@@ -1,0 +1,32 @@
+[user]
+	name = Kenneth V. Domingo
+	email = hello@kvd.studio
+	signingkey = 8013494472EAA68C
+[commit]
+	gpgsign = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[safe]
+	directory = *
+[core]
+	excludesfile = /home/kvdomingo/.gitignore
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[alias]
+	push-new = !git push -u origin $(git branch --show-current)
+[credential]
+	helper = 
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = gpg
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential "https://gitea.local.kvdomingo.dev"]
+	provider = generic

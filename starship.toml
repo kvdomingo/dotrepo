@@ -1,0 +1,212 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = true
+command_timeout = 10000
+
+format = '''
+[┌───────($shell $username $container$os$hostname @ $localip)───────────>](bold cyan)
+[│](bold cyan)$directory$aws$azure$gcloud$buf$c$cmake$golang$java$nodejs$python$conda$rust$php
+[│](bold cyan)$docker_context$kubernetes$terraform
+[│](bold cyan)$time$memory_usage$jobs$git_status$git_commit$git_branch$git_state$git_metrics$status
+[└─> ](bold cyan)'''
+
+[aws]
+symbol = " "
+format = '[[$symbol$profile$region ](fg:#f29100)]($style)'
+
+[azure]
+symbol = "  "
+format = '[$symbol$subscription]($style)'
+disabled = false
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = " "
+
+[directory.substitutions]
+"Documents" = " 󰈙 "
+"Downloads" = "  "
+"Music" = "  "
+"Pictures" = "  "
+
+[docker_context]
+symbol = "󰡨"
+disabled = false
+format = '[ $symbol$context]($style)'
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[gcloud]
+disabled = false
+symbol = "  "
+format = '[[$symbol$project](fg:#417ee7)]($style)'
+
+[git_branch]
+symbol = ""
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+format = '[($all_status$ahead_behind )]($style)'
+
+[golang]
+symbol = " "
+format = '[[ $symbol ($version) ](fg:#00a3cc)]($style)'
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = "⌘ "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
+ssh_only = false
+format = '[$ssh_symbol$hostname]($style)'
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[kubernetes]
+symbol = " 󱃾 "
+format = '[$symbol$context( \($namespace\))]($style)'
+disabled = false
+
+[localip]
+disabled = false
+ssh_only = false
+
+[lua]
+symbol = " "
+
+[memory_usage]
+threshold = -1
+disabled = false
+symbol = "󰍛 "
+format = ' $symbol[${ram_pct} ]($style)'
+
+[meson]
+symbol = "喝 "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = ""
+format = '[[ $symbol ($version) ](fg:#4f9640)]($style)'
+
+[os]
+disabled = false
+style = "bold"
+
+[os.symbols]
+Alpine = " "
+Amazon = "󰸏 "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+Fedora = " "
+FreeBSD = " "
+Gentoo = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = " "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Solus = " "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
+
+[package]
+symbol = " "
+disabled = true
+
+[python]
+symbol = "  "
+format = '[[${symbol}${version}](fg:#346fa0)]($style)'
+
+[rlang]
+symbol = "ﳒ "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = ""
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[php]
+symbol = ""
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[scala]
+symbol = " "
+
+[shell]
+disabled = false
+format = '[\($indicator\)]($style)'
+bash_indicator = "bash"
+powershell_indicator = "pwsh"
+
+[spack]
+symbol = "🅢 "
+
+[status]
+disabled = false
+
+[terraform]
+symbol = " 󱁢 "
+format = "[$symbol$workspace]($style)"
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+format = '[  $time ]($style)'
+
+[username]
+format = '[$user]($style)'
+show_always = true
