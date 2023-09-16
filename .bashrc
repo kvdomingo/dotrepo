@@ -123,26 +123,27 @@ export NVM_DIR="$HOME/.nvm"
 nvm use node > /dev/null
 
 export GPG_TTY=$(tty)
-
-eval "$(direnv hook bash)"
-eval "$(starship init bash)"
-
 export QT_SCALE_FACTOR=1.5
 export GDK_SCALE=1.5
 export XDG_CONFIG_HOME="/home/kvdomingo/.config"
 
 # Go
-export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:/usr/local/go/bin"
 export GOROOT="$HOME/go"
 
 # Deno
-export DENO_INSTALL="/home/kvdomingo/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH=$BUN_INSTALL/bin:$PATH
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # k8s
 export KUBECONFIG="$HOME/.kube/config"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+source "$HOME/bash-wakatime/bash-wakatime.sh"
+
+eval "$(direnv hook bash)"
+eval "$(starship init bash)"
