@@ -5,13 +5,14 @@ command_timeout = 10000
 
 format = '''
 [┌───────($shell $username $container$os$hostname @ $localip)───────────>](bold cyan)
-[│](bold cyan)$directory$aws$azure$gcloud$buf$c$cmake$golang$java$nodejs$python$conda$rust$php
-[│](bold cyan)$docker_context$kubernetes$terraform
-[│](bold cyan)$time$memory_usage$jobs$git_status$git_commit$git_branch$git_state$git_metrics$status
+[│](bold cyan)$directory$bun$c$cmake$deno$golang$java$lua$nodejs$python$conda$rust$php
+[│](bold cyan)$aws$azure$gcloud
+[│](bold cyan)$docker_context$kubernetes$helm$terraform
+[│](bold cyan)$time$memory_usage$jobs$git_status$git_branch$git_commit$git_state$git_metrics$status
 [└─> ](bold cyan)'''
 
 [aws]
-symbol = " "
+symbol = " 󰸏 "
 format = '[[$symbol$profile$region ](fg:#f29100)]($style)'
 
 [azure]
@@ -19,8 +20,9 @@ symbol = "  "
 format = '[$symbol$subscription]($style)'
 disabled = false
 
-[buf]
-symbol = " "
+[bun]
+format = '[$symbol$version ]($style)'
+symbol = " 🍞 "
 
 [c]
 symbol = " "
@@ -47,6 +49,7 @@ read_only = " "
 symbol = "󰡨"
 disabled = false
 format = '[ $symbol$context]($style)'
+style = 'fg:#2570d5'
 
 [elixir]
 symbol = " "
@@ -59,12 +62,17 @@ symbol = " "
 
 [gcloud]
 disabled = false
-symbol = "  "
+symbol = " 󱇶 "
 format = '[[$symbol$project](fg:#417ee7)]($style)'
 
 [git_branch]
 symbol = ""
 format = '[ $symbol $branch ]($style)'
+
+[git_commit]
+only_detached = false
+tag_disabled = false
+disabled = false
 
 [git_status]
 format = '[($all_status$ahead_behind )]($style)'
@@ -81,6 +89,9 @@ symbol = " "
 
 [haxe]
 symbol = "⌘ "
+
+[helm]
+format = '[$symbol$version]($style)'
 
 [hg_branch]
 symbol = " "
@@ -100,6 +111,7 @@ symbol = " "
 symbol = " 󱃾 "
 format = '[$symbol$context( \($namespace\))]($style)'
 disabled = false
+style = 'fg:#3d70e4'
 
 [localip]
 disabled = false
@@ -201,6 +213,7 @@ disabled = false
 [terraform]
 symbol = " 󱁢 "
 format = "[$symbol$workspace]($style)"
+style =  'fg:#7846ba'
 
 [time]
 disabled = false

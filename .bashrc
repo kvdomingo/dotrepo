@@ -143,6 +143,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export KUBECONFIG="$HOME/.kube/config"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# Mojo
+export MODULAR_HOME="$HOME/.modular"
+export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
+
 source "$HOME/bash-wakatime/bash-wakatime.sh"
 
 eval "$(direnv hook bash)"
