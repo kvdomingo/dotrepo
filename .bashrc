@@ -125,7 +125,7 @@ nvm use node > /dev/null
 export GPG_TTY=$(tty)
 export QT_SCALE_FACTOR=1.5
 export GDK_SCALE=1.5
-export XDG_CONFIG_HOME="/home/kvdomingo/.config"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Go
 export PATH="$PATH:/usr/local/go/bin"
