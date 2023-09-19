@@ -13,6 +13,7 @@
 [safe]
 	directory = *
 [core]
+	editor = nvim
 	excludesfile = /home/kvdomingo/.gitignore
 [init]
 	defaultBranch = main
