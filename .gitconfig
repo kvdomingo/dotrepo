@@ -1,9 +1,6 @@
 [user]
 	name = Kenneth V. Domingo
 	email = hello@kvd.studio
-	signingkey = 8013494472EAA68C
-[commit]
-	gpgsign = true
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
@@ -15,6 +12,7 @@
 [core]
 	editor = nvim
 	excludesfile = /home/kvdomingo/.gitignore
+	hooksPath = /home/kvdomingo/.git/hooks
 [init]
 	defaultBranch = main
 [pull]
