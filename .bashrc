@@ -128,8 +128,8 @@ export GDK_SCALE=1.5
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Go
+export GOROOT=/usr/local/go
 export PATH="$PATH:/usr/local/go/bin"
-export GOROOT="$HOME/go"
 
 # Deno
 export DENO_INSTALL="$HOME/.deno"
@@ -146,8 +146,6 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # Mojo
 export MODULAR_HOME="$HOME/.modular"
 export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
-
-source "$HOME/bash-wakatime/bash-wakatime.sh"
 
 eval "$(direnv hook bash)"
 eval "$(starship init bash)"
