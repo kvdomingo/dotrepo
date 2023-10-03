@@ -149,3 +149,6 @@ export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
 
 eval "$(direnv hook bash)"
 eval "$(starship init bash)"
+
+# Turso
+export PATH="$HOME/.turso:$PATH"
