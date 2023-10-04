@@ -128,8 +128,7 @@ export GDK_SCALE=1.5
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Go
-export GOROOT=/usr/local/go
-export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/go/sdk/go/bin"
 
 # Deno
 export DENO_INSTALL="$HOME/.deno"
