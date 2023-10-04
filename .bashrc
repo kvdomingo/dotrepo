@@ -152,3 +152,6 @@ eval "$(starship init bash)"
 
 # Turso
 export PATH="$HOME/.turso:$PATH"
+
+# ADR Tools
+export PATH="$PATH:$HOME/.local/bin/adr-tools/src"
