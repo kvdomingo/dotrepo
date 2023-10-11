@@ -9,6 +9,7 @@
     ~/.bash_aliases: .bash_aliases
     ~/.config/nvim: nvim
     ~/.config/starship.toml: starship.toml
+    ~/.config/glow/glow.yml: glow.yml
     ~/.dotfiles: ""
     ~/.gitconfig: .gitconfig
     ~/.gitignore: .gitignore

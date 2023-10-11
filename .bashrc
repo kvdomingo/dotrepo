@@ -122,6 +122,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 nvm use node > /dev/null
 
+export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export QT_SCALE_FACTOR=1.5
 export GDK_SCALE=1.5
