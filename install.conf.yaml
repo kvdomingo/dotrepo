@@ -19,6 +19,8 @@
 #    /etc/docker/daemon.json: daemon.json
 
 - create:
+    - ~/.config
+    - ~/.config/glow
     - ~/Downloads
 
 - shell:
