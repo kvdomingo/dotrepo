@@ -15,6 +15,7 @@
     ~/.gitignore: .gitignore
     ~/.profile: .profile
     ~/.tmux.conf: .tmux.conf
+    ~/idea-python-watchers.xml: idea-python-watchers.xml
 #    /etc/docker/daemon.json: daemon.json
 
 - create:
