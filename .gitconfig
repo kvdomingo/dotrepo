@@ -21,6 +21,7 @@
 	prune = true
 [alias]
 	push-new = !git push -u origin $(git branch --show-current)
+	snap = !git commit -m $(date --rfc-3339 seconds)
 [credential]
 	helper = 
 	helper = /usr/local/bin/git-credential-manager
