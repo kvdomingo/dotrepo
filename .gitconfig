@@ -30,3 +30,5 @@
 	useHttpPath = true
 [credential "https://gitea.local.kvdomingo.dev"]
 	provider = generic
+[credential "https://git.lab.kvd.studio"]
+	provider = generic
