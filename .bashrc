@@ -130,6 +130,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # Go
 export PATH="$PATH:$HOME/go/sdk/go/bin"
+export PATH="$PATH:$HOME/go/bin"
 
 # Deno
 export DENO_INSTALL="$HOME/.deno"

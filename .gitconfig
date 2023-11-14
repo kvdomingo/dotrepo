@@ -12,7 +12,6 @@
 [core]
 	editor = nvim
 	excludesfile = /home/kvdomingo/.gitignore
-	hooksPath = /home/kvdomingo/.git/hooks
 [init]
 	defaultBranch = main
 [pull]
