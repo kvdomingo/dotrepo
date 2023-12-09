@@ -109,7 +109,17 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+  elif [ -d /etc/bash_completion.d ]; then
+      for comp in /etc/bash_completion.d/*; do
+	  . $comp
+      done
   fi
+fi
+
+if [ -d ~/.bash_completion.d ]; then
+    for comp in ~/.bash_completion.d/*; do
+	. $comp
+    done
 fi
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -148,6 +158,10 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export MODULAR_HOME="$HOME/.modular"
 export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
 
+# Java/Scala
+export PATH="$PATH:$HOME/.local/bin/maven/bin"
+export PATH="$PATH:$HOME/.local/share/coursier/bin"
+
 eval "$(direnv hook bash)"
 eval "$(starship init bash)"
 
@@ -156,3 +170,7 @@ export PATH="$HOME/.turso:$PATH"
 
 # ADR Tools
 export PATH="$PATH:$HOME/.local/bin/adr-tools/src"
+
+# JetBrains
+export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/bin"
+export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"

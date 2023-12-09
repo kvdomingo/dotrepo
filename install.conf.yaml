@@ -1,26 +1,28 @@
 - defaults:
     link:
+      create: true
       relink: true
 
-- clean: [ "~" ]
+- clean:
+    - "~"
+    - "~/.config"
 
 - link:
-    ~/.bashrc: .bashrc
-    ~/.bash_aliases: .bash_aliases
+    ~/.bashrc:
+    ~/.bash_aliases:
+    ~/.bash_completion.d:
     ~/.config/nvim: nvim
     ~/.config/starship.toml: starship.toml
     ~/.config/glow/glow.yml: glow.yml
     ~/.dotfiles: ""
-    ~/.gitconfig: .gitconfig
-    ~/.gitignore: .gitignore
-    ~/.profile: .profile
-    ~/.tmux.conf: .tmux.conf
-    ~/idea-python-watchers.xml: idea-python-watchers.xml
+    ~/.gitconfig:
+    ~/.gitignore:
+    ~/.profile:
+    ~/.tmux.conf:
+    ~/idea-python-watchers.xml:
 #    /etc/docker/daemon.json: daemon.json
 
 - create:
-    - ~/.config
-    - ~/.config/glow
     - ~/Downloads
 
 - shell:
