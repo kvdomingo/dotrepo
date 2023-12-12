@@ -21,6 +21,8 @@
 [alias]
 	push-new = !git push -u origin $(git branch --show-current)
 	snap = !git commit -m \"snapshot $(date --rfc-3339 seconds)\"
+	amend = commit --amend
+	just-amend = commit --amend --no-edit
 [credential]
 	helper = 
 	helper = /usr/local/bin/git-credential-manager
