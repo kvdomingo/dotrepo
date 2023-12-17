@@ -151,7 +151,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # k8s
-export KUBECONFIG="$HOME/.kube/config"
+export KUBECONFIG="$HOME/.kube/config.yaml"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Mojo
