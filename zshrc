@@ -81,6 +81,7 @@ plugins=(
     gh
     golang
     helm
+    history-substring-search
     isodate
     kubectl
     npm
@@ -136,6 +137,8 @@ alias toolbox="jetbrains-toolbox"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(thefuck --alias)"
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
