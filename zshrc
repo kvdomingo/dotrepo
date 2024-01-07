@@ -144,9 +144,6 @@ export GDK_SCALE=1.25
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$HOME/.local/bin"
 
-# asdf
-source "$HOME/.asdf/asdf.sh"
-
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
