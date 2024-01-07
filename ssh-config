@@ -1,0 +1,41 @@
+Host github.com-kvdomingo
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/gh-kvdomingo
+
+Host github.com-tm-kenneth-domingo
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/gh-tm-kenneth-domingo
+
+Host git.lab.kvd.studio
+    HostName git.lab.kvd.studio
+    Port 3322
+    User git
+    IdentityFile ~/.ssh/gh-kvdomingo
+
+Host srv-dev-01
+    HostName srv-dev-01.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+    Port 4422
+
+Host srv-k8s-01
+    HostName srv-k8s-01.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
+Host srv-k8s-02
+    HostName srv-k8s-02.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
+Host srv-k8s-03
+    HostName srv-k8s-03.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
+Host truenas
+    HostName truenas.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
