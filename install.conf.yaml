@@ -28,6 +28,7 @@
 - create:
     - ~/Downloads
     - ~/.ssh
+    - ~/.local/bin
 
 - shell:
     - git submodule update --init --recursive
