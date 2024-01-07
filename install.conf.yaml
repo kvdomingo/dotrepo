@@ -19,6 +19,8 @@
     ~/.gitignore:
     ~/.profile:
     ~/.tmux.conf:
+    ~/.tool-versions:
+    ~/.zshrc:
     ~/idea-python-watchers.xml:
 #    /etc/docker/daemon.json: daemon.json
 

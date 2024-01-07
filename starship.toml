@@ -91,7 +91,7 @@ symbol = " "
 symbol = "⌘ "
 
 [helm]
-format = '[$symbol$version]($style)'
+format = '[$symbol$version ]($style)'
 
 [hg_branch]
 symbol = " "
@@ -109,7 +109,7 @@ symbol = " "
 
 [kubernetes]
 symbol = " 󱃾 "
-format = '[$symbol$context( \($namespace\))]($style)'
+format = '[$symbol$context( \($namespace\)) ]($style)'
 disabled = false
 style = 'fg:#3d70e4'
 

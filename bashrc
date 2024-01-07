@@ -122,29 +122,15 @@ if [ -d ~/.bash_completion.d ]; then
     done
 fi
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use node > /dev/null
-
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
-export QT_SCALE_FACTOR=1.5
-export GDK_SCALE=1.5
+export QT_SCALE_FACTOR=1.25
+export GDK_SCALE=1.25
 export XDG_CONFIG_HOME="$HOME/.config"
+export PATH="$PATH:$HOME/.local/bin"
 
-# Go
-export PATH="$PATH:$HOME/go/sdk/go/bin"
-export PATH="$PATH:$HOME/go/bin"
-
-# Deno
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+# asdf
+source "$HOME/.asdf/asdf.sh"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -153,14 +139,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # k8s
 export KUBECONFIG="$HOME/.kube/config.yaml"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-# Mojo
-export MODULAR_HOME="$HOME/.modular"
-export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
-
-# Java/Scala
-export PATH="$PATH:$HOME/.local/bin/maven/bin"
-export PATH="$PATH:$HOME/.local/share/coursier/bin"
 
 eval "$(direnv hook bash)"
 eval "$(starship init bash)"
@@ -174,3 +152,6 @@ export PATH="$PATH:$HOME/.local/bin/adr-tools/src"
 # JetBrains
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/bin"
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+
+# Wakatime
+source "$HOME/bash-wakatime/bash-wakatime.sh"
