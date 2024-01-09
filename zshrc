@@ -75,6 +75,7 @@ plugins=(
     asdf
     aws
     azure
+    fluxcd
     gcloud
     git
     git-commit
