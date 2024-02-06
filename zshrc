@@ -133,6 +133,7 @@ alias k8="kubectl"
 alias dc="docker compose"
 alias prpy="poetry run python"
 alias clip="clip.exe"
+alias explorer="explorer.exe"
 alias toolbox="jetbrains-toolbox"
 
 eval "$(starship init zsh)"
@@ -171,3 +172,6 @@ if [ -f '/root/.local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/root/.local
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/root/.local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/root/.local/bin/google-cloud-sdk/completion.zsh.inc'; fi
+
+# bun completions
+[ -s "/root/.bun/_bun" ] && source "/root/.bun/_bun"
