@@ -175,3 +175,14 @@ if [ -f '/root/.local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/root/
 
 # bun completions
 [ -s "/root/.bun/_bun" ] && source "/root/.bun/_bun"
+
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
