@@ -39,3 +39,8 @@ Host truenas
     HostName truenas.lab
     User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
+
+Host wings
+    HostName wings.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519

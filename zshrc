@@ -157,6 +157,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export KUBECONFIG="$HOME/.kube/config.yaml"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# Go
+export PATH="$PATH:$HOME/.asdf/installs/golang/1.21.6/packages/bin"
+
 # Rust
 export PATH="$PATH:$HOME/.asdf/installs/rust/1.77.0/bin"
 
