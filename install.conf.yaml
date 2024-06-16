@@ -19,6 +19,7 @@
     ~/.gitignore:
     ~/.profile:
     ~/.ssh/config: ssh-config
+    ~/.sqliterc:
     ~/.tmux.conf:
     ~/.tool-versions:
     ~/.zshrc:

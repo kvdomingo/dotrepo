@@ -133,6 +133,8 @@ alias k8="kubectl"
 alias dc="docker compose"
 alias prpy="poetry run python"
 alias clip="clip.exe"
+alias yank="xsel --input --clipboard"
+alias yeet="xsel --output --clipboard"
 alias explorer="explorer.exe"
 alias toolbox="jetbrains-toolbox"
 
