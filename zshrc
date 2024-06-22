@@ -140,7 +140,7 @@ alias toolbox="jetbrains-toolbox"
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
-eval "$(thefuck --alias)"
+eval "$(zoxide init zsh)"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
