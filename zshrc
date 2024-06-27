@@ -140,7 +140,6 @@ alias toolbox="jetbrains-toolbox"
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
-eval "$(zoxide init zsh)"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -194,3 +193,5 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
+
+eval "$(zoxide init zsh)"
