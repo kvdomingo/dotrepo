@@ -8,6 +8,10 @@ Host github.com-tm-kenneth-domingo
     User git
     IdentityFile ~/.ssh/gh-tm-kenneth-domingo
 
+Host gitlab.com
+    User git
+    IdentityFile ~/.ssh/gh-kvdomingo
+
 Host git.lab.kvd.studio
     HostName git.lab.kvd.studio
     Port 3322
