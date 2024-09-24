@@ -7,7 +7,7 @@ format = '''
 [┌───────($shell $username $container$os$hostname @ $localip)───────────>](bold cyan)
 [│](bold cyan)$directory$bun$c$cmake$deno$golang$java$lua$nodejs$python$conda$rust$php
 [│](bold cyan)$aws$azure$gcloud
-[│](bold cyan)$docker_context$kubernetes$helm$terraform
+[│](bold cyan)$docker_context$kubernetes$helm$terraform$pulumi
 [│](bold cyan)$time$memory_usage$jobs$git_status$git_branch$git_commit$git_state$git_metrics$status
 [└─> ](bold cyan)'''
 
@@ -176,6 +176,10 @@ Windows = " "
 [package]
 symbol = " "
 disabled = true
+
+[pulumi]
+symbol = "  "
+format = '[${symbol} ${stack} (${version})]($style)'
 
 [python]
 symbol = "  "

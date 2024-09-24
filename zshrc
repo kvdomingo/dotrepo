@@ -89,7 +89,6 @@ plugins=(
     poetry
     safe-paste
     terraform
-    vault
     zsh-autosuggestions
 )
 
