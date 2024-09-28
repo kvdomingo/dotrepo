@@ -1,12 +1,6 @@
-Host github.com-kvdomingo
-    HostName github.com
+Host github.com
     User git
     IdentityFile ~/.ssh/gh-kvdomingo
-
-Host github.com-tm-kenneth-domingo
-    HostName github.com
-    User git
-    IdentityFile ~/.ssh/gh-tm-kenneth-domingo
 
 Host gitlab.com
     User git
