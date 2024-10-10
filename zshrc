@@ -171,6 +171,9 @@ export PATH="$PATH:$HOME/.local/bin/adr-tools/src"
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/bin"
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 
+# Vault
+export VAULT_ADDR="https://vault.lab.kvd.studio"
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/root/.local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/root/.local/bin/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -192,3 +195,4 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
 eval "$(zoxide init zsh)"
+eval "$(/root/.local/bin/mise activate zsh)"

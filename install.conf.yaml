@@ -23,8 +23,8 @@
     ~/.tmux.conf:
     ~/.tool-versions:
     ~/.zshrc:
-    ~/idea-python-watchers.xml:
-#    /etc/docker/daemon.json: daemon.json
+    #    /etc/docker/daemon.json: daemon.json
+    /usr/local/share/fonts: fonts
 
 - create:
     - ~/Downloads
