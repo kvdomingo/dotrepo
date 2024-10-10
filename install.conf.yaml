@@ -8,7 +8,9 @@
     - "~/.config"
 
 - link:
+    ~/.config/mise/config.toml: mise.toml
     ~/.config/nvim: nvim
+    ~/.config/pypoetry/config.toml: poetry.toml
     ~/.config/starship.toml: starship.toml
     ~/.config/glow/glow.yml: glow.yml
     ~/.dotfiles: ""
@@ -18,7 +20,7 @@
     ~/.ssh/config: ssh-config
     ~/.sqliterc:
     ~/.tmux.conf:
-    ~/.tool-versions:
+    ~/.zprofile:
     ~/.zshrc:
     #    /etc/docker/daemon.json: daemon.json
     /usr/local/share/fonts: fonts

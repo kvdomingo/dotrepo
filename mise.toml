@@ -1,0 +1,18 @@
+[settings]
+experimental = true
+jobs = 8
+
+[tools]
+usage = "latest"
+poetry = "latest"
+task = "latest"
+go = "latest"
+python = "sub-0.1:latest"
+node = "lts"
+terraform = "latest"
+opentofu = "latest"
+rust = "latest"
+pulumi = "latest"
+just = "latest"
+helmfile = "latest"
+helm = "latest"

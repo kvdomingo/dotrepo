@@ -41,7 +41,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -73,7 +73,6 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(
     ansible
     argocd
-    asdf
     aws
     azure
     bun
@@ -121,7 +120,6 @@ plugins=(
     tmux
     urltools
     z
-    zoxide
     zsh-autosuggestions
     zsh-interactive-cd
     zsh-navigation-tools
@@ -217,5 +215,3 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
-
-eval "$(/root/.local/bin/mise activate zsh)"
