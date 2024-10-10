@@ -8,9 +8,6 @@
     - "~/.config"
 
 - link:
-    ~/.bashrc:
-    ~/.bash_aliases:
-    ~/.bash_completion.d:
     ~/.config/nvim: nvim
     ~/.config/starship.toml: starship.toml
     ~/.config/glow/glow.yml: glow.yml
