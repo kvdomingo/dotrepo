@@ -41,8 +41,6 @@
 	helper = 
 	helper = /usr/local/bin/git-credential-manager
 	credentialStore = gpg
-[credential "https://gitea.local.kvdomingo.dev"]
-	provider = generic
 [credential "https://git.lab.kvd.studio"]
 	provider = generic
 [oh-my-zsh]
