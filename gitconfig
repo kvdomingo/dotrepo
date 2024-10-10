@@ -11,7 +11,7 @@
 	directory = *
 [core]
 	editor = nvim
-	excludesfile = /root/.gitignore
+	excludesfile = ~/.gitignore
 [init]
 	defaultBranch = main
 [pull]
