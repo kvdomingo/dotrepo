@@ -1,6 +1,7 @@
 [settings]
 experimental = true
 jobs = 8
+python_compile = true
 
 [tools]
 usage = "latest"
