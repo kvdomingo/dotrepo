@@ -111,7 +111,6 @@ plugins=(
     rsync
     safe-paste
     ssh
-    ssh-agent
     starship
     sudo
     supervisor
@@ -120,6 +119,7 @@ plugins=(
     tmux
     urltools
     z
+    zoxide
     zsh-autosuggestions
     zsh-interactive-cd
     zsh-navigation-tools

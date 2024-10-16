@@ -4,10 +4,9 @@ jobs = 8
 
 [tools]
 usage = "latest"
+python = "sub-0.1:latest"
 poetry = "latest"
 task = "latest"
-go = "latest"
-python = "sub-0.1:latest"
 node = "lts"
 terraform = "latest"
 opentofu = "latest"
@@ -24,3 +23,4 @@ awscli = "latest"
 firebase = "latest"
 snyk = "latest"
 cloudflared = "latest"
+go = "sub-0.1:latest"
