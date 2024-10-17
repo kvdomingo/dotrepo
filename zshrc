@@ -118,8 +118,6 @@ plugins=(
     terraform
     tmux
     urltools
-    z
-    zoxide
     zsh-autosuggestions
     zsh-interactive-cd
     zsh-navigation-tools
@@ -215,3 +213,5 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
+
+eval "$(zoxide init zsh)"
