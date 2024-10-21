@@ -1,16 +1,16 @@
 Host github.com
     User git
-    IdentityFile ~/.ssh/gh-kvdomingo
+    IdentityFile ~/.ssh/id_rsa
 
 Host gitlab.com
     User git
-    IdentityFile ~/.ssh/gh-kvdomingo
+    IdentityFile ~/.ssh/id_rsa
 
 Host git.lab.kvd.studio
     HostName git.lab.kvd.studio
     Port 3322
     User git
-    IdentityFile ~/.ssh/gh-kvdomingo
+    IdentityFile ~/.ssh/id_rsa
 
 Host srv-dev-01
     HostName srv-dev-01.lab
