@@ -98,6 +98,7 @@ plugins=(
     history-substring-search
     isodate
     kubectl
+    kube-ps1
     last-working-dir
     mise
     node

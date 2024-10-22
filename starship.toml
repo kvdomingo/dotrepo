@@ -195,7 +195,7 @@ symbol = " "
 
 [rust]
 symbol = ""
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+format = '[$symbol ($version)]($style)'
 
 [php]
 symbol = ""
