@@ -47,3 +47,7 @@ Host rpi5-01
     HostName rpi5-01.lab
     User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
+
+Host truenas
+    HostName truenas.lab
+    User kvdomingo

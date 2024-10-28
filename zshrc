@@ -99,14 +99,12 @@ plugins=(
     isodate
     kubectl
     kube-ps1
-    last-working-dir
     mise
     node
     npm
     opentofu
     pip
     poetry
-    poetry-env
     postgres
     redis-cli
     rsync
@@ -122,6 +120,7 @@ plugins=(
     zsh-autosuggestions
     zsh-interactive-cd
     zsh-navigation-tools
+#    zsh-tmux-auto-title
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -159,7 +158,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias cls="clear"
 alias vim="nvim"
 alias dc="docker compose"
-alias prpy="poetry run python"
+alias ppy="poetry run python"
 alias clip="clip.exe"
 alias yank="xsel --input --clipboard"
 alias yeet="xsel --output --clipboard"
@@ -174,10 +173,9 @@ export QT_SCALE_FACTOR=1.25
 export GDK_SCALE=1.25
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$HOME/.local/bin"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export ZSH_TMUX_AUTO_TITLE_TARGET="pane"
+export ZSH_TMUX_AUTO_TITLE_SHORT=true
+export ZSH_TMUX_AUTO_TITLE_IDLE_TEXT="%pwd"
 
 # k8s
 export KUBECONFIG="$HOME/.kube/config.yaml"
@@ -185,9 +183,6 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Turso
 export PATH="$HOME/.turso:$PATH"
-
-# ADR Tools
-export PATH="$PATH:$HOME/.local/bin/adr-tools/src"
 
 # JetBrains
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/bin"
@@ -214,5 +209,9 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
+
+precmd() {
+  echo -ne "\033_${PWD/#$HOME/~}"; echo -ne "\033\\"
+}
 
 eval "$(zoxide init zsh)"
