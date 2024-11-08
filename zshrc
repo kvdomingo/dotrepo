@@ -82,12 +82,12 @@ plugins=(
     direnv
     docker
     docker-compose
-    dotenv
     emoji
     fluxcd
     fzf
     gcloud
     genpass
+    gh
     git
     git-commit
     github
@@ -120,7 +120,6 @@ plugins=(
     zsh-autosuggestions
     zsh-interactive-cd
     zsh-navigation-tools
-#    zsh-tmux-auto-title
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -185,8 +184,8 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/.turso:$PATH"
 
 # JetBrains
-export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/bin"
-export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+export PATH="$HOME/.local/share/JetBrains/Toolbox/bin:$PATH"
+export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 
 # Vault
 export VAULT_ADDR="https://vault.lab.kvd.studio"

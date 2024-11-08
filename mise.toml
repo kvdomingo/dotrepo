@@ -1,11 +1,11 @@
 [settings]
 experimental = true
 jobs = 8
-python_compile = true
+plugin_autoupdate_last_check_duration = "1 week"
 
 [tools]
 usage = "latest"
-python = "sub-0.1:latest"
+python = ["sub-0.1:latest", "sub-0.2:latest", "sub-0.3:latest"]
 poetry = "latest"
 task = "latest"
 node = "lts"
