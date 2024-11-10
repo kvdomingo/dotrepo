@@ -99,11 +99,11 @@ plugins=(
     isodate
     kubectl
     kube-ps1
+    mise
     node
     npm
     opentofu
     pip
-    poetry
     postgres
     redis-cli
     rsync
