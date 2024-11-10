@@ -99,7 +99,6 @@ plugins=(
     isodate
     kubectl
     kube-ps1
-    mise
     node
     npm
     opentofu
