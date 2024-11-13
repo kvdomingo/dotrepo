@@ -51,3 +51,8 @@ Host rpi5-01
 Host truenas
     HostName truenas.lab
     User kvdomingo
+
+Host adguard1
+    HostName adguard1.lab
+    User root
+    IdentityFile ~/.ssh/id_ed25519

@@ -99,7 +99,6 @@ plugins=(
     isodate
     kubectl
     kube-ps1
-    mise
     node
     npm
     opentofu
@@ -114,7 +113,6 @@ plugins=(
     supervisor
     tailscale
     terraform
-    tmux
     urltools
     zsh-autosuggestions
     zsh-interactive-cd
@@ -188,6 +186,9 @@ export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 
 # Vault
 export VAULT_ADDR="https://vault.lab.kvd.studio"
+
+# mise
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # gcloud
 if [ -f '/root/.local/bin/google-cloud-sdk/path.zsh.inc' ]; then
