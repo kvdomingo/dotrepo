@@ -16,6 +16,7 @@
     ~/.dotfiles: ""
     ~/.gitconfig:
     ~/.gitignore:
+    ~/idea-watchers.xml:
     ~/.profile:
     ~/.ssh/config: ssh-config
     ~/.sqliterc:
