@@ -167,9 +167,6 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
-export QT_SCALE_FACTOR=1.25
-export GDK_SCALE=1.25
-export GDK_DPI_SCALE=1.25
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$HOME/.local/bin"
 export ZSH_TMUX_AUTO_TITLE_TARGET="pane"
