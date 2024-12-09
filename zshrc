@@ -166,6 +166,7 @@ alias fly="flyctl"
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export EDITOR="nvim"
+export BROWSER="wslview"
 export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$HOME/.local/bin"
