@@ -3,11 +3,6 @@ Host github.com
     User git
     IdentityFile ~/.ssh/id_rsa
 
-Host github.com-eyva
-    HostName github.com
-    User git
-    IdentityFile ~/.ssh/id_ed25519_eyva
-
 Host gitlab.com
     User git
     IdentityFile ~/.ssh/id_rsa

@@ -1,0 +1,5 @@
+[user]
+	name = Kenneth V. Domingo
+	email = kenneth.domingo@eyva.ai
+[core]
+    sshCommand = ssh -i ~/.ssh/id_ed25519_eyva -F /dev/null

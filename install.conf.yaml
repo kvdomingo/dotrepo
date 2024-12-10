@@ -16,6 +16,7 @@
     ~/.config/glow/glow.yml: glow.yml
     ~/.dotfiles: ""
     ~/.gitconfig:
+    ~/eyva/.gitconfig: gitconfig-eyva
     ~/.gitignore:
     ~/idea-watchers.xml:
     ~/.profile:
@@ -29,6 +30,7 @@
 
 - create:
     - ~/Downloads
+    - ~/eyva
     - ~/.ssh
     - ~/.local/bin
 
