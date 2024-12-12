@@ -57,3 +57,9 @@ Host adguard1
     HostName adguard1.lab
     User root
     IdentityFile ~/.ssh/id_ed25519
+
+
+Host cohere-poc
+    HostName 5.223.51.82
+    User cohere
+    IdentityFile ~/.ssh/id_rsa_cohere
