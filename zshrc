@@ -192,12 +192,7 @@ export VAULT_ADDR="https://vault.lab.kvd.studio"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # gcloud
-if [ -f '/root/.local/bin/google-cloud-sdk/path.zsh.inc' ]; then
-    . '/root/.local/bin/google-cloud-sdk/path.zsh.inc'
-fi
-if [ -f '/root/.local/bin/google-cloud-sdk/completion.zsh.inc' ]; then
-    . '/root/.local/bin/google-cloud-sdk/completion.zsh.inc'
-fi
+export CLOUDSDK_HOME="$HOME/.local/share/mise/installs/gcloud/latest"
 
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
