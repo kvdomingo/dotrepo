@@ -67,3 +67,4 @@ Host cohere-poc
 Host pigsty-poc
     HostName 162.55.87.241
     User pigsty
+    IdentityFile ~/.ssh/id_rsa_pigsty
