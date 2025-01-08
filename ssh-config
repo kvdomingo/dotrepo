@@ -70,10 +70,10 @@ Host pigsty-poc
     IdentityFile ~/.ssh/id_rsa_pigsty
 
 Host pigsty-control-node
-    HostName 35.234.96.104
+    HostName 34.40.18.200
     User pigsty
     IdentityFile ~/.ssh/google_compute_engine
 
-Host Host 35.234.96.104
+Host 34.40.18.200
     User pigsty
     IdentityFile ~/.ssh/google_compute_engine
