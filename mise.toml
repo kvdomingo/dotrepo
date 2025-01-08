@@ -6,7 +6,6 @@ plugin_autoupdate_last_check_duration = "1 week"
 [tools]
 usage = "latest"
 python = ["sub-0.1:latest", "sub-0.2:latest", "sub-0.3:latest"]
-poetry = "latest"
 task = "latest"
 node = "lts"
 terraform = "latest"
@@ -41,3 +40,5 @@ bitwarden = "latest"
 aws-copilot = "latest"
 supabase-cli = "latest"
 deno = "latest"
+poetry = "1"
+ruby = "latest"

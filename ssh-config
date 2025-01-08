@@ -68,3 +68,12 @@ Host pigsty-poc
     HostName 162.55.87.241
     User pigsty
     IdentityFile ~/.ssh/id_rsa_pigsty
+
+Host pigsty-control-node
+    HostName 35.234.96.104
+    User pigsty
+    IdentityFile ~/.ssh/google_compute_engine
+
+Host Host 35.234.96.104
+    User pigsty
+    IdentityFile ~/.ssh/google_compute_engine
