@@ -46,6 +46,6 @@
 [credential "https://git.lab.kvd.studio"]
 	provider = generic
 [oh-my-zsh]
-	git-commit-alias = d82669199b5d900b50fd06dd3518c277f0def869
+	git-commit-alias = 9c8afcc3ee2fe6da2e2487a623498a9105cbd38c
 [pager]
 	branch = false
