@@ -194,6 +194,9 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 # gcloud
 export CLOUDSDK_HOME="$HOME/.local/share/mise/installs/gcloud/latest"
 
+# Cursor IDE
+export PATH="$PATH:/mnt/c/Users/Kenneth/AppData/Local/Programs/cursor/resources/app/bin"
+
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
   zle -N self-insert url-quote-magic
