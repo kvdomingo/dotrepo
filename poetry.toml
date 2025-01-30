@@ -2,4 +2,4 @@
 create = true
 in-project = true
 prefer-active-python = true
-use-poetry-python = true
+use-poetry-python = false
