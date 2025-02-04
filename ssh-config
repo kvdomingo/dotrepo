@@ -88,7 +88,7 @@ Host 35.198.170.71
     User pigsty
     IdentityFile ~/.ssh/google_compute_engine
 
-Host srv-htz-01
-    HostName 5.223.52.189
+Host srv712172
+    HostName srv712172.hstgr.cloud
     User root
     IdentityFile ~/.ssh/id_ed25519
