@@ -1,6 +1,6 @@
 <TaskOptions>
   <TaskOptions>
-    <option name="arguments" value="check --fix $FilePathRelativeToProjectRoot$" />
+    <option name="arguments" value="check --unsafe-fixes --fix $FilePathRelativeToProjectRoot$" />
     <option name="checkSyntaxErrors" value="true" />
     <option name="description" />
     <option name="exitCodeBehavior" value="ERROR" />
