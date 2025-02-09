@@ -54,8 +54,18 @@ Host wings
     User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
 
-Host rpi5-01
+Host srv-pi5-01
     HostName rpi5-01.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
+Host srv-pi5-02
+    HostName srv-pi5-02.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
+Host srv-pi5-03
+    HostName srv-pi5-03.lab
     User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
 
