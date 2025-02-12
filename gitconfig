@@ -12,14 +12,19 @@
 [safe]
 	directory = *
 [core]
-	editor = nvim
-    excludesfile = ~/.gitignore
+  editor = nvim
+  excludesfile = ~/.gitignore
+  pager = delta
 [init]
 	defaultBranch = main
 [pull]
 	rebase = true
 [fetch]
 	prune = true
+[merge]
+  conflictstyle = zdiff3
+[interactive]
+  diffFilter = delta --color-only
 [alias]
 	push-new = !git push -u origin $(git branch --show-current)
 	snap = !git commit -m \"snapshot $(date --rfc-3339 seconds)\"
@@ -41,7 +46,7 @@
 	wip = "!a() {\nlocal _scope _attention _message\nwhile [ $# -ne 0 ]; do\ncase $1 in\n  -s | --scope )\n    if [ -z $2 ]; then\n      echo \"Missing scope!\"\n      return 1\n    fi\n    _scope=\"$2\"\n    shift 2\n    ;;\n  -a | --attention )\n    _attention=\"!\"\n    shift 1\n    ;;\n  * )\n    _message=\"${_message} $1\"\n    shift 1\n    ;;\nesac\ndone\ngit commit -m \"wip${_scope:+(${_scope})}${_attention}:${_message}\"\n}; a"
 [credential]
 	helper = 
-	helper = /usr/local/bin/git-credential-manager
+	helper = libsecret
 	credentialStore = gpg
 [credential "https://git.lab.kvd.studio"]
 	provider = generic
@@ -49,3 +54,5 @@
 	git-commit-alias = 1c34b0e67d4f1dff36a079f31d7dafe8bcf92f6e
 [pager]
 	branch = false
+[delta]
+  navigate = true

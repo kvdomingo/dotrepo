@@ -224,7 +224,7 @@ style = 'fg:#7846ba'
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
-format = '[  $time ]($style)'
+format = '[   $time ]($style)'
 
 [username]
 format = '[$user]($style)'
