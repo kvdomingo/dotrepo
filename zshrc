@@ -154,6 +154,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias cls="clear"
 alias vim="nvim"
 alias dc="docker compose"
+alias ds="docker stack"
 alias ppy="poetry run python"
 alias prun="poetry run"
 alias clip="clip.exe"
