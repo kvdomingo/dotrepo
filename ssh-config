@@ -69,6 +69,11 @@ Host srv-pi5-03
     User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
 
+Host srv-pi5-04
+    HostName srv-pi5-04.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
 Host truenas
     HostName truenas.lab
     User kvdomingo
