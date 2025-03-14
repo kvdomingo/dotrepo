@@ -15,14 +15,40 @@
   editor = nvim
   excludesfile = ~/.gitignore
   pager = delta
+[column]
+  ui = auto
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[commit]
+  verbose = true
+[rerere]
+  enabled = true
+  autoupdate = true
+[push]
+  default = simple
+  autoSetupRemote = true
+  followTags = true
 [pull]
-	rebase = true
+  rebase = true
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
 [fetch]
-	prune = true
+  prune = true
+  pruneTags = true
+  all = true
 [merge]
   conflictstyle = zdiff3
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 [interactive]
   diffFilter = delta --color-only
 [alias]
@@ -51,8 +77,10 @@
 [credential "https://git.lab.kvd.studio"]
 	provider = generic
 [oh-my-zsh]
-	git-commit-alias = 92da3108b52be506dc1334e8f0dc67c5d1c13d57
+	git-commit-alias = 6e7ac0544e71c7b777746cb50f70de68c6495b86
 [pager]
 	branch = false
 [delta]
   navigate = true
+[help]
+  autocorrect = prompt

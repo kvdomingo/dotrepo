@@ -19,13 +19,8 @@ Host srv-dev-01
     IdentityFile ~/.ssh/id_ed25519
     Port 4422
 
-Host srv-dev-02
-    HostName srv-dev-02.lab
-    User kvdomingo
-    IdentityFile ~/.ssh/id_ed25519
-
-Host srv-dev-03
-    HostName srv-dev-03.lab
+Host srv-pg-01
+    HostName srv-pg-01.lab
     User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
 
@@ -94,5 +89,10 @@ Host 35.198.170.71
 
 Host srv712172
     HostName srv712172.hstgr.cloud
+    User root
+    IdentityFile ~/.ssh/id_ed25519
+
+Host bind
+    HostName bind.lab
     User root
     IdentityFile ~/.ssh/id_ed25519
