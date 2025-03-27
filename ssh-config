@@ -19,9 +19,14 @@ Host srv-dev-01
     IdentityFile ~/.ssh/id_ed25519
     Port 4422
 
+Host srv-lab-01
+    HostName srv-lab-01.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
 Host srv-pg-01
     HostName srv-pg-01.lab
-    User kvdomingo
+    User root
     IdentityFile ~/.ssh/id_ed25519
 
 Host srv-k8s-01
