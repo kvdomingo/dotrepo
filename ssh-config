@@ -24,6 +24,16 @@ Host srv-lab-01
     User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
 
+Host srv-lab-02
+    HostName srv-lab-02.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
+Host srv-lab-03
+    HostName srv-lab-03.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
 Host srv-pg-01
     HostName srv-pg-01.lab
     User root
