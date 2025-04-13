@@ -25,7 +25,8 @@
     ~/.tmux.conf:
     ~/.zprofile:
     ~/.zshrc:
-    #    /etc/docker/daemon.json: daemon.json
+    /etc/docker/daemon.json: daemon.json
+    /etc/wsl.conf: wsl.conf
     /usr/local/share/fonts: fonts
 
 - create:

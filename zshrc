@@ -163,6 +163,7 @@ alias yeet="xsel --output --clipboard"
 alias explorer="explorer.exe"
 alias toolbox="jetbrains-toolbox"
 alias fly="flyctl"
+alias bat="batcat"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
