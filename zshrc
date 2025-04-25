@@ -175,6 +175,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export ZSH_TMUX_AUTO_TITLE_TARGET="pane"
 export ZSH_TMUX_AUTO_TITLE_SHORT=true
 export ZSH_TMUX_AUTO_TITLE_IDLE_TEXT="%pwd"
+export COMPOSE_BAKE=true
 
 # k8s
 export KUBECONFIG="$HOME/.kube/config.yaml"

@@ -1,11 +1,12 @@
 [settings]
 experimental = true
-jobs = 8
+jobs = 10
 plugin_autoupdate_last_check_duration = "1 week"
+idiomatic_version_file_enable_tools = []
 
 [tools]
 usage = "latest"
-python = ["sub-0.1:latest", "sub-0.2:latest", "sub-0.3:latest"]
+python = "sub-0.1:latest"
 task = "latest"
 node = "lts"
 terraform = "latest"
@@ -33,7 +34,7 @@ flyctl = "latest"
 mc = "latest"
 dasel = "latest"
 neovim = "0.10"
-kubectl = "latest"
+kubectl = "1.30"
 doppler = "latest"
 gh = "latest"
 bitwarden = "latest"
@@ -56,3 +57,5 @@ packer = "latest"
 atlas = "latest"
 mkcert = "latest"
 trivy = "latest"
+duckdb = "latest"
+tinytex = "latest"
