@@ -63,7 +63,7 @@ symbol = " "
 [gcloud]
 disabled = false
 symbol = " 󱇶 "
-format = '[[$symbol$project](fg:#417ee7)]($style)'
+format = '[[$symbol$active \($project\)](fg:#417ee7)]($style)'
 
 [git_branch]
 symbol = ""
