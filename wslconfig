@@ -7,5 +7,4 @@ networkingMode=mirrored
 kernelCommandLine = "sysctl.vm.swappiness=10"
 
 [experimental]
-autoMemoryReclaim=gradual
 hostAddressLoopback=true

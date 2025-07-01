@@ -147,9 +147,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ll='ls -lhF'
-alias la='ls -alhF'
-alias l='ls -CF'
+alias ll='eza -lhF --icons --time-style=long-iso --group-directories-first'
+alias la='eza -alhF --icons --time-style=long-iso --group-directories-first'
+alias l='eza -F --icons --time-style=long-iso --group-directories-first'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias cls="clear"
 alias vim="nvim"
