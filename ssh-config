@@ -110,3 +110,4 @@ Host mac
     HostName mac.lab
     User kennethdomingo
     IdentityFile ~/.ssh/id_ed25519_eyva
+    ServerAliveInterval 60
