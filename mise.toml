@@ -1,8 +1,9 @@
 [settings]
 experimental = true
-jobs = 10
+jobs = 12
 plugin_autoupdate_last_check_duration = "1 week"
 idiomatic_version_file_enable_tools = []
+python.uv_venv_auto = true
 
 [tools]
 usage = "latest"
@@ -53,7 +54,6 @@ mkcert = "latest"
 trivy = "latest"
 duckdb = "latest"
 act = "latest"
-python = "sub-0.1:latest"
 bitwarden = "latest"
 eza = "latest"
 xh = "latest"
@@ -65,3 +65,7 @@ tokei = "latest"
 mask = "latest"
 mprocs = "latest"
 postgres = "latest"
+erlang = "latest"
+elixir = "latest"
+supabase-cli = "latest"
+python = "3.13"
