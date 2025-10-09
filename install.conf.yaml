@@ -1,39 +1,40 @@
 - defaults:
-    link:
-      create: true
-      relink: true
+      link:
+          create: true
+          relink: true
 
 - clean:
-    - "~"
-    - "~/.config"
+      - "~"
+      - "~/.config"
 
 - link:
-    ~/.config/gh/config.yml: gh-config.yml
-    ~/.config/mise/config.toml: mise.toml
-    ~/.config/nvim: nvim
-    ~/.config/pypoetry/config.toml: poetry.toml
-    ~/.config/starship.toml: starship.toml
-    ~/.config/glow/glow.yml: glow.yml
-    ~/.dotfiles: ""
-    ~/.gitconfig:
-    ~/eyva/.gitconfig: gitconfig-eyva
-    ~/.gitignore:
-    ~/idea-watchers.xml:
-    ~/.profile:
-    ~/.ssh/config: ssh-config
-    ~/.sqliterc:
-    ~/.tmux.conf:
-    ~/.zprofile:
-    ~/.zshrc:
-    /etc/docker/daemon.json: daemon.json
-    /etc/wsl.conf: wsl.conf
-    /usr/local/share/fonts: fonts
+      ~/.config/gh/config.yml: gh-config.yml
+      ~/.config/mise/config.toml: mise.toml
+      ~/.config/nvim: nvim
+      ~/.config/pypoetry/config.toml: poetry.toml
+      ~/.config/starship.toml: starship.toml
+      ~/.config/glow/glow.yml: glow.yml
+      ~/.dotfiles: ""
+      ~/.gitconfig:
+      ~/eyva/.gitconfig: gitconfig-eyva
+      ~/.gitignore:
+      ~/idea-watchers.xml:
+      ~/.profile:
+      ~/.ssh/config: ssh-config
+      ~/.sqliterc:
+      ~/.tmux.conf:
+      ~/.zprofile:
+      ~/.zshrc:
+      ~/requirements.txt: requirements.txt
+      /etc/docker/daemon.json: daemon.json
+      /etc/wsl.conf: wsl.conf
+      /usr/local/share/fonts: fonts
 
 - create:
-    - ~/Downloads
-    - ~/eyva
-    - ~/.ssh
-    - ~/.local/bin
+      - ~/Downloads
+      - ~/eyva
+      - ~/.ssh
+      - ~/.local/bin
 
 - shell:
-    - git submodule update --init --recursive
+      - git submodule update --init --recursive
