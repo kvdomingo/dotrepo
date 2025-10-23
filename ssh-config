@@ -92,22 +92,25 @@ Host pigsty-dev-01
     User pigsty
     IdentityFile ~/.ssh/google_compute_engine
 
-Host 35.198.170.71
-    User pigsty
-    IdentityFile ~/.ssh/google_compute_engine
-
-Host 162.55.87.241
+Host eyva-ana-db
+    HostName 162.55.87.241
     User pigsty
     IdentityFile ~/.ssh/id_rsa_pigsty
 
-Host 178.63.52.110
+Host eyva-old-ana-db
+    HostName 178.63.52.110
     User root
     IdentityFile ~/.ssh/id_rsa
 
-Host srv712172
-    HostName srv712172.hstgr.cloud
+Host eyva-crawlers
+    HostName 159.69.63.220
     User root
-    IdentityFile ~/.ssh/id_ed25519
+    IdentityFile ~/.ssh/id_rsa_eyva
+
+Host eyva-data-api
+    HostName 49.13.77.67
+    User root
+    IdentityFile ~/.ssh/id_rsa_eyva
 
 Host bind
     HostName bind.lab
