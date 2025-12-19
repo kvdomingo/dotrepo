@@ -6,8 +6,7 @@ command_timeout = 10000
 format = '''
 [┌───────($shell $username $container$os$hostname @ $localip)───────────>](bold cyan)
 [│](bold cyan)$directory$bun$c$cmake$deno$golang$java$lua$nodejs$python$conda$rust$php
-[│](bold cyan)$aws$azure$gcloud
-[│](bold cyan)$docker_context$kubernetes$helm$terraform$pulumi$nix_shell
+[│](bold cyan)$docker_context$kubernetes$helm$terraform$gcloud$pulumi$nix_shell
 [│](bold cyan)$time$memory_usage$jobs$git_status$git_branch$git_commit$git_state$git_metrics$status
 [└─> ](bold cyan)'''
 
@@ -22,7 +21,7 @@ disabled = false
 
 [bun]
 format = '[$symbol$version ]($style)'
-symbol = " 🍞 "
+symbol = " "
 
 [c]
 symbol = " "
