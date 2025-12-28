@@ -29,6 +29,9 @@
       /etc/docker/daemon.json: daemon.json
       /etc/wsl.conf: wsl.conf
       /usr/local/share/fonts: fonts
+      /mnt/c/Users/Kenneth/.wslconfig: wslconfig
+      /mnt/c/Users/Kenneth/.wslgconfig: wslgconfig
+      /mnt/c/Users/Kenneth/packages.config: packages.config
 
 - create:
       - ~/Downloads
