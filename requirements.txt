@@ -2,4 +2,4 @@ ansible
 ansible-lint
 antlr4-tools
 pip
-pre-commit
+prek
