@@ -2,6 +2,9 @@
 Adobe.CreativeCloud
 Discord.Discord
 Entropy6.XMeters
+Figma.Figma
 Google.Chrome
+Guru3D.Afterburner
+Overwolf.CurseForge
 Rem0o.FanControl
 zen-team.zen-browser

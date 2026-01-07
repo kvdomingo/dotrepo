@@ -92,6 +92,11 @@ Host pigsty-dev-01
     User pigsty
     IdentityFile ~/.ssh/google_compute_engine
 
+Host ra-deps
+    HostName 34.159.155.75
+    User pigsty
+    IdentityFile ~/.ssh/google_compute_engine
+
 Host eyva-ana-db
     HostName 162.55.87.241
     User pigsty
