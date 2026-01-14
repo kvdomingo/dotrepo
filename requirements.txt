@@ -1,5 +1,6 @@
 ansible
 ansible-lint
 antlr4-tools
+huggingface-hub[cli]
 pip
 prek
