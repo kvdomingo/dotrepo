@@ -1,0 +1,30 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen3-coder:latest": {
+          "tool_call": true
+        },
+        "gpt-oss:latest": {
+          "tool_call": true
+        }
+      }
+    }
+  },
+  "permission": {
+    "*": "ask",
+    "skill": {
+      "*": "allow"
+    }
+  },
+  "theme": "catppuccin",
+  "plugin": [
+    "@zenobius/opencode-skillful",
+    "opencode-wakatime"
+  ]
+}

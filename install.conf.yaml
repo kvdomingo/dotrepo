@@ -12,6 +12,7 @@
       ~/.config/k9s/config.yaml: k9s.yaml
       ~/.config/mise/config.toml: mise.toml
       ~/.config/nvim: nvim
+      ~/.config/opencode/opencode.json: opencode.json
       ~/.config/pypoetry/config.toml: poetry.toml
       ~/.config/starship.toml: starship.toml
       ~/.config/glow/glow.yml: glow.yml

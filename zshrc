@@ -199,8 +199,9 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 # gcloud
 export CLOUDSDK_HOME="$HOME/.local/share/mise/installs/gcloud/latest"
 
-# Cursor IDE
+# IDE
 export PATH="$PATH:/mnt/c/Users/Kenneth/AppData/Local/Programs/cursor/resources/app/bin"
+export PATH="$PATH:/mnt/c/Users/Kenneth/AppData/Local/Programs/Zed/bin"
 
 # ic11
 export PATH="$PATH:$HOME/.local/bin/ic11"

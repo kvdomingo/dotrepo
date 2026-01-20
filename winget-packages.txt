@@ -7,4 +7,5 @@ Google.Chrome
 Guru3D.Afterburner
 Overwolf.CurseForge
 Rem0o.FanControl
+ZedIndustries.Zed
 zen-team.zen-browser
