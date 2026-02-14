@@ -1,6 +1,7 @@
 9PKTQ5699M62
 Adobe.CreativeCloud
 Discord.Discord
+ElectronicArts.EADesktop
 Entropy6.XMeters
 Figma.Figma
 Google.Chrome

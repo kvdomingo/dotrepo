@@ -74,16 +74,12 @@ plugins=(
     ansible
     argocd
     aws
-    azure
     bun
-    celery
     command-not-found
     dbt
     direnv
-    docker
     docker-compose
     emoji
-    fluxcd
     fzf
     gcloud
     genpass
@@ -101,7 +97,6 @@ plugins=(
     kube-ps1
     node
     npm
-    opentofu
     pip
     postgres
     redis-cli

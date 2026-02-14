@@ -1,7 +1,7 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
 add_newline = true
-command_timeout = 10000
+command_timeout = 1000
 
 format = '''
 [┌───────($shell $username $container$os$hostname @ $localip)───────────>](bold cyan)
