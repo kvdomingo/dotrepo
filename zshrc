@@ -159,7 +159,7 @@ alias explorer="explorer.exe"
 alias toolbox="jetbrains-toolbox"
 alias fly="flyctl"
 alias bat="batcat"
-alias update-all="sudo apt update && sudo apt upgrade -y && mise self-update -y && mise upgrade -y && mise prune -y"
+alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && mise self-update -y && mise upgrade -y && mise prune -y"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

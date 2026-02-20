@@ -127,3 +127,8 @@ Host mac
     User kennethdomingo
     IdentityFile ~/.ssh/id_ed25519_eyva
     ServerAliveInterval 60
+
+Host eyva-vault
+    HostName 46.225.174.157
+    User pigsty
+    IdentityFile ~/.ssh/id_ed25519_eyva
