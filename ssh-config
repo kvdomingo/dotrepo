@@ -82,37 +82,27 @@ Host truenas
     HostName truenas.lab
     User kvdomingo
 
-Host pigsty-poc
-    HostName 162.55.87.241
-    User pigsty
-    IdentityFile ~/.ssh/id_rsa_pigsty
-
-Host pigsty-dev-01
-    HostName 35.198.170.71
-    User pigsty
-    IdentityFile ~/.ssh/google_compute_engine
-
 Host ra-deps
     HostName 34.159.155.75
     User pigsty
     IdentityFile ~/.ssh/google_compute_engine
 
-Host eyva-ana-db
+Host eyva-infra-dev
     HostName 162.55.87.241
     User pigsty
     IdentityFile ~/.ssh/id_rsa_pigsty
 
-Host eyva-old-ana-db
-    HostName 178.63.52.110
-    User root
-    IdentityFile ~/.ssh/id_rsa
+Host 162.55.87.241
+    User pigsty
+    IdentityFile ~/.ssh/id_rsa_pigsty
+
 
 Host eyva-crawlers
     HostName 159.69.63.220
     User root
     IdentityFile ~/.ssh/id_rsa_eyva
 
-Host eyva-data-api
+Host eyva-old-data-api-dev
     HostName 49.13.77.67
     User root
     IdentityFile ~/.ssh/id_rsa_eyva
@@ -132,3 +122,17 @@ Host eyva-vault
     HostName 46.225.174.157
     User pigsty
     IdentityFile ~/.ssh/id_ed25519_eyva
+
+Host 46.225.174.157
+    User pigsty
+    IdentityFile ~/.ssh/id_ed25519_eyva
+
+
+Host eyva-infra-prod
+    HostName 138.201.138.87
+    User pigsty
+    IdentityFile ~/.ssh/id_rsa_pigsty
+
+Host 138.201.138.87
+    User pigsty
+    IdentityFile ~/.ssh/id_rsa_pigsty
