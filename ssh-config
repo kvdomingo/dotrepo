@@ -13,6 +13,11 @@ Host srv-dev-01
     IdentityFile ~/.ssh/id_ed25519
     Port 4422
 
+Host srv-dev-02
+    HostName srv-dev-02.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
 Host srv-lab-01
     HostName srv-lab-01.lab
     User kvdomingo
@@ -30,7 +35,7 @@ Host srv-lab-03
 
 Host srv-pg-01
     HostName srv-pg-01.lab
-    User root
+    User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
 
 Host srv-k8s-01
@@ -46,6 +51,11 @@ Host srv-k8s-02
 Host srv-k8s-03
     HostName srv-k8s-03.lab
     User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
+Host aurora
+    HostName aurora.lab
+    User root
     IdentityFile ~/.ssh/id_ed25519
 
 Host truenas
@@ -109,7 +119,7 @@ Host eyva-old-data-api-dev
 
 Host bind
     HostName bind.lab
-    User root
+    User kvdomingo
     IdentityFile ~/.ssh/id_ed25519
 
 Host mac

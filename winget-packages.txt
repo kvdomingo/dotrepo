@@ -1,5 +1,6 @@
 9PKTQ5699M62
 Adobe.CreativeCloud
+DifferentAI.OpenWork
 Discord.Discord
 ElectronicArts.EADesktop
 Entropy6.XMeters
