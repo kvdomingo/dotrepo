@@ -29,7 +29,6 @@
       "*": "allow"
     }
   },
-  "theme": "catppuccin",
   "plugin": [
     "@tarquinen/opencode-dcp@latest",
     "envsitter-guard@latest",
