@@ -218,3 +218,4 @@ precmd() {
 
 eval "$(zoxide init zsh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+eval "$(atuin init zsh)"

@@ -117,6 +117,11 @@ Host eyva-old-data-api-dev
     User root
     IdentityFile ~/.ssh/id_rsa_eyva
 
+Host eyva-old-data-api-prod
+    HostName 178.63.18.56
+    User root
+    IdentityFile ~/.ssh/id_rsa_eyva
+
 Host bind
     HostName bind.lab
     User kvdomingo

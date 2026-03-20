@@ -10,6 +10,7 @@
 - link:
     ~/.claude/agents: claude/agents
     ~/.claude/skills: claude/skills
+    ~/.config/atuin/config.toml: atuin.toml
     ~/.config/gh/config.yml: gh-config.yml
     ~/.config/k9s/config.yaml: k9s.yaml
     ~/.config/mise/config.toml: mise.toml
@@ -28,6 +29,8 @@
     ~/.ssh/config: ssh-config
     ~/.sqliterc:
     ~/.tmux.conf:
+    ~/.warp/agents: claude/agents
+    ~/.warp/skills: claude/skills
     ~/.zprofile:
     ~/.zshrc:
     ~/requirements.txt: requirements.txt
@@ -45,6 +48,7 @@
     - ~/.claude
     - ~/.ssh
     - ~/.local/bin
+    - ~/.warp
 
 - shell:
     - git submodule update --init --recursive

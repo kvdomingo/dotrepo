@@ -2,7 +2,7 @@
 name: pr-description-updater
 description: "Use this agent when a git push has just been performed and the PR description needs to be created or updated. It should be triggered automatically after a successful git push to manage GitHub pull request descriptions using the `gh` CLI.\\n\\n<example>\\nContext: The user has just pushed code to a remote branch and wants the PR description updated.\\nuser: \"I just pushed my feature branch with the new authentication changes\"\\nassistant: \"Let me use the pr-description-updater agent to update the PR description for your branch.\"\\n<commentary>\\nSince the user has just pushed code, use the Agent tool to launch the pr-description-updater agent to create or update the PR description.\\n</commentary>\\n</example>\\n\\n<example>\\nContext: The user runs a git push command and the agent should proactively update the PR.\\nuser: \"git push origin feature/payment-integration\"\\nassistant: \"The push was successful. Now let me use the pr-description-updater agent to ensure the PR description is up to date.\"\\n<commentary>\\nAfter a git push, proactively use the pr-description-updater agent to manage the PR description.\\n</commentary>\\n</example>"
 tools: Bash, Grep, WebSearch, WebFetch, Skill, TaskCreate, TaskGet, TaskUpdate, TaskList, EnterWorktree, ToolSearch, mcp__claude_ai_Context7__resolve-library-id, mcp__claude_ai_Context7__query-docs
-model: haiku
+model: sonnet
 color: blue
 ---
 
