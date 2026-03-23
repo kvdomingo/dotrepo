@@ -8,6 +8,7 @@
     - "~/.config"
 
 - link:
+    ~/.agents/skills: claude/skills
     ~/.claude/agents: claude/agents
     ~/.claude/skills: claude/skills
     ~/.config/atuin/config.toml: atuin.toml
@@ -20,10 +21,13 @@
     ~/.config/starship.toml: starship.toml
     ~/.config/glow/glow.yml: glow.yml
     ~/.dotfiles: ""
+    ~/.gemini/antigravity/skills: claude/skills
     ~/.gitconfig:
     ~/eyva/.gitconfig: gitconfig-eyva
     ~/.gitignore:
     ~/idea-watchers.xml:
+    ~/.opencode/agents: claude/agents
+    ~/.opencode/skills: claude/skills
     ~/.profile:
     ~/.rumdl.toml:
     ~/.ssh/config: ssh-config
