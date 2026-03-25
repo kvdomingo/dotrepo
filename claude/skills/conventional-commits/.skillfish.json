@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "conventional-commits",
+  "owner": "dgalarza",
+  "repo": "claude-code-workflows",
+  "path": "plugins/conventional-commits/skills/conventional-commits",
+  "branch": "main",
+  "sha": "00ec91f154c251bac03552145d29e2f9ee7652d4",
+  "source": "manual"
+}

@@ -56,6 +56,7 @@
 
 - shell:
     - git submodule update --init --recursive
+    - cp -r claude /mnt/c/Users/Kenneth/.agents
     - cp wslconfig /mnt/c/Users/Kenneth/.wslconfig
     - cp wslgconfig /mnt/c/Users/Kenneth/.wslgconfig
     - cp packages.config /mnt/c/Users/Kenneth/packages.config
