@@ -12,6 +12,7 @@
     ~/.claude/agents: claude/agents
     ~/.claude/skills: claude/skills
     ~/.config/atuin/config.toml: atuin.toml
+    ~/.config/gcloud/configurations: gcloud/configurations
     ~/.config/gh/config.yml: gh-config.yml
     ~/.config/k9s/config.yaml: k9s.yaml
     ~/.config/mise/config.toml: mise.toml
