@@ -219,3 +219,9 @@ precmd() {
 eval "$(zoxide init zsh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 eval "$(atuin init zsh)"
+# Added by dbt Fusion extension (ensure dbt binary dir on PATH)
+if [[ ":$PATH:" != *":/home/kvdomingo/.local/bin:"* ]]; then
+  export PATH=/home/kvdomingo/.local/bin:"$PATH"
+fi
+# Added by dbt Fusion extension
+alias dbtf=/home/kvdomingo/.local/bin/dbt
