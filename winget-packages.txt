@@ -1,5 +1,6 @@
 9PKTQ5699M62
 Adobe.CreativeCloud
+APIDocumentation.Scalar
 DifferentAI.OpenWork
 Discord.Discord
 ElectronicArts.EADesktop
