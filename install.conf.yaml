@@ -30,6 +30,7 @@
     ~/.opencode/agents: claude/agents
     ~/.opencode/skills: claude/skills
     ~/.profile:
+    ~/.psqlrc:
     ~/.rumdl.toml:
     ~/.ssh/config: ssh-config
     ~/.sqliterc:
