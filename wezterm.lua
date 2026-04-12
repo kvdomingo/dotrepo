@@ -36,14 +36,14 @@ config.window_frame = {
 config.default_prog = {
 	"wsl",
 	"-d",
-	"Ubuntu",
+	"UbuntuB",
 	"--cd",
 	"/home/kvdomingo",
 }
 
 config.launch_menu = {
 	{
-		args = { "wsl", "-d", "Ubuntu", "--cd", "/home/kvdomingo" },
+		args = { "wsl", "-d", "UbuntuB", "--cd", "/home/kvdomingo" },
 		label = "WSL",
 	},
 	{

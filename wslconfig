@@ -1,6 +1,4 @@
 [wsl2]
-localhostForwarding=true
-pageReporting=true
 guiApplications=true
 nestedVirtualization=true
 networkingMode=mirrored

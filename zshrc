@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/home/kvdomingo/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -150,8 +157,6 @@ alias cls="clear"
 alias vim="nvim"
 alias dc="docker compose"
 alias ds="docker stack"
-alias ppy="poetry run python"
-alias prun="poetry run"
 alias clip="clip.exe"
 alias yank="xsel --input --clipboard"
 alias yeet="xsel --output --clipboard"
@@ -159,6 +164,7 @@ alias explorer="explorer.exe"
 alias toolbox="jetbrains-toolbox"
 alias fly="flyctl"
 alias bat="batcat"
+alias tg="terragrunt"
 alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && mise self-update -y && mise upgrade -y && mise prune -y"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

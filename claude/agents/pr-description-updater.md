@@ -41,9 +41,10 @@ Verify the switch was successful before proceeding. If the switch fails, halt an
 3. **If no PR exists**: Exit gracefully with a message like: `No open PR found for branch '<branch-name>'. Nothing to update.` Do NOT create a new PR.
 4. **If a PR exists**: Proceed to Step 3.
 
-### Step 3: Analyze the Existing PR Description
+### Step 3: Analyze the Existing PR
 
-Retrieve the current PR body. Carefully inspect it for:
+Retrieve the current PR. Carefully inspect it for:
+- **Base branch**: Do not assume that the base branch is `main`.
 - **AI agent blocks**: Sections or blocks marked as created by other AI agents (e.g., sections with headers like `<!-- AI-generated -->`, blocks from automated tools, checklist sections from bots, etc.). These must be preserved exactly as-is.
 - **Existing structure/outline**: Any section headers or organizational patterns already present.
 - **Human-authored content**: Any manually written content that must be preserved.
