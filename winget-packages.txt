@@ -1,6 +1,7 @@
 9PKTQ5699M62
 Adobe.CreativeCloud
 APIDocumentation.Scalar
+Comfy.ComfyUI-Desktop
 Corsair.iCUE.5
 DifferentAI.OpenWork
 Discord.Discord
