@@ -173,12 +173,12 @@ export EDITOR="nvim"
 export BROWSER="wslview"
 export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME="$HOME/.config"
-export LD_LIBRARY_PATH="/opt/rocm-6.4.2/lib"
 export PATH="$PATH:$HOME/.local/bin"
 export ZSH_TMUX_AUTO_TITLE_TARGET="pane"
 export ZSH_TMUX_AUTO_TITLE_SHORT=true
 export ZSH_TMUX_AUTO_TITLE_IDLE_TEXT="%pwd"
 export COMPOSE_BAKE=true
+export PAGER="less -SRFXMi --mouse --wheel-lines=3"
 
 # k8s
 export KUBECONFIG="$HOME/.kube/config.yaml"
@@ -206,6 +206,9 @@ export PATH="$PATH:/mnt/c/Users/Kenneth/AppData/Local/Programs/Zed/bin"
 
 # ic11
 export PATH="$PATH:$HOME/.local/bin/ic11"
+
+# ROCm
+export HSA_ENABLE_DXG_DETECTION=1
 
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
