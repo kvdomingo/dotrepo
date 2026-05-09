@@ -1,10 +1,3 @@
-# OPENSPEC:START
-# OpenSpec shell completions configuration
-fpath=("/home/kvdomingo/.oh-my-zsh/custom/completions" $fpath)
-autoload -Uz compinit
-compinit
-# OPENSPEC:END
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -228,9 +221,25 @@ precmd() {
 eval "$(zoxide init zsh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 eval "$(atuin init zsh)"
+
 # Added by dbt Fusion extension (ensure dbt binary dir on PATH)
 if [[ ":$PATH:" != *":/home/kvdomingo/.local/bin:"* ]]; then
   export PATH=/home/kvdomingo/.local/bin:"$PATH"
 fi
 # Added by dbt Fusion extension
 alias dbtf=/home/kvdomingo/.local/bin/dbt
+
+# pnpm
+export PNPM_HOME="/home/kvdomingo/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/home/kvdomingo/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
