@@ -7,6 +7,16 @@ Host gitlab.com
     User git
     IdentityFile ~/.ssh/id_rsa
 
+Host pihole1
+    HostName 10.10.1.53
+    User root
+    IdentityFile ~/.ssh/id_ed25519
+
+Host pihole2
+    HostName 10.10.2.53
+    User root
+    IdentityFile ~/.ssh/id_ed25519
+
 Host srv-dev-01
     HostName srv-dev-01.lab
     User kvdomingo
@@ -100,27 +110,11 @@ Host ra-deps
 Host eyva-infra-dev
     HostName 162.55.87.241
     User pigsty
-    IdentityFile ~/.ssh/id_rsa_pigsty
+    IdentityFile ~/.ssh/id_ed25519_eyva
 
 Host 162.55.87.241
     User pigsty
-    IdentityFile ~/.ssh/id_rsa_pigsty
-
-
-Host eyva-crawlers
-    HostName 159.69.63.220
-    User root
-    IdentityFile ~/.ssh/id_rsa_eyva
-
-Host eyva-old-data-api-dev
-    HostName 49.13.77.67
-    User root
-    IdentityFile ~/.ssh/id_rsa_eyva
-
-Host eyva-old-data-api-prod
-    HostName 178.63.18.56
-    User root
-    IdentityFile ~/.ssh/id_rsa_eyva
+    IdentityFile ~/.ssh/id_ed25519_eyva
 
 Host bind
     HostName bind.lab
@@ -151,3 +145,8 @@ Host eyva-infra-prod
 Host 138.201.138.87
     User pigsty
     IdentityFile ~/.ssh/id_rsa_pigsty
+
+Host eyva-crawl-proxy
+    HostName 91.99.155.97
+    User root
+    IdentityFile ~/.ssh/id_ed25519_eyva
