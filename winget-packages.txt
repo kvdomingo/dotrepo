@@ -11,6 +11,7 @@ Figma.Figma
 Google.Chrome
 Guru3D.Afterburner
 Overwolf.CurseForge
+Rakuten.Viber
 Rem0o.FanControl
 ZedIndustries.Zed
 zen-team.zen-browser

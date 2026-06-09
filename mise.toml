@@ -45,7 +45,7 @@ dua = "latest"
 yazi = "latest"
 mask = "latest"
 mprocs = "latest"
-postgres = "latest"
+postgres = "18"
 python = { version = "sub-0.1:latest", postinstall = "pip install -r ~/requirements.txt" }
 dotnet-core = "9"
 aqua = "latest"
