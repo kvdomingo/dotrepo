@@ -4,6 +4,7 @@ plugin_autoupdate_last_check_duration = "1 week"
 idiomatic_version_file_enable_tools = []
 minimum_release_age = "24h"
 python.uv_venv_auto = false
+fetch_remote_versions_timeout = "10s"
 
 [tools]
 usage = "latest"
@@ -19,7 +20,7 @@ gcloud = { version = "latest", postinstall = "$(gcloud info --format=\"value(bas
 awscli = "latest"
 snyk = "latest"
 cloudflared = "latest"
-go = "sub-0.0.1:latest"
+go = "sub-0.0.2:latest"
 bun = "latest"
 vault = "latest"
 uv = "latest"
@@ -47,7 +48,7 @@ yazi = "latest"
 mask = "latest"
 mprocs = "latest"
 postgres = "18"
-python = { version = "sub-0.1:latest", postinstall = "pip install -r ~/requirements.txt" }
+python = { version = "sub-0.1.1:latest", postinstall = "pip install -r ~/requirements.txt" }
 aqua = "latest"
 tokei = "latest"
 gitleaks = "latest"
@@ -61,7 +62,6 @@ claude-code = "latest"
 opencode = "latest"
 mc = "latest"
 rumdl = "latest"
-codex = "latest"
 atuin = "latest"
 terraform-docs = "latest"
 prek = "latest"
@@ -74,3 +74,9 @@ yarn = "latest"
 pnpm = "latest"
 zizmor = "latest"
 supabase = "latest"
+herdr = "latest"
+pi = "latest"
+witr = "latest"
+infisical = { version = "latest", asset_pattern = "cli_{{ version }}_{{ os(macos='darwin') }}_{{ arch(x64='amd64') }}.tar.gz" }
+"aqua:madelynnblue/sqlfmt" = "latest"
+lazydocker = "latest"
