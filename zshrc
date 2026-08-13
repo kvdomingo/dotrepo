@@ -244,3 +244,6 @@ fpath=("/home/kvdomingo/.oh-my-zsh/custom/completions" $fpath)
 autoload -Uz compinit
 compinit
 # OPENSPEC:END
+
+# Added by GitButler installer
+eval "$(but completions zsh)"
