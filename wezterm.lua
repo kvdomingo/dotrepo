@@ -33,25 +33,6 @@ config.window_frame = {
 	font_size = 11,
 }
 
-config.default_prog = {
-	"wsl",
-	"-d",
-	"UbuntuB",
-	"--cd",
-	"/home/kvdomingo",
-}
-
-config.launch_menu = {
-	{
-		args = { "wsl", "-d", "UbuntuB", "--cd", "/home/kvdomingo" },
-		label = "WSL",
-	},
-	{
-		args = { "pwsh.exe" },
-		label = "PowerShell",
-	},
-}
-
 config.keys = {
 	{
 		key = "v",

@@ -54,7 +54,6 @@ tokei = "latest"
 gitleaks = "latest"
 krew = "latest"
 java = "latest"
-imagemagick = { version = "latest", os = ["linux", "windows"] }
 infracost = "latest"
 gemini-cli = "latest"
 gh = "latest"
