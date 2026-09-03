@@ -1,5 +1,6 @@
 [settings]
 experimental = true
+prereleases = false
 plugin_autoupdate_last_check_duration = "1 week"
 idiomatic_version_file_enable_tools = []
 minimum_release_age = "24h"
@@ -47,7 +48,7 @@ dua = "latest"
 yazi = "latest"
 mask = "latest"
 mprocs = "latest"
-postgres = "18"
+postgres = "latest"
 python = { version = "sub-0.1.1:latest", postinstall = "pip install -r ~/requirements.txt" }
 aqua = "latest"
 tokei = "latest"
@@ -79,3 +80,6 @@ witr = "latest"
 infisical = { version = "latest", asset_pattern = "cli_{{ version }}_{{ os(macos='darwin') }}_{{ arch(x64='amd64') }}.tar.gz" }
 "aqua:madelynnblue/sqlfmt" = "latest"
 lazydocker = "latest"
+codex = "latest"
+yt-dlp = { version = "latest", rename_exe = "yt-dlp" }
+ffmpeg = "latest"
