@@ -62,6 +62,15 @@ COMPLETION_WAITING_DOTS="true"
 # see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
 
+# Detect OS
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export PLATFORM="macos"
+elif [[ -n "$WSL_DISTRO_NAME" ]]; then
+  export PLATFORM="wsl"
+else
+  export PLATFORM="linux"
+fi
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -164,7 +173,6 @@ alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export EDITOR="nvim"
-export BROWSER="wslview"
 export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$HOME/.local/bin"
@@ -173,6 +181,10 @@ export ZSH_TMUX_AUTO_TITLE_SHORT=true
 export ZSH_TMUX_AUTO_TITLE_IDLE_TEXT="%pwd"
 export COMPOSE_BAKE=true
 export PAGER="less -SRFXMi --mouse --wheel-lines=3"
+
+if [[ "$PLATFORM" == "wsl" ]]; then
+  export BROWSER="wslview"
+fi
 
 # k8s
 export KUBECONFIG="$HOME/.kube/config.yaml"
@@ -202,7 +214,9 @@ export PATH="$PATH:/mnt/c/Users/Kenneth/AppData/Local/Programs/Zed/bin"
 export PATH="$PATH:$HOME/.local/bin/ic11"
 
 # ROCm
-export HSA_ENABLE_DXG_DETECTION=1
+if [[ "$PLATFORM" == "wsl" ]]; then
+  export HSA_ENABLE_DXG_DETECTION=1
+fi
 
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}

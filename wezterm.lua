@@ -48,4 +48,16 @@ for i = 1, 8 do
 	})
 end
 
+config.launch_menu = {
+	{
+		label = "WSL Ubuntu",
+		args = { "wsl", "--cd", "~" },
+	},
+	{
+		label = "PowerShell",
+		args = { "pwsh" },
+	},
+}
+config.default_prog = { "wsl", "--cd", "~" }
+
 return config
