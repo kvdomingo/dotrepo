@@ -10,6 +10,8 @@
 - link:
     ~/.agents/skills: claude/skills
     ~/.claude/agents: claude/agents
+    ~/.claude/CLAUDE.md: claude/CLAUDE.md
+    ~/.claude/RTK.md: claude/RTK.md
     ~/.claude/skills: claude/skills
     ~/.config/atuin/config.toml: atuin.toml
     ~/.config/gcloud/configurations: gcloud/configurations
