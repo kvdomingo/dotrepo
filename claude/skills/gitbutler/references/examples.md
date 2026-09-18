@@ -1,6 +1,6 @@
 # GitButler CLI Workflow Examples
 
-Real-world examples of common workflows.
+Real-world examples of common workflows. Applies only in a GitButler workspace with `but` installed; elsewhere plain `git` is the default (see SKILL.md).
 
 **Note on CLI IDs:** Examples below use full branch names for branch-targeting mutations. Illustrative IDs like `nn` and `a1` keep other commands readable; in practice, **always read actual IDs from `but status -fv`** because they are generated for the current workspace snapshot. Commit IDs are short change-ID prefixes that stay stable across history edits (e.g., `kyn`; commits without a change ID fall back to a sha prefix), and file/hunk/stack IDs are auto-generated (e.g., `r`, `r:c`, `h0`). All IDs are unique across entity types within one snapshot.
 

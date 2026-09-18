@@ -1,0 +1,15 @@
+onboarding = false
+
+[ui]
+mouse_capture = true
+agent_panel_sort = "spaces"
+
+[ui.toast]
+delivery = "system"
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+[keys]
+prefix = "ctrl+z"

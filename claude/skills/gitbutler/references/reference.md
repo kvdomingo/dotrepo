@@ -1,6 +1,6 @@
 # GitButler CLI Command Reference
 
-Agent-focused reference for useful `but` commands.
+Agent-focused reference for useful `but` commands. Applies only in a GitButler workspace with `but` installed; elsewhere plain `git` is the default (see SKILL.md).
 
 ## Contents
 

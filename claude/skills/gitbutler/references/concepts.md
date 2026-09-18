@@ -1,6 +1,6 @@
 # GitButler CLI Key Concepts
 
-Deep dive into GitButler's conceptual model and philosophy.
+Deep dive into GitButler's conceptual model and philosophy. Applies only in a GitButler workspace with `but` installed; elsewhere plain `git` is the default (see SKILL.md).
 
 ## The Workspace Model
 
@@ -324,4 +324,4 @@ Git commands that don't modify state are safe to use:
 - `git rebase` - Conflicts with GitButler's management
 - `git merge` - Use `but land` instead
 
-**Rule of thumb:** If it reads, it's fine. If it writes, use `but` instead.
+**Rule of thumb:** In a GitButler workspace, if it reads, it's fine; if it writes, use `but` instead.

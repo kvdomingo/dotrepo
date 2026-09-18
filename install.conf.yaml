@@ -16,6 +16,7 @@
     ~/.config/atuin/config.toml: atuin.toml
     ~/.config/gcloud/configurations: gcloud/configurations
     ~/.config/gh/config.yml: gh-config.yml
+    ~/.config/herdr/config.toml: herdr.toml
     ~/.config/k9s/config.yaml: k9s.yaml
     ~/.config/mise/config.toml: mise.toml
     ~/.config/nvim: nvim

@@ -49,7 +49,7 @@ yazi = "latest"
 mask = "latest"
 mprocs = "latest"
 postgres = "latest"
-python = { version = "sub-0.1.1:latest", postinstall = "pip install -r ~/requirements.txt" }
+python = { version = "sub-0.1:latest", postinstall = "pip install -r ~/requirements.txt" }
 aqua = "latest"
 tokei = "latest"
 gitleaks = "latest"
