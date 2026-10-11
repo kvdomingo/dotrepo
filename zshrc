@@ -95,7 +95,6 @@ plugins=(
     gh
     git
     git-commit
-    github
     gitignore
     git-lfs
     golang
