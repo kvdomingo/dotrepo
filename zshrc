@@ -168,6 +168,11 @@ alias bat="batcat"
 alias tg="terragrunt"
 alias trae="/mnt/c/Users/Kenneth/AppData/Local/Programs/Trae/Trae.exe > /dev/null 2>&1 &"
 alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade -y && mise self-update -y && mise upgrade -y && mise prune -y"
+alias gcloud-login-eyva="gcloud auth application-default login --client-id-file=\"${HOME}/eyva/client_secret.json\" --scopes=openid,https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/drive"
+
+notify-send() {
+  wsl-notify-send.exe --category $WSL_DISTRO_NAME "${@}";
+}
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

@@ -1,6 +1,54 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
+    "litellm": {
+      "name": "LiteLLM",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://litellm.lab.kvd.studio/v1"
+      },
+      "models": {
+        "gpt-6.1-sol": {
+          "name": "GPT-6.1 Sol"
+        },
+        "gpt-6-luna": {
+          "name": "GPT-6 Luna"
+        },
+        "claude-opus-5-5": {
+          "name": "Claude Opus 5.5"
+        },
+        "claude-sonnet-5-5": {
+          "name": "Claude Sonnet 5.5"
+        },
+        "gemini-4-argon": {
+          "name": "Gemini 4 Argon",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gemini-3.8-flash": {
+          "name": "Gemini 3.8 Flash",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gemini-3.1-pro-preview": {
+          "name": "Gemini 3.1 Pro Preview"
+        }
+      }
+    },
     "ollama": {
       "name": "Ollama (local)",
       "npm": "@ai-sdk/openai-compatible",

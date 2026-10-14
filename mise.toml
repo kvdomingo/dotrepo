@@ -81,3 +81,4 @@ yt-dlp = { version = "latest", rename_exe = "yt-dlp" }
 ffmpeg = "latest"
 copilot = "latest"
 antigravity-cli = "latest"
+zellij = "latest"

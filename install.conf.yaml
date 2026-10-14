@@ -9,7 +9,6 @@
 
 - link:
     ~/.agents/skills: claude/skills
-    ~/.claude/agents: claude/agents
     ~/.claude/CLAUDE.md: claude/CLAUDE.md
     ~/.claude/RTK.md: claude/RTK.md
     ~/.claude/skills: claude/skills
@@ -24,13 +23,13 @@
     ~/.config/pypoetry/config.toml: poetry.toml
     ~/.config/starship.toml: starship.toml
     ~/.config/glow/glow.yml: glow.yml
+    ~/.config/zellij: zellij
     ~/.dotfiles: ""
     ~/.gemini/antigravity/skills: claude/skills
     ~/.gitconfig:
     ~/eyva/.gitconfig: gitconfig-eyva
     ~/.gitignore:
     ~/idea-watchers.xml:
-    ~/.opencode/agents: claude/agents
     ~/.opencode/skills: claude/skills
     ~/.profile:
     ~/.psqlrc:
@@ -38,7 +37,6 @@
     ~/.ssh/config: ssh-config
     ~/.sqliterc:
     ~/.tmux.conf:
-    ~/.warp/agents: claude/agents
     ~/.warp/skills: claude/skills
     ~/.zprofile:
     ~/.zshrc:
