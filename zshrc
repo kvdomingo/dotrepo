@@ -1,225 +1,106 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+case "$OSTYPE" in
+  darwin*) export PLATFORM="macos" ;;
+  *) [[ -n "$WSL_DISTRO_NAME" ]] && export PLATFORM="wsl" || export PLATFORM="linux" ;;
+esac
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+typeset -U path fpath
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+for brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  [[ -x $brew ]] && { eval "$($brew shellenv zsh)"; break; }
+done
+unset brew
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
+# antidote handles updates; OMZ's own updater would git-pull antidote's clone
+zstyle ':omz:update' mode disabled
 
-# Detect OS
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  export PLATFORM="macos"
-elif [[ -n "$WSL_DISTRO_NAME" ]]; then
-  export PLATFORM="wsl"
-else
-  export PLATFORM="linux"
-fi
+export EDITOR="nvim"
+export GPG_TTY=$TTY
+export XDG_CONFIG_HOME="$HOME/.config"
+export COMPOSE_BAKE=true
+export PAGER="less -SRFXMi --mouse --wheel-lines=3"
+export KUBECONFIG="$HOME/.kube/config.yaml"
+export VAULT_ADDR="https://vault.lab.kvd.studio"
+export CLOUDSDK_HOME="$HOME/.local/share/mise/installs/gcloud/latest"
+export BUT_THEME="dark"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    ansible
-    argocd
-    aws
-    bun
-    command-not-found
-    dbt
-    direnv
-    docker-compose
-    emoji
-    fzf
-    gcloud
-    genpass
-    gh
-    git
-    git-commit
-    gitignore
-    git-lfs
-    golang
-    helm
-    history-substring-search
-    isodate
-    kubectl
-    kube-ps1
-    node
-    npm
-    pip
-    postgres
-    redis-cli
-    rsync
-    safe-paste
-    ssh
-    starship
-    sudo
-    supervisor
-    tailscale
-    terraform
-    urltools
-    zsh-autosuggestions
-    zsh-interactive-cd
-    zsh-navigation-tools
+path=(
+  # mise shims cost ~270ms per exec and atuin runs on every command
+  "$HOME/.local/share/mise/installs/atuin/latest/.mise-bins"
+  "$HOME/.local/share/mise/shims"
+  "${KREW_ROOT:-$HOME/.krew}/bin"
+  "$HOME/.turso"
+  "$HOME/.antigravity-ide/antigravity-ide/bin"
+  $path
+  "$HOME/.local/bin"
+  "$HOME/.local/bin/ic11"
 )
 
-source $ZSH/oh-my-zsh.sh
+if [[ "$PLATFORM" == "macos" ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+  path=("$HOME/Library/Application Support/JetBrains/Toolbox/scripts" $path)
+else
+  export PNPM_HOME="$HOME/.local/share/pnpm"
+  path=("$HOME/.local/share/JetBrains/Toolbox/bin" "$HOME/.local/share/JetBrains/Toolbox/scripts" $path)
+fi
+path=("$PNPM_HOME/bin" $path)
 
-# User configuration
+if [[ "$PLATFORM" == "wsl" ]]; then
+  export BROWSER="wslview"
+  export HSA_ENABLE_DXG_DETECTION=1
+  # wsl.conf disables appendWindowsPath: every /mnt/c dir on PATH slows mise shims and command lookup
+  path+=("/mnt/c/Windows/system32" "/mnt/c/Windows")
+fi
 
-# export MANPATH="/usr/local/man:$MANPATH"
+completions_dir="$HOME/.local/share/zsh/completions"
+fpath=("$completions_dir" $fpath)
+# regenerate only when the binary changes; eval'ing it every startup costs ~50ms
+if (( $+commands[but] )) && [[ ! -e $completions_dir/_but || $commands[but] -nt $completions_dir/_but ]]; then
+  mkdir -p "$completions_dir"
+  but completions zsh >| "$completions_dir/_but"
+fi
+unset completions_dir
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+source "$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
+antidote load "$HOME/.zsh_plugins.txt"
 
 alias ll='eza -lhF --icons --time-style=long-iso --group-directories-first'
 alias la='eza -alhF --icons --time-style=long-iso --group-directories-first'
 alias l='eza -F --icons --time-style=long-iso --group-directories-first'
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias cls="clear"
 alias vim="nvim"
 alias dc="docker compose"
 alias ds="docker stack"
-alias clip="clip.exe"
-alias yank="xsel --input --clipboard"
-alias yeet="xsel --output --clipboard"
-alias explorer="explorer.exe"
-alias toolbox="jetbrains-toolbox"
 alias fly="flyctl"
-alias bat="batcat"
 alias tg="terragrunt"
-alias trae="/mnt/c/Users/Kenneth/AppData/Local/Programs/Trae/Trae.exe > /dev/null 2>&1 &"
-alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade -y && mise self-update -y && mise upgrade -y && mise prune -y"
+alias dbtf="$HOME/.local/bin/dbt"
 alias gcloud-login-eyva="gcloud auth application-default login --client-id-file=\"${HOME}/eyva/client_secret.json\" --scopes=openid,https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/drive"
 
-notify-send() {
-  wsl-notify-send.exe --category $WSL_DISTRO_NAME "${@}";
-}
-
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export EDITOR="nvim"
-export GPG_TTY=$(tty)
-export XDG_CONFIG_HOME="$HOME/.config"
-export PATH="$PATH:$HOME/.local/bin"
-export ZSH_TMUX_AUTO_TITLE_TARGET="pane"
-export ZSH_TMUX_AUTO_TITLE_SHORT=true
-export ZSH_TMUX_AUTO_TITLE_IDLE_TEXT="%pwd"
-export COMPOSE_BAKE=true
-export PAGER="less -SRFXMi --mouse --wheel-lines=3"
-
-if [[ "$PLATFORM" == "wsl" ]]; then
-  export BROWSER="wslview"
+if [[ "$PLATFORM" == "macos" ]]; then
+  alias yank="pbcopy"
+  alias yeet="pbpaste"
+  alias update-all="brew update && brew upgrade -y && mise self-update -y && mise upgrade -y && mise prune -y"
+else
+  alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+  alias yank="xsel --input --clipboard"
+  alias yeet="xsel --output --clipboard"
+  alias bat="batcat"
+  alias toolbox="jetbrains-toolbox"
+  alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade -y && mise self-update -y && mise upgrade -y && mise prune -y"
 fi
 
-# k8s
-export KUBECONFIG="$HOME/.kube/config.yaml"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-# Turso
-export PATH="$HOME/.turso:$PATH"
-
-# JetBrains
-export PATH="$HOME/.local/share/JetBrains/Toolbox/bin:$PATH"
-export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
-
-# Vault
-export VAULT_ADDR="https://vault.lab.kvd.studio"
-
-# mise
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-
-# gcloud
-export CLOUDSDK_HOME="$HOME/.local/share/mise/installs/gcloud/latest"
-
-# IDE
-export PATH="$PATH:/mnt/c/Users/Kenneth/AppData/Local/Programs/cursor/resources/app/bin"
-export PATH="$PATH:/mnt/c/Users/Kenneth/AppData/Local/Programs/Zed/bin"
-
-# ic11
-export PATH="$PATH:$HOME/.local/bin/ic11"
-
-# ROCm
 if [[ "$PLATFORM" == "wsl" ]]; then
-  export HSA_ENABLE_DXG_DETECTION=1
+  alias code="'/mnt/c/Program Files/Microsoft VS Code/bin/code'"
+  alias cursor="/mnt/c/Users/Kenneth/AppData/Local/Programs/cursor/resources/app/bin/cursor"
+  alias zed="/mnt/c/Users/Kenneth/AppData/Local/Programs/Zed/bin/zed"
+  alias clip="clip.exe"
+  alias explorer="explorer.exe"
+  alias trae="/mnt/c/Users/Kenneth/AppData/Local/Programs/Trae/Trae.exe > /dev/null 2>&1 &"
+
+  notify-send() {
+    wsl-notify-send.exe --category $WSL_DISTRO_NAME "${@}";
+  }
 fi
 
 pasteinit() {
@@ -238,33 +119,5 @@ precmd() {
 }
 
 eval "$(zoxide init zsh)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+# after fzf and OMZ key-bindings so atuin owns ^R and up-arrow
 eval "$(atuin init zsh)"
-
-# Added by dbt Fusion extension (ensure dbt binary dir on PATH)
-if [[ ":$PATH:" != *":/home/kvdomingo/.local/bin:"* ]]; then
-  export PATH=/home/kvdomingo/.local/bin:"$PATH"
-fi
-# Added by dbt Fusion extension
-alias dbtf=/home/kvdomingo/.local/bin/dbt
-
-# pnpm
-export PNPM_HOME="/home/kvdomingo/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-# pnpm end
-
-# OPENSPEC:START
-# OpenSpec shell completions configuration
-fpath=("/home/kvdomingo/.oh-my-zsh/custom/completions" $fpath)
-autoload -Uz compinit
-compinit
-# OPENSPEC:END
-
-# Added by GitButler installer
-eval "$(but completions zsh)"
-
-# Added by Antigravity IDE
-export PATH="${HOME}/.antigravity-ide/antigravity-ide/bin:$PATH"

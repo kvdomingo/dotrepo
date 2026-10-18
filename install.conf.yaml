@@ -40,6 +40,7 @@
     ~/.warp/skills: claude/skills
     ~/.zprofile:
     ~/.zshrc:
+    ~/.zsh_plugins.txt: zsh_plugins.txt
     ~/requirements.txt: requirements.txt
     /etc/docker/daemon.json: daemon.json
     /etc/wsl.conf: wsl.conf
