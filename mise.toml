@@ -79,4 +79,4 @@ copilot = "latest"
 antigravity-cli = "latest"
 zellij = "latest"
 oh-my-pi = { version = "latest", rename_exe = "omp" }
-"asdf:mise-plugins/mise-gcloud" = { version = "latest", postinstall = "$(gcloud info --format=\"value(basic.python_location)\") -m pip install -U numpy" }
+gcloud = { version = "latest", postinstall = "$(gcloud info --format=\"value(basic.python_location)\") -m pip install -U numpy" }
