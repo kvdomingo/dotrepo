@@ -16,7 +16,6 @@ helmfile = "latest"
 helm = "latest"
 jq = "latest"
 yq = "latest"
-gcloud = { version = "latest", postinstall = "$(gcloud info --format=\"value(basic.python_location)\") -m pip install -U numpy" }
 awscli = "latest"
 cloudflared = "latest"
 go = "sub-0.0.2:latest"
@@ -51,7 +50,6 @@ aqua = "latest"
 tokei = "latest"
 gitleaks = "latest"
 krew = "latest"
-java = "latest"
 gemini-cli = "latest"
 gh = "latest"
 claude-code = "latest"
@@ -77,8 +75,8 @@ infisical = { version = "latest", asset_pattern = "cli_{{ version }}_{{ os(macos
 lazydocker = "latest"
 codex = "latest"
 yt-dlp = { version = "latest", rename_exe = "yt-dlp" }
-ffmpeg = "latest"
 copilot = "latest"
 antigravity-cli = "latest"
 zellij = "latest"
 oh-my-pi = { version = "latest", rename_exe = "omp" }
+"asdf:mise-plugins/mise-gcloud" = { version = "latest", postinstall = "$(gcloud info --format=\"value(basic.python_location)\") -m pip install -U numpy" }

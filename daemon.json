@@ -1,14 +1,25 @@
 {
+  "bip": "172.16.0.1/24",
+  "default-address-pools": [
+    {
+      "base": "172.17.0.0/12",
+      "size": 28
+    }
+  ],
   "features": {
     "containerd-snapshotter": true
   },
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "20m",
-    "max-file": "5"
+    "max-file": "5",
+    "max-size": "20m"
   },
-  "bip": "172.16.0.1/24",
-  "default-address-pools": [
-    {"base": "172.17.0.0/12", "size": 28}
-  ]
+  "runtimes": {
+    "runsc": {
+      "path": "/usr/local/bin/runsc",
+      "runtimeArgs": [
+        "--platform=kvm"
+      ]
+    }
+  }
 }
