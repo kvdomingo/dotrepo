@@ -9,7 +9,7 @@ fetch_remote_versions_timeout = "10s"
 [tools]
 usage = "latest"
 task = "latest"
-node = "lts"
+node = { version = "lts", postinstall = "npm install -g @fission-ai/openspec@latest @tawandotorg/claude-sync@latest" }
 terraform = "latest"
 rust = "latest"
 helmfile = "latest"
