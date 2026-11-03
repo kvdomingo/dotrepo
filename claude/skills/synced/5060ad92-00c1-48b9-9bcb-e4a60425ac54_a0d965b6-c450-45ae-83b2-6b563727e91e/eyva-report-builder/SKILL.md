@@ -17,20 +17,21 @@ The target is what a top-tier consultancy would send a client: a clear verdict o
 
 ## Workflow
 
-1. **Read the input and the brief.** Chat transcript, finished agent report, or raw data collection. Treat it as evidence only, never as a structure to copy. Agent reports are usually organised by data source; you will reorganise them by question. Also find the client's **initial brief or intake form** (often at the start of the chat export or attached separately). If you can't find it, ask for it before planning the storyline.
+1. **Read the input and the brief.** Chat transcript, finished agent report, or raw data collection. Treat it as evidence only, never as a structure to copy. Agent reports are usually organised by data source; you will reorganise them by question. The input is usually the data package folder from the Eyva agent: raw data per source plus the client's **initial brief or intake form**. If you can't find it, ask for it before planning the storyline.
 2. **List the brief questions.** Copy every question the client asked in the brief or intake form, numbered, in their own words. Split compound questions ("Which formats and price points win?" becomes two). This list is the checklist the storyline must answer (see Brief coverage).
-3. **Write a fact sheet** (internal, not in the report). For every usable finding: what was measured, the number, the comparison, source, market, period and base ("of 2,400 reviews"); for search data, which topic or keyword set. Mark findings based on fewer than 30 items. Build the **triangulation grid** (see Triangulation): for each candidate conclusion, which sources confirm it, which contradict it, and which don't cover it. Build the **ID map** for links (see Eyva App Links): every verified `ce_id`, `p_c_id`, `ing_id`, saved search ID and Social Trends topic name, with the name it belongs to. Note what the data can't answer, for the handover only. Never invent, estimate or backfill numbers.
+3. **Write a fact sheet** (internal, not in the report). For every usable finding: what was measured, the number, the comparison, source, market, period and base ("of 2,400 reviews"); for search data, which topic or keyword set. Mark findings based on fewer than 30 items. Build the **triangulation grid** (see Triangulation): for each candidate conclusion, which sources confirm it, which contradict it, and which don't cover it. Build the **ID map** for links (see Eyva App Links): every verified `ce_id`, `p_c_id`, `ing_id`, saved search ID and Social Trends topic name, with the name it belongs to. Build the **topic map** (see Analysis depth): every sub-topic the data covers, which level each number belongs to, from broad to narrow, and which findings come as a time series. Note what the data can't answer, for the handover only. Never invent, estimate or backfill numbers.
 4. **Pin down the decision question.** One sentence: what does the client want to decide?
 5. **Plan 3 to 5 chapters, each answering one business question** (e.g. How big and fast is the category? Who wins? What do shoppers search for and when? What do customers praise and criticise?). Build the chapters from the brief questions: every brief question maps to a chapter or a slide. A chapter mixes whatever sources answer its question.
 6. **Write the storyline as text only:** cover title, executive summary (with answer line), each chapter's name, guiding question and topic chips for its divider, each chapter's answer in one sentence, every slide headline, the recommendation. Then run these checks and fix the story here, not later:
    - **Headline test** (see Slide Anatomy).
    - **Triangulation check:** wherever more than one source covers a conclusion, the conclusion uses all of them.
+   - **Analysis depth check:** the storyline runs from broad to narrow, each slide stays on one level, the whole topic is covered (no single finding takes over), compared lists are balanced, and social topics are shown over time on both platforms (see Analysis depth).
    - **Brief coverage check:** every brief question has a clear answer on a named slide.
    - **Red thread check:** read the storyline start to finish. Each chapter builds on the one before, the order feels logical, nothing repeats or contradicts, and every chapter leads towards the recommendation. A reader should be able to retell the whole report in three sentences.
 7. **Leave photo slots** for the cover, every chapter divider and the final slide, each with its own motif hint (see Photo slots).
 8. **Build the slides** following Report Structure, Slide Anatomy, Language, Visuals and Eyva App Links, with lean styling (see Design). Run the **link pass** as you write: everything linkable gets linked. Then run the **side-card test** and the **text cut pass** on every slide (see Slide Anatomy and Less text).
 9. **Export** as static HTML (see Export) and run the check script.
-10. **Quality check** with `eyva-report-qa`, ideally in a fresh chat, passing along the brief questions. Fix everything it flags. Target: SHIP.
+10. **Hand over.** Don't run `eyva-report-qa` yourself: the team reviews and iterates first, then asks for the QA.
 
 ## Brief coverage
 
@@ -61,6 +62,40 @@ Triangulate wherever the data allows it. A conclusion that several sources point
 - **Contradictions are insights, not noise.** If search interest rises but reviews complain, or the shelf says one thing and shoppers another, say so plainly and explain what it means for the decision ("The shelf is in the pharmacy. The reviews are in the drugstore.").
 - **Show it on the slide:** the source line names every source that supports the claim. Put the second source into the visual itself (e.g. a second column, a quote column) or into one side card that shows its number; the "what this means" line can say "Same picture in search, reviews and social" where it helps.
 - If the input doesn't hold a second source for an important conclusion, check whether the Eyva connector can supply one (e.g. a Google Trends or Product Reviews query on the same topic). If not, keep the single-source claim.
+
+## Analysis depth
+
+How to look at a topic so the report is complete, comparable and easy to follow. Apply each rule when the data package holds the data. If it doesn't, leave it out of the report and list it in the handover under "Ask for in the next export".
+
+### See the whole topic
+
+- A strong finding can be the focus of the report and come up in several chapters, but it must not crowd out everything else. If PDRN is growing, show it, and still cover the other parts of the topic.
+- Before planning chapters, list every sub-topic the data covers for the client's topic (e.g. ingredients, claims, formats, concerns, brands, price tiers). Give each a place in the storyline, weighted by the brief and by how strong the data is.
+- Show the standout in context: rank it against the other big topics in the same chart and highlight it.
+
+### Broad to narrow
+
+- The red thread runs from broad to narrow: start with the big picture, then zoom in step by step to the details. For e-commerce data, that means category, then subcategory, then product type, then products.
+- **One level per slide.** Don't mix levels on the same slide or chart, e.g. categories next to subcategories, or product types next to single products. If both matter, use two slides, broad first.
+- Name the level in the kicker or chart title.
+
+### Balanced comparisons
+
+- When slides compare parallel lists, show the same or a similar number of items in each. Lists of very different length look like something is missing.
+- If one list is shorter in the data, cut the longer one to match and flag it in the handover.
+- Use the same period, market and metric for both sides of a comparison.
+
+### Social media (TikTok and Instagram)
+
+- **Over time, not one week.** Show how trend strength and views developed over the last weeks and months (a line for the last 12 to 26 weeks), not only last week's trend strength. The headline says the direction: "PDRN views tripled since July".
+- **Every social topic gets context:** the sentiment (share of positive, neutral and negative), the products mentioned most and the brands mentioned most. One slide can carry all three: trend line, sentiment bar, top products and brands.
+- **Same topics on both platforms.** Analyse the same topic list on TikTok and Instagram with the same metrics and period, and show them side by side. Check every TikTok pattern on Instagram and say whether it holds; "Big on TikTok, not yet on Instagram" is a finding. Never run two unrelated analyses.
+- Explain trend strength once in plain words: "how strongly a topic is trending right now, from views, growth and posts".
+
+### E-commerce rankings
+
+- Use product rankings (Product Performance, retailer ranks) as the visibility signal: which products sit at the top, which climb, which drop. Call it ranking or visibility, never sales. Link [Product Performance](https://app.eyva.ai/rankings).
+- Pair it with listings where it helps: the number of listed products shows supply, the ranking shows who wins visibility.
 
 ## Report Structure
 
@@ -137,7 +172,7 @@ A slot is an empty light-grey `<div class="photo-slot">` with no visible text. G
 - **Headline: the slide's main point as a claim.** One or two short sentences, max ~15 words. Names the subject and what happens. Quotable. E.g. "The shelf is in the pharmacy. The reviews are in the drugstore."
 - **Body: one main visual, full width by default.** Highlight the key number inside the visual (marked bar, cell or annotation) instead of repeating it next to it.
 - **Side card only when it passes the side-card test** (see below). A side card = one hero number + one plain sentence. Usually none; max 1 per slide (2 only for a deliberate contrast such as "pack promises 50 %, reviews say 0"). Never reserve a side column by default: if no card passes, the visual takes the full width.
-- **Counts of what people say get examples.** When a number counts reviews, posts or comments ("17 of 24 complaints name the colour result"), show 2 to 3 real quotes behind it, not the number alone.
+- **Counts of what people say get examples.** When a number counts reviews, posts or comments ("71% of complaints name the colour result"), show 2 to 3 real quotes behind it, not the number alone.
 - **"What this means" strip** (tag: Hypothesis): one sentence on why it matters for the decision. Never repeats the headline.
 - **Source line:** one line, plain words, with each Eyva section linked: what data, how much, which period. Name every source the claim rests on. E.g. "[Product Reviews](https://app.eyva.ai/review-insights), Germany, 756 texts; [Social Trends](https://app.eyva.ai/social-trends), 1,200 posts; Oct 2025 to Oct 2026".
 
@@ -290,6 +325,8 @@ Slides are looked at, not read. Use as little text as possible, but as much as t
 ### Numbers
 
 - Every number gets a comparison (last year, the category, a competitor) and says what was counted ("38% of reviews"). For search data, name the topic the volume belongs to.
+- **Shares always as percentages, never as "X of Y".** Write "71% of complaints", not "17 of 24 complaints" (DE: "71 % der Kritiken", not "17 von 24 Kritiken"); "75%", not "3 of 4" or "3 in 4". "6 out of 10 users" makes readers think 10 is the number of things we looked at. This applies everywhere: headlines, bullets, side cards, chart labels, dot arrays, the executive summary and the recommendation. Put the base once in the source line or the chart caption ("24 read complaints"), never as the denominator of a fraction.
+- A plain count without "of" is fine when the count itself is the point ("4 réell’e shades match growing searches", "1 drugstore mention").
 - Round to whole percentages in text; same rounding everywhere.
 - Percent vs percentage points: "from 20% to 25%, up 5 percentage points".
 - Max 2 to 3 numbers per sentence.
@@ -304,7 +341,7 @@ Name the signal: search interest, review mentions, social media attention, numbe
 ### Match confidence to evidence
 
 - Strong evidence: say it plainly.
-- Thin evidence (under 30 items, one source): tag it, and say so once beside the finding: "An early sign, based on 18 reviews."
+- Thin evidence (under 30 items, one source): tag it, and say so once beside the finding: "An early sign, based on 18 reviews." The share itself still stays a percentage.
 - When sources agree, show it ("Same picture in every source"); when they disagree, say which and why it matters.
 
 ### Patterns from weak Eyva reports, and the fix
@@ -326,7 +363,13 @@ Name the signal: search interest, review mentions, social media attention, numbe
 | Next steps as questions or vague tasks ("Preise validieren") | A short, verb-led recommendation with the one number that proves it |
 | A decisions table with areas, tests, teams and timings | One recommendation slide that answers the client's question in plain words |
 | Two side cards on every slide that repeat the chart or carry an unrelated fact | Visual at full width with the key number highlighted; a side card only when it passes the side-card test |
-| "17 of 24 complaints name the colour result" as a bare number | The number plus 2 to 3 real quotes that show what the complaints say |
+| One finding crowds out the rest: PDRN grows, so nothing else gets looked at | The finding can be the focus, but the rest of the topic is still covered |
+| Broad and narrow levels mixed on one slide | Broad to narrow, one level per slide |
+| Parallel lists of very different length | The same or a similar number of items in each |
+| Only last week's trend strength for a TikTok topic | Trend strength and views over weeks and months, plus sentiment, top products and top brands |
+| Different topics analysed on TikTok and Instagram | The same topics, metrics and period on both, side by side |
+| "17 of 24 complaints name the colour result" as a bare number | "71% of complaints name the colour result" plus 2 to 3 real quotes that show what the complaints say; base in the source line |
+| Shares as fractions: "6 von 10 Texten", "3 of 4 brands", "9/13" as a hero number | Percentages: "60 % der Texte", "75% of brands", "69 %"; the base in the source line or caption |
 
 ### Replace jargon
 
@@ -365,7 +408,7 @@ The recommendation slide is where the report pays off. A busy reader should get 
 **Show, don't tell.** Everything that can be shown visually is shown visually, with as little text as possible. If a sentence describes a number, a ranking, a change, a contrast, a share or a sequence, turn it into a visual and cut the sentence. Text only says what the visual can't: the claim (headline) and what it means.
 
 **Be creative.** Don't default to a bar chart. Pick the most striking form that still reads in two seconds, for example:
-- icon or dot arrays for shares ("4 in 10 reviews mention stickiness" as 10 icons, 4 highlighted)
+- icon or dot arrays for shares ("40% of reviews mention stickiness" as 10 icons, 4 highlighted, labelled 40%). Always 10 or 100 icons standing for 100%, never one icon per item read.
 - a single giant number with a tiny comparison next to it
 - a before/after or shelf vs. shopper split
 - a timeline or seasonal calendar with the peak marked
@@ -385,8 +428,8 @@ Every key claim gets a visual that proves it at a glance.
 | Compare sizes or rankings | Horizontal bars, sorted, values on the bars |
 | See two shares side by side (e.g. listings vs reviews) | Paired bars per item |
 | Know one striking number | Hero number + one plain sentence |
-| Understand what people say | Theme bars or a count plus 2 to 3 real quotes with product, retailer, month |
-| Show the same point in two sources | Two columns side by side, each with its count and 2 to 3 quotes (e.g. TikTok vs reviews) |
+| Understand what people say | Theme bars or a percentage plus 2 to 3 real quotes with product, retailer, month |
+| Show the same point in two sources | Two columns side by side, each with its percentage and 2 to 3 quotes (e.g. TikTok vs reviews) |
 | See a gap or contrast | Two hero numbers side by side ("18.9% mention oily skin, 5.1% report oil control") |
 | Understand a grouping | One real example per level (group, topic, actual search term) |
 | Connect findings to the recommendation | Numbered recommendation cards grouped by priority |
@@ -427,7 +470,7 @@ Deliver one static, self-contained HTML file:
 Run this check on the final file:
 
 ```python
-import re, sys
+import re, sys, html as H
 from urllib.parse import urlparse
 h = open(sys.argv[1], encoding="utf-8").read()
 CSP = """<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src data:; base-uri 'none'; form-action 'none'">"""
@@ -455,6 +498,9 @@ for a in re.findall(r"<a\b[^>]*>", h, re.I):
         if p.path.rstrip("/") not in SECTIONS and not p.path.startswith(DEEP):
             print("FAIL unknown Eyva app path:", url)
 print(f"Eyva app links: {eyva}" + ("  (FAIL: none found)" if eyva == 0 else ""))
+text = H.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<(style|svg|head)[^>]*>.*?</\1>", " ", h, flags=re.S | re.I)))
+for f in re.findall(r"\b[1-9]\d{0,2}(?:\s+(?:of|von|in|aus|out of)\s+|\s*/\s*)\d{1,3}\b(?![./]\d)", text, re.I):
+    print(f"FAIL share as fraction, use a percentage: '{f}'")
 ```
 
 If a browser is available, render with JavaScript disabled and print to PDF; check the first, middle and last pages for missing or cut-off content, and that the photo slots keep their size.
@@ -464,12 +510,14 @@ If a browser is available, render with JavaScript disabled and print to PDF; che
 - Headline test and red thread check pass; every content slide has a kicker, claim headline, tag, visual, "what this means" and linked source line.
 - Everything that can be shown visually is shown visually, with formats chosen for the point.
 - Side-card test done: most content slides have no side card; every remaining card shows a new number that supports the headline; no card repeats the visual. Every count of reviews or posts has 2 to 3 real quotes behind it.
+- Every share is a percentage, never "X of Y" or "X/Y" (headlines, bullets, hero numbers, chart labels, dot arrays); the base sits once in the source line or caption. The check script prints no fraction fails.
 - Text cut pass done on every slide: as little text as possible, as much as necessary; about 30 to 40 words of body text per content slide, never more than 60.
 - Cover with only the logo, a curiosity title and a photo slot; executive summary (with answer line), content scope, a divider before every chapter, recommendation and the what's-next slide (Eyva Agent outlook, three steps, feedback box with a working `mailto:` button, linked Eyva sections) are all there. The recommendation slide answers the client's core question in its headline and has 3 to 5 short cards, without teams, timings or tables. No gaps slide, no Gap / Lücke tags, no text about missing data.
 - Every divider has number, chapter name, guiding question, 3 to 4 topic chips and its own photo slot; names and questions match the kickers, summary cards and content scope.
 - Brief coverage: every question from the brief or intake form is answered on a named slide; the original questions are embedded in the `eyva-brief` comment; the handover includes the coverage table and flags any question the data couldn't answer.
 - Triangulation: wherever more than one source covers a conclusion, the slide brings them together; the biggest claims (executive summary, recommendation) use triangulated findings where the data allows.
+- Analysis depth: broad to narrow with one level per slide; the whole topic covered, no single finding takes over; parallel lists balanced; social topics shown over time with sentiment, top products and brands, and compared on TikTok and Instagram; rankings used for visibility where the data has them. The handover lists what to ask for in the next export.
 - Cover, dividers and final slide have empty photo slots, each with a different motif hint; the handover lists them.
 - Every number matches the fact sheet; method caveats stay out of the slides (handover only).
 - Link pass done: every source line, Eyva section mention and entity with a verified ID is linked (chart labels included); every Eyva link is a verified section, deep link or documented filter. The handover states the link count and what stayed unlinked for lack of IDs.
-- Check script passes. Then run `eyva-report-qa`.
+- Check script passes. Hand over; the team runs `eyva-report-qa` after their own review.

@@ -74,7 +74,7 @@ Ask only for what is missing and needed; otherwise use the defaults.
    2: a tour through data sources (one chapter per source), conclusion only at the end, label headlines, no scope | 5: summary exists, body is source-led; some headlines are labels | 8: curiosity title on the cover, answer on slide 2; a divider before every chapter; content scope with each chapter's answer in one sentence; chapters built around business questions; every headline a claim; headlines alone tell the story; each slide has a so-what; one red thread across the whole report, easy to follow from first to last slide
 9. **Clarity:** Readable without explanation?
    2: dense, technical, needs a guide | 5: understandable with effort | 8: a busy executive gets it in one pass
-   Check: sentences mostly under 20 words, none over 25; one idea per sentence; active voice; max ~60 words of body text per slide; no abbreviations like SKU, n=, P25–P75 (YoY is fine: it's the Eyva app's term); every score or index explained in plain words; no defensive disclaimers ("kein Wirksamkeitsbeleg", "not sales data") in body text; source lines one plain line, not multi-line method footers.
+   Check: sentences mostly under 20 words, none over 25; one idea per sentence; active voice; max ~60 words of body text per slide; no abbreviations like SKU, n=, P25–P75 (YoY is fine: it's the Eyva app's term); every score or index explained in plain words; shares written as percentages, never "X of Y"; no defensive disclaimers ("kein Wirksamkeitsbeleg", "not sales data") in body text; source lines one plain line, not multi-line method footers.
 10. **Copywriting & industry language:** Does it speak the language of category, R&D and key account management?
     2: tool jargon, Denglisch, defensive or compliance tone | 5: correct but flat | 8: precise trade vocabulary (listing, shelf, claims, range role, format, texture), headlines as quotable statements
     Check: no analyst or tool words (cluster, canonical, multi-label, denominator, Prüfpfad, Packgruppe, Strength Score, share of voice, white space, over-index); none of the banned words; signals named exactly, never inflated to demand, sales or market share; German reports address the reader with du, never Sie.
@@ -135,6 +135,7 @@ Judge the whole report, not only single slides.
 - No slide over ~60 words of body text (chart labels excluded).
 - Script: zero jargon and banned-word flags in client-facing text.
 - Every score, index or grouping is explained once in plain words with an example.
+- **Shares as percentages:** every share is written as a percentage ("71 %"), never as "X of Y", "X von Y", "X in Y", "X out of Y" or "X/Y", in text, hero numbers, chart labels or dot arrays. Readers take the second number for the total we looked at. The base appears once in the source line or caption. Script: zero fraction flags. Plain counts without "of" ("4 shades") pass.
 - The executive summary works alone: someone who reads only slide 2 knows the answer, what the chapters cover and what to do.
 - First-read test: pick three content slides; after one read, can you say each slide's point in one sentence?
 
@@ -148,6 +149,7 @@ Judge the whole report, not only single slides.
 - Bars start at zero; one highlight colour, the rest neutral; max ~7 categories.
 - No pies over 4 slices, no 3D, nothing hover-only; labels readable at print size.
 - No table doing a chart's job, and no table with 6+ columns.
+- **Dot and icon arrays** use 10 or 100 icons standing for 100% and are labelled with the percentage; fail arrays with one icon per item read (e.g. 24 dots for 24 reviews).
 - **Side cards:** most content slides have none; the visual takes the full width. Fail every side card that repeats a number already in the visual or headline, or that carries a finding unrelated to the slide's headline. Fail the report-level check if side cards appear on most slides by default. A card passes only if it adds a new number from a second source or the one comparison that gives the main number meaning.
 - **Counts with examples:** every count of what people say (reviews, posts, comments) is backed by 2 to 3 real quotes on the same slide or the slide it refers to; fail bare counts.
 
@@ -156,7 +158,7 @@ Judge the whole report, not only single slides.
 For each of the six core areas (decision relevance, actionability, storytelling, triangulation, clarity, data visualization), always give 1 to 3 concrete suggestions to make the report better, even when every check passes. A good report can still get better.
 
 - Be specific: name the slide, what to change and how. "Make it clearer" is not a suggestion.
-- Show the change: a rewritten headline or sentence, a sketch of the new visual in words ("10 face icons, 4 in coral: 4 in 10 reviews mention stickiness"), a reordered chapter list, or a sharper, shorter recommendation.
+- Show the change: a rewritten headline or sentence, a sketch of the new visual in words ("10 face icons, 4 in coral: 40% of reviews mention stickiness"), a reordered chapter list, or a sharper, shorter recommendation.
 - For storytelling, include at least one suggestion on the red thread across the whole report (chapter order, transitions, what to merge or cut).
 - For data visualization, include at least one suggestion that turns text into a visual or replaces a standard chart with a more striking format.
 - Order the suggestions within each area by impact on the client.
@@ -248,6 +250,8 @@ jargon = ["SKU", "KPI", "CAGR", "n =", "n=", "P25", "share of voice", "share of 
 for w in banned + jargon:
     n = len(re.findall(re.escape(w), text, re.I))
     if n: print(f"FLAG '{w}': {n}x")
+for f in re.findall(r"\b[1-9]\d{0,2}(?:\s+(?:of|von|in|aus|out of)\s+|\s*/\s*)\d{1,3}\b(?![./]\d)", text, re.I):
+    print(f"FLAG share as fraction, use a percentage: '{f}'")
 
 b = re.search(r"<!--\s*eyva-brief(.*?)-->", h, re.S)
 print("\nBrief questions:" + (b.group(1).rstrip() if b else " none embedded; ask for the brief or intake form"))
