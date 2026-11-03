@@ -21,7 +21,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export COMPOSE_BAKE=true
 export PAGER="less -SRFXMi --mouse --wheel-lines=3"
 export KUBECONFIG="$HOME/.kube/config.yaml"
-export VAULT_ADDR="https://vault.lab.kvd.studio"
+export AI_MEMORY_SERVER_URL="https://memory.lab.kvd.studio"
 export CLOUDSDK_HOME="$HOME/.local/share/mise/installs/gcloud/latest"
 export BUT_THEME="dark"
 
