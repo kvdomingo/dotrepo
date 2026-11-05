@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1793693142622,
+  "lastUpdated": 1793788954232,
   "skills": [
     {
       "skillId": "docs",
@@ -69,7 +69,7 @@
       "name": "eyva-report-builder",
       "description": "Turn Eyva agent output (chat export, draft report or raw data) into a clear, story-led HTML report deck for beauty product managers. Use when asked to build, write, rewrite or restructure an Eyva report.",
       "source": "plugin",
-      "updatedAt": "2026-11-02T12:25:13.502675Z",
+      "updatedAt": "2026-11-04T10:38:29.421789Z",
       "backingPluginId": "plugin_01SvW9unqLg8gwF4iUAu8K61"
     },
     {
@@ -77,7 +77,7 @@
       "name": "eyva-report-qa",
       "description": "Score an Eyva or competitor market-intelligence report on Eyva's fixed 13-criterion rubric (1-10), check red flags and Eyva delivery rules, and return SHIP / SHIP AFTER FIXES / REWORK with fixes. Use when asked to check, review, score or QA a report.",
       "source": "plugin",
-      "updatedAt": "2026-11-02T12:25:05.328478Z",
+      "updatedAt": "2026-11-04T10:38:22.061393Z",
       "backingPluginId": "plugin_01HJHra4hbfeLBHzT2CHFpWZ"
     }
   ]

@@ -170,7 +170,7 @@ A slot is an empty light-grey `<div class="photo-slot">` with no visible text. G
 
 - **Kicker:** "<chapter number> <chapter name> · <guiding question>" in mono caps (e.g. "01 Nachfrage · Welche Nuancen wachsen?"), plus the evidence tag and page number. The reader always knows where they are.
 - **Headline: the slide's main point as a claim.** One or two short sentences, max ~15 words. Names the subject and what happens. Quotable. E.g. "The shelf is in the pharmacy. The reviews are in the drugstore."
-- **Body: one main visual, full width by default.** Highlight the key number inside the visual (marked bar, cell or annotation) instead of repeating it next to it.
+- **Body: one main visual, full width by default.** Never more than two charts on a slide (see Keep charts simple). Highlight the key number inside the visual (marked bar, cell or annotation) instead of repeating it next to it.
 - **Side card only when it passes the side-card test** (see below). A side card = one hero number + one plain sentence. Usually none; max 1 per slide (2 only for a deliberate contrast such as "pack promises 50 %, reviews say 0"). Never reserve a side column by default: if no card passes, the visual takes the full width.
 - **Counts of what people say get examples.** When a number counts reviews, posts or comments ("71% of complaints name the colour result"), show 2 to 3 real quotes behind it, not the number alone.
 - **"What this means" strip** (tag: Hypothesis): one sentence on why it matters for the decision. Never repeats the headline.
@@ -363,6 +363,7 @@ Name the signal: search interest, review mentions, social media attention, numbe
 | Next steps as questions or vague tasks ("Preise validieren") | A short, verb-led recommendation with the one number that proves it |
 | A decisions table with areas, tests, teams and timings | One recommendation slide that answers the client's question in plain words |
 | Two side cards on every slide that repeat the chart or carry an unrelated fact | Visual at full width with the key number highlighted; a side card only when it passes the side-card test |
+| Three or four charts crammed on one slide; charts with dual axes, many segments or a big legend | Max two charts per slide, each showing one thing with direct labels; a few numbers as a small table or hero numbers |
 | One finding crowds out the rest: PDRN grows, so nothing else gets looked at | The finding can be the focus, but the rest of the topic is still covered |
 | Broad and narrow levels mixed on one slide | Broad to narrow, one level per slide |
 | Parallel lists of very different length | The same or a similar number of items in each |
@@ -407,7 +408,9 @@ The recommendation slide is where the report pays off. A busy reader should get 
 
 **Show, don't tell.** Everything that can be shown visually is shown visually, with as little text as possible. If a sentence describes a number, a ranking, a change, a contrast, a share or a sequence, turn it into a visual and cut the sentence. Text only says what the visual can't: the claim (headline) and what it means.
 
-**Be creative.** Don't default to a bar chart. Pick the most striking form that still reads in two seconds, for example:
+**Show doesn't mean chart.** Not every number needs a graph. A few numbers often read faster as a small table or as hero numbers side by side (see Keep charts simple).
+
+**Be creative, but simple first.** Don't default to a bar chart. Pick the simplest form that reads in two seconds; a striking format is only better if it's just as easy to read. For example:
 - icon or dot arrays for shares ("40% of reviews mention stickiness" as 10 icons, 4 highlighted, labelled 40%). Always 10 or 100 icons standing for 100%, never one icon per item read.
 - a single giant number with a tiny comparison next to it
 - a before/after or shelf vs. shopper split
@@ -418,7 +421,7 @@ The recommendation slide is where the report pays off. A busy reader should get 
 - a scale or slider placing the client against competitors
 - a small-multiples grid comparing several brands or formats at once
 
-Creativity never beats accuracy: proportions stay true, bars start at zero, and the claimed number or contrast is the most visible thing on the slide.
+Creativity never beats accuracy or clarity: proportions stay true, bars start at zero, and the claimed number or contrast is the most visible thing on the slide.
 
 Every key claim gets a visual that proves it at a glance.
 
@@ -428,13 +431,26 @@ Every key claim gets a visual that proves it at a glance.
 | Compare sizes or rankings | Horizontal bars, sorted, values on the bars |
 | See two shares side by side (e.g. listings vs reviews) | Paired bars per item |
 | Know one striking number | Hero number + one plain sentence |
+| Compare two to four numbers | Hero numbers side by side, or a small table (max 4 rows, 3 columns) |
 | Understand what people say | Theme bars or a percentage plus 2 to 3 real quotes with product, retailer, month |
 | Show the same point in two sources | Two columns side by side, each with its percentage and 2 to 3 quotes (e.g. TikTok vs reviews) |
 | See a gap or contrast | Two hero numbers side by side ("18.9% mention oily skin, 5.1% report oil control") |
 | Understand a grouping | One real example per level (group, topic, actual search term) |
 | Connect findings to the recommendation | Numbered recommendation cards grouped by priority |
 
-Rules: one main visual per slide; units, period and base visible; bars start at zero; one highlight colour, the rest neutral; max ~7 categories; no pies over 4 slices, no 3D, nothing hover-only; tables only for lookup, never 6+ columns; real quotes only; charts as inline SVG or HTML/CSS (no chart libraries).
+### Keep charts simple
+
+The goal of every slide is that the reader gets the point on the first look, without reading it three times or working out which axis means what.
+
+- **Max two charts per slide.** One is the default. Use a second only for a deliberate side-by-side comparison. If a slide needs three or more, split it into two slides or cut the weakest.
+- **Not everything is a chart.** If it's just two to four numbers, use hero numbers side by side or a small table (max 4 rows, max 3 columns). Only chart what has a shape worth seeing: a trend, a ranking, a gap.
+- **One message per chart.** Each chart shows one thing: one measure, one comparison. No dual axes, no stacked bars with many segments, no bubble charts with size and colour both carrying meaning, no mixing two chart types in one.
+- **Labels instead of axes.** Put values directly on bars and points and name lines at their end, so the reader doesn't need gridlines, a legend or an axis scale. If an axis is needed, label it in plain words with the unit ("Search interest, index"), never a field name.
+- **No legend if you can avoid it.** Max one highlight colour plus grey. If a legend is unavoidable, max 3 entries, placed right next to the data.
+- **Chart title = what it shows**, in plain words ("Searches per month, Germany"); the headline says what it means.
+- **The two-second test:** cover the headline and look at the chart. If it isn't clear in two seconds what is compared and which value matters, simplify it: fewer categories, fewer series, direct labels, or a table.
+
+Rules: one main visual per slide (max two charts); units, period and base visible; bars start at zero; one highlight colour, the rest neutral; max ~7 categories; no pies over 4 slices, no 3D, nothing hover-only; tables for lookup or for a handful of numbers (max 4 rows, 3 columns when they replace a chart), never 6+ columns; real quotes only; charts as inline SVG or HTML/CSS (no chart libraries).
 
 ## Design
 
@@ -509,6 +525,7 @@ If a browser is available, render with JavaScript disabled and print to PDF; che
 
 - Headline test and red thread check pass; every content slide has a kicker, claim headline, tag, visual, "what this means" and linked source line.
 - Everything that can be shown visually is shown visually, with formats chosen for the point.
+- Charts kept simple: max two per slide, one message each, direct labels instead of legends and axis decoding; two to four numbers shown as hero numbers or a small table, not a chart. Every chart passes the two-second test.
 - Side-card test done: most content slides have no side card; every remaining card shows a new number that supports the headline; no card repeats the visual. Every count of reviews or posts has 2 to 3 real quotes behind it.
 - Every share is a percentage, never "X of Y" or "X/Y" (headlines, bullets, hero numbers, chart labels, dot arrays); the base sits once in the source line or caption. The check script prints no fraction fails.
 - Text cut pass done on every slide: as little text as possible, as much as necessary; about 30 to 40 words of body text per content slide, never more than 60.

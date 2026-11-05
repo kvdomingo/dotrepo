@@ -82,7 +82,7 @@ Ask only for what is missing and needed; otherwise use the defaults.
 ### Design & finish
 
 11. **Data visualization:** Is everything that can be shown visually shown visually, at a glance and with little text?
-    2: tables only, or text describing numbers that could be a chart | 5: standard charts present but decorative, hard to read or surrounded by too much text | 8: every key claim has a visual that proves it; anything visualisable is visualised; minimal text; creative formats chosen for the point (icon arrays, matrices, timelines, journeys), not default bar charts everywhere; units, period and base visible; one highlight colour
+    2: tables only, or text describing numbers that could be a chart | 5: standard charts present but decorative, hard to read, overloaded (three or more charts on a slide) or surrounded by too much text | 8: every key claim has a visual that proves it; anything visualisable is visualised; minimal text; creative formats chosen for the point (icon arrays, matrices, timelines, journeys), not default bar charts everywhere; every chart simple and readable at a glance (max two per slide, one message each, direct labels); units, period and base visible; one highlight colour
 12. **Visual design:** Clean, clear layout overall? For Eyva deliverables, judge layout and hierarchy only, not brand fonts or colours: the Eyva design system is applied later in Claude Design.
     2: inconsistent, cluttered, or the same table layout on every page | 5: clean but templated, filler pages or filler side cards that repeat the chart | 8: consistent, deliberate hierarchy, no wasted pages or boxes; one idea per slide
 13. **Professionalism / QA:** Consistent and error-free?
@@ -142,13 +142,15 @@ Judge the whole report, not only single slides.
 **Data visualization (11)**
 - **Visual first:** everything that can be shown visually is shown visually. Flag every sentence or table that describes numbers, rankings, changes, shares, contrasts or sequences that could be a visual.
 - **Minimal text:** the visual carries the point; text is only the headline, short labels and the "what this means" line.
-- **Creativity:** formats are chosen for the point (icon or dot arrays, giant numbers with a comparison, before/after splits, timelines, 2x2 matrices, journeys, theme maps with quotes, small multiples), not the same bar chart on every slide. Suggest a more striking format wherever a slide looks templated.
+- **Creativity:** formats are chosen for the point (icon or dot arrays, giant numbers with a comparison, before/after splits, timelines, 2x2 matrices, journeys, theme maps with quotes, small multiples), not the same bar chart on every slide. Suggest a more striking format wherever a slide looks templated, but only if it stays just as easy to read.
 - Every content slide has one main visual, and it proves the headline (the claimed number or contrast is visible and highlighted).
 - The chart type fits the job: lines for change over time, sorted horizontal bars for rankings, paired bars for two shares, hero numbers for one striking figure.
 - Units, period and base are visible on or next to the chart.
+- **Simple charts:** fail any slide with more than two charts. Fail charts the reader has to decode: dual axes, stacked bars with many segments, two chart types mixed, legends with more than 3 entries, unlabelled or field-name axes. Prefer values on the bars and line names at the line ends. Apply the two-second test: with the headline covered, is it clear in two seconds what is compared and which value matters? If not, give the simpler version as the fix.
+- **Not everything is a chart:** flag charts that show only two to four numbers; hero numbers side by side or a small table (max 4 rows, 3 columns) reads faster.
 - Bars start at zero; one highlight colour, the rest neutral; max ~7 categories.
 - No pies over 4 slices, no 3D, nothing hover-only; labels readable at print size.
-- No table doing a chart's job, and no table with 6+ columns.
+- No table doing a chart's job (a trend, a ranking of 5+ items), and no table with 6+ columns. A small table for two to four numbers passes.
 - **Dot and icon arrays** use 10 or 100 icons standing for 100% and are labelled with the percentage; fail arrays with one icon per item read (e.g. 24 dots for 24 reviews).
 - **Side cards:** most content slides have none; the visual takes the full width. Fail every side card that repeats a number already in the visual or headline, or that carries a finding unrelated to the slide's headline. Fail the report-level check if side cards appear on most slides by default. A card passes only if it adds a new number from a second source or the one comparison that gives the main number meaning.
 - **Counts with examples:** every count of what people say (reviews, posts, comments) is backed by 2 to 3 real quotes on the same slide or the slide it refers to; fail bare counts.
@@ -160,7 +162,7 @@ For each of the six core areas (decision relevance, actionability, storytelling,
 - Be specific: name the slide, what to change and how. "Make it clearer" is not a suggestion.
 - Show the change: a rewritten headline or sentence, a sketch of the new visual in words ("10 face icons, 4 in coral: 40% of reviews mention stickiness"), a reordered chapter list, or a sharper, shorter recommendation.
 - For storytelling, include at least one suggestion on the red thread across the whole report (chapter order, transitions, what to merge or cut).
-- For data visualization, include at least one suggestion that turns text into a visual or replaces a standard chart with a more striking format.
+- For data visualization, include at least one suggestion that turns text into a visual, simplifies an overloaded or hard-to-read chart, or replaces a standard chart with a clearer format.
 - Order the suggestions within each area by impact on the client.
 
 ## Brief coverage check
