@@ -63,5 +63,6 @@
     - cp wezterm.lua /mnt/c/Users/Kenneth/.wezterm.lua
     - cp wslconfig /mnt/c/Users/Kenneth/.wslconfig
     - cp wslgconfig /mnt/c/Users/Kenneth/.wslgconfig
+    - cp wslc.yaml /mnt/c/Users/Kenneth/AppData/Local/wslc/settings.yaml
     - cp packages.config /mnt/c/Users/Kenneth/packages.config
     - cp winget-packages.txt /mnt/c/Users/Kenneth/winget-packages.txt

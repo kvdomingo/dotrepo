@@ -50,7 +50,13 @@ if [[ "$PLATFORM" == "wsl" ]]; then
   export BROWSER="wslview"
   export HSA_ENABLE_DXG_DETECTION=1
   # wsl.conf disables appendWindowsPath: every /mnt/c dir on PATH slows mise shims and command lookup
-  path+=("/mnt/c/Windows/system32" "/mnt/c/Windows")
+  path+=(
+    "/mnt/c/Windows/system32"
+    "/mnt/c/Windows"
+    "/mnt/c/Program Files/WSL"
+  )
+
+  alias wslc='/mnt/c/Program\ Files/WSL/wslc.exe'
 fi
 
 completions_dir="$HOME/.local/share/zsh/completions"
