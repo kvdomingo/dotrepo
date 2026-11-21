@@ -4,5 +4,8 @@ nestedVirtualization=true
 networkingMode=mirrored
 kernelCommandLine = "sysctl.vm.swappiness=10"
 
+[general]
+instanceIdleTimeout = -1
+
 [experimental]
 hostAddressLoopback=true
