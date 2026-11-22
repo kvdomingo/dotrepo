@@ -20,7 +20,7 @@ config.skip_close_confirmation_for_processes_named = {
 }
 
 config.font = wezterm.font("GeistMono Nerd Font", {
-	weight = "Regular",
+	weight = "Light",
 })
 
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
