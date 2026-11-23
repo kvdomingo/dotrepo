@@ -110,6 +110,7 @@ math.getStyles(); // Returns "katex/dist/katex.min.css"
 ```
 
 **Math requires CSS import:**
+
 ```tsx
 import 'katex/dist/katex.min.css';
 ```
@@ -209,7 +210,9 @@ type UrlTransform = (
 
 ### defaultUrlTransform
 
-Passthrough function that returns URLs unchanged. URL security is handled by `rehype-sanitize` and `rehype-harden` instead. Use `urlTransform` when you need custom URL rewriting.
+Passthrough function that returns URLs unchanged. URL security is handled by
+`rehype-sanitize` and `rehype-harden` instead. Use `urlTransform` when you need custom
+URL rewriting.
 
 ```tsx
 import { defaultUrlTransform } from 'streamdown';

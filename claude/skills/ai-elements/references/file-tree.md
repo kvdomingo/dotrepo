@@ -2,7 +2,8 @@
 
 Display hierarchical file and folder structure with expand/collapse functionality.
 
-The `FileTree` component displays a hierarchical file system structure with expandable folders and file selection.
+The `FileTree` component displays a hierarchical file system structure with expandable
+folders and file selection.
 
 See `scripts/file-tree.tsx` for this example.
 

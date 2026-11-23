@@ -2,7 +2,8 @@
 
 Display dependency information and version changes.
 
-The `PackageInfo` component displays package dependency information including version changes and change type badges.
+The `PackageInfo` component displays package dependency information including version
+changes and change type badges.
 
 See `scripts/package-info.tsx` for this example.
 

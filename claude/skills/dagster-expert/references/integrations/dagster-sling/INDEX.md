@@ -4,6 +4,6 @@ triggers:
   - "EL data replication with Sling"
 ---
 
-# dagster-sling
+## dagster-sling
 
-Docs: https://docs.dagster.io/integrations/libraries/sling
+Docs: <https://docs.dagster.io/integrations/libraries/sling>

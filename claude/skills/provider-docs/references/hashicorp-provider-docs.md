@@ -1,13 +1,15 @@
 # HashiCorp Provider Documentation Reference
 
 Source of truth for this skill:
-- https://developer.hashicorp.com/terraform/registry/providers/docs
+
+- <https://developer.hashicorp.com/terraform/registry/providers/docs>
 
 ## Core Rules
 
 - Publish provider docs through Terraform Registry using `tfplugindocs`.
 - Generate provider docs from schema descriptions and markdown templates.
-- Store templates under the repository `docs/` directory with expected naming conventions.
+- Store templates under the repository `docs/` directory with expected naming
+  conventions.
 - Keep release tags and manifest metadata valid so Registry can render and display docs.
 
 ## Template Paths
@@ -47,7 +49,8 @@ go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate --pr
 - Use semantic version tags prefixed with `v`.
 - Create tags from the default branch.
 - Keep `terraform-registry-manifest.json` in the repository root.
-- Understand docs appear by provider version in Registry once the provider release is published.
+- Understand docs appear by provider version in Registry once the provider release is
+  published.
 
 ## Preview and Troubleshooting
 
@@ -60,6 +63,6 @@ go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate --pr
 ## Related Canonical Pages
 
 - Provider docs guidance:
-  - https://developer.hashicorp.com/terraform/registry/providers/docs
+  - <https://developer.hashicorp.com/terraform/registry/providers/docs>
 - Terraform Plugin Docs (`tfplugindocs`) source and usage:
-  - https://github.com/hashicorp/terraform-plugin-docs
+  - <https://github.com/hashicorp/terraform-plugin-docs>

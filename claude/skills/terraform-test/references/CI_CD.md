@@ -76,5 +76,6 @@ terraform-integration-tests:
 
 - Run unit tests (plan mode + mock tests) on every PR — fast, no credentials needed
 - Run integration tests only on merge to main or nightly — requires cloud credentials
-- Use `-filter=unit_test` / `-filter=integration_test` to separate test types based on naming convention
+- Use `-filter=unit_test` / `-filter=integration_test` to separate test types based on
+  naming convention
 - Store cloud credentials as CI secrets, never in code

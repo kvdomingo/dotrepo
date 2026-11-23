@@ -4,6 +4,6 @@ triggers:
   - "AWS services (S3, ECS, Lambda) from Dagster"
 ---
 
-# dagster-aws
+## dagster-aws
 
-Docs: https://docs.dagster.io/integrations/libraries/aws
+Docs: <https://docs.dagster.io/integrations/libraries/aws>

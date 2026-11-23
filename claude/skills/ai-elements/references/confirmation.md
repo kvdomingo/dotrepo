@@ -1,8 +1,11 @@
 # Confirmation
 
-An alert-based component for managing tool execution approval workflows with request, accept, and reject states.
+An alert-based component for managing tool execution approval workflows with request,
+accept, and reject states.
 
-The `Confirmation` component provides a flexible system for displaying tool approval requests and their outcomes. Perfect for showing users when AI tools require approval before execution, and displaying the approval status afterward.
+The `Confirmation` component provides a flexible system for displaying tool approval
+requests and their outcomes. Perfect for showing users when AI tools require approval
+before execution, and displaying the approval status afterward.
 
 See `scripts/confirmation.tsx` for this example.
 
@@ -14,7 +17,8 @@ npx ai-elements@latest add confirmation
 
 ## Usage with AI SDK
 
-Build a chat UI with tool approval workflow where dangerous tools require user confirmation before execution.
+Build a chat UI with tool approval workflow where dangerous tools require user
+confirmation before execution.
 
 Add the following component to your frontend:
 
@@ -184,7 +188,8 @@ export async function POST(req: Request) {
 
 - Context-based state management for approval workflow
 - Conditional rendering based on approval state
-- Support for approval-requested, approval-responded, output-denied, and output-available states
+- Support for approval-requested, approval-responded, output-denied, and
+  output-available states
 - Built on shadcn/ui Alert and Button components
 - TypeScript support with comprehensive type definitions
 - Customizable styling with Tailwind CSS
@@ -201,7 +206,8 @@ See `scripts/confirmation-request.tsx` for this example.
 
 ### Approved State
 
-Shows the accepted status when user approves and state is `approval-responded` or `output-available`.
+Shows the accepted status when user approves and state is `approval-responded` or
+`output-available`.
 
 See `scripts/confirmation-accepted.tsx` for this example.
 
@@ -224,7 +230,8 @@ See `scripts/confirmation-rejected.tsx` for this example.
 
 ### `<ConfirmationTitle />`
 
-A styled description element for displaying a title or label within the confirmation alert.
+A styled description element for displaying a title or label within the confirmation
+alert.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

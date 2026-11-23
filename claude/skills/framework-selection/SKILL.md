@@ -6,7 +6,7 @@ description: "INVOKE THIS SKILL at the START of any LangChain/LangGraph/Deep Age
 <overview>
 LangChain, LangGraph, and Deep Agents are **layered**, not competing choices. Each builds on the one below it:
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │              Deep Agents                │  ← highest level: batteries included
 │   (planning, memory, skills, files)     │
@@ -19,9 +19,12 @@ LangChain, LangGraph, and Deep Agents are **layered**, not competing choices. Ea
 └─────────────────────────────────────────┘
 ```
 
-Picking a higher layer does not cut you off from lower layers — you can use LangGraph graphs inside Deep Agents, and LangChain primitives inside both.
+Picking a higher layer does not cut you off from lower layers — you can use LangGraph
+graphs inside Deep Agents, and LangChain primitives inside both.
 
-> **This skill should be loaded at the top of any project before selecting other skills or writing agent code.** The framework you choose dictates which other skills to invoke next.
+> **This skill should be loaded at the top of any project before selecting other skills
+> or writing agent code.** The framework you choose dictates which other skills to
+> invoke next.
 </overview>
 
 ---
@@ -50,12 +53,14 @@ Answer these questions in order:
 ### LangChain — Use when the task is focused and self-contained
 
 **Best for:**
+
 - Single-purpose agents that use a fixed set of tools
 - RAG pipelines and document Q&A
 - Model calls, prompt templates, output parsing
 - Quick prototypes where agent logic is simple
 
 **Not ideal when:**
+
 - The agent needs to plan across many steps
 - State needs to persist across multiple sessions
 - Control flow is conditional or iterative
@@ -69,6 +74,7 @@ Answer these questions in order:
 ### LangGraph — Use when you need to own the control flow
 
 **Best for:**
+
 - Agents with branching logic or loops (e.g. retry-until-correct, reflection)
 - Multi-step workflows where different paths depend on intermediate results
 - Human-in-the-loop approval at specific steps
@@ -76,10 +82,13 @@ Answer these questions in order:
 - Persistent state across invocations within a session
 
 **Not ideal when:**
-- You want planning, file management, and subagent delegation handled for you (use Deep Agents instead)
+
+- You want planning, file management, and subagent delegation handled for you (use Deep
+  Agents instead)
 - The workflow is straightforward enough for a simple agent
 
-**Skills to invoke next:** `langgraph-fundamentals`, `langgraph-human-in-the-loop`, `langgraph-persistence`
+**Skills to invoke next:** `langgraph-fundamentals`, `langgraph-human-in-the-loop`,
+`langgraph-persistence`
 
 </langgraph-profile>
 
@@ -88,6 +97,7 @@ Answer these questions in order:
 ### Deep Agents — Use when the task is open-ended and multi-dimensional
 
 **Best for:**
+
 - Long-running tasks that require breaking work into a todo list
 - Agents that need to read, write, and manage files across a session
 - Delegating subtasks to specialized subagents
@@ -95,12 +105,14 @@ Answer these questions in order:
 - Persistent memory that survives across multiple sessions
 
 **Not ideal when:**
+
 - The task is simple enough for a single-purpose agent
 - You need precise, hand-crafted control over every graph edge (use LangGraph directly)
 
 **Middleware — built-in and extensible:**
 
-Deep Agents ships with a built-in middleware layer out of the box — you configure it, you don't implement it. The following come pre-wired; you can also add your own on top:
+Deep Agents ships with a built-in middleware layer out of the box — you configure it,
+you don't implement it. The following come pre-wired; you can also add your own on top:
 
 | Middleware | What it provides | Always on? |
 |------------|-----------------|------------|
@@ -111,7 +123,8 @@ Deep Agents ships with a built-in middleware layer out of the box — you config
 | `MemoryMiddleware` | Long-term memory across sessions via a `Store` instance | Opt-in |
 | `HumanInTheLoopMiddleware` | Interrupt and request human approval before sensitive tool calls | Opt-in |
 
-**Skills to invoke next:** `deep-agents-core`, `deep-agents-memory`, `deep-agents-orchestration`
+**Skills to invoke next:** `deep-agents-core`, `deep-agents-memory`,
+`deep-agents-orchestration`
 
 </deep-agents-profile>
 
@@ -132,9 +145,13 @@ Because the frameworks are layered, they can be combined in the same project. Th
 
 ### How it works in practice
 
-A LangGraph compiled graph can be registered as a subagent inside Deep Agents. This means you can build a tightly-controlled LangGraph workflow (e.g. a retrieval-and-verify loop) and hand it off to the Deep Agents `task` tool as a named subagent — the Deep Agents orchestrator delegates to it without caring about its internal graph structure.
+A LangGraph compiled graph can be registered as a subagent inside Deep Agents. This
+means you can build a tightly-controlled LangGraph workflow (e.g. a retrieval-and-verify
+loop) and hand it off to the Deep Agents `task` tool as a named subagent — the Deep
+Agents orchestrator delegates to it without caring about its internal graph structure.
 
-LangChain tools, chains, and retrievers can be used freely inside both LangGraph nodes and Deep Agents tools — they are the shared building blocks at every level.
+LangChain tools, chains, and retrievers can be used freely inside both LangGraph nodes
+and Deep Agents tools — they are the shared building blocks at every level.
 
 </mixing-layers>
 
@@ -158,6 +175,8 @@ LangChain tools, chains, and retrievers can be used freely inside both LangGraph
 | **Setup complexity** | Low | Medium | Low |
 | **Flexibility** | Medium | High | Medium |
 
-> **Middleware is a concept specific to LangChain (callbacks) and Deep Agents (explicit middleware layer). LangGraph has no middleware — you wire behavior directly into nodes and edges.**
+> **Middleware is a concept specific to LangChain (callbacks) and Deep Agents (explicit
+> middleware layer). LangGraph has no middleware — you wire behavior directly into nodes
+> and edges.**
 
 </quick-reference>

@@ -4,6 +4,7 @@ triggers:
   - "duckdb pandas, duckdb dataframe"
 ---
 
-# dagster-duckdb-pandas
+## dagster-duckdb-pandas
 
-Docs: https://docs.dagster.io/integrations/libraries/duckdb/reference#dagster-duckdb-pandas
+Docs:
+<https://docs.dagster.io/integrations/libraries/duckdb/reference#dagster-duckdb-pandas>

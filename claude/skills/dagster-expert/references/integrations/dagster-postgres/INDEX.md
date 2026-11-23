@@ -4,6 +4,6 @@ triggers:
   - "PostgreSQL as a Dagster storage backend"
 ---
 
-# dagster-postgres
+## dagster-postgres
 
-Docs: https://docs.dagster.io/integrations/libraries/postgres
+Docs: <https://docs.dagster.io/integrations/libraries/postgres>

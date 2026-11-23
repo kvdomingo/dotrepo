@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
 **A `route.ts` and `page.tsx` cannot coexist in the same folder.**
 
-```
+```text
 app/
 ├── api/
 │   └── users/
@@ -38,7 +38,7 @@ app/
 
 If you need both a page and an API at the same path, use different paths:
 
-```
+```text
 app/
 ├── users/
 │   └── page.tsx        # /users (page)

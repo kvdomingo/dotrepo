@@ -1,8 +1,10 @@
 # Attachments
 
-A flexible, composable attachment component for displaying files, images, videos, audio, and source documents.
+A flexible, composable attachment component for displaying files, images, videos, audio,
+and source documents.
 
-The `Attachment` component provides a unified way to display file attachments and source documents with multiple layout variants.
+The `Attachment` component provides a unified way to display file attachments and source
+documents with multiple layout variants.
 
 See `scripts/attachments.tsx` for this example.
 

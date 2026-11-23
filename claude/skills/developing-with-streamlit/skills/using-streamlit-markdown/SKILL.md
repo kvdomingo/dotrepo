@@ -6,7 +6,9 @@ license: Apache-2.0
 
 # Using Markdown in Streamlit
 
-Streamlit supports Markdown throughout its API—in `st.markdown()`, widget labels, help tooltips, metrics, `st.table()` cells, and more. Beyond standard GitHub-flavored Markdown, Streamlit adds colored text, badges, icons, and LaTeX.
+Streamlit supports Markdown throughout its API—in `st.markdown()`, widget labels, help
+tooltips, metrics, `st.table()` cells, and more. Beyond standard GitHub-flavored
+Markdown, Streamlit adds colored text, badges, icons, and LaTeX.
 
 ## Quick reference
 
@@ -19,7 +21,7 @@ Streamlit supports Markdown throughout its API—in `st.markdown()`, widget labe
 | Code block | ` ```lang...``` ` | ` ```python...``` ` | ✗ |
 | Link | `[text](url)` | `[Streamlit](https://streamlit.io)` | ✓ |
 | Image | `![alt](path)` | `![Logo](logo.png)` | ✓ |
-| Heading | `# ` to `###### ` | `## Section` | ✗ |
+| Heading | `#` to `######` | `## Section` | ✗ |
 | Blockquote | `> text` | `> Note` | ✗ |
 | Horizontal rule | `---` | `---` | ✗ |
 | Unordered list | `- item` | `- First`<br>`- Second` | ✗ |
@@ -38,22 +40,34 @@ Streamlit supports Markdown throughout its API—in `st.markdown()`, widget labe
 
 ## Where Markdown works
 
-Markdown is supported in most places where text is rendered. Streamlit has three levels of markdown support:
+Markdown is supported in most places where text is rendered. Streamlit has three levels
+of markdown support:
 
 **Full Markdown** — All syntax shown in the table above:
-- `st.markdown()`, `st.write()`, `st.caption()`, `st.info()`, `st.warning()`, `st.error()`, `st.success()`, `st.table` cells and headers, tooltips (`help` parameter)
 
-**Label subset** — Inline formatting only (see table above). Block elements (e.g. headings, lists, tables) are silently stripped:
-- Widget and element labels (`st.button`, `st.checkbox`, `st.radio`, `st.expander`, `st.page_link`, etc.), `st.radio` and `st.select_slider` options, `st.tabs` names, `st.metric` label/value/delta, `st.title`, `st.header`, `st.subheader`, `st.image` caption, `st.dialog` title, `st.progress`, `st.spinner`.
+- `st.markdown()`, `st.write()`, `st.caption()`, `st.info()`, `st.warning()`,
+  `st.error()`, `st.success()`, `st.table` cells and headers, tooltips (`help`
+  parameter)
+
+**Label subset** — Inline formatting only (see table above). Block elements (e.g.
+headings, lists, tables) are silently stripped:
+
+- Widget and element labels (`st.button`, `st.checkbox`, `st.radio`, `st.expander`,
+  `st.page_link`, etc.), `st.radio` and `st.select_slider` options, `st.tabs` names,
+  `st.metric` label/value/delta, `st.title`, `st.header`, `st.subheader`, `st.image`
+  caption, `st.dialog` title, `st.progress`, `st.spinner`.
 
 **No Markdown** — Text displays literally:
-- `st.text()`, `st.json()`, `st.dataframe()` / `st.data_editor()` cells, `st.selectbox` / `st.multiselect` options, input placeholders, `st.Page` titles, chart/map labels
+
+- `st.text()`, `st.json()`, `st.dataframe()` / `st.data_editor()` cells, `st.selectbox`
+  / `st.multiselect` options, input placeholders, `st.Page` titles, chart/map labels
 
 ## GitHub-flavored Markdown
 
-Standard GFM syntax works as expected. Headings automatically get anchor links for navigation.
+Standard GFM syntax works as expected. Headings automatically get anchor links for
+navigation.
 
-~~~python
+````python
 st.markdown("""
 # Heading
 
@@ -72,7 +86,7 @@ st.markdown("""
 code_block = "with syntax highlighting"
 ```
 """)
-~~~
+````
 
 ## Colored text, backgrounds, and badges
 
@@ -82,19 +96,23 @@ st.markdown(":blue-background[Highlighted]")     # Colored background
 st.markdown(":green-badge[Active] :red-badge[Inactive]")  # Inline badges
 ```
 
-**Available colors:** `red`, `orange`, `yellow`, `green`, `blue`, `violet`, `gray`/`grey`, `rainbow`, `primary`
+**Available colors:** `red`, `orange`, `yellow`, `green`, `blue`, `violet`,
+`gray`/`grey`, `rainbow`, `primary`
 
-Note: `rainbow` is not supported for backgrounds or badges. Standalone badges also available via `st.badge()`.
+Note: `rainbow` is not supported for backgrounds or badges. Standalone badges also
+available via `st.badge()`.
 
 ## Material icons
 
-Use Google Material Symbols with `:material/icon_name:` syntax. Find icons at [fonts.google.com/icons](https://fonts.google.com/icons)
+Use Google Material Symbols with `:material/icon_name:` syntax. Find icons at
+[fonts.google.com/icons](https://fonts.google.com/icons)
 
 ```python
 st.markdown(":material/check_circle: Complete")
 ```
 
-Material icons also work in `icon` parameters across many elements (`st.button`, `st.expander`, `st.info`, etc.).
+Material icons also work in `icon` parameters across many elements (`st.button`,
+`st.expander`, `st.info`, etc.).
 
 ## Emojis
 
@@ -108,7 +126,8 @@ st.markdown("Hello! 👋 :+1: :tada: :streamlit:")
 
 ## LaTeX math
 
-Single `$` for inline, double `$$` for display mode. Inline math requires non-whitespace after `$` to avoid conflicts with currency (e.g., "$5" won't be parsed as math).
+Single `$` for inline, double `$$` for display mode. Inline math requires non-whitespace
+after `$` to avoid conflicts with currency (e.g., "$5" won't be parsed as math).
 
 ```python
 # Inline math
@@ -133,7 +152,8 @@ In labels, images display as icons with max height equal to font height.
 
 ## Markdown in element labels
 
-Widgets, containers, and other elements support Markdown in their labels (using the label subset).
+Widgets, containers, and other elements support Markdown in their labels (using the
+label subset).
 
 ```python
 st.radio(":material/palette: Choose **color**", [":red-background[Red]", ":blue-background[Blue]", ":green-background[Green]"])
@@ -191,7 +211,8 @@ st.markdown("Content width only", width="content")  # stretch, content, or pixel
 
 ## HTML (use very sparingly!)
 
-Mix Markdown with HTML using `unsafe_allow_html=True`. For pure HTML without markdown processing, use `st.html()` instead.
+Mix Markdown with HTML using `unsafe_allow_html=True`. For pure HTML without markdown
+processing, use `st.html()` instead.
 
 ```python
 st.markdown("**Status:** <span style='color: coral'>Custom styled</span>", unsafe_allow_html=True)

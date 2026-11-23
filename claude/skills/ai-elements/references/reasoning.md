@@ -1,8 +1,10 @@
 # Reasoning
 
-A collapsible component that displays AI reasoning content, automatically opening during streaming and closing when finished.
+A collapsible component that displays AI reasoning content, automatically opening during
+streaming and closing when finished.
 
-The `Reasoning` component displays AI reasoning content, automatically opening during streaming and closing when finished.
+The `Reasoning` component displays AI reasoning content, automatically opening during
+streaming and closing when finished.
 
 See `scripts/reasoning.tsx` for this example.
 
@@ -16,7 +18,9 @@ npx ai-elements@latest add reasoning
 
 Build a chatbot with reasoning using Deepseek R1 or other reasoning models.
 
-Some models (like GPT with high reasoning effort) return multiple reasoning parts instead of a single streaming block. The example below consolidates all reasoning parts into a single component to avoid displaying multiple "Thinking..." indicators.
+Some models (like GPT with high reasoning effort) return multiple reasoning parts
+instead of a single streaming block. The example below consolidates all reasoning parts
+into a single component to avoid displaying multiple "Thinking..." indicators.
 
 Add the following component to your frontend:
 
@@ -174,9 +178,12 @@ export async function POST(req: Request) {
 
 ## Reasoning vs Chain of Thought
 
-Use the `Reasoning` component when your model outputs thinking content as a single block or continuous stream (Deepseek R1, Claude with extended thinking, etc.).
+Use the `Reasoning` component when your model outputs thinking content as a single block
+or continuous stream (Deepseek R1, Claude with extended thinking, etc.).
 
-If your model outputs discrete, labeled steps (search queries, tool calls, distinct thought stages), consider using the [Chain of Thought](/components/chain-of-thought) component instead for a more structured visual representation.
+If your model outputs discrete, labeled steps (search queries, tool calls, distinct
+thought stages), consider using the [Chain of Thought](/components/chain-of-thought)
+component instead for a more structured visual representation.
 
 ## Features
 

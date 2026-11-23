@@ -4,7 +4,8 @@ Sweepers clean up infrastructure resources that leak during acceptance tests —
 when test infrastructure fails to be destroyed due to API errors or test
 failures.
 
-Source: [Sweepers](https://developer.hashicorp.com/terraform/plugin/testing/acceptance-tests/sweepers)
+Source:
+[Sweepers](https://developer.hashicorp.com/terraform/plugin/testing/acceptance-tests/sweepers)
 
 ---
 

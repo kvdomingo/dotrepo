@@ -1,8 +1,12 @@
 # Web Preview
 
-A composable component for previewing the result of a generated UI, with support for live examples and code display.
+A composable component for previewing the result of a generated UI, with support for
+live examples and code display.
 
-The `WebPreview` component provides a flexible way to showcase the result of a generated UI component, along with its source code. It is designed for documentation and demo purposes, allowing users to interact with live examples and view the underlying implementation.
+The `WebPreview` component provides a flexible way to showcase the result of a generated
+UI component, along with its source code. It is designed for documentation and demo
+purposes, allowing users to interact with live examples and view the underlying
+implementation.
 
 See `scripts/web-preview.tsx` for this example.
 
@@ -196,5 +200,5 @@ export async function POST(req: Request) {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `logs` | `Array<{ level: ` | - | Console log entries to display in the console panel. |
+| `logs` | `Array<{ level:` | - | Console log entries to display in the console panel. |
 | `...props` | `React.HTMLAttributes<HTMLDivElement>` | - | Any other props are spread to the root div. |

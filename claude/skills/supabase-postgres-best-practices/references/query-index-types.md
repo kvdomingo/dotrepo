@@ -7,7 +7,8 @@ tags: indexes, btree, gin, gist, brin, hash, index-types
 
 ## Choose the Right Index Type for Your Data
 
-Different index types excel at different query patterns. The default B-tree isn't always optimal.
+Different index types excel at different query patterns. The default B-tree isn't always
+optimal.
 
 **Incorrect (B-tree for JSONB containment):**
 

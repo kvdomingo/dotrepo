@@ -1,6 +1,7 @@
 # Streamlit Dashboard App Templates
 
-This directory contains ready-to-use dashboard templates for Streamlit. Each template demonstrates best practices for building data-driven dashboards with modern UI patterns.
+This directory contains ready-to-use dashboard templates for Streamlit. Each template
+demonstrates best practices for building data-driven dashboards with modern UI patterns.
 
 ## Available Templates
 
@@ -16,7 +17,8 @@ These templates are based on official Streamlit demo apps and work out of the bo
 
 ### Analytics Dashboard Templates
 
-These templates demonstrate common dashboard patterns with synthetic data. Replace the data generation functions with your actual data sources:
+These templates demonstrate common dashboard patterns with synthetic data. Replace the
+data generation functions with your actual data sources:
 
 | Template | Description | Key Features |
 |----------|-------------|--------------|
@@ -46,7 +48,7 @@ uv run streamlit run streamlit_app.py
 
 Each template follows this structure:
 
-```
+```text
 dashboard-{name}/
 ├── streamlit_app.py    # Main application code
 └── pyproject.toml      # Dependencies and metadata
@@ -54,11 +56,13 @@ dashboard-{name}/
 
 ## Canonical Patterns
 
-When creating new templates or adapting existing ones, follow these patterns for consistency.
+When creating new templates or adapting existing ones, follow these patterns for
+consistency.
 
 ### Page Configuration
 
-Always set page config as the first Streamlit call, with `layout="wide"` and a Material icon:
+Always set page config as the first Streamlit call, with `layout="wide"` and a Material
+icon:
 
 ```python
 st.set_page_config(
@@ -79,7 +83,8 @@ CHART_HEIGHT = 300  # Standard chart height in pixels
 
 ### Time Range Filtering
 
-All dashboard templates that support time filtering use the same `filter_by_time_range` function:
+All dashboard templates that support time filtering use the same `filter_by_time_range`
+function:
 
 ```python
 def filter_by_time_range(df: pd.DataFrame, x_col: str, time_range: str) -> pd.DataFrame:
@@ -181,7 +186,9 @@ def load_metric_data() -> pd.DataFrame:
 ## Dependencies
 
 All templates require Python >=3.11 and use:
-- `snowflake-connector-python>=3.3.0` (required — `streamlit[snowflake]` silently skips this on Python 3.12+)
+
+- `snowflake-connector-python>=3.3.0` (required — `streamlit[snowflake]` silently skips
+  this on Python 3.12+)
 - `streamlit[snowflake]>=1.54.0`
 - `altair>=5.5.0`
 - `pandas>=2.2.3`

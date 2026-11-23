@@ -1,8 +1,13 @@
 # Voice Selector
 
-A composable dialog component for selecting AI voices with metadata display and search functionality.
+A composable dialog component for selecting AI voices with metadata display and search
+functionality.
 
-The `VoiceSelector` component provides a flexible and composable interface for selecting AI voices. Built on shadcn/ui's Dialog and Command components, it features a searchable voice list with support for metadata display (gender, accent, age), grouping, and customizable layouts. The component includes a context provider for accessing voice selection state from any nested component.
+The `VoiceSelector` component provides a flexible and composable interface for selecting
+AI voices. Built on shadcn/ui's Dialog and Command components, it features a searchable
+voice list with support for metadata display (gender, accent, age), grouping, and
+customizable layouts. The component includes a context provider for accessing voice
+selection state from any nested component.
 
 See `scripts/voice-selector.tsx` for this example.
 
@@ -29,7 +34,8 @@ npx ai-elements@latest add voice-selector
 
 ### `<VoiceSelector />`
 
-Root Dialog component that provides context for all child components. Manages both voice selection and dialog open states.
+Root Dialog component that provides context for all child components. Manages both voice
+selection and dialog open states.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -63,7 +69,8 @@ Container for the Command component and voice list, rendered inside the dialog.
 
 ### `<VoiceSelectorDialog />`
 
-Alternative dialog implementation using CommandDialog for a full-screen command palette style.
+Alternative dialog implementation using CommandDialog for a full-screen command palette
+style.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -134,7 +141,8 @@ Displays the voice name with proper styling.
 
 ### `<VoiceSelectorGender />`
 
-Displays the voice gender metadata with icons from Lucide. Supports multiple gender identities with corresponding icons.
+Displays the voice gender metadata with icons from Lucide. Supports multiple gender
+identities with corresponding icons.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -145,7 +153,8 @@ Displays the voice gender metadata with icons from Lucide. Supports multiple gen
 
 ### `<VoiceSelectorAccent />`
 
-Displays the voice accent metadata with emoji flags representing different countries/regions.
+Displays the voice accent metadata with emoji flags representing different
+countries/regions.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -156,7 +165,8 @@ Displays the voice accent metadata with emoji flags representing different count
 
 ### `<VoiceSelectorAge />`
 
-Displays the voice age metadata with muted styling and tabular numbers for consistent alignment.
+Displays the voice age metadata with muted styling and tabular numbers for consistent
+alignment.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -174,7 +184,8 @@ Displays a description for the voice with muted styling.
 
 ### `<VoiceSelectorAttributes />`
 
-Container for grouping voice attributes (gender, accent, age) together. Use with `VoiceSelectorBullet` for separation.
+Container for grouping voice attributes (gender, accent, age) together. Use with
+`VoiceSelectorBullet` for separation.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -183,7 +194,8 @@ Container for grouping voice attributes (gender, accent, age) together. Use with
 
 ### `<VoiceSelectorBullet />`
 
-Displays a bullet separator (•) between voice attributes. Hidden from screen readers via `aria-hidden`.
+Displays a bullet separator (•) between voice attributes. Hidden from screen readers via
+`aria-hidden`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -200,7 +212,8 @@ Displays keyboard shortcuts for voice items.
 
 ### `<VoiceSelectorPreview />`
 
-A button that allows users to preview/play a voice sample before selecting it. Shows play, pause, or loading icons based on state.
+A button that allows users to preview/play a voice sample before selecting it. Shows
+play, pause, or loading icons based on state.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -214,7 +227,8 @@ A button that allows users to preview/play a voice sample before selecting it. S
 
 ### `useVoiceSelector()`
 
-A custom hook for accessing the voice selector context. This hook allows you to access and control the voice selection state from any component nested within `VoiceSelector`.
+A custom hook for accessing the voice selector context. This hook allows you to access
+and control the voice selection state from any component nested within `VoiceSelector`.
 
 ```tsx
 import { useVoiceSelector } from "@repo/elements/voice-selector";

@@ -7,7 +7,8 @@ tags: constraints, migrations, schema, alter-table
 
 ## Add Constraints Safely in Migrations
 
-PostgreSQL does not support `ADD CONSTRAINT IF NOT EXISTS`. Migrations using this syntax will fail.
+PostgreSQL does not support `ADD CONSTRAINT IF NOT EXISTS`. Migrations using this syntax
+will fail.
 
 **Incorrect (causes syntax error):**
 

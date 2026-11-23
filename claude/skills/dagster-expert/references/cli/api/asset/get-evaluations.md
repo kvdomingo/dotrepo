@@ -8,4 +8,6 @@ triggers:
 dg api asset get-evaluations <ASSET_KEY>
 ```
 
-`--include-nodes` — includes individual evaluation nodes in the response. Warning: this produces dense output with the full tree of conditions evaluated for each record. Only use when processing a small number of records.
+`--include-nodes` — includes individual evaluation nodes in the response. Warning: this
+produces dense output with the full tree of conditions evaluated for each record. Only
+use when processing a small number of records.

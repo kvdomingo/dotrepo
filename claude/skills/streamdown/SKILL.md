@@ -12,7 +12,8 @@ description: >-
 
 # Streamdown
 
-Streaming-optimized React Markdown renderer. Drop-in replacement for `react-markdown` with built-in streaming support, security, and interactive controls.
+Streaming-optimized React Markdown renderer. Drop-in replacement for `react-markdown`
+with built-in streaming support, security, and interactive controls.
 
 ## Quick Setup
 
@@ -23,27 +24,32 @@ npm install streamdown
 ```
 
 Optional plugins (install only what's needed):
+
 ```bash
 npm install @streamdown/code @streamdown/mermaid @streamdown/math @streamdown/cjk
 ```
 
 ### 2. Configure Tailwind CSS (Required)
 
-**This is the most commonly missed step.** Streamdown uses Tailwind for styling and the dist files must be scanned.
+**This is the most commonly missed step.** Streamdown uses Tailwind for styling and the
+dist files must be scanned.
 
 **Tailwind v4** — add to `globals.css`:
+
 ```css
 @source "../node_modules/streamdown/dist/*.js";
 ```
 
-Add plugin `@source` lines **only for packages you have installed** (omitting uninstalled plugins avoids Tailwind errors). See plugin pages for exact paths:
+Add plugin `@source` lines **only for packages you have installed** (omitting
+uninstalled plugins avoids Tailwind errors). See plugin pages for exact paths:
+
 - Code: `@source "../node_modules/@streamdown/code/dist/*.js";`
 - CJK: `@source "../node_modules/@streamdown/cjk/dist/*.js";`
 - Math: `@source "../node_modules/@streamdown/math/dist/*.js";`
 - Mermaid: `@source "../node_modules/@streamdown/mermaid/dist/*.js";`
 
-
 **Tailwind v3** — add to `tailwind.config.js`:
+
 ```js
 module.exports = {
   content: [
@@ -133,6 +139,7 @@ For full API reference, see [references/api.md](references/api.md).
 | CJK | `@streamdown/cjk` | Chinese/Japanese/Korean text support |
 
 **Math requires CSS:**
+
 ```tsx
 import 'katex/dist/katex.min.css';
 ```
@@ -144,28 +151,39 @@ For plugin configuration details, see [references/plugins.md](references/plugins
 Use these for deeper implementation details:
 
 - **[references/api.md](references/api.md)** — Complete props, types, and interfaces
-- **[references/plugins.md](references/plugins.md)** — Plugin setup, configuration, and customization
-- **[references/styling.md](references/styling.md)** — CSS variables, data attributes, custom components, theme examples
-- **[references/security.md](references/security.md)** — Hardening, link safety, custom HTML tags, production config
-- **[references/features.md](references/features.md)** — Carets, remend, static mode, controls, GFM, memoization, troubleshooting
+- **[references/plugins.md](references/plugins.md)** — Plugin setup, configuration, and
+  customization
+- **[references/styling.md](references/styling.md)** — CSS variables, data attributes,
+  custom components, theme examples
+- **[references/security.md](references/security.md)** — Hardening, link safety, custom
+  HTML tags, production config
+- **[references/features.md](references/features.md)** — Carets, remend, static mode,
+  controls, GFM, memoization, troubleshooting
 
 ## Example Configurations
 
 Copy and adapt from `assets/examples/`:
 
-- **[basic-streaming.tsx](assets/examples/basic-streaming.tsx)** — Minimal AI chat with Vercel AI SDK
-- **[with-caret.tsx](assets/examples/with-caret.tsx)** — Streaming with block caret cursor
-- **[full-featured.tsx](assets/examples/full-featured.tsx)** — All plugins, carets, link safety, controls
+- **[basic-streaming.tsx](assets/examples/basic-streaming.tsx)** — Minimal AI chat with
+  Vercel AI SDK
+- **[with-caret.tsx](assets/examples/with-caret.tsx)** — Streaming with block caret
+  cursor
+- **[full-featured.tsx](assets/examples/full-featured.tsx)** — All plugins, carets, link
+  safety, controls
 - **[static-mode.tsx](assets/examples/static-mode.tsx)** — Blog/docs rendering
-- **[custom-security.tsx](assets/examples/custom-security.tsx)** — Strict security for AI content
+- **[custom-security.tsx](assets/examples/custom-security.tsx)** — Strict security for
+  AI content
 
 ## Common Gotchas
 
-1. **Tailwind styles missing** — Add `@source` directive or `content` entry for `node_modules/streamdown/dist/*.js`
+1. **Tailwind styles missing** — Add `@source` directive or `content` entry for
+   `node_modules/streamdown/dist/*.js`
 2. **Math not rendering** — Import `katex/dist/katex.min.css`
 3. **Caret not showing** — Both `caret` prop AND `isAnimating={true}` are required
 4. **Copy buttons during streaming** — Disabled automatically when `isAnimating={true}`
-5. **Link safety modal appearing** — Enabled by default; disable with `linkSafety={{ enabled: false }}`
+5. **Link safety modal appearing** — Enabled by default; disable with
+   `linkSafety={{ enabled: false }}`
 6. **Shiki warning in Next.js** — Install `shiki` explicitly, add to `transpilePackages`
 7. **`allowedTags` not working** — Only works with default rehype plugins
-8. **Math uses `$$` not `$`** — Single dollar is disabled by default to avoid currency conflicts
+8. **Math uses `$$` not `$`** — Single dollar is disabled by default to avoid currency
+   conflicts

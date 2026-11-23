@@ -4,9 +4,10 @@
 
 ### Modules in Separate Repos (Recommended)
 
-Consider maintaining modules in **separate Git repositories** rather than in the catalog:
+Consider maintaining modules in **separate Git repositories** rather than in the
+catalog:
 
-```
+```text
 # Module repos (separate per module)
 github.com/YOUR_ORG/modules/rds.git
 github.com/YOUR_ORG/modules/eks.git
@@ -22,9 +23,11 @@ github.com/YOUR_ORG/infrastructure-prod.git
 github.com/YOUR_ORG/infrastructure-platform.git
 ```
 
-**Trade-off:** Requires more initial development effort to set up, but each module gets a proper development workflow.
+**Trade-off:** Requires more initial development effort to set up, but each module gets
+a proper development workflow.
 
 **Benefits:**
+
 - Independent semantic versioning per module
 - Dedicated CI/CD pipeline with automated testing (Terratest)
 - Pre-commit hooks for formatting, validation, and security scanning
@@ -94,6 +97,7 @@ npmPublish: false
 ```
 
 This enables:
+
 - Automatic version bumps based on commit messages (`feat:`, `fix:`, `BREAKING CHANGE:`)
 - Auto-generated changelogs
 - Git tags for each release (e.g., `v1.2.0`)
@@ -101,9 +105,11 @@ This enables:
 
 ### Modules in Catalog (Alternative - Monorepo)
 
-Alternatively, keep modules in the same repository as the catalog. This is the pattern used by [Gruntwork's terragrunt-infrastructure-catalog-example](https://github.com/gruntwork-io/terragrunt-infrastructure-catalog-example).
+Alternatively, keep modules in the same repository as the catalog. This is the pattern
+used by
+[Gruntwork's terragrunt-infrastructure-catalog-example](https://github.com/gruntwork-io/terragrunt-infrastructure-catalog-example).
 
-```
+```text
 infrastructure-catalog/
 ├── modules/                    # OpenTofu/Terraform modules
 │   ├── rds/
@@ -142,20 +148,23 @@ terraform {
 | Catalog version = module version | Isolated blast radius for changes |
 
 **When to use monorepo:**
+
 - Smaller teams with shared ownership
 - Rapid iteration during early development
 - Simpler governance requirements
 
 **When to use multi-repo:**
+
 - Large teams with distinct ownership
 - Strict versioning and release processes
 - Enterprise environments with compliance requirements
 
 ### Boilerplate Modules Pattern
 
-A hybrid approach uses `/modules` for **catalog discovery** (scaffolding) while units reference **external modules**:
+A hybrid approach uses `/modules` for **catalog discovery** (scaffolding) while units
+reference **external modules**:
 
-```
+```text
 infrastructure-catalog/
 ├── modules/                    # Boilerplate templates (for `terragrunt catalog`)
 │   └── rds/
@@ -195,7 +204,8 @@ inputs = {
 }
 ```
 
-This enables `terragrunt catalog` to show available modules with interactive scaffolding while keeping actual module code in separate repos.
+This enables `terragrunt catalog` to show available modules with interactive scaffolding
+while keeping actual module code in separate repos.
 
 ### Unit Source Pattern
 
@@ -217,6 +227,7 @@ terraform {
 ```
 
 Key points:
+
 - `//app` - Path within the module repo (submodule)
 - `?ref=${values.version}` - Version comes from stack's values
 - Can mix public and private modules in the same catalog
@@ -361,6 +372,7 @@ locals {
 ```
 
 Results in:
+
 - `tfstate-myproject-nonprod-staging-us-east-1`
 - `tfstate-locks-myproject-nonprod-staging-us-east-1`
 
@@ -418,7 +430,8 @@ inputs = {
 ## Common Pitfalls
 
 1. **Git refspec error:** Use `//path?ref=branch` NOT `?ref=branch//path`
-2. **Heredoc in ternary:** Wrap in parentheses: `condition ? (\n<<-EOF\n...\nEOF\n) : ""`
+2. **Heredoc in ternary:** Wrap in parentheses:
+   `condition ? (\n<<-EOF\n...\nEOF\n) : ""`
 3. **Duplicate dependencies:** Each dependency block should appear only once
 4. **Missing mock outputs:** Always provide for plan/validate commands
 5. **Hardcoded local paths:** Use local paths only for testing, never in committed code

@@ -4,6 +4,6 @@ triggers:
   - "SMS and communication with Twilio"
 ---
 
-# dagster-twilio
+## dagster-twilio
 
-Docs: https://docs.dagster.io/integrations/libraries/twilio
+Docs: <https://docs.dagster.io/integrations/libraries/twilio>

@@ -29,11 +29,15 @@ st.scatter_chart(df, x="age", y="salary")
 st.area_chart(df, x="date", y="value")
 ```
 
-Native charts support additional parameters: `color` for series grouping, `stack` for bar/area stacking, `size` for scatter point sizing, `horizontal` for horizontal bars. See the [chart API reference](https://docs.streamlit.io/develop/api-reference/charts) for full options.
+Native charts support additional parameters: `color` for series grouping, `stack` for
+bar/area stacking, `size` for scatter point sizing, `horizontal` for horizontal bars.
+See the [chart API reference](https://docs.streamlit.io/develop/api-reference/charts)
+for full options.
 
 ## Human-readable labels
 
-Use clear labels—not column names or abbreviations. Skip `x_label`/`y_label` if the column names are already readable.
+Use clear labels—not column names or abbreviations. Skip `x_label`/`y_label` if the
+column names are already readable.
 
 ```python
 # BAD: cryptic column names without labels
@@ -48,7 +52,9 @@ st.line_chart(df, x="dt", y="rev", x_label="Date", y_label="Revenue")
 
 ## Altair for complex charts
 
-Use Altair when you need more control. Altair is bundled with Streamlit (no extra install), while Plotly requires an additional package. Pick one and stay consistent throughout your app.
+Use Altair when you need more control. Altair is bundled with Streamlit (no extra
+install), while Plotly requires an additional package. Pick one and stay consistent
+throughout your app.
 
 ```python
 import altair as alt
@@ -62,6 +68,7 @@ st.altair_chart(chart)
 ```
 
 **When to use Altair:**
+
 - Custom axis formatting
 - Multiple series with legends
 - Interactive tooltips
@@ -69,7 +76,9 @@ st.altair_chart(chart)
 
 ## Dataframe column configuration
 
-Use `column_config` where it adds value—formatting currencies, showing progress bars, displaying links or images. Don't add config just for labels or tooltips that don't meaningfully improve readability. Works with both `st.dataframe` and `st.data_editor`.
+Use `column_config` where it adds value—formatting currencies, showing progress bars,
+displaying links or images. Don't add config just for labels or tooltips that don't
+meaningfully improve readability. Works with both `st.dataframe` and `st.data_editor`.
 
 ```python
 st.dataframe(
@@ -96,15 +105,21 @@ st.dataframe(
 )
 ```
 
-**Note on hiding columns:** Setting a column to `None` hides it from the UI, but the data is still sent to the frontend. For truly sensitive data, pre-filter the DataFrame before displaying.
+**Note on hiding columns:** Setting a column to `None` hides it from the UI, but the
+data is still sent to the frontend. For truly sensitive data, pre-filter the DataFrame
+before displaying.
 
 **Dataframe best practices:**
+
 - **Hide useless index:** `hide_index=True`
 - **Or make index meaningful:** `df = df.set_index("customer_name")` before displaying
-- **Hide internal/technical columns:** Set column to `None` in config (but pre-filter for sensitive data)
-- **Use visual column types where they help:** sparklines for trends, progress bars for completion, images for logos
+- **Hide internal/technical columns:** Set column to `None` in config (but pre-filter
+  for sensitive data)
+- **Use visual column types where they help:** sparklines for trends, progress bars for
+  completion, images for logos
 
 **Column types:**
+
 - `AreaChartColumn` → Area sparklines
 - `BarChartColumn` → Bar sparklines
 - `CheckboxColumn` → Boolean as checkbox
@@ -183,7 +198,9 @@ st.metric(
 )
 ```
 
-**Note:** Sparklines only show y-values and ignore x-axis spacing. Use them for evenly-spaced data (like daily or weekly snapshots). For irregularly-spaced time series, use a proper chart instead.
+**Note:** Sparklines only show y-values and ignore x-axis spacing. Use them for
+evenly-spaced data (like daily or weekly snapshots). For irregularly-spaced time series,
+use a proper chart instead.
 
 See `building-streamlit-dashboards` for composing metrics into dashboard layouts.
 

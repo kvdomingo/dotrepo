@@ -1,6 +1,8 @@
 # API Monitoring Reference
 
-Complete guide for monitoring Terraform Stack deployments using the HCP Terraform API. Use this approach for automation, CI/CD pipelines, and non-interactive environments like AI agents.
+Complete guide for monitoring Terraform Stack deployments using the HCP Terraform API.
+Use this approach for automation, CI/CD pipelines, and non-interactive environments like
+AI agents.
 
 ## Table of Contents
 
@@ -13,6 +15,7 @@ Complete guide for monitoring Terraform Stack deployments using the HCP Terrafor
 ## When to Use the API
 
 Use the HCP Terraform API instead of CLI commands when:
+
 - Running in non-interactive environments (CI/CD, automation scripts)
 - Building tools or integrations that need programmatic access
 - Monitoring multiple Stacks simultaneously
@@ -20,6 +23,7 @@ Use the HCP Terraform API instead of CLI commands when:
 - Working in environments where streaming CLI commands don't work
 
 **CLI commands that don't work in automation:**
+
 - `terraform stacks deployment-run watch` - Streams output, blocks indefinitely
 - `terraform stacks deployment-group watch` - Streams output, blocks indefinitely
 - `terraform stacks configuration watch` - Streams output, blocks indefinitely
@@ -50,13 +54,15 @@ All API requests require these headers:
 
 ## API Monitoring Workflow
 
-After uploading a configuration with `terraform stacks configuration upload`, follow this sequence to monitor deployment progress:
+After uploading a configuration with `terraform stacks configuration upload`, follow
+this sequence to monitor deployment progress:
 
 ### Step 1: Get Configuration Status
 
 **Endpoint:** `GET /api/v2/stack-configurations/{configuration-id}`
 
-**Purpose:** Verify configuration upload completed successfully and get the configuration details.
+**Purpose:** Verify configuration upload completed successfully and get the
+configuration details.
 
 **Request:**
 
@@ -67,6 +73,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 ```
 
 **Response Fields:**
+
 - `attributes.status` - Configuration processing status (pending/completed)
 - `attributes.sequence-number` - Version number of this configuration
 - `attributes.components-detected` - Number of components found
@@ -93,7 +100,8 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 ### Step 2: Get Deployment Group Summaries
 
-**Endpoint:** `GET /api/v2/stack-configurations/{configuration-id}/stack-deployment-group-summaries`
+**Endpoint:**
+`GET /api/v2/stack-configurations/{configuration-id}/stack-deployment-group-summaries`
 
 **Purpose:** Get list of deployment groups, their IDs, and current status summary.
 
@@ -106,6 +114,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 ```
 
 **Response Fields:**
+
 - `id` - Deployment group ID (needed for next step)
 - `attributes.name` - Deployment group name (e.g., `dev_default`)
 - `attributes.status` - Overall status (running/succeeded/failed)
@@ -149,6 +158,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 ```
 
 **Response Fields:**
+
 - `id` - Deployment run ID (needed for next step)
 - `attributes.status` - Current status (planning/planned/applying/applied/failed)
 - `attributes.created-at` - Run start time
@@ -187,6 +197,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 ```
 
 **Response Fields:**
+
 - `id` - Step ID (needed for diagnostics and outputs)
 - `attributes.operation-type` - Type of operation (plan/apply)
 - `attributes.status` - Step status (running/completed/failed)
@@ -228,7 +239,8 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 **Purpose:** Retrieve detailed error messages when a deployment step fails.
 
-**Critical:** The `stack_deployment_step_id` query parameter is **required**. Without it, the API returns empty results.
+**Critical:** The `stack_deployment_step_id` query parameter is **required**. Without
+it, the API returns empty results.
 
 **Request:**
 
@@ -239,6 +251,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 ```
 
 **Response Fields:**
+
 - `attributes.severity` - Diagnostic level (error/warning)
 - `attributes.summary` - Brief error description
 - `attributes.detail` - Detailed error message
@@ -324,12 +337,15 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 ### Step 6: Get Stack Outputs (After Successful Deployment)
 
-**Endpoint:** `GET /api/v2/stack-deployment-steps/{final-apply-step-id}/artifacts?name=apply-description`
+**Endpoint:**
+`GET /api/v2/stack-deployment-steps/{final-apply-step-id}/artifacts?name=apply-description`
 
 **Purpose:** Retrieve Stack outputs after a successful deployment completes.
 
 **Important Notes:**
-- This endpoint returns HTTP 307 redirect - use `curl -L` to follow redirects automatically
+
+- This endpoint returns HTTP 307 redirect - use `curl -L` to follow redirects
+  automatically
 - This is currently the **only way** to retrieve Stack outputs programmatically
 - This endpoint is **not documented** in public API documentation
 - You need the final apply step ID from Step 4
@@ -343,7 +359,8 @@ curl -L -s -H "Authorization: Bearer $TOKEN" \
 
 **Response Structure:**
 
-The artifact response includes an `.outputs` object where each output contains a `change.after` property with the actual output value:
+The artifact response includes an `.outputs` object where each output contains a
+`change.after` property with the actual output value:
 
 ```json
 {
@@ -384,7 +401,7 @@ curl -L -s --header "Authorization: Bearer $TOKEN" \
 
 **Example Output:**
 
-```
+```text
 alb_url: http://my-alb-123456789.us-west-2.elb.amazonaws.com
 ecr_repository_url: 123456789.dkr.ecr.us-west-2.amazonaws.com/my-repo
 ```
@@ -403,6 +420,7 @@ The artifacts endpoint accepts these `name` parameter values:
 ### Polling Best Practices
 
 **Recommended polling intervals:**
+
 - Configuration status: Check every 5 seconds until status is "completed"
 - Deployment runs: Check every 10 seconds during active deployment
 - Deployment steps: Check every 10 seconds for individual step status
@@ -436,6 +454,7 @@ done
 ### CLI Command Limitations
 
 **These CLI commands DO NOT work in automation:**
+
 - `terraform stacks deployment-run watch` - Streams output, blocks indefinitely
 - `terraform stacks deployment-group watch` - Streams output, blocks indefinitely
 - `terraform stacks configuration watch` - Streams output, blocks indefinitely
@@ -445,6 +464,7 @@ done
 ### No Direct Output Command
 
 There is currently no CLI command to retrieve Stack outputs. You must:
+
 1. Use API to get deployment steps
 2. Find the final apply step ID
 3. Request the `apply-description` artifact
@@ -452,7 +472,8 @@ There is currently no CLI command to retrieve Stack outputs. You must:
 
 ### Handling Redirects
 
-The artifacts endpoint returns HTTP 307 redirect to the actual artifact location. Ensure your HTTP client follows redirects:
+The artifacts endpoint returns HTTP 307 redirect to the actual artifact location. Ensure
+your HTTP client follows redirects:
 
 **curl:** Use `-L` flag
 **Python requests:** Set `allow_redirects=True` (default)
@@ -540,4 +561,5 @@ while true; do
 done
 ```
 
-This script demonstrates a complete monitoring workflow from configuration upload to output retrieval with error handling.
+This script demonstrates a complete monitoring workflow from configuration upload to
+output retrieval with error handling.

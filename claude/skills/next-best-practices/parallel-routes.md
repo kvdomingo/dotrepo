@@ -1,10 +1,12 @@
 # Parallel & Intercepting Routes
 
-Parallel routes render multiple pages in the same layout. Intercepting routes show a different UI when navigating from within your app vs direct URL access. Together they enable modal patterns.
+Parallel routes render multiple pages in the same layout. Intercepting routes show a
+different UI when navigating from within your app vs direct URL access. Together they
+enable modal patterns.
 
 ## File Structure
 
-```
+```text
 app/
 ├── @modal/                    # Parallel route slot
 │   ├── default.tsx            # Required! Returns null
@@ -44,7 +46,8 @@ export default function RootLayout({
 
 ## Step 2: Default File (Critical!)
 
-**Every parallel route slot MUST have a `default.tsx`** to prevent 404s on hard navigation.
+**Every parallel route slot MUST have a `default.tsx`** to prevent 404s on hard
+navigation.
 
 ```tsx
 // app/@modal/default.tsx
@@ -53,7 +56,8 @@ export default function Default() {
 }
 ```
 
-Without this file, refreshing any page will 404 because Next.js can't determine what to render in the `@modal` slot.
+Without this file, refreshing any page will 404 because Next.js can't determine what to
+render in the `@modal` slot.
 
 ## Step 3: Intercepting Route (Modal)
 
@@ -156,11 +160,13 @@ export function Modal({ children }: { children: React.ReactNode }) {
 ### Why NOT `router.push('/')` or `<Link href="/">`?
 
 Using `push` or `Link` to "close" a modal:
+
 1. Adds a new history entry (back button shows modal again)
 2. Doesn't properly clear the intercepted route
 3. Can cause the modal to flash or persist unexpectedly
 
 `router.back()` correctly:
+
 1. Removes the intercepted route from history
 2. Returns to the previous page
 3. Properly unmounts the modal
@@ -176,11 +182,13 @@ Matchers match **route segments**, not filesystem paths:
 | `(..)(..)` | Two levels up | Rarely used |
 | `(...)` | From root | `@modal/(...)photos` intercepts `/photos` from anywhere |
 
-**Common mistake**: Thinking `(..)` means "parent folder" - it means "parent route segment".
+**Common mistake**: Thinking `(..)` means "parent folder" - it means "parent route
+segment".
 
 ## Handling Hard Navigation
 
 When users directly visit `/photos/123` (bookmark, refresh, shared link):
+
 - The intercepting route is bypassed
 - The full `photos/[id]/page.tsx` renders
 - Modal doesn't appear (expected behavior)
@@ -218,7 +226,7 @@ You're using `router.push()` instead of `router.back()`.
 
 If you have `@modal` inside a route group, each level needs its own `default.tsx`:
 
-```
+```text
 app/
 ├── (marketing)/
 │   ├── @modal/
@@ -230,8 +238,10 @@ app/
 ### 4. Intercepted Route Shows Wrong Content
 
 Check your matcher:
+
 - `(.)photos` intercepts `/photos` from the same route level
-- If your `@modal` is in `app/dashboard/@modal`, use `(.)photos` to intercept `/dashboard/photos`, not `/photos`
+- If your `@modal` is in `app/dashboard/@modal`, use `(.)photos` to intercept
+  `/dashboard/photos`, not `/photos`
 
 ### 5. TypeScript Errors with `params`
 
@@ -246,7 +256,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
 ## Complete Example: Photo Gallery Modal
 
-```
+```text
 app/
 ├── @modal/
 │   ├── default.tsx

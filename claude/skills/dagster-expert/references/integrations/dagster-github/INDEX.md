@@ -4,6 +4,6 @@ triggers:
   - "GitHub repository event handling from Dagster"
 ---
 
-# dagster-github
+## dagster-github
 
-Docs: https://docs.dagster.io/integrations/libraries/github
+Docs: <https://docs.dagster.io/integrations/libraries/github>

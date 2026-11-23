@@ -4,8 +4,8 @@ triggers:
   - "fast DataFrame processing with Polars"
 ---
 
-# dagster-polars
+## dagster-polars
 
 > **Community-supported integration.**
 
-Docs: https://docs.dagster.io/integrations/libraries/polars
+Docs: <https://docs.dagster.io/integrations/libraries/polars>

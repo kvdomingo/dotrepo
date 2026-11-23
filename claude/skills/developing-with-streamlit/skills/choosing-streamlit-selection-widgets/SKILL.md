@@ -6,11 +6,13 @@ license: Apache-2.0
 
 # Streamlit selection widgets
 
-The right selection widget for the job. Streamlit has evolved—many old patterns are now anti-patterns.
+The right selection widget for the job. Streamlit has evolved—many old patterns are now
+anti-patterns.
 
 ## When to use what
 
-Use `st.segmented_control` or `st.pills` when you want all options visible at once. Use `st.selectbox` or `st.multiselect` when options should be hidden in a dropdown.
+Use `st.segmented_control` or `st.pills` when you want all options visible at once. Use
+`st.selectbox` or `st.multiselect` when options should be hidden in a dropdown.
 
 | Widget | Best For |
 |--------|----------|
@@ -44,7 +46,9 @@ selected = st.pills(
 )
 ```
 
-Can also be used to mimic an "example" widget, especially with `label_visibility="collapsed"`:
+Can also be used to mimic an "example" widget, especially with
+`label_visibility="collapsed"`:
+
 ```python
 st.pills("Examples", ["Show me sales data", "Top customers"], label_visibility="collapsed")
 ```
@@ -73,7 +77,8 @@ countries = st.multiselect(
 
 ## Toggle vs checkbox
 
-Use `st.toggle` for settings that trigger changes in the app. Reserve `st.checkbox` for forms.
+Use `st.toggle` for settings that trigger changes in the app. Reserve `st.checkbox` for
+forms.
 
 ```python
 # GOOD: Toggle for app settings
@@ -88,7 +93,8 @@ with st.form("signup"):
 
 ## Forms with border=False
 
-Remove the default form border for cleaner inline forms. Keep the border for longer forms where visual grouping helps.
+Remove the default form border for cleaner inline forms. Keep the border for longer
+forms where visual grouping helps.
 
 ```python
 # Inline form without border

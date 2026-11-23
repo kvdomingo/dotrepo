@@ -5,11 +5,11 @@ triggers:
   - "listing or inspecting secrets in a Dagster Plus deployment"
 ---
 
-# dg api secret Reference
+## dg api secret Reference
 
 Commands for listing and inspecting secrets in a Dagster Plus deployment.
 
-## Reference Files Index
+### Reference Files Index
 
 <!-- BEGIN GENERATED INDEX -->
 

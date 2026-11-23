@@ -4,6 +4,6 @@ triggers:
   - "metadata management and data cataloging with DataHub"
 ---
 
-# dagster-datahub
+## dagster-datahub
 
-Docs: https://docs.dagster.io/integrations/libraries/datahub
+Docs: <https://docs.dagster.io/integrations/libraries/datahub>

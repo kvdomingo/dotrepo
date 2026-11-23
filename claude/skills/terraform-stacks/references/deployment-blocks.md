@@ -1,6 +1,7 @@
 # Deployment Configuration Block Reference
 
-Complete reference for all blocks available in Terraform Stack deployment configuration files (`.tfdeploy.hcl`).
+Complete reference for all blocks available in Terraform Stack deployment configuration
+files (`.tfdeploy.hcl`).
 
 ## Table of Contents
 
@@ -10,7 +11,8 @@ Complete reference for all blocks available in Terraform Stack deployment config
 4. [Deployment Group Block](#deployment-group-block)
 5. [Deployment Auto-Approve Block](#deployment-auto-approve-block)
 
-**Note**: For Publish Output and Upstream Input blocks (linked Stacks), see `linked-stacks.md`.
+**Note**: For Publish Output and Upstream Input blocks (linked Stacks), see
+`linked-stacks.md`.
 
 ## Identity Token Block
 
@@ -36,6 +38,7 @@ Reference the JWT using: `identity_token.<n>.jwt`
 ### Cloud Provider Audiences
 
 **AWS:**
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -43,6 +46,7 @@ identity_token "aws" {
 ```
 
 **Azure:**
+
 ```hcl
 identity_token "azure" {
   audience = ["api://AzureADTokenExchange"]
@@ -50,13 +54,17 @@ identity_token "azure" {
 ```
 
 **Google Cloud:**
+
 ```hcl
 identity_token "gcp" {
   audience = ["//iam.googleapis.com/projects/<PROJECT_NUMBER>/locations/global/workloadIdentityPools/<POOL_ID>/providers/<PROVIDER_ID>"]
 }
 ```
 
-**Setup Documentation:** For detailed instructions on configuring OIDC/workload identity for each cloud provider (including IAM roles, trust policies, and federated credentials), see: https://developer.hashicorp.com/terraform/cloud-docs/dynamic-provider-credentials
+**Setup Documentation:** For detailed instructions on configuring OIDC/workload identity
+for each cloud provider (including IAM roles, trust policies, and federated
+credentials), see:
+<https://developer.hashicorp.com/terraform/cloud-docs/dynamic-provider-credentials>
 
 ### Examples
 
@@ -75,7 +83,8 @@ deployment "production" {
 }
 ```
 
-For complete working examples including multi-region identity token usage, see `examples.md`.
+For complete working examples including multi-region identity token usage, see
+`examples.md`.
 
 ## Locals Block
 
@@ -137,9 +146,11 @@ To safely remove a deployment from your Stack:
 2. Apply the plan through HCP Terraform
 3. After successful destruction, remove the deployment block from your configuration
 
-**Important**: Using the `destroy` argument ensures your configuration has the provider authentication necessary to properly destroy the deployment's resources.
+**Important**: Using the `destroy` argument ensures your configuration has the provider
+authentication necessary to properly destroy the deployment's resources.
 
 **Example:**
+
 ```hcl
 deployment "old_environment" {
   inputs = {
@@ -152,7 +163,8 @@ deployment "old_environment" {
 }
 ```
 
-After applying this plan and the deployment is destroyed, remove the entire `deployment "old_environment"` block from your configuration.
+After applying this plan and the deployment is destroyed, remove the entire
+`deployment "old_environment"` block from your configuration.
 
 ### Examples
 
@@ -202,7 +214,8 @@ For complete multi-environment and multi-region deployment examples, see `exampl
 
 ## Deployment Group Block
 
-Groups deployments together to configure shared settings and auto-approval rules (HCP Terraform Premium tier feature).
+Groups deployments together to configure shared settings and auto-approval rules (HCP
+Terraform Premium tier feature).
 
 ### Syntax
 
@@ -220,6 +233,7 @@ deployment_group "<group_name>" {
 ### Purpose
 
 Deployment groups allow you to:
+
 - Organize deployments logically (by environment, team, region, etc.)
 - Configure shared auto-approval rules for multiple deployments
 - Manage deployments more effectively at scale
@@ -265,14 +279,15 @@ deployment_group "production" {
 
 ## Deployment Auto-Approve Block
 
-Defines rules that automatically approve deployment plans based on specific conditions (HCP Terraform Premium feature).
+Defines rules that automatically approve deployment plans based on specific conditions
+(HCP Terraform Premium feature).
 
 ### Syntax
 
 ```hcl
 deployment_auto_approve "<rule_name>" {
   deployment_group = deployment_group.<group_name>
-  
+
   check {
     condition = <boolean_expression>
     reason    = "<failure_message>"
@@ -283,7 +298,8 @@ deployment_auto_approve "<rule_name>" {
 ### Arguments
 
 - **rule_name** (label, required): Unique identifier for this auto-approve rule
-- **deployment_group** (required): Reference to the deployment group this rule applies to
+- **deployment_group** (required): Reference to the deployment group this rule applies
+  to
 - **check** (required, one or more): Condition that must be met for auto-approval
 
 ### Context Variables
@@ -317,7 +333,7 @@ deployment_group "canary" {
 
 deployment_auto_approve "applyable_plans" {
   deployment_group = deployment_group.canary
-  
+
   check {
     condition = context.plan.applyable
     reason    = "Plan must be applyable without errors"
@@ -337,12 +353,12 @@ deployment_group "production" {
 
 deployment_auto_approve "safe_production_changes" {
   deployment_group = deployment_group.production
-  
+
   check {
     condition = context.plan.changes.remove == 0
     reason    = "Production deletions require manual approval"
   }
-  
+
   check {
     condition = context.plan.applyable
     reason    = "Plan must be successful"
@@ -368,17 +384,17 @@ deployment_group "production" {
 # Canary auto-approves with strict checks
 deployment_auto_approve "canary_strict" {
   deployment_group = deployment_group.canary
-  
+
   check {
     condition = context.plan.changes.remove == 0
     reason    = "Canary cannot delete resources"
   }
-  
+
   check {
     condition = context.plan.changes.change <= 5
     reason    = "Canary limited to 5 resource changes"
   }
-  
+
   check {
     condition = context.plan.applyable
     reason    = "Plan must be applyable"

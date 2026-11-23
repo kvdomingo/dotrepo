@@ -4,8 +4,8 @@ triggers:
   - "reverse ETL syncs with Census"
 ---
 
-# dagster-census
+## dagster-census
 
 > **Community-supported integration.**
 
-Docs: https://docs.dagster.io/integrations/libraries/census
+Docs: <https://docs.dagster.io/integrations/libraries/census>

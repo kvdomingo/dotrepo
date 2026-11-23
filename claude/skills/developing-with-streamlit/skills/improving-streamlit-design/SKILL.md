@@ -9,13 +9,16 @@ license: Apache-2.0
 Small touches that make apps feel polished.
 
 **Related skills:** Visual design works hand-in-hand with other skills:
-- `choosing-streamlit-selection-widgets` → Choosing the right widget (segmented control, pills, toggle)
+
+- `choosing-streamlit-selection-widgets` → Choosing the right widget (segmented control,
+  pills, toggle)
 - `displaying-streamlit-data` → Column config, sparklines, bordered metrics
 - `using-streamlit-layouts` → Containers, alignment, dashboard cards
 
 ## Page config
 
-Set browser tab title, icon, and layout. Place this at the top of your script to avoid visual blinking:
+Set browser tab title, icon, and layout. Place this at the top of your script to avoid
+visual blinking:
 
 ```python
 st.set_page_config(
@@ -26,7 +29,9 @@ st.set_page_config(
 ```
 
 **Layout options:**
-- `layout="centered"` (default) → Best for most apps, content is constrained to a readable width
+
+- `layout="centered"` (default) → Best for most apps, content is constrained to a
+  readable width
 - `layout="wide"` → Full-width, good for dashboards and data-heavy apps
 
 ## App logo
@@ -54,7 +59,7 @@ st.markdown("Celebration! 🎉")
 
 Format: `:material/icon_name:`
 
-Find icons: https://fonts.google.com/icons
+Find icons: <https://fonts.google.com/icons>
 
 **Popular icons by category:**
 
@@ -70,6 +75,7 @@ Find icons: https://fonts.google.com/icons
 ## Badges for status
 
 For standalone badges:
+
 ```python
 st.badge("Active", icon=":material/check:", color="green")
 st.badge("Pending", icon=":material/schedule:", color="orange")
@@ -77,6 +83,7 @@ st.badge("Deprecated", color="red")
 ```
 
 For inline badges in text:
+
 ```python
 st.markdown("""
 :green-badge[Active] :orange-badge[Pending] :red-badge[Deprecated] :blue-badge[New]
@@ -84,6 +91,7 @@ st.markdown("""
 ```
 
 Avoid the old verbose syntax:
+
 ```python
 # OLD (still works but cluttered)
 st.markdown(":orange-background[:orange[Pending]]")
@@ -91,7 +99,8 @@ st.markdown(":orange-background[:orange[Pending]]")
 
 ## Spacing: remove dividers
 
-Dividers (`st.divider()` or `---`) look heavy. Just remove them—Streamlit's default spacing is usually enough.
+Dividers (`st.divider()` or `---`) look heavy. Just remove them—Streamlit's default
+spacing is usually enough.
 
 ```python
 # BAD
@@ -107,6 +116,7 @@ st.header("Section 2")
 ```
 
 If you genuinely need spacing:
+
 ```python
 st.space("small")   # Small gap
 st.space("medium")  # Medium gap
@@ -144,6 +154,7 @@ st.info("Data last updated 5 minutes ago")
 ```
 
 **When to use what:**
+
 - `st.caption` → Simple info, metadata, timestamps
 - `st.info` → Important instructions
 - `st.warning` → Caution, potential issues
@@ -163,7 +174,9 @@ st.caption("Justified text", text_alignment="justify")
 
 Options: `"left"` (default), `"center"`, `"right"`, `"justify"`
 
-**Note:** `horizontal_alignment` on containers positions elements but also sets their `text_alignment`. If you need different text alignment within a horizontally-aligned container, override `text_alignment` on the text element itself.
+**Note:** `horizontal_alignment` on containers positions elements but also sets their
+`text_alignment`. If you need different text alignment within a horizontally-aligned
+container, override `text_alignment` on the text element itself.
 
 ## Icons in callouts and expanders
 
@@ -179,7 +192,8 @@ with st.expander("Settings", icon=":material/settings:"):
     st.write("Configure your preferences")
 ```
 
-Other elements like `st.button` and `st.tabs` also support icons—worth considering when it adds clarity.
+Other elements like `st.button` and `st.tabs` also support icons—worth considering when
+it adds clarity.
 
 ## References
 

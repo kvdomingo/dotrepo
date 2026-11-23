@@ -4,11 +4,12 @@ triggers:
   - "combining conditions using since, any_deps_match, or boolean operators"
 ---
 
-# Declarative Automation: Operators
+## Declarative Automation: Operators
 
-Operators combine operands and other conditions into complex expressions using boolean logic and transformations.
+Operators combine operands and other conditions into complex expressions using boolean
+logic and transformations.
 
-## Boolean Operators
+### Boolean Operators
 
 **`&` (AND)**: Both conditions must be true:
 
@@ -36,11 +37,12 @@ condition = (
 condition = ~dg.AutomationCondition.any_deps_missing()
 ```
 
-## Transformation Operators
+### Transformation Operators
 
-### since(reset_condition)
+#### since(reset_condition)
 
-Converts events into status. Becomes true when the operand becomes true and remains true until the reset condition becomes true.
+Converts events into status. Becomes true when the operand becomes true and remains true
+until the reset condition becomes true.
 
 ```python
 # True from when dependency updates until asset is requested
@@ -51,32 +53,37 @@ condition = dg.AutomationCondition.any_deps_updated().since(
 
 **Pattern**: `A.since(B)` means "A has occurred more recently than B"
 
-**Use case**: Create persistent states from transient events. "Upstream updated" is an event, but "upstream updated since I was last requested" is a status.
+**Use case**: Create persistent states from transient events. "Upstream updated" is an
+event, but "upstream updated since I was last requested" is a status.
 
-### newly_true()
+#### newly_true()
 
-Converts status into an event. True only on the tick when the operand transitions from false to true.
+Converts status into an event. True only on the tick when the operand transitions from
+false to true.
 
 ```python
 # True only on the tick when the asset becomes missing
 condition = dg.AutomationCondition.missing().newly_true()
 ```
 
-**Use case**: Prevent repeated actions during persistent states. `missing()` stays true for many ticks, but `missing().newly_true()` is only true once.
+**Use case**: Prevent repeated actions during persistent states. `missing()` stays true
+for many ticks, but `missing().newly_true()` is only true once.
 
-### since_last_handled()
+#### since_last_handled()
 
-Convenience method equivalent to `.since(newly_requested() | newly_updated() | initial_evaluation())`.
+Convenience method equivalent to
+`.since(newly_requested() | newly_updated() | initial_evaluation())`.
 
 ```python
 condition = dg.AutomationCondition.any_deps_updated().since_last_handled()
 ```
 
-True from when the condition becomes true until the asset is requested, updated, or the condition is first applied.
+True from when the condition becomes true until the asset is requested, updated, or the
+condition is first applied.
 
-## Dependency Operators
+### Dependency Operators
 
-### any_deps_match(condition)
+#### any_deps_match(condition)
 
 True if the condition is true for at least one partition of any upstream dependency.
 
@@ -88,7 +95,7 @@ condition = dg.AutomationCondition.any_deps_match(
 
 Supports filtering with `.allow()` and `.ignore()`.
 
-### all_deps_match(condition)
+#### all_deps_match(condition)
 
 True if the condition is true for at least one partition of all upstream dependencies.
 
@@ -100,9 +107,9 @@ condition = dg.AutomationCondition.all_deps_match(
 
 Requires every upstream asset to have at least one partition matching the condition.
 
-## Dependency Filtering
+### Dependency Filtering
 
-### allow(selection)
+#### allow(selection)
 
 Restricts which dependencies are checked to only those in the `AssetSelection`:
 
@@ -115,7 +122,7 @@ condition = dg.AutomationCondition.any_deps_match(
 
 Creates an intersection: `dep_keys & allowed_selection`
 
-### ignore(selection)
+#### ignore(selection)
 
 Excludes dependencies in the `AssetSelection` from being checked:
 
@@ -128,9 +135,10 @@ condition = dg.AutomationCondition.any_deps_updated().ignore(
 
 Creates a subtraction: `dep_keys - ignored_selection`
 
-### Propagation Through Boolean Operators
+#### Propagation Through Boolean Operators
 
-When applied to `AND`/`OR` conditions, `.allow()` and `.ignore()` propagate to all sub-conditions:
+When applied to `AND`/`OR` conditions, `.allow()` and `.ignore()` propagate to all
+sub-conditions:
 
 ```python
 # Applies allow() to all dependency checks within eager()
@@ -139,9 +147,9 @@ condition = dg.AutomationCondition.eager().allow(
 )
 ```
 
-## Check Operators
+### Check Operators
 
-### any_checks_match(condition, blocking_only)
+#### any_checks_match(condition, blocking_only)
 
 True if any of the asset's checks match the condition.
 
@@ -157,7 +165,7 @@ Parameters:
 - `condition`: Condition to evaluate against checks
 - `blocking_only` (bool): If True, only considers blocking checks (default: False)
 
-### all_checks_match(condition, blocking_only)
+#### all_checks_match(condition, blocking_only)
 
 True if all of the asset's checks match the condition.
 
@@ -168,9 +176,9 @@ condition = dg.AutomationCondition.all_checks_match(
 )
 ```
 
-## Labeling
+### Labeling
 
-### with_label(label)
+#### with_label(label)
 
 Adds a human-readable label to a condition for debugging and UI display:
 
@@ -181,4 +189,5 @@ condition = (
 ).with_label("updated_since_requested")
 ```
 
-Labels appear in condition evaluation traces in the Dagster UI, making complex conditions easier to understand.
+Labels appear in condition evaluation traces in the Dagster UI, making complex
+conditions easier to understand.

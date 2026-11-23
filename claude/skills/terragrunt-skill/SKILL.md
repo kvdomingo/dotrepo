@@ -14,11 +14,14 @@ description: |
 
 ## Overview
 
-This skill provides guidance for infrastructure using Terragrunt with OpenTofu, following a three-repository pattern:
+This skill provides guidance for infrastructure using Terragrunt with OpenTofu,
+following a three-repository pattern:
 
-1. **Infrastructure Catalog** - Units and stacks that reference modules from separate repos
+1. **Infrastructure Catalog** - Units and stacks that reference modules from separate
+   repos
 2. **Infrastructure Live** - Environment-specific deployments consuming the catalog
-3. **Module Repos** - Separate repositories for each OpenTofu module (independent versioning)
+3. **Module Repos** - Separate repositories for each OpenTofu module (independent
+   versioning)
 
 ## Quick Navigation
 
@@ -110,7 +113,8 @@ terraform {
 ## Common Pitfalls
 
 1. **Git refspec error** - Use `//path?ref=branch` NOT `?ref=branch//path`
-2. **Heredoc in ternary** - Wrap in parentheses: `condition ? (\n<<-EOF\n...\nEOF\n) : ""`
+2. **Heredoc in ternary** - Wrap in parentheses:
+   `condition ? (\n<<-EOF\n...\nEOF\n) : ""`
 3. **Missing mock outputs** - Always provide for plan/validate
 4. **Hardcoded paths** - Use local paths only for testing
 

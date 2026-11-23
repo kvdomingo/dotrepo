@@ -4,6 +4,6 @@ triggers:
   - "LLM-powered assets with OpenAI"
 ---
 
-# dagster-openai
+## dagster-openai
 
-Docs: https://docs.dagster.io/integrations/libraries/openai
+Docs: <https://docs.dagster.io/integrations/libraries/openai>

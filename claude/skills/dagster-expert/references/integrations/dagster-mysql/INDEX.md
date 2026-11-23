@@ -4,6 +4,6 @@ triggers:
   - "MySQL as a Dagster storage backend"
 ---
 
-# dagster-mysql
+## dagster-mysql
 
-Docs: https://docs.dagster.io/integrations/libraries/mysql
+Docs: <https://docs.dagster.io/integrations/libraries/mysql>

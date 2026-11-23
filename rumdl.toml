@@ -45,14 +45,15 @@ flavor = "gfm"
 # [MD004]
 # style = "asterisk"  # Unordered list style (asterisk, plus, dash, consistent)
 
-# [MD007]
-indent = 2  # Unordered list indentation
+[MD007]
+indent = 2 # Unordered list indentation
 
-# [MD013]
-line-length = 88  # Line length
-# code-blocks = false  # Exclude code blocks from line length check
-# tables = false  # Exclude tables from line length check
-# headings = true  # Include headings in line length check
+[MD013]
+line-length = 88    # Line length
+reflow = true
+code-blocks = false # Exclude code blocks from line length check
+tables = false      # Exclude tables from line length check
+headings = true     # Include headings in line length check
 
 # [MD044]
 # names = ["rumdl", "Markdown", "GitHub"]  # Proper names that should be capitalized correctly

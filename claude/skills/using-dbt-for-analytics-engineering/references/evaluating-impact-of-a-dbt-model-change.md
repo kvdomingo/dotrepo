@@ -1,6 +1,7 @@
 # Evaluating Impact of a dbt Model Change
 
-Assess downstream dependencies before modifying a dbt model. Determines scope of impact and recommends appropriate build selectors.
+Assess downstream dependencies before modifying a dbt model. Determines scope of impact
+and recommends appropriate build selectors.
 
 ## When to Use
 
@@ -43,16 +44,19 @@ Check for these tools first - they provide richer lineage data:
 ### CLI Fallback (Worse data but always available)
 
 **List all downstream models:**
+
 ```bash
 dbt ls --select model_name+ --output name
 ```
 
 **Count downstream models:**
+
 ```bash
 dbt ls --select model_name+ --output name | wc -l
 ```
 
 **View as JSON with details:**
+
 ```bash
 dbt ls --select model_name+ --output json
 ```
@@ -83,11 +87,13 @@ With MCP tools, use `get_column_lineage` for precise tracking.
 ## Recommending Build Commands
 
 **Standard (all downstream):**
+
 ```bash
 dbt build --select state:modified+
 ```
 
 **Limited depth (user choice):**
+
 ```bash
 # Only 1 level downstream
 dbt build --select state:modified+1
@@ -102,6 +108,7 @@ dbt build --select state:modified+3
 When impact is high, ask the user:
 
 > "This change affects N downstream models. Do you want to:
+>
 > 1. Build all downstream models with `state:modified+`
 > 2. Limit to a specific depth (e.g., `state:modified+2` for 2 levels)?"
 
@@ -117,8 +124,11 @@ When impact is high, ask the user:
 
 ## Common Mistakes
 
-**Not checking before changing** - Always run impact assessment first, even for "small" changes.
+**Not checking before changing** - Always run impact assessment first, even for "small"
+changes.
 
-**Ignoring column-level impact** - Removing a column breaks downstream models that reference it. Check column usage, not just model dependencies.
+**Ignoring column-level impact** - Removing a column breaks downstream models that
+reference it. Check column usage, not just model dependencies.
 
-**Building everything** - Use `--select` to limit scope. Never run `dbt build` without selectors on large projects.
+**Building everything** - Use `--select` to limit scope. Never run `dbt build` without
+selectors on large projects.

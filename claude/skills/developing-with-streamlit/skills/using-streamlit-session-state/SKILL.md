@@ -6,7 +6,8 @@ license: Apache-2.0
 
 # Using Streamlit session state
 
-Streamlit reruns scripts top-to-bottom on every interaction. Without session state, variables reset each time. Use `st.session_state` to persist values across reruns.
+Streamlit reruns scripts top-to-bottom on every interaction. Without session state,
+variables reset each time. Use `st.session_state` to persist values across reruns.
 
 ## Basic usage
 
@@ -31,7 +32,8 @@ st.session_state["count"] = 5  # Bracket notation also works
 del st.session_state.count
 ```
 
-**Accessing uninitialized keys raises `KeyError`.** Use `st.session_state.get("key", default)` for safe access.
+**Accessing uninitialized keys raises `KeyError`.** Use
+`st.session_state.get("key", default)` for safe access.
 
 ## Widget-state association
 
@@ -44,7 +46,8 @@ name = st.text_input("Name", key="user_name")
 
 ## Callbacks
 
-Callbacks execute **before** the script reruns, allowing immediate state changes. Use `on_change` or `on_click` with optional `args` and `kwargs`:
+Callbacks execute **before** the script reruns, allowing immediate state changes. Use
+`on_change` or `on_click` with optional `args` and `kwargs`:
 
 ```python
 def increment(amount):
@@ -53,7 +56,8 @@ def increment(amount):
 st.button("Add 5", on_click=increment, args=(5,))
 ```
 
-Access a widget's value in its own callback via `st.session_state.key`, not the return variable.
+Access a widget's value in its own callback via `st.session_state.key`, not the return
+variable.
 
 ## Initialization patterns
 

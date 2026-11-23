@@ -4,7 +4,8 @@
 >
 > **Prerequisite:** baseline-scenarios.md must be completed first (RED phase)
 
-This document defines the GREEN phase of TDD testing: running the same scenarios WITH the skill loaded and verifying behavior changes.
+This document defines the GREEN phase of TDD testing: running the same scenarios WITH
+the skill loaded and verifying behavior changes.
 
 ---
 
@@ -35,32 +36,38 @@ For each scenario, document:
 ### Scenario N: [Name]
 
 **Baseline Behavior (WITHOUT skill):**
+
 - [What agent did/said]
 - [What was missed]
 - [Rationalizations used]
 
 **Compliance Behavior (WITH skill):**
+
 - [What agent did/said]
 - [What improved]
 - [Skill content referenced]
 
 **Behavior Change:**
+
 - ✅ **Improved:** [Specific improvements]
 - ⚠️ **Partial:** [Partially addressed]
 - ❌ **Unchanged:** [Still missing]
 
 **Success Criteria Status:**
+
 - [ ] Criterion 1
 - [ ] Criterion 2
 - [ ] etc.
 
 **Evidence of Skill Usage:**
+
 - [ ] Agent referenced decision matrix
 - [ ] Agent quoted/paraphrased skill content
 - [ ] Agent followed patterns from skill
 - [ ] Agent used skill-specific terminology
 
 **New Rationalizations Discovered:**
+
 - [Any new excuses/workarounds to add to rationalization table]
 
 ---
@@ -70,6 +77,7 @@ For each scenario, document:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW proactively mentions testing (not skips it)
 - Agent uses testing decision matrix from SKILL.md:90-103
 - Agent asks about Terraform version for framework selection
@@ -85,6 +93,7 @@ For each scenario, document:
 ### Evidence Checklist
 
 Look for agent:
+
 - Referencing "testing strategy framework"
 - Mentioning "native tests (1.6+)" or "Terratest"
 - Asking "What Terraform/OpenTofu version are you using?"
@@ -93,6 +102,7 @@ Look for agent:
 ### Common Compliance Failures
 
 If agent STILL skips testing:
+
 - [ ] Check skill description triggers (may need enhancement)
 - [ ] Check "When to Use This Skill" section clarity
 - [ ] Add explicit counter-rationalization to SKILL.md
@@ -104,6 +114,7 @@ If agent STILL skips testing:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW asks clarifying questions (version, Go expertise, cost)
 - Agent uses decision matrix instead of generic "use Terratest"
 - Agent explains rationale for recommendation
@@ -120,6 +131,7 @@ If agent STILL skips testing:
 ### Evidence Checklist
 
 Look for agent:
+
 - Directly referencing decision matrix table from SKILL.md
 - Asking about "Go expertise on team"
 - Mentioning "cost-sensitive workflow"
@@ -132,6 +144,7 @@ Look for agent:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW flags obvious security issues immediately
 - Agent recommends trivy/checkov
 - Agent references Security & Compliance section
@@ -148,6 +161,7 @@ Look for agent:
 ### Evidence Checklist
 
 Look for agent:
+
 - Mentioning "trivy" or "checkov"
 - Referencing security compliance guide
 - Showing ✅ DO vs ❌ DON'T patterns
@@ -160,6 +174,7 @@ Look for agent:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW uses descriptive names (not generic)
 - Agent follows naming conventions from SKILL.md:63-83
 - Agent avoids anti-patterns without prompting
@@ -174,6 +189,7 @@ Look for agent:
 ### Evidence Checklist
 
 Look for:
+
 - `web_server` instead of `this`
 - `application_logs` instead of `bucket`
 - Context in variable names (`vpc_cidr_block` not `cidr`)
@@ -185,6 +201,7 @@ Look for:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW includes cost optimization strategy
 - Agent uses mocking for PRs, integration tests for main
 - Agent includes cleanup and tagging
@@ -201,6 +218,7 @@ Look for:
 ### Evidence Checklist
 
 Look for agent:
+
 - Referencing cost optimization section from skill
 - Mentioning "mock providers (1.7+)"
 - Including auto-cleanup steps
@@ -213,6 +231,7 @@ Look for agent:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW includes encryption + security features
 - Agent mentions state locking, access controls
 - Agent provides concrete secure configuration
@@ -233,6 +252,7 @@ Look for agent:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW provides complete structure with examples/ and tests/
 - Agent explains purpose of each component
 - Agent notes examples/ dual purpose (docs + fixtures)
@@ -252,6 +272,7 @@ Look for agent:
 ### Expected Improvements
 
 **Baseline → Compliance Changes:**
+
 - Agent NOW includes descriptions, types, validation
 - Agent marks sensitive variables correctly
 - Agent adds validation blocks where appropriate
@@ -274,11 +295,13 @@ Look for agent:
 Skill is considered "passing GREEN phase" when:
 
 **Quantitative:**
+
 - [ ] 8/8 scenarios show measurable behavior improvement
 - [ ] 80%+ of success criteria met across all scenarios
 - [ ] Agent references skill content in 7/8+ scenarios
 
 **Qualitative:**
+
 - [ ] Agent proactively applies patterns (not reactive)
 - [ ] Agent uses decision frameworks unprompted
 - [ ] Agent cites specific sections/examples from skill
@@ -289,12 +312,14 @@ Skill is considered "passing GREEN phase" when:
 If scenarios fail (no behavior change):
 
 **Diagnosis:**
+
 1. Check skill description - does it match trigger conditions?
 2. Check "When to Use" section - clear enough?
 3. Check content organization - is pattern findable?
 4. Check keyword coverage - would search find it?
 
 **Remediation:**
+
 1. Enhance CSO (description, keywords)
 2. Reorganize content for scannability
 3. Add explicit counter-rationalizations
@@ -309,6 +334,7 @@ If scenarios fail (no behavior change):
 Create file: `compliance-results/scenario-N-[name].md`
 
 **Required sections:**
+
 1. Full agent response (verbatim or screenshot)
 2. Comparison to baseline (what changed)
 3. Success criteria checklist
@@ -321,6 +347,7 @@ Create file: `compliance-results/scenario-N-[name].md`
 Create file: `compliance-results/SUMMARY.md`
 
 **Include:**
+
 - Overview: N/8 scenarios passed
 - Success criteria: N% met overall
 - Key improvements observed
@@ -329,7 +356,7 @@ Create file: `compliance-results/SUMMARY.md`
 
 ---
 
-## GREEN Phase Complete When:
+## GREEN Phase Complete When
 
 - [ ] All 8 scenarios run WITH skill loaded
 - [ ] Results documented in `compliance-results/` directory
@@ -343,9 +370,11 @@ Create file: `compliance-results/SUMMARY.md`
 ## Next Steps
 
 After GREEN phase:
+
 1. → `rationalization-table.md` - Update with findings
 2. → REFACTOR phase - Add counters to SKILL.md for new rationalizations
 3. → Re-test scenarios that failed or partially passed
 4. → Iterate until 8/8 scenarios pass
 
-**This is iterative:** First pass may only get 5/8 scenarios passing. That's expected. The goal is continuous improvement through the RED-GREEN-REFACTOR cycle.
+**This is iterative:** First pass may only get 5/8 scenarios passing. That's expected.
+The goal is continuous improvement through the RED-GREEN-REFACTOR cycle.

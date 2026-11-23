@@ -4,17 +4,22 @@ triggers:
   - "using Jinja2 template variables in component YAML (env, dg, context, or custom scopes)"
 ---
 
-# Template Variables
+## Template Variables
 
-## Overview
+### Overview
 
-Dagster component YAML files support Jinja2 expressions with `{{ expression }}` syntax. Any Resolvable field can accept template strings because the generated schema unions every non-`str` field type with `str`.
+Dagster component YAML files support Jinja2 expressions with `{{ expression }}` syntax.
+Any Resolvable field can accept template strings because the generated schema unions
+every non-`str` field type with `str`.
 
-Templates are often resolved at component load time, but some contexts resolve independently. For example, post-processing templates (`post_processing.assets[].attributes`) are resolved once per asset, with the current asset available as a template variable.
+Templates are often resolved at component load time, but some contexts resolve
+independently. For example, post-processing templates
+(`post_processing.assets[].attributes`) are resolved once per asset, with the current
+asset available as a template variable.
 
-## Built-in Scopes
+### Built-in Scopes
 
-### env — Environment Variables
+#### env — Environment Variables
 
 Access environment variables directly or with a fallback default:
 
@@ -24,9 +29,10 @@ attributes:
   api_key: "{{ env('API_KEY', 'dev-key-fallback') }}"
 ```
 
-`{{ env.MY_VAR }}` returns the value or `None` if unset. `{{ env('MY_VAR', 'default') }}` raises an error if unset and no default is provided.
+`{{ env.MY_VAR }}` returns the value or `None` if unset.
+`{{ env('MY_VAR', 'default') }}` raises an error if unset and no default is provided.
 
-### dg — Dagster Objects
+#### dg — Dagster Objects
 
 Instantiate Dagster objects directly in YAML:
 
@@ -36,9 +42,12 @@ attributes:
   partitions_def: "{{ dg.DailyPartitionsDefinition(start_date='2024-01-01') }}"
 ```
 
-Available objects: `AutomationCondition`, `FreshnessPolicy`, `DailyPartitionsDefinition`, `WeeklyPartitionsDefinition`, `MonthlyPartitionsDefinition`, `HourlyPartitionsDefinition`, `StaticPartitionsDefinition`, `TimeWindowPartitionsDefinition`.
+Available objects: `AutomationCondition`, `FreshnessPolicy`,
+`DailyPartitionsDefinition`, `WeeklyPartitionsDefinition`,
+`MonthlyPartitionsDefinition`, `HourlyPartitionsDefinition`,
+`StaticPartitionsDefinition`, `TimeWindowPartitionsDefinition`.
 
-### datetime — Python datetime
+#### datetime — Python datetime
 
 ```yaml
 attributes:
@@ -48,7 +57,7 @@ attributes:
 
 Available: `datetime` and `timedelta`.
 
-### context — Component Load Context
+#### context — Component Load Context
 
 Access project information and load other components:
 
@@ -59,9 +68,10 @@ attributes:
   sub_defs: "{{ context.build_defs('submodule') }}"
 ```
 
-### asset — Current Asset (Post-Processing Only)
+#### asset — Current Asset (Post-Processing Only)
 
-Available inside `post_processing.assets[].attributes` blocks. The template is resolved independently per matching asset, with `asset` bound to the current `AssetSpec`:
+Available inside `post_processing.assets[].attributes` blocks. The template is resolved
+independently per matching asset, with `asset` bound to the current `AssetSpec`:
 
 ```yaml
 post_processing:
@@ -74,11 +84,12 @@ post_processing:
           key_path: "{{ asset.key }}"
 ```
 
-Available attributes include `key`, `tags`, `group_name`, `metadata`, `kinds`, and all other `AssetSpec` fields.
+Available attributes include `key`, `tags`, `group_name`, `metadata`, `kinds`, and all
+other `AssetSpec` fields.
 
-## Custom Template Variables
+### Custom Template Variables
 
-### Module-Level Template Vars
+#### Module-Level Template Vars
 
 Create a `template_vars.py` file and reference it in `defs.yaml`:
 
@@ -109,9 +120,10 @@ Template var functions have one of two signatures:
 - `() -> Any` — zero parameters, returns a static value
 - `(context: ComponentLoadContext) -> Any` — receives the component load context
 
-### Component Static Methods
+#### Component Static Methods
 
-Define `@template_var` as static methods on a Component class. These are auto-discovered without needing `template_vars_module`:
+Define `@template_var` as static methods on a Component class. These are auto-discovered
+without needing `template_vars_module`:
 
 ```python
 class MyComponent(dg.Component, dg.Resolvable, dg.Model):
@@ -132,7 +144,7 @@ attributes:
   asset_key: "{{ default_group }}/my_asset"
 ```
 
-### User-Defined Functions (UDFs)
+#### User-Defined Functions (UDFs)
 
 Template vars can return callables, which are then invoked with arguments in templates:
 
@@ -154,6 +166,6 @@ attributes:
   asset_key: "{{ prefixed_key('orders') }}"
 ```
 
-## References
+### References
 
 - [Resolved Framework](./resolved-framework.md)

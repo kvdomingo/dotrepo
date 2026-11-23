@@ -1,8 +1,12 @@
 # Agent
 
-A composable component for displaying AI agent configuration with model, instructions, tools, and output schema.
+A composable component for displaying AI agent configuration with model, instructions,
+tools, and output schema.
 
-The `Agent` component displays an interface for showing AI agent configuration details. It's designed to represent a configured agent from the AI SDK, showing the agent's model, system instructions, available tools (with expandable input schemas), and output schema.
+The `Agent` component displays an interface for showing AI agent configuration details.
+It's designed to represent a configured agent from the AI SDK, showing the agent's
+model, system instructions, available tools (with expandable input schemas), and output
+schema.
 
 See `scripts/agent.tsx` for this example.
 
@@ -14,7 +18,8 @@ npx ai-elements@latest add agent
 
 ## Usage with AI SDK
 
-Display an agent's configuration alongside your chat interface. Tools are displayed in an accordion where clicking the description expands to show the input schema.
+Display an agent's configuration alongside your chat interface. Tools are displayed in
+an accordion where clicking the description expands to show the input schema.
 
 ```tsx title="app/page.tsx"
 "use client";

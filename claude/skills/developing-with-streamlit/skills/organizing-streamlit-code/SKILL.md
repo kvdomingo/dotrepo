@@ -6,18 +6,22 @@ license: Apache-2.0
 
 # Streamlit code organization
 
-For most simple apps, keep everything in one file—it's cleaner and more straightforward. The app file should read like a normal Python script for data processing, with a few Streamlit commands sprinkled in.
+For most simple apps, keep everything in one file—it's cleaner and more straightforward.
+The app file should read like a normal Python script for data processing, with a few
+Streamlit commands sprinkled in.
 
 Name the main file `streamlit_app.py` (Streamlit's default).
 
 ## When to split
 
 **Keep in one file (most apps):**
+
 - Apps under ~1000 lines
 - One-off scripts and prototypes
 - Apps where logic is straightforward
 
 **Consider splitting when:**
+
 - Data processing is complex (50+ lines of non-UI code)
 - Multiple pages share logic
 - You want to test business logic separately
@@ -26,7 +30,7 @@ If splitting makes sense, here's how to organize it.
 
 ## Directory structure
 
-```
+```text
 my-app/
 ├── streamlit_app.py      # Main entry point
 ├── app_pages/            # Page UI modules
@@ -39,7 +43,8 @@ my-app/
 
 ## Separating UI from logic
 
-When you do split, keep Streamlit files focused on UI and move complex logic to utility modules:
+When you do split, keep Streamlit files focused on UI and move complex logic to utility
+modules:
 
 ```python
 # streamlit_app.py - UI-focused
@@ -58,9 +63,10 @@ st.metric("Revenue", f"${metrics['revenue']:,.0f}")
 st.dataframe(data)
 ```
 
-## Avoid if __name__ == "__main__"
+## Avoid if **name** == "**main**"
 
-Streamlit apps run the entire file on each interaction. Don't use the main guard in Streamlit files.
+Streamlit apps run the entire file on each interaction. Don't use the main guard in
+Streamlit files.
 
 ```python
 # BAD - don't do this in streamlit_app.py or pages

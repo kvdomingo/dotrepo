@@ -10,7 +10,8 @@ Compose metrics, charts, and data into clean dashboard layouts.
 
 ## Cards with borders
 
-Use `border=True` to create visual cards. Supported on `st.container`, `st.metric`, `st.columns`, and `st.form`:
+Use `border=True` to create visual cards. Supported on `st.container`, `st.metric`,
+`st.columns`, and `st.form`:
 
 ```python
 # Container card
@@ -54,7 +55,8 @@ with st.container(horizontal=True):
     st.metric("Orders", "1.4k", "+5%", border=True)
 ```
 
-Horizontal containers wrap on smaller screens. Prefer them over `st.columns` for metric rows.
+Horizontal containers wrap on smaller screens. Prefer them over `st.columns` for metric
+rows.
 
 ## Metrics with sparklines
 
@@ -112,7 +114,7 @@ Put filters in the sidebar to maximize dashboard space:
 with st.sidebar:
     date_range = st.date_input("Date range", value=(start, end))
     region = st.multiselect("Region", regions, default=regions)
-    
+
 # Main area is all dashboard content
 ```
 
@@ -132,7 +134,8 @@ Ready-to-use dashboard templates are available in `templates/apps/`:
 | `dashboard-stock-peers` | Stock peer comparison |
 | `dashboard-stock-peers-snowflake` | Same as above, with Snowflake connection |
 
-Each template uses synthetic data that can be replaced with real queries. See `templates/apps/README.md` for setup instructions.
+Each template uses synthetic data that can be replaced with real queries. See
+`templates/apps/README.md` for setup instructions.
 
 ## Related skills
 

@@ -12,13 +12,15 @@
 
 ## Streaming Mode vs Static Mode
 
-**Streaming (default):** Splits markdown into blocks, applies remend, supports carets, memoizes blocks individually.
+**Streaming (default):** Splits markdown into blocks, applies remend, supports carets,
+memoizes blocks individually.
 
 ```tsx
 <Streamdown isAnimating={isLoading}>{streamingContent}</Streamdown>
 ```
 
-**Static:** Renders as single unit, skips streaming optimizations. Use for blog posts, docs, pre-generated content.
+**Static:** Renders as single unit, skips streaming optimizations. Use for blog posts,
+docs, pre-generated content.
 
 ```tsx
 <Streamdown mode="static">{completeContent}</Streamdown>
@@ -38,9 +40,11 @@ Visual cursor at end of streaming content.
 <Streamdown caret="circle" isAnimating={isLoading}>{content}</Streamdown>
 ```
 
-**Requirements:** Both `caret` prop AND `isAnimating={true}` must be set. Caret disappears when streaming stops.
+**Requirements:** Both `caret` prop AND `isAnimating={true}` must be set. Caret
+disappears when streaming stops.
 
 **Per-message in chat:**
+
 ```tsx
 {messages.map((msg, i) => (
   <Streamdown
@@ -58,6 +62,7 @@ Visual cursor at end of streaming content.
 Preprocessor that completes incomplete Markdown during streaming.
 
 **What it handles:**
+
 | Pattern | Completion |
 |---------|-----------|
 | `**text` | `**text**` |
@@ -69,11 +74,13 @@ Preprocessor that completes incomplete Markdown during streaming.
 | `$$\n math` | `$$\n math $$` |
 
 **Disable:**
+
 ```tsx
 <Streamdown parseIncompleteMarkdown={false}>{content}</Streamdown>
 ```
 
 **Configure:**
+
 ```tsx
 <Streamdown
   remend={{
@@ -90,6 +97,7 @@ Preprocessor that completes incomplete Markdown during streaming.
 ```
 
 **Custom handlers:**
+
 ```tsx
 <Streamdown
   remend={{
@@ -110,11 +118,13 @@ Preprocessor that completes incomplete Markdown during streaming.
 Auto-added buttons for images, tables, code, and Mermaid.
 
 **Disable all:**
+
 ```tsx
 <Streamdown controls={false}>{markdown}</Streamdown>
 ```
 
 **Selective:**
+
 ```tsx
 <Streamdown
   controls={{
@@ -131,6 +141,7 @@ Auto-added buttons for images, tables, code, and Mermaid.
 ```
 
 **Button types by element:**
+
 - **Images:** Download (auto-detected format, alt text as filename)
 - **Tables:** Copy (CSV/TSV/HTML), Download (CSV/Markdown)
 - **Code blocks:** Copy (raw code), Download (with correct extension)
@@ -143,6 +154,7 @@ All buttons disabled during streaming when `isAnimating={true}`.
 Included by default via `remark-gfm`:
 
 **Tables:**
+
 ```markdown
 | Left | Center | Right |
 |:-----|:------:|------:|
@@ -150,6 +162,7 @@ Included by default via `remark-gfm`:
 ```
 
 **Task lists:**
+
 ```markdown
 - [x] Completed
 - [ ] Pending
@@ -163,29 +176,35 @@ Included by default via `remark-gfm`:
 
 ## Memoization & Performance
 
-- **Component-level:** `React.memo` on Streamdown, re-renders only on children/shikiTheme/isAnimating changes
+- **Component-level:** `React.memo` on Streamdown, re-renders only on
+  children/shikiTheme/isAnimating changes
 - **Block-level:** Content split into blocks, each memoized individually
-- **Syntax highlighting:** Cached tokens, lazy-loaded languages, shared highlighter instance
+- **Syntax highlighting:** Cached tokens, lazy-loaded languages, shared highlighter
+  instance
 - **Plugin arrays:** Created once at module level
 
 ## Troubleshooting
 
 ### Shiki external package warning (Next.js)
+
 ```bash
 npm install shiki
 ```
+
 ```js
 // next.config.js
 { transpilePackages: ['shiki'] }
 ```
 
 ### Vite SSR CSS loading error
+
 ```js
 // vite.config.js
 { ssr: { noExternal: ['streamdown'] } }
 ```
 
 ### vscode-jsonrpc bundling errors (Next.js)
+
 ```js
 // next.config.js
 {
@@ -198,4 +217,6 @@ npm install shiki
 ```
 
 ### Tailwind styles not applied
-Ensure Streamdown dist files are included in Tailwind content scanning. See the Tailwind setup in SKILL.md.
+
+Ensure Streamdown dist files are included in Tailwind content scanning. See the Tailwind
+setup in SKILL.md.

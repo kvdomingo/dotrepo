@@ -104,6 +104,7 @@ terragrunt list --format=dot --dependencies
 ## The .terragrunt-stack Directory
 
 The `.terragrunt-stack` directory is auto-generated when running stack commands:
+
 - `terragrunt stack generate` - Pre-generate the directory
 - `terragrunt stack clean` - Remove the generated directory
 - The directory contains the resolved unit configurations

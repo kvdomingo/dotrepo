@@ -1,6 +1,7 @@
 # Discovering Data with dbt show
 
-Use `dbt show` to interactively explore raw data, understand table structures, and document findings for downstream model development.
+Use `dbt show` to interactively explore raw data, understand table structures, and
+document findings for downstream model development.
 
 ## When to Use
 
@@ -28,6 +29,7 @@ Use `dbt show` to interactively explore raw data, understand table structures, a
 ## Red Flags - You're About to Skip Steps
 
 Stop if you catch yourself:
+
 - Running only `SELECT *` without grain analysis
 - Saying "the join worked" without checking orphan counts
 - Noting "some nulls" without quantifying null rates
@@ -41,9 +43,12 @@ Stop if you catch yourself:
 
 When facing many tables (20+), the answer is NOT abbreviated discovery. The answer is:
 
-1. **Scope ruthlessly first** - Which tables will you actually build models on? Only those need discovery now.
-2. **Full methodology on scoped tables** - Every table in scope gets all 6 steps. No exceptions.
-3. **Explicit deferral for out-of-scope** - Document which tables you're NOT discovering and why. "Not needed for current project" is valid. "Too many tables" is not.
+1. **Scope ruthlessly first** - Which tables will you actually build models on? Only
+   those need discovery now.
+2. **Full methodology on scoped tables** - Every table in scope gets all 6 steps. No
+   exceptions.
+3. **Explicit deferral for out-of-scope** - Document which tables you're NOT discovering
+   and why. "Not needed for current project" is valid. "Too many tables" is not.
 
 **Wrong approach:** "I'll do light discovery on all 47 tables"
 **Right approach:** "I'll do full discovery on the 8 tables needed for this project"
@@ -54,14 +59,16 @@ When facing many tables (20+), the answer is NOT abbreviated discovery. The answ
 
 #### Sources
 
-When discovering new raw data, list all tables from the new source. E.g. listing all `ecom` source tables:
+When discovering new raw data, list all tables from the new source. E.g. listing all
+`ecom` source tables:
 
 ```bash
 # quoting is critical when selecting sources
 dbt ls --select "source:ecom.*" --output json
 ```
 
-Review the existing YAML file at `original_file_path` to understand what's already documented.
+Review the existing YAML file at `original_file_path` to understand what's already
+documented.
 
 #### Models
 
@@ -72,7 +79,8 @@ When previewing existing models, use standard node selection syntax:
 dbt ls --select "my_first_model my_second_model" --output json
 ```
 
-Review existing YAML files (normally colocated with the model's `original_file_path`) to understand what's already documented.
+Review existing YAML files (normally colocated with the model's `original_file_path`) to
+understand what's already documented.
 
 ### Step 2: Sample Raw Data
 
@@ -86,7 +94,8 @@ dbt show --inline "SELECT * FROM {{ source('source_name', 'table_name') }}" --li
 
 - Column names and warehouse-native data types
 - Which columns appear to be identifiers vs attributes
-- Obvious nulls, low-cardinality values, and values which are not obvious from their column name
+- Obvious nulls, low-cardinality values, and values which are not obvious from their
+  column name
 
 ### Run standard EDA
 
@@ -101,7 +110,9 @@ Continue to use `dbt show` to run standard exploratory data analysis queries suc
 
 ## Documenting Findings
 
-Create a discovery report that other agents can consume. Place in a `data_discovery.md` file alongside the SQL/YAML files. Do not use Jinja in these discovery files to avoid them being mistaken for doc blocks.
+Create a discovery report that other agents can consume. Place in a `data_discovery.md`
+file alongside the SQL/YAML files. Do not use Jinja in these discovery files to avoid
+them being mistaken for doc blocks.
 
 ### Discovery Report Template
 
@@ -136,7 +147,9 @@ Create a discovery report that other agents can consume. Place in a `data_discov
 
 ## Previewing Data Efficiently
 
-When using `dbt show --inline` to preview data, push `LIMIT` clauses as early as possible in CTEs to minimize data scanning. Never add a `LIMIT` at the end of the query - `dbt show` always adds an additional limit and you will cause a syntax error.
+When using `dbt show --inline` to preview data, push `LIMIT` clauses as early as
+possible in CTEs to minimize data scanning. Never add a `LIMIT` at the end of the
+query - `dbt show` always adds an additional limit and you will cause a syntax error.
 
 ```sql
 -- ✅ GOOD: Limit pushed early, minimizes scanning
@@ -161,10 +174,14 @@ limit 100  -- Too late, and redundant with --limit flag
 
 ## Common Mistakes
 
-**Assuming column names reflect content**. Always verify with sample data; `customer_id` might contain account IDs
+**Assuming column names reflect content**. Always verify with sample data; `customer_id`
+might contain account IDs
 
-**Not documenting findings**. Discovery without documentation wastes effort; write it down immediately
+**Not documenting findings**. Discovery without documentation wastes effort; write it
+down immediately
 
-**Testing relationships on sampled data only**. Orphan records may exist outside your sample; run full counts
+**Testing relationships on sampled data only**. Orphan records may exist outside your
+sample; run full counts
 
-**Ignoring soft deletes**. Check for `deleted_at`, `is_active`, or `status` columns that filter valid records
+**Ignoring soft deletes**. Check for `deleted_at`, `is_active`, or `status` columns that
+filter valid records

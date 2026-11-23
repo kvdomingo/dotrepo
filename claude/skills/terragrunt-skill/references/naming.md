@@ -36,7 +36,7 @@
 
 State bucket names follow the pattern:
 
-```
+```text
 tfstate-{account_name}-{suffix}-{region}
 ```
 

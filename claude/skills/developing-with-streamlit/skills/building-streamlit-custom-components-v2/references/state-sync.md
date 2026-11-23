@@ -1,6 +1,7 @@
 ## State sync patterns (JS ↔ Python)
 
-This reference shows the canonical CCv2 “controlled component” loop and the most common pitfalls when syncing state between JavaScript and Python.
+This reference shows the canonical CCv2 “controlled component” loop and the most common
+pitfalls when syncing state between JavaScript and Python.
 
 ## Contents
 
@@ -15,8 +16,10 @@ This reference shows the canonical CCv2 “controlled component” loop and the 
 
 ### Mental model
 
-- **Frontend state emission (JS → Python)**: you explicitly call `setStateValue(key, value)` or `setTriggerValue(key, value)`.
-- **Frontend state hydration (Python → JS)**: your JS reads `component.data` and updates the DOM accordingly.
+- **Frontend state emission (JS → Python)**: you explicitly call
+  `setStateValue(key, value)` or `setTriggerValue(key, value)`.
+- **Frontend state hydration (Python → JS)**: your JS reads `component.data` and updates
+  the DOM accordingly.
 - There is no built-in “two-way binding”: you must implement both sides.
 
 ### Canonical pattern: controlled text input
@@ -25,7 +28,8 @@ This is modeled after Streamlit’s own CCv2 e2e example.
 
 #### JavaScript (hydrate from `data`, emit via `setStateValue`)
 
-Key guideline: only assign to the input when it’s different, or you’ll fight the user’s cursor.
+Key guideline: only assign to the input when it’s different, or you’ll fight the user’s
+cursor.
 
 ```js
 export default function (component) {
@@ -89,12 +93,14 @@ interactive_text_input(label="Enter something", initial_value="Initial Text", ke
 
 ### Defaults: when to use `default=...` (and why it fails)
 
-`default={...}` is optional. Use it when you want Streamlit to initialize missing state keys for a mounted instance.
+`default={...}` is optional. Use it when you want Streamlit to initialize missing state
+keys for a mounted instance.
 
 Rules:
 
 - Defaults apply only to **state** keys (not triggers).
-- Every key in `default` must have a corresponding `on_<key>_change` callback parameter when mounting, or Streamlit raises.
+- Every key in `default` must have a corresponding `on_<key>_change` callback parameter
+  when mounting, or Streamlit raises.
 
 Pattern:
 
@@ -111,8 +117,10 @@ result = _COMPONENT(
 
 You’ll see two patterns in the wild:
 
-- **Initial-only hydration**: JS reads `data.initialX` on first mount only. This is useful for *initialization* but it will **not** reflect later Python changes.
-- **True sync (controlled)**: JS reconciles its UI from `data.value` on every render, and only writes when changed.
+- **Initial-only hydration**: JS reads `data.initialX` on first mount only. This is
+  useful for *initialization* but it will **not** reflect later Python changes.
+- **True sync (controlled)**: JS reconciles its UI from `data.value` on every render,
+  and only writes when changed.
 
 Initial-only example (pitfall for sync):
 
@@ -133,17 +141,22 @@ if (input.value !== nextValue) input.value = nextValue
 
 ### Session State timing: don’t mutate after mount
 
-Streamlit may raise if you modify `st.session_state.<key>.<field>` **after** the component with that key has been instantiated in the same run.
+Streamlit may raise if you modify `st.session_state.<key>.<field>` **after** the
+component with that key has been instantiated in the same run.
 
 Safe patterns:
 
-- Update `st.session_state[key][...]` **before** mounting the component (e.g., in a button handler placed above the mount call).
+- Update `st.session_state[key][...]` **before** mounting the component (e.g., in a
+  button handler placed above the mount call).
 - Or update state in a different run (trigger a rerun after setting state).
 
 ### Troubleshooting checklist
 
-- **Cursor jumps / typing feels broken**: ensure your JS only assigns `input.value` when it differs from the `data` value.
-- **Python updates don’t reflect in UI**: confirm you pass the updated values via `data` every run; avoid initial-only hydration guards if you want true sync.
-- **`default` raises**: ensure every default key has a corresponding `on_<key>_change` callback parameter.
-- **Session state mutation error**: move `st.session_state[key][...] = ...` earlier in the script (before mount), or restructure into a two-run flow (set state then rerun).
-
+- **Cursor jumps / typing feels broken**: ensure your JS only assigns `input.value` when
+  it differs from the `data` value.
+- **Python updates don’t reflect in UI**: confirm you pass the updated values via `data`
+  every run; avoid initial-only hydration guards if you want true sync.
+- **`default` raises**: ensure every default key has a corresponding `on_<key>_change`
+  callback parameter.
+- **Session state mutation error**: move `st.session_state[key][...] = ...` earlier in
+  the script (before mount), or restructure into a two-run flow (set state then rerun).

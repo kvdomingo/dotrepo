@@ -66,6 +66,7 @@ Usage: `<ViewTransition enter="fade-in" exit="fade-out" />`
 ```
 
 Usage:
+
 ```jsx
 <Suspense fallback={<ViewTransition exit="slide-down"><Skeleton /></ViewTransition>}>
   <ViewTransition default="none" enter="slide-up"><Content /></ViewTransition>
@@ -156,11 +157,14 @@ Usage:
 
 Usage: `<ViewTransition name={`product-${id}`} share="morph" />`
 
-**Note:** Shared element transitions take raster snapshots. For text with significant size differences (e.g., `<h3>` → `<h1>`), the old snapshot gets scaled up, producing a visible ghost artifact. Use `text-morph` for text shared elements.
+**Note:** Shared element transitions take raster snapshots. For text with significant
+size differences (e.g., `<h3>` → `<h1>`), the old snapshot gets scaled up, producing a
+visible ghost artifact. Use `text-morph` for text shared elements.
 
 ## Text Morph
 
-Avoids raster scaling artifacts on text by hiding the old snapshot and showing the new text at full resolution:
+Avoids raster scaling artifacts on text by hiding the old snapshot and showing the new
+text at full resolution:
 
 ```css
 ::view-transition-group(.text-morph) {

@@ -4,6 +4,6 @@ triggers:
   - "distributed data processing with PySpark"
 ---
 
-# dagster-pyspark
+## dagster-pyspark
 
-Docs: https://docs.dagster.io/integrations/libraries/pyspark
+Docs: <https://docs.dagster.io/integrations/libraries/pyspark>

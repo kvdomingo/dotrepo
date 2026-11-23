@@ -2,12 +2,14 @@
 
 ## Overview
 
-Terragrunt operations can be significantly accelerated through proper caching and configuration. With provider caching enabled, you can achieve:
+Terragrunt operations can be significantly accelerated through proper caching and
+configuration. With provider caching enabled, you can achieve:
 
 - **Cold cache:** 42% faster (1.73x speedup)
 - **Warm cache:** 51% faster (2.07x speedup)
 
-For a 10-person team running 35 Terragrunt operations daily, this translates to approximately 35 hours saved monthly.
+For a 10-person team running 35 Terragrunt operations daily, this translates to
+approximately 35 hours saved monthly.
 
 ## Easy Wins
 
@@ -20,17 +22,22 @@ terragrunt run --all plan --provider-cache
 ```
 
 Benefits:
+
 - Significantly reduces time for batch operations
 - Most effective with `--all` and `--graph` flags
 - No additional infrastructure required
 
-**Note:** Can add overhead for single operations. Measure before/after for your use case.
+**Note:** Can add overhead for single operations. Measure before/after for your use
+case.
 
 ### Automatic Provider Caching (OpenTofu >= 1.10)
 
-With OpenTofu 1.10+ and latest Terragrunt, provider caching is automatic via `TF_PLUGIN_CACHE_DIR`. No manual configuration needed.
+With OpenTofu 1.10+ and latest Terragrunt, provider caching is automatic via
+`TF_PLUGIN_CACHE_DIR`. No manual configuration needed.
 
-> **Note:** OpenTofu's auto provider cache is generally more performant at lower scales compared to Terraform. For larger operations, the explicit `--provider-cache` flag with Terragrunt's cache server provides better results.
+> **Note:** OpenTofu's auto provider cache is generally more performant at lower scales
+> compared to Terraform. For larger operations, the explicit `--provider-cache` flag
+> with Terragrunt's cache server provides better results.
 
 **Limitation:** Filesystem lock contention can occur with many concurrent operations.
 
@@ -43,6 +50,7 @@ terragrunt run --all plan --experiment=dependency-fetch-output-from-state
 ```
 
 Constraints:
+
 - Only works with S3 backends
 - State file schema compatibility not guaranteed across versions
 - Experimental feature
@@ -74,7 +82,8 @@ provider_installation {
 }
 ```
 
-**Note:** The trailing slash in the mirror URL is required per the protocol specification.
+**Note:** The trailing slash in the mirror URL is required per the protocol
+specification.
 
 ### Combined Configuration
 
@@ -94,7 +103,8 @@ terragrunt run --all plan \
 
 ## Explicit vs Implicit Stacks
 
-Explicit stacks (using `terragrunt.stack.hcl`) provide better performance than implicit dependency resolution:
+Explicit stacks (using `terragrunt.stack.hcl`) provide better performance than implicit
+dependency resolution:
 
 | Scenario | Implicit | Explicit | Speedup |
 |----------|----------|----------|---------|
@@ -155,6 +165,7 @@ benchmarks/
 ```
 
 Run benchmarks with:
+
 ```bash
 make up              # Start services (registry, cache)
 make bench-cold      # Run cold cache benchmarks (3 iterations)
@@ -219,6 +230,7 @@ terragrunt run --all plan \
 ```
 
 Recommendations:
+
 - **Terragrunt parallelism:** Start with CPU cores, adjust based on memory
 - **OpenTofu parallelism:** Default is 10, increase for API-heavy providers
 
@@ -226,4 +238,6 @@ Recommendations:
 
 - [Terragrunt Performance Troubleshooting](https://terragrunt.gruntwork.io/docs/troubleshooting/performance/)
 - [Explicit Terragrunt Stacks: 2x Faster Runs Using Provider Cache](https://www.linkedin.com/pulse/explicit-terragrunt-stacks-2x-faster-runs-using-provider-juan-reyes-ucsre/)
-- [Terragrunt Cache Benchmark Test Suite](https://github.com/jfr992/terragrunt-cache-test) - Reproducible benchmarking environment with Docker, boring-registry, and automated reporting
+- [Terragrunt Cache Benchmark Test Suite](https://github.com/jfr992/terragrunt-cache-test) -
+  Reproducible benchmarking environment with Docker, boring-registry, and automated
+  reporting

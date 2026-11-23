@@ -10,9 +10,12 @@ metadata:
 
 ## Overview
 
-This guide covers developing Terraform Provider resources and data sources using the Terraform Plugin Framework. Resources represent infrastructure objects that Terraform manages through Create, Read, Update, and Delete (CRUD) operations.
+This guide covers developing Terraform Provider resources and data sources using the
+Terraform Plugin Framework. Resources represent infrastructure objects that Terraform
+manages through Create, Read, Update, and Delete (CRUD) operations.
 
 **References:**
+
 - [Terraform Plugin Framework](https://developer.hashicorp.com/terraform/plugin/framework)
 - [Resource Development](https://developer.hashicorp.com/terraform/plugin/framework/resources)
 - [Data Source Development](https://developer.hashicorp.com/terraform/plugin/framework/data-sources)
@@ -21,7 +24,7 @@ This guide covers developing Terraform Provider resources and data sources using
 
 Resources follow the standard service package structure:
 
-```
+```text
 internal/service/<service>/
 ├── <resource_name>.go           # Resource implementation
 ├── <resource_name>_test.go      # Acceptance tests
@@ -32,7 +35,8 @@ internal/service/<service>/
 ```
 
 Documentation structure:
-```
+
+```text
 website/docs/r/
 └── <service>_<resource_name>.html.markdown  # Resource documentation
 

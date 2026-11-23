@@ -3,9 +3,9 @@ title: Common Errors
 description: Reference for common AI SDK errors and how to resolve them.
 ---
 
-# Common Errors
+## Common Errors
 
-## `maxTokens` → `maxOutputTokens`
+### `maxTokens` → `maxOutputTokens`
 
 ```typescript
 // ❌ Incorrect
@@ -23,7 +23,7 @@ const result = await generateText({
 });
 ```
 
-## `maxSteps` → `stopWhen: stepCountIs(n)`
+### `maxSteps` → `stopWhen: stepCountIs(n)`
 
 ```typescript
 // ❌ Incorrect
@@ -45,7 +45,7 @@ const result = await generateText({
 });
 ```
 
-## `parameters` → `inputSchema` (in tool definition)
+### `parameters` → `inputSchema` (in tool definition)
 
 ```typescript
 // ❌ Incorrect
@@ -68,7 +68,7 @@ const weatherTool = tool({
 });
 ```
 
-## `generateObject` → `generateText` with `output`
+### `generateObject` → `generateText` with `output`
 
 `generateObject` is deprecated. Use `generateText` with the `output` option instead.
 
@@ -108,7 +108,7 @@ const result = await generateText({
 console.log(result.output); // typed object
 ```
 
-## Manual JSON parsing → `generateText` with `output`
+### Manual JSON parsing → `generateText` with `output`
 
 ```typescript
 // ❌ Incorrect
@@ -137,7 +137,7 @@ const result = await generateText({
 console.log(result.output); // { name: 'John', age: 25 }
 ```
 
-## Other `output` options
+### Other `output` options
 
 ```typescript
 // Output.array - for generating arrays of items
@@ -169,9 +169,11 @@ const result = await generateText({
 });
 ```
 
-## `toDataStreamResponse` → `toUIMessageStreamResponse`
+### `toDataStreamResponse` → `toUIMessageStreamResponse`
 
-When using `useChat` on the frontend, use `toUIMessageStreamResponse()` instead of `toDataStreamResponse()`. The UI message stream format is designed to work with the chat UI components and handles message state correctly.
+When using `useChat` on the frontend, use `toUIMessageStreamResponse()` instead of
+`toDataStreamResponse()`. The UI message stream format is designed to work with the chat
+UI components and handles message state correctly.
 
 ```typescript
 // ❌ Incorrect (when using useChat)
@@ -189,9 +191,10 @@ const result = streamText({
 return result.toUIMessageStreamResponse();
 ```
 
-## Removed managed input state in `useChat`
+### Removed managed input state in `useChat`
 
-The `useChat` hook no longer manages input state internally. You must now manage input state manually.
+The `useChat` hook no longer manages input state internally. You must now manage input
+state manually.
 
 ```tsx
 // ❌ Deprecated
@@ -240,9 +243,11 @@ export default function Page() {
 }
 ```
 
-## `tool-invocation` → `tool-{toolName}` (typed tool parts)
+### `tool-invocation` → `tool-{toolName}` (typed tool parts)
 
-When rendering messages with `useChat`, use the typed tool part names (`tool-{toolName}`) instead of the generic `tool-invocation` type. This provides better type safety and access to tool-specific input/output types.
+When rendering messages with `useChat`, use the typed tool part names
+(`tool-{toolName}`) instead of the generic `tool-invocation` type. This provides better
+type safety and access to tool-specific input/output types.
 
 > For end-to-end type-safety, see [Type-Safe Agents](type-safe-agents.md).
 
@@ -304,9 +309,10 @@ import { isToolUIPart } from 'ai';
 }
 ```
 
-## `useChat` state-dependent property access
+### `useChat` state-dependent property access
 
-Tool part properties are only available in certain states. TypeScript will error if you access them without checking state first.
+Tool part properties are only available in certain states. TypeScript will error if you
+access them without checking state first.
 
 ```tsx
 // ❌ Incorrect - input may be undefined during streaming
@@ -336,7 +342,7 @@ if (part.type === 'tool-getWeather' && part.state === 'output-available') {
 }
 ```
 
-## `part.toolInvocation.args` → `part.input`
+### `part.toolInvocation.args` → `part.input`
 
 ```tsx
 // ❌ Incorrect
@@ -354,7 +360,7 @@ if (
 }
 ```
 
-## `part.toolInvocation.result` → `part.output`
+### `part.toolInvocation.result` → `part.output`
 
 ```tsx
 // ❌ Incorrect
@@ -369,7 +375,7 @@ if (part.type === 'tool-getWeather' && part.state === 'output-available') {
 }
 ```
 
-## `part.toolInvocation.toolCallId` → `part.toolCallId`
+### `part.toolInvocation.toolCallId` → `part.toolCallId`
 
 ```tsx
 // ❌ Incorrect
@@ -384,7 +390,7 @@ if (part.type === 'tool-getWeather') {
 }
 ```
 
-## Tool invocation states renamed
+### Tool invocation states renamed
 
 ```tsx
 // ❌ Incorrect
@@ -408,7 +414,7 @@ switch (part.state) {
 }
 ```
 
-## `addToolResult` → `addToolOutput`
+### `addToolResult` → `addToolOutput`
 
 ```tsx
 // ❌ Incorrect
@@ -426,7 +432,7 @@ addToolOutput({
 });
 ```
 
-## `messages` → `uiMessages` in `createAgentUIStreamResponse`
+### `messages` → `uiMessages` in `createAgentUIStreamResponse`
 
 ```typescript
 // ❌ Incorrect

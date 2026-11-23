@@ -1,8 +1,11 @@
 # Code Block
 
-Provides syntax highlighting, line numbers, and copy to clipboard functionality for code blocks.
+Provides syntax highlighting, line numbers, and copy to clipboard functionality for code
+blocks.
 
-The `CodeBlock` component provides syntax highlighting, line numbers, and copy to clipboard functionality for code blocks. It's fully composable, allowing you to customize the header, actions, and content.
+The `CodeBlock` component provides syntax highlighting, line numbers, and copy to
+clipboard functionality for code blocks. It's fully composable, allowing you to
+customize the header, actions, and content.
 
 See `scripts/code-block.tsx` for this example.
 
@@ -157,11 +160,13 @@ Individual language option in the dropdown.
 
 ### `<CodeBlockContainer />`
 
-Low-level container component with performance optimizations (`contentVisibility`). Used internally by CodeBlock.
+Low-level container component with performance optimizations (`contentVisibility`). Used
+internally by CodeBlock.
 
 ### `<CodeBlockContent />`
 
-Low-level component that handles syntax highlighting. Used internally by CodeBlock, but can be used directly for custom layouts.
+Low-level component that handles syntax highlighting. Used internally by CodeBlock, but
+can be used directly for custom layouts.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

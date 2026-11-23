@@ -21,11 +21,17 @@ Graphs must be `compile()`d before execution.
 
 Follow these 5 steps when building a new graph:
 
-1. **Map out discrete steps** — sketch a flowchart of your workflow. Each step becomes a node.
-2. **Identify what each step does** — categorize nodes: LLM step, data step, action step, or user input step. For each, determine static context (prompt), dynamic context (from state), retry strategy, and desired outcome.
-3. **Design your state** — state is shared memory for all nodes. Store raw data, format prompts on-demand inside nodes.
-4. **Build your nodes** — implement each step as a function that takes state and returns partial updates.
-5. **Wire it together** — connect nodes with edges, add conditional routing, compile with a checkpointer if needed.
+1. **Map out discrete steps** — sketch a flowchart of your workflow. Each step becomes a
+   node.
+2. **Identify what each step does** — categorize nodes: LLM step, data step, action
+   step, or user input step. For each, determine static context (prompt), dynamic
+   context (from state), retry strategy, and desired outcome.
+3. **Design your state** — state is shared memory for all nodes. Store raw data, format
+   prompts on-demand inside nodes.
+4. **Build your nodes** — implement each step as a function that takes state and returns
+   partial updates.
+5. **Wire it together** — connect nodes with edges, add conditional routing, compile
+   with a checkpointer if needed.
 
 </design-methodology>
 
@@ -61,10 +67,11 @@ from typing_extensions import TypedDict, Annotated
 import operator
 
 class State(TypedDict):
-    name: str  # Default: overwrites on update
-    messages: Annotated[list, operator.add]  # Appends to list
-    total: Annotated[int, operator.add]  # Sums integers
-```
+    name: str # Default: overwrites on update
+    messages: Annotated[list, operator.add] # Appends to list
+    total: Annotated[int, operator.add] # Sums integers
+
+```text
 </python>
 <typescript>
 Use StateSchema with ReducedValue for accumulating arrays.
@@ -81,6 +88,7 @@ const State = new StateSchema({
   ),
 });
 ```
+
 </typescript>
 </ex-state-with-reducer>
 
@@ -93,17 +101,22 @@ class State(TypedDict):
     messages: list  # No reducer!
 
 # Node 1 returns: {"messages": ["A"]}
-# Node 2 returns: {"messages": ["B"]}
-# Final: {"messages": ["B"]}  # "A" is LOST!
 
-# CORRECT: Use Annotated with operator.add
+## Node 2 returns: {"messages": ["B"]}
+
+## Final: {"messages": ["B"]} # "A" is LOST
+
+## CORRECT: Use Annotated with operator.add
+
 from typing import Annotated
 import operator
 
 class State(TypedDict):
     messages: Annotated[list, operator.add]
-# Final: {"messages": ["A", "B"]}
-```
+
+## Final: {"messages": ["A", "B"]}
+
+```text
 </python>
 <typescript>
 Without ReducedValue, arrays are overwritten not appended.
@@ -124,6 +137,7 @@ const State = new StateSchema({
 });
 // Final: { items: ["A", "B"] }
 ```
+
 </typescript>
 </fix-forgot-reducer-for-list>
 
@@ -136,10 +150,12 @@ def my_node(state: State) -> State:
     state["field"] = "updated"
     return state  # Don't mutate and return!
 
-# CORRECT: Return dict with only the updates
+## CORRECT: Return dict with only the updates
+
 def my_node(state: State) -> dict:
     return {"field": "updated"}
-```
+
+```text
 </python>
 <typescript>
 Return partial updates only, not the full state object.
@@ -155,12 +171,13 @@ const myNode = async (state: typeof State.State) => {
   return { field: "updated" };
 };
 ```
+
 </typescript>
 </fix-state-must-return-dict>
 
 ---
 
-## Nodes
+### Nodes
 
 <node-function-signatures>
 
@@ -189,6 +206,7 @@ def node_with_runtime(state: State, runtime: Runtime[Context]):
     user_id = runtime.context.user_id
     return {"results": f"User: {user_id}"}
 ```
+
 </python>
 <typescript>
 
@@ -209,13 +227,14 @@ const nodeWithConfig: GraphNode<typeof State> = (state, config) => {
   return { results: `Thread: ${threadId}` };
 };
 ```
+
 </typescript>
 
 </node-function-signatures>
 
 ---
 
-## Edges
+### Edges
 
 <edge-type-selection>
 
@@ -256,8 +275,9 @@ graph = (
 )
 
 result = graph.invoke({"input": "hello"})
-print(result["output"])  # "PROCESSED: HELLO"
-```
+print(result["output"]) # "PROCESSED: HELLO"
+
+```text
 </python>
 <typescript>
 Chain nodes with addEdge and compile before invoking.
@@ -289,6 +309,7 @@ const graph = new StateGraph(State)
 const result = await graph.invoke({ input: "hello" });
 console.log(result.output);  // "PROCESSED: HELLO"
 ```
+
 </typescript>
 </ex-basic-graph>
 
@@ -323,7 +344,8 @@ graph = (
     .add_edge("general", END)
     .compile()
 )
-```
+
+```text
 </python>
 <typescript>
 addConditionalEdges routes based on function return value.
@@ -356,14 +378,16 @@ const graph = new StateGraph(State)
   .addEdge("general", END)
   .compile();
 ```
+
 </typescript>
 </ex-conditional-edges>
 
 ---
 
-## Command
+### Command
 
 Command combines state updates and routing in a single return value. Fields:
+
 - **`update`**: State updates to apply (like returning a dict from a node)
 - **`goto`**: Node name(s) to navigate to next
 - **`resume`**: Value to resume after `interrupt()` — see human-in-the-loop skill
@@ -396,7 +420,8 @@ graph = (
     .add_edge("node_c", END)
     .compile()
 )
-```
+
+```text
 </python>
 <typescript>
 Return Command with update and goto to combine state change with routing.
@@ -426,28 +451,35 @@ const graph = new StateGraph(State)
   .addEdge("node_c", END)
   .compile();
 ```
+
 </typescript>
 </ex-command-state-and-routing>
 
 <command-return-type-annotations>
 
-**Python**: Use `Command[Literal["node_a", "node_b"]]` as the return type annotation to declare valid goto destinations.
+**Python**: Use `Command[Literal["node_a", "node_b"]]` as the return type annotation to
+declare valid goto destinations.
 
-**TypeScript**: Pass `{ ends: ["node_a", "node_b"] }` as the third argument to `addNode` to declare valid goto destinations.
+**TypeScript**: Pass `{ ends: ["node_a", "node_b"] }` as the third argument to `addNode`
+to declare valid goto destinations.
 
 </command-return-type-annotations>
 
 <warning-command-static-edges>
 
-**Warning**: `Command` only adds **dynamic** edges — static edges defined with `add_edge` / `addEdge` still execute. If `node_a` returns `Command(goto="node_c")` and you also have `graph.add_edge("node_a", "node_b")`, **both** `node_b` and `node_c` will run.
+**Warning**: `Command` only adds **dynamic** edges — static edges defined with
+`add_edge` / `addEdge` still execute. If `node_a` returns `Command(goto="node_c")` and
+you also have `graph.add_edge("node_a", "node_b")`, **both** `node_b` and `node_c` will
+run.
 
 </warning-command-static-edges>
 
 ---
 
-## Send API
+### Send API
 
-Fan-out with `Send`: return `[Send("worker", {...})]` from a conditional edge to spawn parallel workers. Requires a reducer on the results field.
+Fan-out with `Send`: return `[Send("worker", {...})]` from a conditional edge to spawn
+parallel workers. Requires a reducer on the results field.
 
 <ex-orchestrator-worker>
 <python>
@@ -483,7 +515,8 @@ graph = (
 )
 
 result = graph.invoke({"tasks": ["Task A", "Task B", "Task C"]})
-```
+
+```text
 </python>
 <typescript>
 Fan out tasks to parallel workers using the Send API and aggregate results.
@@ -520,6 +553,7 @@ const graph = new StateGraph(State)
   .addEdge("synthesize", END)
   .compile();
 ```
+
 </typescript>
 </ex-orchestrator-worker>
 
@@ -531,10 +565,12 @@ Use a reducer to accumulate parallel worker results (otherwise last worker overw
 class State(TypedDict):
     results: list
 
-# CORRECT
+## CORRECT
+
 class State(TypedDict):
-    results: Annotated[list, operator.add]  # Accumulates
-```
+    results: Annotated[list, operator.add] # Accumulates
+
+```text
 </python>
 <typescript>
 Use ReducedValue to accumulate parallel worker results.
@@ -547,16 +583,18 @@ const State = new StateSchema({
   results: new ReducedValue(z.array(z.string()).default(() => []), { reducer: (curr, upd) => curr.concat(upd) }),
 });
 ```
+
 </typescript>
 </fix-send-accumulator>
 
 ---
 
-## Running Graphs: Invoke and Stream
+### Running Graphs: Invoke and Stream
 
 <invoke-basics>
 
-Call `graph.invoke(input, config)` to run a graph to completion and return the final state.
+Call `graph.invoke(input, config)` to run a graph to completion and return the final
+state.
 
 <python>
 ```python
@@ -630,7 +668,8 @@ def my_node(state):
 
 for chunk in graph.stream({"data": "test"}, stream_mode="custom"):
     print(chunk)
-```
+
+```text
 </python>
 <typescript>
 Emit custom progress updates from within nodes using the stream writer.
@@ -649,12 +688,13 @@ for await (const chunk of graph.stream({ data: "test" }, { streamMode: "custom" 
   console.log(chunk);
 }
 ```
+
 </typescript>
 </ex-stream-custom-data>
 
 ---
 
-## Error Handling
+### Error Handling
 
 Match the error type to the right handler:
 
@@ -680,7 +720,8 @@ workflow.add_node(
     search_documentation,
     retry_policy=RetryPolicy(max_attempts=3, initial_interval=1.0)
 )
-```
+
+```text
 </python>
 <typescript>
 Use retryPolicy for transient errors.
@@ -693,6 +734,7 @@ workflow.addNode(
   },
 );
 ```
+
 </typescript>
 </ex-retry-policy>
 
@@ -705,7 +747,8 @@ from langgraph.prebuilt import ToolNode
 tool_node = ToolNode(tools, handle_tool_errors=True)
 
 workflow.add_node("tools", tool_node)
-```
+
+```text
 </python>
 <typescript>
 Use ToolNode from @langchain/langgraph/prebuilt to handle tool execution and errors. When handleToolErrors is true, errors are returned as ToolMessages so the LLM can recover.
@@ -716,12 +759,13 @@ const toolNode = new ToolNode(tools, { handleToolErrors: true });
 
 workflow.addNode("tools", toolNode);
 ```
+
 </typescript>
 </ex-tool-node-error-handling>
 
 ---
 
-## Common Fixes
+### Common Fixes
 
 <fix-compile-before-execution>
 <python>
@@ -730,10 +774,12 @@ Must compile() to get executable graph.
 # WRONG
 builder.invoke({"input": "test"})  # AttributeError!
 
-# CORRECT
+## CORRECT
+
 graph = builder.compile()
 graph.invoke({"input": "test"})
-```
+
+```text
 </python>
 <typescript>
 Must compile() to get executable graph.
@@ -745,6 +791,7 @@ await builder.invoke({ input: "test" });
 const graph = builder.compile();
 await graph.invoke({ input: "test" });
 ```
+
 </typescript>
 </fix-compile-before-execution>
 
@@ -756,11 +803,13 @@ Provide conditional path to END to avoid infinite loops.
 builder.add_edge("node_a", "node_b")
 builder.add_edge("node_b", "node_a")
 
-# CORRECT
+## CORRECT
+
 def should_continue(state):
     return END if state["count"] > 10 else "node_b"
 builder.add_conditional_edges("node_a", should_continue)
-```
+
+```text
 </python>
 <typescript>
 Use conditional edges with END return to break loops.
@@ -771,6 +820,7 @@ builder.addEdge("node_a", "node_b").addEdge("node_b", "node_a");
 // CORRECT
 builder.addConditionalEdges("node_a", (state) => state.count > 10 ? END : "node_b");
 ```
+
 </typescript>
 </fix-infinite-loop-needs-exit>
 
@@ -781,17 +831,21 @@ Other common mistakes:
 builder.add_node("my_node", func)  # Add node BEFORE referencing in edges
 builder.add_conditional_edges("node_a", router, ["my_node"])
 
-# Command return type needs Literal for routing destinations (Python)
+## Command return type needs Literal for routing destinations (Python)
+
 def node_a(state) -> Command[Literal["node_b", "node_c"]]:
     return Command(goto="node_b")
 
-# START is entry-only - cannot route back to it
-builder.add_edge("node_a", START)  # WRONG!
-builder.add_edge("node_a", "entry")  # Use a named entry node instead
+## START is entry-only - cannot route back to it
 
-# Reducer expects matching types
-return {"items": ["item"]}  # List for list reducer, not a string
-```
+builder.add_edge("node_a", START) # WRONG!
+builder.add_edge("node_a", "entry") # Use a named entry node instead
+
+## Reducer expects matching types
+
+return {"items": ["item"]} # List for list reducer, not a string
+
+```text
 ```typescript
 // Always await graph.invoke() - it returns a Promise
 const result = await graph.invoke({ input: "test" });
@@ -799,6 +853,7 @@ const result = await graph.invoke({ input: "test" });
 // TS Command nodes need { ends } to declare routing destinations
 builder.addNode("router", routerFn, { ends: ["node_b", "node_c"] });
 ```
+
 </fix-common-mistakes>
 
 <boundaries>

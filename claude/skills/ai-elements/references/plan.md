@@ -1,8 +1,12 @@
 # Plan
 
-A collapsible plan component for displaying AI-generated execution plans with streaming support and shimmer animations.
+A collapsible plan component for displaying AI-generated execution plans with streaming
+support and shimmer animations.
 
-The `Plan` component provides a flexible system for displaying AI-generated execution plans with collapsible content. Perfect for showing multi-step workflows, task breakdowns, and implementation strategies with support for streaming content and loading states.
+The `Plan` component provides a flexible system for displaying AI-generated execution
+plans with collapsible content. Perfect for showing multi-step workflows, task
+breakdowns, and implementation strategies with support for streaming content and loading
+states.
 
 See `scripts/plan.tsx` for this example.
 
@@ -45,14 +49,14 @@ npx ai-elements@latest add plan
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `string` | - | The title text. Displays with shimmer animation when isStreaming is true. |
-| `...props` | `Omit<React.ComponentProps<typeof CardTitle>, ` | - | Any other props (except children) are spread to the CardTitle component. |
+| `...props` | `Omit<React.ComponentProps<typeof CardTitle>,` | - | Any other props (except children) are spread to the CardTitle component. |
 
 ### `<PlanDescription />`
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `string` | - | The description text. Displays with shimmer animation when isStreaming is true. |
-| `...props` | `Omit<React.ComponentProps<typeof CardDescription>, ` | - | Any other props (except children) are spread to the CardDescription component. |
+| `...props` | `Omit<React.ComponentProps<typeof CardDescription>,` | - | Any other props (except children) are spread to the CardDescription component. |
 
 ### `<PlanTrigger />`
 

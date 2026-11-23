@@ -5,13 +5,15 @@ description: Build multi-platform chat bots with Chat SDK (`chat` npm package). 
 
 # Chat SDK
 
-Unified TypeScript SDK for building chat bots across Slack, Teams, Google Chat, Discord, Telegram, GitHub, Linear, and WhatsApp. Write bot logic once, deploy everywhere.
+Unified TypeScript SDK for building chat bots across Slack, Teams, Google Chat, Discord,
+Telegram, GitHub, Linear, and WhatsApp. Write bot logic once, deploy everywhere.
 
 ## Start with published sources
 
-When Chat SDK is installed in a user project, inspect the published files that ship in `node_modules`:
+When Chat SDK is installed in a user project, inspect the published files that ship in
+`node_modules`:
 
-```
+```text
 node_modules/chat/docs/                    # bundled docs
 node_modules/chat/dist/index.d.ts          # core API types
 node_modules/chat/dist/jsx-runtime.d.ts    # JSX runtime types
@@ -19,9 +21,11 @@ node_modules/chat/docs/contributing/       # adapter-authoring docs
 node_modules/chat/docs/guides/             # framework/platform guides
 ```
 
-If one of the paths below does not exist, that package is not installed in the project yet.
+If one of the paths below does not exist, that package is not installed in the project
+yet.
 
 Read these before writing code:
+
 - `node_modules/chat/docs/getting-started.mdx` — install and setup
 - `node_modules/chat/docs/usage.mdx` — `Chat` config and lifecycle
 - `node_modules/chat/docs/handling-events.mdx` — event routing and handlers
@@ -41,7 +45,8 @@ Read these before writing code:
 - `node_modules/chat/docs/api/message.mdx` — exact `Message` API
 - `node_modules/chat/docs/api/modals.mdx` — modal element and event details
 
-For the specific adapter or state package you are using, inspect that installed package's `dist/index.d.ts` export surface in `node_modules`.
+For the specific adapter or state package you are using, inspect that installed
+package's `dist/index.d.ts` export surface in `node_modules`.
 
 ## Quick start
 
@@ -72,10 +77,13 @@ bot.onSubscribedMessage(async (thread, message) => {
 ## Core concepts
 
 - **Chat** — main entry point; coordinates adapters, routing, locks, and state
-- **Adapters** — platform-specific integrations for Slack, Teams, Google Chat, Discord, Telegram, GitHub, Linear, and WhatsApp
+- **Adapters** — platform-specific integrations for Slack, Teams, Google Chat, Discord,
+  Telegram, GitHub, Linear, and WhatsApp
 - **State adapters** — persistence for subscriptions, locks, dedupe, and thread state
-- **Thread** — conversation context with `post()`, `stream()`, `subscribe()`, `setState()`, `startTyping()`
-- **Message** — normalized content with `text`, `formatted`, attachments, author info, and platform `raw`
+- **Thread** — conversation context with `post()`, `stream()`, `subscribe()`,
+  `setState()`, `startTyping()`
+- **Message** — normalized content with `text`, `formatted`, attachments, author info,
+  and platform `raw`
 - **Channel** — container for threads and top-level posts
 
 ## Event handlers
@@ -96,11 +104,16 @@ bot.onSubscribedMessage(async (thread, message) => {
 | `onAppHomeOpened` | Slack App Home opened |
 | `onMemberJoinedChannel` | Slack member joined channel event |
 
-Read `node_modules/chat/docs/handling-events.mdx`, `node_modules/chat/docs/actions.mdx`, `node_modules/chat/docs/modals.mdx`, and `node_modules/chat/docs/slash-commands.mdx` before wiring handlers. `onDirectMessage` behavior is documented in `node_modules/chat/docs/direct-messages.mdx`.
+Read `node_modules/chat/docs/handling-events.mdx`, `node_modules/chat/docs/actions.mdx`,
+`node_modules/chat/docs/modals.mdx`, and `node_modules/chat/docs/slash-commands.mdx`
+before wiring handlers. `onDirectMessage` behavior is documented in
+`node_modules/chat/docs/direct-messages.mdx`.
 
 ## Streaming
 
-Pass any `AsyncIterable<string>` to `thread.post()`. For AI SDK, prefer `result.fullStream` over `result.textStream` when available so step boundaries are preserved.
+Pass any `AsyncIterable<string>` to `thread.post()`. For AI SDK, prefer
+`result.fullStream` over `result.textStream` when available so step boundaries are
+preserved.
 
 ```typescript
 import { ToolLoopAgent } from "ai";
@@ -114,6 +127,7 @@ bot.onNewMention(async (thread, message) => {
 ```
 
 Key details:
+
 - `streamingUpdateIntervalMs` controls post+edit fallback cadence
 - `fallbackStreamingPlaceholderText` defaults to `"..."`; set `null` to disable
 - Structured `StreamChunk` support is Slack-only; other adapters ignore non-text chunks
@@ -123,9 +137,12 @@ Key details:
 Set `jsxImportSource: "chat"` in `tsconfig.json`.
 
 Card components:
-- `Card`, `CardText`, `Section`, `Fields`, `Field`, `Button`, `CardLink`, `LinkButton`, `Actions`, `Select`, `SelectOption`, `RadioSelect`, `Table`, `Image`, `Divider`
+
+- `Card`, `CardText`, `Section`, `Fields`, `Field`, `Button`, `CardLink`, `LinkButton`,
+  `Actions`, `Select`, `SelectOption`, `RadioSelect`, `Table`, `Image`, `Divider`
 
 Modal components:
+
 - `Modal`, `TextInput`, `Select`, `SelectOption`, `RadioSelect`
 
 ```tsx
@@ -188,17 +205,24 @@ await thread.post(
 ## Building a custom adapter
 
 Read these published docs first:
+
 - `node_modules/chat/docs/contributing/building.mdx`
 - `node_modules/chat/docs/contributing/testing.mdx`
 - `node_modules/chat/docs/contributing/publishing.mdx`
 
 Also inspect:
+
 - `node_modules/chat/dist/index.d.ts` — `Adapter` and related interfaces
 - `node_modules/@chat-adapter/shared/dist/index.d.ts` — shared errors and utilities
-- Installed official adapter `dist/index.d.ts` files — reference implementations for config and APIs
+- Installed official adapter `dist/index.d.ts` files — reference implementations for
+  config and APIs
 
-A custom adapter needs request verification, webhook parsing, message/thread/channel operations, ID encoding/decoding, and a format converter. Use `BaseFormatConverter` from `chat` and shared utilities from `@chat-adapter/shared`.
+A custom adapter needs request verification, webhook parsing, message/thread/channel
+operations, ID encoding/decoding, and a format converter. Use `BaseFormatConverter` from
+`chat` and shared utilities from `@chat-adapter/shared`.
 
 ## Webhook setup
 
-Each registered adapter exposes `bot.webhooks.<name>`. Wire those directly to your HTTP framework routes. See `node_modules/chat/docs/guides/slack-nextjs.mdx` and `node_modules/chat/docs/guides/discord-nuxt.mdx` for framework-specific route patterns.
+Each registered adapter exposes `bot.webhooks.<name>`. Wire those directly to your HTTP
+framework routes. See `node_modules/chat/docs/guides/slack-nextjs.mdx` and
+`node_modules/chat/docs/guides/discord-nuxt.mdx` for framework-specific route patterns.

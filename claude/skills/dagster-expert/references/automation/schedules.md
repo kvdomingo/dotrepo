@@ -4,13 +4,15 @@ triggers:
   - "time-based automation with cron expressions"
 ---
 
-# Schedules
+## Schedules
 
-Basic schedule patterns are covered in the main SKILL.md Quick Reference. This reference covers advanced schedule configuration and partitioned job automation.
+Basic schedule patterns are covered in the main SKILL.md Quick Reference. This reference
+covers advanced schedule configuration and partitioned job automation.
 
-## Basic Schedule Review
+### Basic Schedule Review
 
-A schedule executes a job at specified times using cron expressions. See SKILL.md for the basic pattern.
+A schedule executes a job at specified times using cron expressions. See SKILL.md for
+the basic pattern.
 
 ```python
 import dagster as dg
@@ -23,7 +25,7 @@ daily_schedule = dg.ScheduleDefinition(
 )
 ```
 
-## Execution Timezone
+### Execution Timezone
 
 Schedules default to UTC. Specify a different timezone with `execution_timezone`:
 
@@ -35,13 +37,16 @@ daily_schedule = dg.ScheduleDefinition(
 )
 ```
 
-**Timezone string format**: Use IANA timezone database names like `"America/New_York"`, `"Europe/London"`, or `"Asia/Tokyo"`.
+**Timezone string format**: Use IANA timezone database names like `"America/New_York"`,
+`"Europe/London"`, or `"Asia/Tokyo"`.
 
-**Daylight saving time**: Dagster handles DST transitions automatically based on the specified timezone.
+**Daylight saving time**: Dagster handles DST transitions automatically based on the
+specified timezone.
 
-## Schedules from Partitioned Assets
+### Schedules from Partitioned Assets
 
-For partitioned assets or jobs, use `build_schedule_from_partitioned_job` to automatically create a schedule matching the partition cadence:
+For partitioned assets or jobs, use `build_schedule_from_partitioned_job` to
+automatically create a schedule matching the partition cadence:
 
 ```python
 
@@ -60,7 +65,8 @@ partitioned_job = dg.define_asset_job(
 schedule = dg.build_schedule_from_partitioned_job(partitioned_job)
 ```
 
-**How it works**: The schedule's cron expression is derived from the `PartitionsDefinition`:
+**How it works**: The schedule's cron expression is derived from the
+`PartitionsDefinition`:
 
 - `DailyPartitionsDefinition` → daily cron schedule
 - `WeeklyPartitionsDefinition` → weekly cron schedule
@@ -69,7 +75,7 @@ schedule = dg.build_schedule_from_partitioned_job(partitioned_job)
 
 Each schedule run materializes the partition corresponding to the schedule time.
 
-## Cron Expression Reference
+### Cron Expression Reference
 
 Common cron patterns for schedules:
 
@@ -86,7 +92,7 @@ Common cron patterns for schedules:
 
 **Cron format**: `minute hour day_of_month month day_of_week`
 
-## Configuration Options
+### Configuration Options
 
 ```python nocheckundefined
 schedule = dg.ScheduleDefinition(
@@ -101,11 +107,12 @@ schedule = dg.ScheduleDefinition(
 
 **Key parameters**:
 
-- `default_status`: Set to `DefaultScheduleStatus.RUNNING` to enable schedule automatically when deployed (default is `STOPPED`)
+- `default_status`: Set to `DefaultScheduleStatus.RUNNING` to enable schedule
+  automatically when deployed (default is `STOPPED`)
 - `description`: Human-readable description shown in the Dagster UI
 - `tags`: Metadata tags for organization and filtering
 
-## When to Use Schedules
+### When to Use Schedules
 
 **Use schedules when**:
 

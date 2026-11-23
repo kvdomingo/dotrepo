@@ -52,35 +52,35 @@ def generate_time_series(
 ) -> pd.DataFrame:
     """Generate synthetic time series data by category."""
     np.random.seed(hash(category_name) % 2**32)
-    
+
     dates = pd.date_range(start=start_date, end=end_date, freq="D")
     records = []
-    
+
     for category in categories:
         base = base_values.get(category, 1000) if base_values else np.random.randint(500, 5000)
         growth = np.random.uniform(0.001, 0.005)
-        
+
         for i, dt in enumerate(dates):
             trend = base * (1 + growth) ** i
             if dt.dayofweek >= 5:
                 trend *= 0.4
-            
+
             daily = max(0, trend * np.random.uniform(0.8, 1.2))
-            
+
             records.append({
                 "ds": dt,
                 category_name: category,
                 "daily_credits": daily,
             })
-    
+
     df = pd.DataFrame(records)
-    
+
     # Add 7-day moving average
     df["credits_7d_ma"] = (
         df.groupby(category_name)["daily_credits"]
         .transform(lambda x: x.rolling(7, min_periods=1).mean())
     )
-    
+
     return df
 
 
@@ -158,7 +158,7 @@ def create_line_chart(
 ) -> alt.Chart:
     """Create a line chart."""
     y_format = ".1%" if show_percent else ",.0f"
-    
+
     return (
         alt.Chart(df)
         .mark_line()
@@ -187,7 +187,7 @@ def create_bar_chart(
 ) -> alt.Chart:
     """Create a stacked bar chart."""
     y_format = ".1%" if show_percent else ",.0f"
-    
+
     return (
         alt.Chart(df)
         .mark_bar()
@@ -235,11 +235,11 @@ def render_page_header(title: str):
 def account_type_metric():
     """Account type metric card with independent state."""
     data = load_account_type_data()
-    
+
     with st.container(border=True):
         with st.container(horizontal=True, horizontal_alignment="distribute", vertical_alignment="center"):
             st.markdown("**Credits by account type**")
-            
+
             view_mode = st.segmented_control(
                 "View",
                 options=[":material/show_chart:", ":material/table:"],
@@ -247,7 +247,7 @@ def account_type_metric():
                 key="acct_view",
                 label_visibility="collapsed",
             )
-            
+
             with st.popover("Filters", type="tertiary"):
                 selected_types = st.pills(
                     "Account types",
@@ -279,16 +279,16 @@ def account_type_metric():
                     default="All",
                     key="acct_time",
                 )
-        
+
         # Filter data
         selected_types = selected_types or ["Paying"]
         line_options = line_options or ["7-day MA"]
         filtered = data[data["account_type"].isin(selected_types)]
         filtered = filter_by_time_range(filtered, "ds", time_range)
-        
+
         # Determine y column
         y_col = "credits_7d_ma" if "7-day MA" in line_options else "daily_credits"
-        
+
         if "table" in (view_mode or ""):
             st.dataframe(filtered, height=CHART_HEIGHT, hide_index=True)
         else:
@@ -306,11 +306,11 @@ def account_type_metric():
 def instance_type_metric():
     """Instance type metric card with independent state."""
     data = load_instance_type_data()
-    
+
     with st.container(border=True):
         with st.container(horizontal=True, horizontal_alignment="distribute", vertical_alignment="center"):
             st.markdown("**Credits by instance type**")
-            
+
             view_mode = st.segmented_control(
                 "View",
                 options=[":material/show_chart:", ":material/table:"],
@@ -318,7 +318,7 @@ def instance_type_metric():
                 key="inst_view",
                 label_visibility="collapsed",
             )
-            
+
             with st.popover("Filters", type="tertiary"):
                 selected_types = st.pills(
                     "Instance types",
@@ -350,15 +350,15 @@ def instance_type_metric():
                     default="All",
                     key="inst_time",
                 )
-        
+
         # Filter data
         selected_types = selected_types or INSTANCE_TYPES
         line_options = line_options or ["7-day MA"]
         filtered = data[data["instance_type"].isin(selected_types)]
         filtered = filter_by_time_range(filtered, "ds", time_range)
-        
+
         y_col = "credits_7d_ma" if "7-day MA" in line_options else "daily_credits"
-        
+
         if "table" in (view_mode or ""):
             st.dataframe(filtered, height=CHART_HEIGHT, hide_index=True)
         else:
@@ -376,11 +376,11 @@ def instance_type_metric():
 def region_metric():
     """Region metric card with independent state."""
     data = load_region_data()
-    
+
     with st.container(border=True):
         with st.container(horizontal=True, horizontal_alignment="distribute", vertical_alignment="center"):
             st.markdown("**Credits by region**")
-            
+
             view_mode = st.segmented_control(
                 "View",
                 options=[":material/show_chart:", ":material/table:"],
@@ -388,7 +388,7 @@ def region_metric():
                 key="region_view",
                 label_visibility="collapsed",
             )
-            
+
             with st.popover("Filters", type="tertiary"):
                 selected_regions = st.pills(
                     "Regions",
@@ -420,15 +420,15 @@ def region_metric():
                     default="All",
                     key="region_time",
                 )
-        
+
         # Filter data
         selected_regions = selected_regions or REGIONS
         line_options = line_options or ["7-day MA"]
         filtered = data[data["region"].isin(selected_regions)]
         filtered = filter_by_time_range(filtered, "ds", time_range)
-        
+
         y_col = "credits_7d_ma" if "7-day MA" in line_options else "daily_credits"
-        
+
         if "table" in (view_mode or ""):
             st.dataframe(filtered, height=CHART_HEIGHT, hide_index=True)
         else:

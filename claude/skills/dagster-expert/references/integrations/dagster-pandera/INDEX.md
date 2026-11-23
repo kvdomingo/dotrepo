@@ -4,6 +4,6 @@ triggers:
   - "DataFrame schema validation with Pandera"
 ---
 
-# dagster-pandera
+## dagster-pandera
 
-Docs: https://docs.dagster.io/integrations/libraries/pandera
+Docs: <https://docs.dagster.io/integrations/libraries/pandera>

@@ -7,7 +7,8 @@ tags: indexes, query-optimization, performance
 
 ## [Rule Title]
 
-[1-2 sentence explanation of the problem and why it matters. Focus on performance impact.]
+[1-2 sentence explanation of the problem and why it matters. Focus on performance
+impact.]
 
 **Incorrect (describe the problem):**
 

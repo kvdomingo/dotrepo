@@ -42,6 +42,3 @@
 
 * add automated release workflow with conventional commits ([7a1582c](https://github.com/jfr992/terragrunt-skill/commit/7a1582c3ab4598a0ca4fbdd4424f137ed8aa7d6d))
 * update CI/CD pipelines for terragrunt stack commands ([19c6949](https://github.com/jfr992/terragrunt-skill/commit/19c6949b549ed402ee74558e9b59e2e180781e67))
-
-
-

@@ -4,6 +4,6 @@ triggers:
   - "distributed task execution with Celery"
 ---
 
-# dagster-celery
+## dagster-celery
 
-Docs: https://docs.dagster.io/integrations/libraries/celery
+Docs: <https://docs.dagster.io/integrations/libraries/celery>

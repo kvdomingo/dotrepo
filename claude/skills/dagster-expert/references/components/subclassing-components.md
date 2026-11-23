@@ -5,13 +5,17 @@ triggers:
   - "customize dagster integration component"
 ---
 
-# Subclassing Components
+## Subclassing Components
 
-When a [Dagster integration](../integrations/INDEX.md) already covers the external tool you're working with, it is almost always better to **subclass the existing component** instead of building from scratch. This preserves the core of the API interactions and metadata translation logic, while allowing you to customize the parts that differ for your use case.
+When a [Dagster integration](../integrations/INDEX.md) already covers the external tool
+you're working with, it is almost always better to **subclass the existing component**
+instead of building from scratch. This preserves the core of the API interactions and
+metadata translation logic, while allowing you to customize the parts that differ for
+your use case.
 
-## Common Override Points
+### Common Override Points
 
-### `get_asset_spec()` — Customize Asset Representation
+#### `get_asset_spec()` — Customize Asset Representation
 
 Override to change asset keys, groups, metadata, kinds, or dependencies.
 
@@ -28,7 +32,7 @@ class CustomFivetranComponent(FivetranAccountComponent):
         )
 ```
 
-### `execute()` — Customize Execution Behavior
+#### `execute()` — Customize Execution Behavior
 
 Override to add pre/post logic around the standard sync, or to filter which syncs run.
 
@@ -44,9 +48,11 @@ class CustomFivetranComponent(FivetranAccountComponent):
         context.log.info("Post-sync complete")
 ```
 
-### (StateBackedComponent) `write_state_to_path()` — Customize State Persistence
+#### (StateBackedComponent) `write_state_to_path()` — Customize State Persistence
 
-For `StateBackedComponent` subclasses, override to transform or augment the persisted state. This is typically only necessary for mock / demo purposes, and should otherwise be avoided in most cases.
+For `StateBackedComponent` subclasses, override to transform or augment the persisted
+state. This is typically only necessary for mock / demo purposes, and should otherwise
+be avoided in most cases.
 
 ```python nocheckundefined
 from pathlib import Path
@@ -57,11 +63,15 @@ class CustomComponent(ExistingStateBackedComponent):
         state_path.write_text(dg.serialize_value(state))
 ```
 
-### (StateBackedComponent) `build_defs_from_state()` — Customize Definition Construction
+#### (StateBackedComponent) `build_defs_from_state()` — Customize Definition Construction
 
-Override to change how persisted state is translated into Dagster definitions (e.g., adding sensors, extra assets, or resources). This is only necessary when:
+Override to change how persisted state is translated into Dagster definitions (e.g.,
+adding sensors, extra assets, or resources). This is only necessary when:
 
-- Fundamentally changing the existing definitions entirely (rare). Note that if you only want to change the runtime behavior of the existing definitions, you should just override `execute()`, and if you just want to change the metadata of the generated assets, you should just override `get_asset_spec()`.
+- Fundamentally changing the existing definitions entirely (rare). Note that if you only
+  want to change the runtime behavior of the existing definitions, you should just
+  override `execute()`, and if you just want to change the metadata of the generated
+  assets, you should just override `get_asset_spec()`.
 - Adding additional definitions on top of the base definitions (shown below)
 
 ```python nocheckundefined

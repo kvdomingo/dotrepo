@@ -4,11 +4,13 @@ triggers:
   - "deciding between schedules, sensors, and declarative automation"
 ---
 
-# Choosing an Automation Approach
+## Choosing an Automation Approach
 
-Dagster provides three main approaches to automation: schedules for time-based execution, sensors for event-driven triggers, and declarative automation for asset-centric condition-based orchestration.
+Dagster provides three main approaches to automation: schedules for time-based
+execution, sensors for event-driven triggers, and declarative automation for
+asset-centric condition-based orchestration.
 
-## Workflow Decision Tree
+### Workflow Decision Tree
 
 Choose your automation approach based on your use case:
 
@@ -16,13 +18,15 @@ Choose your automation approach based on your use case:
 - Custom polling logic → **Basic Sensors**
 - Launching jobs in response to asset materialization events → **Asset Sensors**
 - Triggering compute based on run success/failure → **Run Status Sensors**
-- Partition-aware scheduling, declarative/asset-based scheduling, scheduling depending on asset graph state and materialization events → **Declarative Automation**
+- Partition-aware scheduling, declarative/asset-based scheduling, scheduling depending
+  on asset graph state and materialization events → **Declarative Automation**
 
-## Core Concepts
+### Core Concepts
 
-### Jobs
+#### Jobs
 
-A **job** is a selection of assets to execute together. Jobs are the unit of execution that schedules and sensors trigger.
+A **job** is a selection of assets to execute together. Jobs are the unit of execution
+that schedules and sensors trigger.
 
 ```python
 import dagster as dg
@@ -50,10 +54,14 @@ group_job = dg.define_asset_job(
 )
 ```
 
-### Automation Approaches
+#### Automation Approaches
 
-**Schedules**: Time-based execution with cron expressions. Best for predictable, recurring tasks.
+**Schedules**: Time-based execution with cron expressions. Best for predictable,
+recurring tasks.
 
-**Sensors**: Poll for external events and trigger runs. Best for file arrivals, API events, or custom conditions.
+**Sensors**: Poll for external events and trigger runs. Best for file arrivals, API
+events, or custom conditions.
 
-**Declarative Automation**: Set conditions directly on assets. Best for complex dependency logic and asset-centric workflows. Automatic handling of asset and partition state and dependencies.
+**Declarative Automation**: Set conditions directly on assets. Best for complex
+dependency logic and asset-centric workflows. Automatic handling of asset and partition
+state and dependencies.

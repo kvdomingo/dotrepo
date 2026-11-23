@@ -4,7 +4,7 @@ Choose the right data fetching pattern for each use case.
 
 ## Decision Tree
 
-```
+```text
 Need to fetch data?
 ├── From a Server Component?
 │   └── Use: Fetch directly (no API needed)
@@ -44,6 +44,7 @@ async function UsersPage() {
 ```
 
 **Benefits**:
+
 - No API to maintain
 - No client-server waterfall
 - Secrets stay on server
@@ -89,12 +90,14 @@ export default function NewPost() {
 ```
 
 **Benefits**:
+
 - End-to-end type safety
 - Progressive enhancement (works without JS)
 - Automatic request handling
 - Integrated with React transitions
 
 **Constraints**:
+
 - POST only (no GET caching semantics)
 - Internal use only (no external access)
 - Cannot return non-serializable data
@@ -122,12 +125,14 @@ export async function POST(request: NextRequest) {
 ```
 
 **When to use**:
+
 - External API access (mobile apps, third parties)
 - Webhooks from external services
 - GET endpoints that need HTTP caching
 - OpenAPI/Swagger documentation needed
 
 **When NOT to use**:
+
 - Internal data fetching (use Server Components)
 - Mutations from your UI (use Server Actions)
 
@@ -267,7 +272,8 @@ function ClientComponent() {
 
 ### Option 3: Server Action for Reads (Works But Not Ideal)
 
-Server Actions can be called from Client Components for reads, but this is not their intended purpose:
+Server Actions can be called from Client Components for reads, but this is not their
+intended purpose:
 
 ```tsx
 'use client';
@@ -285,7 +291,8 @@ function ClientComponent() {
 }
 ```
 
-**Note**: Server Actions always use POST, so no HTTP caching. Prefer Route Handlers for cacheable reads.
+**Note**: Server Actions always use POST, so no HTTP caching. Prefer Route Handlers for
+cacheable reads.
 
 ## Quick Reference
 

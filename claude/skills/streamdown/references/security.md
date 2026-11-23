@@ -13,11 +13,13 @@
 
 ## Default Security Posture
 
-Streamdown is permissive by default (all prefixes, protocols, and data images allowed). Security is provided by:
+Streamdown is permissive by default (all prefixes, protocols, and data images allowed).
+Security is provided by:
 
 1. **rehype-sanitize** — XSS prevention
 2. **rehype-harden** — URL/protocol restriction (all allowed by default)
-3. **Link safety modal** — Confirmation before opening external links (enabled by default)
+3. **Link safety modal** — Confirmation before opening external links (enabled by
+   default)
 
 ## Restricting Protocols
 
@@ -67,11 +69,13 @@ Only allow specific domains:
 **Default:** Enabled. Shows confirmation before opening links.
 
 **Disable:**
+
 ```tsx
 <Streamdown linkSafety={{ enabled: false }}>{markdown}</Streamdown>
 ```
 
 **Safelist trusted domains:**
+
 ```tsx
 <Streamdown
   linkSafety={{
@@ -86,6 +90,7 @@ Only allow specific domains:
 ```
 
 **Custom modal:**
+
 ```tsx
 <Streamdown
   linkSafety={{
@@ -121,11 +126,13 @@ Whitelist specific tags and attributes for AI-generated custom elements:
 >
 ```
 
-**Important:** `allowedTags` only works with default rehype plugins. Custom `rehypePlugins` require custom sanitization.
+**Important:** `allowedTags` only works with default rehype plugins. Custom
+`rehypePlugins` require custom sanitization.
 
 ## URL Transform
 
-Use the `urlTransform` prop for custom URL rewriting. The default `defaultUrlTransform` is a passthrough — URL security is handled by `rehype-sanitize` and `rehype-harden`.
+Use the `urlTransform` prop for custom URL rewriting. The default `defaultUrlTransform`
+is a passthrough — URL security is handled by `rehype-sanitize` and `rehype-harden`.
 
 ```tsx
 import { Streamdown, defaultUrlTransform } from 'streamdown';

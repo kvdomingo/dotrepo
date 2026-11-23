@@ -26,7 +26,8 @@ export default function SearchableGrid({ itemsPromise }) {
 }
 ```
 
-Per-item `<ViewTransition name={...}>` inside a deferred list triggers cross-fades on every keystroke. Fix with `default="none"`:
+Per-item `<ViewTransition name={...}>` inside a deferred list triggers cross-fades on
+every keystroke. Fix with `default="none"`:
 
 ```tsx
 {filteredItems.map(item => (
@@ -102,7 +103,8 @@ export function HorizontalTransition({ children, enter, exit }: {
 
 ## Cross-Fade Without Remount
 
-Omit `key` to trigger an update (cross-fade) instead of exit + enter. Avoids Suspense remount/refetch:
+Omit `key` to trigger an update (cross-fade) instead of exit + enter. Avoids Suspense
+remount/refetch:
 
 ```jsx
 <ViewTransition>
@@ -110,19 +112,23 @@ Omit `key` to trigger an update (cross-fade) instead of exit + enter. Avoids Sus
 </ViewTransition>
 ```
 
-Use `key` when content identity changes (state resets). Omit for cross-fades (tabs, panels, carousel).
+Use `key` when content identity changes (state resets). Omit for cross-fades (tabs,
+panels, carousel).
 
 ## Isolate Elements from Parent Animations
 
 ### Persistent Layout Elements
 
-Persistent elements (headers, navbars, sidebars) get captured in the page's transition snapshot. Fix with `viewTransitionName`:
+Persistent elements (headers, navbars, sidebars) get captured in the page's transition
+snapshot. Fix with `viewTransitionName`:
 
 ```jsx
 <nav style={{ viewTransitionName: "persistent-nav" }}>{/* ... */}</nav>
 ```
 
-Then add the persistent element isolation CSS from `css-recipes.md`. For `backdrop-blur`/`backdrop-filter`, use the backdrop-blur workaround from `css-recipes.md`.
+Then add the persistent element isolation CSS from `css-recipes.md`. For
+`backdrop-blur`/`backdrop-filter`, use the backdrop-blur workaround from
+`css-recipes.md`.
 
 ### Floating Elements
 
@@ -145,7 +151,8 @@ Give matching controls in fallback and content the same `viewTransitionName`:
 <input placeholder="Search..." style={{ viewTransitionName: 'search-input' }} />
 ```
 
-Don't put manual `viewTransitionName` on the root DOM node inside `<ViewTransition>` — React's auto-generated name overrides it.
+Don't put manual `viewTransitionName` on the root DOM node inside `<ViewTransition>` —
+React's auto-generated name overrides it.
 
 ## Reusable Animated Collapse
 
@@ -176,7 +183,8 @@ function AnimatedCollapse({ open, children }) {
 
 ## Exclude Elements with `useOptimistic`
 
-`useOptimistic` values update before the transition snapshot, excluding them from animation. Use for controls (labels); use committed state for animated content:
+`useOptimistic` values update before the transition snapshot, excluding them from
+animation. Use for controls (labels); use committed state for animated content:
 
 ```tsx
 const [sort, setSort] = useState('newest');
@@ -200,7 +208,8 @@ function cycleSort() {
 
 ## View Transition Events
 
-Imperative control via `onEnter`, `onExit`, `onUpdate`, `onShare`. Always return a cleanup function. `onShare` takes precedence over `onEnter`/`onExit`.
+Imperative control via `onEnter`, `onExit`, `onUpdate`, `onShare`. Always return a
+cleanup function. `onShare` takes precedence over `onEnter`/`onExit`.
 
 ```jsx
 <ViewTransition
@@ -216,7 +225,8 @@ Imperative control via `onEnter`, `onExit`, `onUpdate`, `onShare`. Always return
 </ViewTransition>
 ```
 
-The `instance` object: `instance.old`, `instance.new`, `instance.group`, `instance.imagePair`, `instance.name`.
+The `instance` object: `instance.old`, `instance.new`, `instance.group`,
+`instance.imagePair`, `instance.name`.
 
 The `types` array (second argument) lets you vary animation based on transition type.
 
@@ -235,27 +245,37 @@ The `types` array (second argument) lets you vary animation based on transition 
 
 ## Troubleshooting
 
-**VT not activating:** Ensure `<ViewTransition>` comes before any DOM node. Ensure state update is inside `startTransition`.
+**VT not activating:** Ensure `<ViewTransition>` comes before any DOM node. Ensure state
+update is inside `startTransition`.
 
-**"Two ViewTransition components with the same name":** Names must be globally unique. Use IDs: `name={`hero-${item.id}`}`.
+**"Two ViewTransition components with the same name":** Names must be globally unique.
+Use IDs: `name={`hero-${item.id}`}`.
 
-**`router.back()` and browser back/forward skip animation:** Use `router.push()` with an explicit URL instead. See SKILL.md "router.back() and Browser Back Button."
+**`router.back()` and browser back/forward skip animation:** Use `router.push()` with an
+explicit URL instead. See SKILL.md "router.back() and Browser Back Button."
 
 **`flushSync` skips animations:** Use `startTransition` instead.
 
-**Only updates animate (no enter/exit):** Without `<Suspense>`, React treats swaps as updates. Conditionally render the VT itself, or wrap in `<Suspense>`.
+**Only updates animate (no enter/exit):** Without `<Suspense>`, React treats swaps as
+updates. Conditionally render the VT itself, or wrap in `<Suspense>`.
 
-**Layout VT prevents page VTs from animating:** Nested VTs never fire enter/exit inside a parent VT. If your layout has a VT wrapping `{children}`, page-level enter/exit will silently not work. Remove the layout VT.
+**Layout VT prevents page VTs from animating:** Nested VTs never fire enter/exit inside
+a parent VT. If your layout has a VT wrapping `{children}`, page-level enter/exit will
+silently not work. Remove the layout VT.
 
-**List reorder not animating with `useOptimistic`:** Optimistic values resolve before snapshot. Use committed state for list order.
+**List reorder not animating with `useOptimistic`:** Optimistic values resolve before
+snapshot. Use committed state for list order.
 
-**TS error "Property 'default' is missing":** Type-keyed objects require a `default` key.
+**TS error "Property 'default' is missing":** Type-keyed objects require a `default`
+key.
 
-**Hash fragments cause scroll jumps:** Navigate without hash; scroll programmatically after navigation.
+**Hash fragments cause scroll jumps:** Navigate without hash; scroll programmatically
+after navigation.
 
 **Backdrop-blur flickers:** Use the backdrop-blur workaround from `css-recipes.md`.
 
-**`border-radius` lost during transitions:** Apply `border-radius` directly to the captured element.
+**`border-radius` lost during transitions:** Apply `border-radius` directly to the
+captured element.
 
 **Skeleton controls slide away:** Give matching controls the same `viewTransitionName`.
 

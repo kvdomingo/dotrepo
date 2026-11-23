@@ -4,9 +4,9 @@ triggers:
   - "defining assets, dependencies, metadata, partitions, or multi-asset definitions"
 ---
 
-# Asset Patterns Reference
+## Asset Patterns Reference
 
-## Pattern Summary
+### Pattern Summary
 
 | Pattern                    | When to Use                                       |
 | -------------------------- | ------------------------------------------------- |
@@ -24,13 +24,15 @@ triggers:
 
 ---
 
-## Launching Assets
+### Launching Assets
 
-Once you've defined assets, use the `dg launch` command to materialize them. For comprehensive documentation on launching assets, see the [CLI launch reference](./cli/launch.md).
+Once you've defined assets, use the `dg launch` command to materialize them. For
+comprehensive documentation on launching assets, see the
+[CLI launch reference](./cli/launch.md).
 
 ---
 
-## Basic Asset Definition
+### Basic Asset Definition
 
 ```python
 import dagster as dg
@@ -52,9 +54,9 @@ def my_asset() -> None:
 
 ---
 
-## Asset Dependencies
+### Asset Dependencies
 
-### Parameter-Based Dependencies
+#### Parameter-Based Dependencies
 
 When an asset depends on another Dagster-managed asset, use parameters:
 
@@ -77,7 +79,7 @@ def downstream_asset(upstream_asset: dict) -> list:
 - Dagster automatically passes the materialized output
 - Creates a visual dependency in the asset graph
 
-### External Dependencies with `deps=`
+#### External Dependencies with `deps=`
 
 When an asset depends on something not managed by Dagster or without a return value:
 
@@ -97,7 +99,7 @@ def processed_data() -> None:
 - The asset is external (file created by another process)
 - You need loose coupling between assets
 
-### Mixed Dependencies
+#### Mixed Dependencies
 
 Combine both patterns when needed:
 
@@ -115,9 +117,9 @@ def enriched_data(reference_table: dict) -> dict:
 
 ---
 
-## Asset Metadata
+### Asset Metadata
 
-### Definition Metadata (Static)
+#### Definition Metadata (Static)
 
 Applied once when the asset is defined:
 
@@ -143,7 +145,7 @@ def my_asset() -> None:
 - **group_name**: Visual organization in UI (use for layers or domains)
 - **key_prefix**: Hierarchical namespacing for multi-tenant or layered architectures
 
-### Materialization Metadata (Dynamic)
+#### Materialization Metadata (Dynamic)
 
 Captured each time the asset materializes:
 
@@ -168,7 +170,7 @@ def my_asset() -> dg.MaterializeResult:
     )
 ```
 
-### MetadataValue Types
+#### MetadataValue Types
 
 | Type                           | Usage                       |
 | ------------------------------ | --------------------------- |
@@ -183,7 +185,7 @@ def my_asset() -> dg.MaterializeResult:
 
 ---
 
-## Asset Groups
+### Asset Groups
 
 Organize related assets visually in the UI:
 
@@ -209,7 +211,7 @@ def daily_revenue(raw_orders) -> None:
 
 ---
 
-## Asset Key Prefixes
+### Asset Key Prefixes
 
 Namespace assets for organization:
 
@@ -233,7 +235,7 @@ def orders_cleaned() -> None:
 
 ---
 
-## Asset with Execution Context
+### Asset with Execution Context
 
 Access runtime information during materialization:
 
@@ -256,7 +258,7 @@ def context_aware_asset(context: dg.AssetExecutionContext) -> None:
 
 ---
 
-## Asset with Configuration
+### Asset with Configuration
 
 Make assets configurable at runtime:
 
@@ -280,9 +282,9 @@ def configurable_asset(config: MyAssetConfig) -> None:
 
 ---
 
-## Asset Return Types
+### Asset Return Types
 
-### Returning Data Directly
+#### Returning Data Directly
 
 ```python
 @dg.asset
@@ -290,7 +292,7 @@ def returns_data() -> dict:
     return {"key": "value"}
 ```
 
-### Returning MaterializeResult
+#### Returning MaterializeResult
 
 ```python
 @dg.asset
@@ -301,7 +303,7 @@ def returns_result() -> dg.MaterializeResult:
     )
 ```
 
-### Returning Output with Type
+#### Returning Output with Type
 
 ```python
 from dagster import Output
@@ -317,7 +319,7 @@ def returns_output() -> Output[dict]:
 
 ---
 
-## Multi-Asset Pattern
+### Multi-Asset Pattern
 
 Define multiple assets from one function:
 
@@ -344,9 +346,9 @@ def load_data():
 
 ---
 
-## Graph Assets
+### Graph Assets
 
-### @graph_asset Pattern
+#### @graph_asset Pattern
 
 Use when multiple steps are needed to produce a single asset:
 
@@ -379,7 +381,7 @@ def complex_asset():
 - Testing individual steps is important
 - Steps are reusable across multiple assets
 
-### @graph_multi_asset Pattern
+#### @graph_multi_asset Pattern
 
 Use for complex pipelines producing multiple assets:
 
@@ -408,7 +410,7 @@ def etl_pipeline():
 
 ---
 
-## Asset Factories
+### Asset Factories
 
 Generate similar assets programmatically:
 
@@ -431,11 +433,11 @@ orders = create_table_asset("orders", "sales")
 
 ---
 
-## Asset Selection Syntax
+### Asset Selection Syntax
 
 Select subsets of assets for materialization or job definition:
 
-### Basic Selection
+#### Basic Selection
 
 ```python
 # Select specific assets
@@ -454,7 +456,7 @@ dg.AssetSelection.key_prefixes(["warehouse", "staging"])
 dg.AssetSelection.tag("priority", "high")
 ```
 
-### Dependency-Based Selection
+#### Dependency-Based Selection
 
 ```python
 # Select asset and all upstream dependencies
@@ -467,7 +469,7 @@ dg.AssetSelection.assets("raw_data").downstream()
 dg.AssetSelection.assets("final_report").upstream(depth=1)
 ```
 
-### Combining Selections
+#### Combining Selections
 
 ```python
 selection_a = dg.AssetSelection.assets("a")
@@ -486,7 +488,7 @@ selection_a - selection_b
 dg.AssetSelection.groups("analytics") - dg.AssetSelection.assets("excluded_asset")
 ```
 
-### Using in Jobs
+#### Using in Jobs
 
 ```python
 analytics_job = dg.define_asset_job(
@@ -495,7 +497,7 @@ analytics_job = dg.define_asset_job(
 )
 ```
 
-### Using in CLI
+#### Using in CLI
 
 ```bash
 # Materialize specific assets
@@ -510,7 +512,7 @@ dg launch --job analytics_job
 
 ---
 
-## Common Anti-Patterns
+### Common Anti-Patterns
 
 | Anti-Pattern                       | Better Approach                                |
 | ---------------------------------- | ---------------------------------------------- |
@@ -523,7 +525,7 @@ dg launch --job analytics_job
 
 ---
 
-## References
+### References
 
 - [Assets API](https://docs.dagster.io/api/dagster/assets)
 - [Asset Metadata](https://docs.dagster.io/guides/build/assets/metadata-and-tags)

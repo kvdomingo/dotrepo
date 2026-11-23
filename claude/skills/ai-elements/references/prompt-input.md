@@ -1,8 +1,12 @@
 # Prompt Input
 
-Allows a user to send a message with file attachments to a large language model. It includes a textarea, file upload capabilities, a submit button, and a dropdown for selecting the model.
+Allows a user to send a message with file attachments to a large language model. It
+includes a textarea, file upload capabilities, a submit button, and a dropdown for
+selecting the model.
 
-The `PromptInput` component allows a user to send a message with file attachments to a large language model. It includes a textarea, file upload capabilities, a submit button, and a dropdown for selecting the model.
+The `PromptInput` component allows a user to send a message with file attachments to a
+large language model. It includes a textarea, file upload capabilities, a submit button,
+and a dropdown for selecting the model.
 
 See `scripts/prompt-input.tsx` for this example.
 
@@ -14,7 +18,8 @@ npx ai-elements@latest add prompt-input
 
 ## Usage with AI SDK
 
-Build a fully functional chat app using `PromptInput`, [`Conversation`](/components/conversation) with a model picker:
+Build a fully functional chat app using `PromptInput`,
+[`Conversation`](/components/conversation) with a model picker:
 
 Add the following component to your frontend:
 
@@ -266,7 +271,8 @@ See `scripts/prompt-input-cursor.tsx` for this example.
 
 ### Button tooltips
 
-Buttons can display tooltips with optional keyboard shortcut hints. Hover over the buttons below to see the tooltips.
+Buttons can display tooltips with optional keyboard shortcut hints. Hover over the
+buttons below to see the tooltips.
 
 See `scripts/prompt-input-tooltip.tsx` for this example.
 
@@ -283,7 +289,7 @@ See `scripts/prompt-input-tooltip.tsx` for this example.
 | `syncHiddenInput` | `boolean` | - | Render a hidden input with given name for native form posts. |
 | `maxFiles` | `number` | - | Maximum number of files allowed. |
 | `maxFileSize` | `number` | - | Maximum file size in bytes. |
-| `onError` | `(err: { code: ` | - | Handler for file validation errors. |
+| `onError` | `(err: { code:` | - | Handler for file validation errors. |
 | `...props` | `React.HTMLAttributes<HTMLFormElement>` | - | Any other props are spread to the root form element. |
 
 ### `<PromptInputTextarea />`
@@ -375,7 +381,10 @@ See `scripts/prompt-input-tooltip.tsx` for this example.
 
 ### Attachments
 
-Attachment components have been moved to a separate module. See the [Attachment](/components/attachment) component documentation for details on `<Attachments />`, `<Attachment />`, `<AttachmentPreview />`, `<AttachmentInfo />`, and `<AttachmentRemove />`.
+Attachment components have been moved to a separate module. See the
+[Attachment](/components/attachment) component documentation for details on
+`<Attachments />`, `<Attachment />`, `<AttachmentPreview />`, `<AttachmentInfo />`, and
+`<AttachmentRemove />`.
 
 ### `<PromptInputActionMenu />`
 
@@ -422,13 +431,15 @@ Attachment components have been moved to a separate module. See the [Attachment]
 | `initialInput` | `string` | - | Initial text input value. |
 | `children` | `React.ReactNode` | - | Child components that will have access to the provider context. |
 
-Optional global provider that lifts PromptInput state outside of PromptInput. When used, it allows you to access and control the input state from anywhere within the provider tree. If not used, PromptInput stays fully self-managed.
+Optional global provider that lifts PromptInput state outside of PromptInput. When used,
+it allows you to access and control the input state from anywhere within the provider
+tree. If not used, PromptInput stays fully self-managed.
 
 ### `<PromptInputHeader />`
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `...props` | `Omit<React.ComponentProps<typeof InputGroupAddon>, ` | - | Any other props (except align) are spread to the InputGroupAddon component. |
+| `...props` | `Omit<React.ComponentProps<typeof InputGroupAddon>,` | - | Any other props (except align) are spread to the InputGroupAddon component. |
 
 ### `<PromptInputHoverCard />`
 
@@ -542,7 +553,8 @@ attachments.openFileDialog(); // Open file selection dialog
 
 ### `usePromptInputController`
 
-Access the full PromptInput controller from a PromptInputProvider. Only available when using the provider.
+Access the full PromptInput controller from a PromptInputProvider. Only available when
+using the provider.
 
 ```tsx
 const controller = usePromptInputController();
@@ -556,7 +568,8 @@ controller.attachments; // Same as usePromptInputAttachments
 
 ### `useProviderAttachments`
 
-Access attachments context from a PromptInputProvider. Only available when using the provider.
+Access attachments context from a PromptInputProvider. Only available when using the
+provider.
 
 ```tsx
 const attachments = useProviderAttachments();

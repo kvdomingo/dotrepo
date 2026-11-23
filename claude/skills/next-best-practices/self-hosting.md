@@ -15,7 +15,7 @@ module.exports = {
 
 This creates a minimal `standalone` folder with only production dependencies:
 
-```
+```text
 .next/
 ├── standalone/
 │   ├── server.js          # Entry point
@@ -117,7 +117,8 @@ pm2 start ecosystem.config.js
 
 ### The Problem
 
-ISR (Incremental Static Regeneration) uses filesystem caching by default. This **breaks with multiple instances**:
+ISR (Incremental Static Regeneration) uses filesystem caching by default. This
+**breaks with multiple instances**:
 
 - Instance A regenerates page → saves to its local disk
 - Instance B serves stale page → doesn't see Instance A's cache
@@ -244,6 +245,7 @@ Next.js Image Optimization works out of the box but is CPU-intensive.
 ### Option 1: Built-in (Simple)
 
 Works automatically, but consider:
+
 - Set `deviceSizes` and `imageSizes` in config to limit variants
 - Use `minimumCacheTTL` to reduce regeneration
 
@@ -308,7 +310,8 @@ export async function GET() {
 
 ## OpenNext: Serverless Without Vercel
 
-[OpenNext](https://open-next.js.org/) adapts Next.js for AWS Lambda, Cloudflare Workers, etc.
+[OpenNext](https://open-next.js.org/) adapts Next.js for AWS Lambda, Cloudflare Workers,
+etc.
 
 ```bash
 npx create-sst@latest
@@ -317,6 +320,7 @@ npx @opennextjs/aws build
 ```
 
 Supports:
+
 - AWS Lambda + CloudFront
 - Cloudflare Workers
 - Netlify Functions

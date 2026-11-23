@@ -1,0 +1,152 @@
+{
+  "mcpServers": {
+    "NocoDB - KVD Studio": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://nocodb.lab.kvd.studio/mcp/nc8dj3m4t6gh9eqo",
+        "--header",
+        "x-api-key: ${NOCODB_KVD_STUDIO_API_KEY}"
+      ]
+    },
+    "Eyva Langfuse (Research Assistant)": {
+      "type": "http",
+      "url": "https://langfuse.eyva.ai/api/public/mcp",
+      "headers": {
+        "Authorization": "Basic ${LANGFUSE_RESEARCH_ASSISTANT_AUTH}"
+      }
+    },
+    "Eyva Analytics Database": {
+      "command": "npx",
+      "args": [
+        "mcp-remote@latest",
+        "https://mcp-ana-db.eyva.ai/sse",
+        "--header",
+        "Authorization: Basic ${EYVA_ANALYTICS_DB_MCP_AUTH}"
+      ]
+    },
+    "Eyva Data API Database (Dev)": {
+      "command": "npx",
+      "args": [
+        "mcp-remote@latest",
+        "https://mcp-data-db.eyva.ai/sse",
+        "--header",
+        "Authorization: Basic ${EYVA_DATA_API_DB_MCP_AUTH}"
+      ]
+    },
+    "Eyva Realtime Database": {
+      "command": "npx",
+      "args": [
+        "mcp-remote@latest",
+        "https://mcp-realtime-db.eyva.ai/sse",
+        "--header",
+        "Authorization: Basic ${EYVA_REALTIME_DB_MCP_AUTH}"
+      ]
+    },
+    "Eyva Supabase (Dev)": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=oyxfwfzjcwefttmgauus&read_only=true&features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching%2Cstorage"
+    },
+    "Local Postgres MCP": {
+      "command": "npx",
+      "args": [
+        "mcp-remote@latest",
+        "http://localhost:8080/sse"
+      ]
+    },
+    "Eyva Research Assistant Tools API": {
+      "command": "npx",
+      "args": [
+        "mcp-remote@latest",
+        "http://localhost:8001/mcp",
+        "--header",
+        "Authorization: Bearer ${EYVA_RESEARCH_ASSISTANT_TOOLS_API_TOKEN}"
+      ]
+    },
+    "Eyva ClickUp": {
+      "command": "npx",
+      "args": [
+        "mcp-remote@latest",
+        "https://mcp.clickup.com/mcp"
+      ]
+    },
+    "Eyva Doppler": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@dopplerhq/mcp-server",
+        "--read-only"
+      ]
+    },
+    "Eyva Langfuse (Dev)": {
+      "type": "http",
+      "url": "https://langfuse.eyva.ai/api/public/mcp",
+      "headers": {
+        "Authorization": "Basic ${LANGFUSE_DEV_AUTH}"
+      }
+    },
+    "Eyva Langfuse (Prod)": {
+      "type": "http",
+      "url": "https://langfuse.eyva.ai/api/public/mcp",
+      "headers": {
+        "Authorization": "Basic ${LANGFUSE_PROD_AUTH}"
+      }
+    },
+    "Eyva Langfuse (Agentic Core)": {
+      "type": "http",
+      "url": "https://langfuse.eyva.ai/api/public/mcp",
+      "headers": {
+        "Authorization": "Basic ${LANGFUSE_AGENTIC_CORE_AUTH}"
+      }
+    },
+    "Eyva Langfuse (Data Platform)": {
+      "type": "http",
+      "url": "https://langfuse.eyva.ai/api/public/mcp",
+      "headers": {
+        "Authorization": "Basic ${LANGFUSE_DATA_PLATFORM_AUTH}"
+      }
+    },
+    "Eyva ReportHub Public": {
+      "type": "http",
+      "url": "https://with.eyva.ai/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${EYVA_REPORTHUB_TOKEN}"
+      }
+    },
+    "Eyva Google Sheets": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-gsheets@latest"
+      ],
+      "env": {
+        "GOOGLE_PROJECT_ID": "eyva-ai",
+        "GOOGLE_APPLICATION_CREDENTIALS": "${HOME}/.config/gcloud/application_default_credentials.json"
+      }
+    },
+    "Eyva Vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com"
+    },
+    "Eyva PostHog": {
+      "type": "http",
+      "url": "https://mcp.posthog.com/mcp"
+    },
+    "ai-memory": {
+      "type": "http",
+      "url": "https://memory.lab.kvd.studio/mcp",
+      "headers": {
+        "Authorization": "Bearer ${AI_MEMORY_TOKEN}"
+      }
+    },
+    "Wanderlog": {
+      "command": "npx",
+      "args": [
+        "wanderlog-mcp@latest"
+      ],
+      "env": {
+        "WANDERLOG_COOKIE": "${WANDERLOG_COOKIE}"
+      }
+    }
+  }
+}

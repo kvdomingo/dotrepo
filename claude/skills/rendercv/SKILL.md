@@ -13,10 +13,14 @@ description: >-
 
 ## Quick Start
 
-**Available themes:** `classic`, `harvard`, `engineeringresumes`, `engineeringclassic`, `sb2nov`, `moderncv`
-**Available locales:** `english`, `arabic`, `danish`, `dutch`, `french`, `german`, `hebrew`, `hindi`, `hungarian`, `indonesian`, `italian`, `japanese`, `korean`, `mandarin_chinese`, `norwegian_bokmål`, `norwegian_nynorsk`, `persian`, `portuguese`, `russian`, `spanish`, `turkish`, `vietnamese`
+**Available themes:** `classic`, `harvard`, `engineeringresumes`, `engineeringclassic`,
+`sb2nov`, `moderncv` **Available locales:** `english`, `arabic`, `danish`, `dutch`,
+`french`, `german`, `hebrew`, `hindi`, `hungarian`, `indonesian`, `italian`, `japanese`,
+`korean`, `mandarin_chinese`, `norwegian_bokmål`, `norwegian_nynorsk`, `persian`,
+`portuguese`, `russian`, `spanish`, `turkish`, `vietnamese`
 
-These are starting points — every aspect of the design and locale can be fully customized in the YAML file.
+These are starting points — every aspect of the design and locale can be fully
+customized in the YAML file.
 
 ```bash
 # Install RenderCV
@@ -41,7 +45,8 @@ rendercv render cv.yaml --cv.name "Jane Doe" --design.theme "moderncv"
 
 ## YAML Structure
 
-A RenderCV input has four sections. Only `cv` is required — the others have sensible defaults.
+A RenderCV input has four sections. Only `cv` is required — the others have sensible
+defaults.
 
 ```yaml
 cv:         # Your content: name, contact info, and all sections
@@ -50,7 +55,9 @@ locale:     # Language: month names, phrases, translations
 settings:   # Behavior: output paths, bold keywords, current date
 ```
 
-**Single file vs. separate files:** All four sections can live in one YAML file, or each can be a separate file. Separate files are useful for reusing the same design/locale across multiple CVs:
+**Single file vs. separate files:** All four sections can live in one YAML file, or each
+can be a separate file. Separate files are useful for reusing the same design/locale
+across multiple CVs:
 
 ```bash
 # Single self-contained file (all sections in one file)
@@ -60,9 +67,11 @@ rendercv render John_Doe_CV.yaml
 rendercv render cv.yaml --design design.yaml --locale-catalog locale.yaml --settings settings.yaml
 ```
 
-When using separate files, each file contains only its section (e.g., `design.yaml` has `design:` as the top-level key). CLI-loaded files override values in the main YAML file.
+When using separate files, each file contains only its section (e.g., `design.yaml` has
+`design:` as the top-level key). CLI-loaded files override values in the main YAML file.
 
-The YAML maps directly to Pydantic models. The complete type-safe schema is provided below so you can understand every field, its type, and its default value.
+The YAML maps directly to Pydantic models. The complete type-safe schema is provided
+below so you can understand every field, its type, and its default value.
 
 ## Pydantic Schema
 
@@ -81,7 +90,8 @@ class RenderCVModel(BaseModelWithoutExtraKeys):
 
 ### CV Content (`cv`)
 
-The `cv.sections` field is a dictionary where keys are section titles (any string you want) and values are lists of entries. Each section contains entries of the same type.
+The `cv.sections` field is a dictionary where keys are section titles (any string you
+want) and values are lists of entries. Each section contains entries of the same type.
 
 ```python
 class Cv(BaseModelWithoutExtraKeys):
@@ -119,9 +129,13 @@ class CustomConnection(BaseModelWithoutExtraKeys):
 
 ### Entry Types
 
-`cv.sections` is a dictionary: keys are section titles (any string), values are lists of entries. Each section must use a **single** entry type — you cannot mix different entry types within the same section. The entry type is auto-detected from the fields present in each entry.
+`cv.sections` is a dictionary: keys are section titles (any string), values are lists of
+entries. Each section must use a **single** entry type — you cannot mix different entry
+types within the same section. The entry type is auto-detected from the fields present
+in each entry.
 
-**Shared fields** — these are available on entry types that support dates and complex fields (ExperienceEntry, EducationEntry, NormalEntry, PublicationEntry):
+**Shared fields** — these are available on entry types that support dates and complex
+fields (ExperienceEntry, EducationEntry, NormalEntry, PublicationEntry):
 
 | Field | Type | Default | Notes |
 |---|---|---|---|
@@ -164,27 +178,38 @@ cv:
       - This is a free-form paragraph about me.
 ```
 
-Entries also accept arbitrary extra keys (silently ignored during rendering). A typo in a field name will NOT cause an error.
+Entries also accept arbitrary extra keys (silently ignored during rendering). A typo in
+a field name will NOT cause an error.
 
 ### Design (`design`)
 
-All built-in themes share the same structure — they only differ in default values. See the sample designs below for every available field and its default. Set `design.theme` to pick a theme, then override any field.
+All built-in themes share the same structure — they only differ in default values. See
+the sample designs below for every available field and its default. Set `design.theme`
+to pick a theme, then override any field.
 
 ### Locale (`locale`)
 
-Built-in locales: `english`, `arabic`, `danish`, `dutch`, `french`, `german`, `hebrew`, `hindi`, `hungarian`, `indonesian`, `italian`, `japanese`, `korean`, `mandarin_chinese`, `norwegian_bokmål`, `norwegian_nynorsk`, `persian`, `portuguese`, `russian`, `spanish`, `turkish`, `vietnamese`
+Built-in locales: `english`, `arabic`, `danish`, `dutch`, `french`, `german`, `hebrew`,
+`hindi`, `hungarian`, `indonesian`, `italian`, `japanese`, `korean`, `mandarin_chinese`,
+`norwegian_bokmål`, `norwegian_nynorsk`, `persian`, `portuguese`, `russian`, `spanish`,
+`turkish`, `vietnamese`
 
-Set `locale.language` to a built-in locale name to use it. Override any field to customize translations. Set `language` to any string and provide all translations for a fully custom locale.
+Set `locale.language` to a built-in locale name to use it. Override any field to
+customize translations. Set `language` to any string and provide all translations for a
+fully custom locale.
 
 ### Settings (`settings`)
 
-Key fields: `bold_keywords` (list of strings to auto-bold), `current_date` (override today's date), `render_command.*` (output paths, generation flags).
+Key fields: `bold_keywords` (list of strings to auto-bold), `current_date` (override
+today's date), `render_command.*` (output paths, generation flags).
 
 ## Important Patterns
 
 ### YAML quoting
 
-**ALWAYS quote string values that contain a colon (`:`).** This is the most common cause of invalid YAML. Highlights, titles, summaries, and any free-form text often contain colons:
+**ALWAYS quote string values that contain a colon (`:`).** This is the most common cause
+of invalid YAML. Highlights, titles, summaries, and any free-form text often contain
+colons:
 
 ```yaml
 # WRONG — colon breaks YAML parsing:
@@ -202,11 +227,14 @@ Rule: if a string value contains `:`, it MUST be quoted. When in doubt, quote it
 
 ### Bullet characters
 
-The `design.highlights.bullet` field only accepts these exact characters: `●`, `•`, `◦`, `-`, `◆`, `★`, `■`, `—`, `○`. Do not use en-dash (`–`), `>`, `*`, or any other character. When in doubt, omit `bullet` to use the theme default.
+The `design.highlights.bullet` field only accepts these exact characters: `●`, `•`, `◦`,
+`-`, `◆`, `★`, `■`, `—`, `○`. Do not use en-dash (`–`), `>`, `*`, or any other
+character. When in doubt, omit `bullet` to use the theme default.
 
 ### Phone numbers
 
-Phone numbers MUST be in international format with country code (E.164). Never invent a phone number — only include one if the user provides it.
+Phone numbers MUST be in international format with country code (E.164). Never invent a
+phone number — only include one if the user provides it.
 
 ```yaml
 # WRONG:
@@ -217,15 +245,19 @@ phone: "555-123-4567"
 phone: "+15551234567"
 ```
 
-If the user provides a local number without country code, ask which country, or omit the phone field.
+If the user provides a local number without country code, ask which country, or omit the
+phone field.
 
 ### Text formatting
 
-All text fields support inline Markdown: `**bold**`, `*italic*`, `[link text](url)`. Block-level Markdown (headers, lists, blockquotes, code blocks) is not supported. Raw Typst commands and math (`$$f(x)$$`) also pass through.
+All text fields support inline Markdown: `**bold**`, `*italic*`, `[link text](url)`.
+Block-level Markdown (headers, lists, blockquotes, code blocks) is not supported. Raw
+Typst commands and math (`$$f(x)$$`) also pass through.
 
 ### Date handling
 
-- `date` and `start_date`/`end_date` are mutually exclusive. If `date` is provided, `start_date` and `end_date` are ignored.
+- `date` and `start_date`/`end_date` are mutually exclusive. If `date` is provided,
+  `start_date` and `end_date` are ignored.
 - If only `start_date` is given, `end_date` defaults to `"present"`.
 - `start_date`/`end_date` require strict formats: YYYY-MM-DD, YYYY-MM, or YYYY.
 - `date` is flexible: accepts any string ("Fall 2023") in addition to date formats.
@@ -273,9 +305,12 @@ Generate PDF, Typst, Markdown, HTML, and PNG from a YAML file.
 | `--settings FILE` | `-s` | Load settings section from a separate YAML file |
 | `--output-folder DIR` | `-o` | Custom output directory |
 
-Per-format controls: `--{format}-path PATH` sets custom output path, `--dont-generate-{format}` skips generation. Formats: `pdf`, `typst`, `markdown`, `html`, `png`.
+Per-format controls: `--{format}-path PATH` sets custom output path,
+`--dont-generate-{format}` skips generation. Formats: `pdf`, `typst`, `markdown`,
+`html`, `png`.
 
-**Override any YAML field from the CLI** using dot notation (overrides without editing the file):
+**Override any YAML field from the CLI** using dot notation (overrides without editing
+the file):
 
 ```bash
 rendercv render CV.yaml --cv.name "Jane Doe" --design.theme "moderncv"
@@ -284,7 +319,8 @@ rendercv render CV.yaml --cv.sections.education.0.institution "MIT"
 
 ### `rendercv create-theme "theme-name"`
 
-Scaffold a custom theme directory with editable Typst templates for complete design control.
+Scaffold a custom theme directory with editable Typst templates for complete design
+control.
 
 ## JSON Schema
 
@@ -315,7 +351,7 @@ cv:
   custom_connections:
   sections:
     Welcome to RenderCV:
-    - RenderCV reads a CV written in a YAML file, and generates a PDF with 
+    - RenderCV reads a CV written in a YAML file, and generates a PDF with
       professional typography.
     - Each section title is arbitrary.
     education:
@@ -351,13 +387,13 @@ cv:
       location: San Francisco, CA
       summary:
       highlights:
-      - Built foundation model infrastructure serving 2M+ monthly API requests 
+      - Built foundation model infrastructure serving 2M+ monthly API requests
         with 99.97% uptime
-      - Raised $18M Series A led by Sequoia Capital, with participation from 
+      - Raised $18M Series A led by Sequoia Capital, with participation from
         a16z and Founders Fund
-      - Scaled engineering team from 3 to 28 across ML research, platform, and 
+      - Scaled engineering team from 3 to 28 across ML research, platform, and
         applied AI divisions
-      - Developed proprietary inference optimization reducing latency by 73% 
+      - Developed proprietary inference optimization reducing latency by 73%
         compared to baseline
     - company: NVIDIA Research
       position: Research Intern
@@ -367,9 +403,9 @@ cv:
       location: Santa Clara, CA
       summary:
       highlights:
-      - Designed sparse attention mechanism reducing transformer memory 
+      - Designed sparse attention mechanism reducing transformer memory
         footprint by 4.2x
-      - Co-authored paper accepted at NeurIPS 2022 (spotlight presentation, top 
+      - Co-authored paper accepted at NeurIPS 2022 (spotlight presentation, top
         5% of submissions)
     projects:
     - name: '[FlashInfer](https://github.com/)'
@@ -379,7 +415,7 @@ cv:
       location:
       summary: Open-source library for high-performance LLM inference kernels
       highlights:
-      - Achieved 2.8x speedup over baseline attention implementations on A100 
+      - Achieved 2.8x speedup over baseline attention implementations on A100
         GPUs
       - Adopted by 3 major AI labs, 8,500+ GitHub stars, 200+ contributors
     - name: '[NeuralPrune](https://github.com/)'
@@ -387,10 +423,10 @@ cv:
       start_date:
       end_date:
       location:
-      summary: Automated neural network pruning toolkit with differentiable 
+      summary: Automated neural network pruning toolkit with differentiable
         masks
       highlights:
-      - Reduced model size by 90% with less than 1% accuracy degradation on 
+      - Reduced model size by 90% with less than 1% accuracy degradation on
         ImageNet
       - Featured in PyTorch ecosystem tools, 4,200+ GitHub stars
     publications:
@@ -425,19 +461,20 @@ cv:
     patents:
     - number: Adaptive Quantization for Neural Network Inference on Edge Devices
         (US Patent 11,234,567)
-    - number: Dynamic Sparsity Patterns for Efficient Transformer Attention (US 
+    - number: Dynamic Sparsity Patterns for Efficient Transformer Attention (US
         Patent 11,345,678)
     invited_talks:
-    - reversed_number: Scaling Laws for Efficient Inference — Stanford HAI 
+    - reversed_number: Scaling Laws for Efficient Inference — Stanford HAI
         Symposium (2024)
-    - reversed_number: Building AI Infrastructure for the Next Decade — 
+    - reversed_number: Building AI Infrastructure for the Next Decade —
         TechCrunch Disrupt (2024)
 
 ```
 
 ### Sample Design (classic — complete reference)
 
-This shows every available design field with its default value. All themes share the same structure.
+This shows every available design field with its default value. All themes share the
+same structure.
 
 ```yaml
 design:
@@ -577,7 +614,10 @@ design:
 
 ### Other Theme Overrides
 
-Other themes only override specific fields from the classic defaults above. To use a theme, set `design.theme` and optionally override any field. Each theme also customizes `design.templates` (entry layout patterns) — see the classic sample above for the full template structure. The override YAMLs below omit templates for brevity.
+Other themes only override specific fields from the classic defaults above. To use a
+theme, set `design.theme` and optionally override any field. Each theme also customizes
+`design.templates` (entry layout patterns) — see the classic sample above for the full
+template structure. The override YAMLs below omit templates for brevity.
 
 #### harvard
 
@@ -802,4 +842,3 @@ design:
       space_between_items: 0.1cm
       space_between_bullet_and_text: 0.3em
 ```
-

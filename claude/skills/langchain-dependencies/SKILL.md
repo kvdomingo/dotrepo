@@ -7,10 +7,16 @@ description: "INVOKE THIS SKILL when setting up a new project or when asked abou
 The LangChain ecosystem is split into focused, independently-versioned packages. Understanding which packages you need — and their version constraints — prevents incompatibilities and keeps upgrades predictable.
 
 **Key principles:**
-- **LangChain 1.0 is the current LTS release.** Always start new projects on 1.0+. LangChain 0.3 is legacy maintenance-only — do not use it for new work.
-- **langchain-core** is the shared foundation: always install it explicitly alongside any other package.
-- **langchain-community** (Python only) does NOT follow semantic versioning; pin it conservatively.
-- **LangGraph vs Deep Agents:** choose one orchestration approach based on your use case — they are alternatives, not a required stack (see [Framework Choice](#framework-choice) below).
+
+- **LangChain 1.0 is the current LTS release.** Always start new projects on 1.0+.
+  LangChain 0.3 is legacy maintenance-only — do not use it for new work.
+- **langchain-core** is the shared foundation: always install it explicitly alongside
+  any other package.
+- **langchain-community** (Python only) does NOT follow semantic versioning; pin it
+  conservatively.
+- **LangGraph vs Deep Agents:** choose one orchestration approach based on your use case
+  — they are alternatives, not a required stack (see
+  [Framework Choice](#framework-choice) below).
 - Provider integrations (model, vector store, tools) are installed separately so you only pull in what you use.
 </overview>
 
@@ -83,7 +89,8 @@ Both sit on top of `langchain` + `langchain-core` + `langsmith`.
 
 ### Python — common tool & retrieval packages
 
-These packages have tighter compatibility requirements — use the latest available version unless you have a specific reason not to.
+These packages have tighter compatibility requirements — use the latest available
+version unless you have a specific reason not to.
 
 | Package | Adds | Notes |
 |---------|------|-------|
@@ -97,7 +104,10 @@ These packages have tighter compatibility requirements — use the latest availa
 | `langchain-weaviate` | Weaviate vector store | Dedicated integration package; prefer latest |
 | `langsmith[pytest]` | pytest plugin for LangSmith | Requires langsmith >= 0.3.4 |
 
-> **langchain-community stability note:** This package is NOT on semantic versioning. Minor releases can contain breaking changes. Prefer dedicated integration packages (e.g. `langchain-chroma`, `langchain-tavily`) when they exist — they are independently versioned and more stable.
+> **langchain-community stability note:** This package is NOT on semantic versioning.
+> Minor releases can contain breaking changes. Prefer dedicated integration packages
+> (e.g. `langchain-chroma`, `langchain-tavily`) when they exist — they are independently
+> versioned and more stable.
 
 </python-packages>
 
@@ -142,7 +152,8 @@ These packages have tighter compatibility requirements — use the latest availa
 | `@langchain/qdrant` | Qdrant vector store | Dedicated integration package; prefer latest |
 | `@langchain/weaviate` | Weaviate vector store | Dedicated integration package; prefer latest |
 
-> **`@langchain/core` must be installed explicitly** in yarn workspaces and monorepos — it is a peer dependency and will not always be hoisted automatically.
+> **`@langchain/core` must be installed explicitly** in yarn workspaces and monorepos —
+> it is a peer dependency and will not always be hoisted automatically.
 
 </typescript-packages>
 
@@ -160,11 +171,15 @@ langchain-core>=1.0,<2.0
 langgraph>=1.0,<2.0
 langsmith>=0.3.0
 
-# Add your model provider, e.g.:
-# langchain-openai
-# langchain-anthropic
-# langchain-google-genai
-```
+# Add your model provider, e.g
+
+## langchain-openai
+
+## langchain-anthropic
+
+## langchain-google-genai
+
+```text
 </python>
 </ex-langgraph-python>
 
@@ -181,6 +196,7 @@ Minimal package.json dependencies for a LangGraph project (provider-agnostic).
   }
 }
 ```
+
 </typescript>
 </ex-langgraph-typescript>
 
@@ -194,10 +210,13 @@ langchain>=1.0,<2.0
 langchain-core>=1.0,<2.0
 langsmith>=0.3.0
 
-# Add your model provider, e.g.:
-# langchain-anthropic
-# langchain-openai
-```
+## Add your model provider, e.g
+
+## langchain-anthropic
+
+## langchain-openai
+
+```text
 </python>
 </ex-deepagents-python>
 
@@ -214,6 +233,7 @@ Minimal package.json dependencies for a Deep Agents project (provider-agnostic).
   }
 }
 ```
+
 </typescript>
 </ex-deepagents-typescript>
 
@@ -227,20 +247,27 @@ langchain-core>=1.0,<2.0
 langgraph>=1.0,<2.0
 langsmith>=0.3.0
 
-# Web search
-langchain-tavily          # use latest; partner package, semver
+## Web search
 
-# Vector store — pick one:
-langchain-chroma          # use latest; partner package, semver
-# langchain-pinecone      # use latest; partner package, semver
-# langchain-qdrant        # use latest; partner package, semver
+langchain-tavily # use latest; partner package, semver
 
-# Text processing
-langchain-text-splitters  # use latest; semver
+## Vector store — pick one
 
-# Your model provider:
-# langchain-openai / langchain-anthropic / etc.
-```
+langchain-chroma # use latest; partner package, semver
+
+## langchain-pinecone # use latest; partner package, semver
+
+## langchain-qdrant        # use latest; partner package, semver
+
+## Text processing
+
+langchain-text-splitters # use latest; semver
+
+## Your model provider
+
+## langchain-openai / langchain-anthropic / etc
+
+```text
 </python>
 </ex-with-tools-python>
 
@@ -259,12 +286,13 @@ Adding Tavily search and a vector store to a LangGraph project.
   }
 }
 ```
+
 </typescript>
 </ex-with-tools-typescript>
 
 ---
 
-## Versioning Policy & Upgrade Strategy
+### Versioning Policy & Upgrade Strategy
 
 <versioning-policy>
 
@@ -277,17 +305,23 @@ Adding Tavily search and a vector store to a LangGraph project.
 | `langchain-community` | **NOT semver** | Pin exact minor: `>=0.4.0,<0.5.0` |
 | `deepagents` | Follow project releases | Pin to tested version in production |
 
-**Breaking changes only happen in major versions** (1.x → 2.x) for all semver-compliant packages. Deprecated features remain functional across the entire 1.x series with warnings.
+**Breaking changes only happen in major versions** (1.x → 2.x) for all semver-compliant
+packages. Deprecated features remain functional across the entire 1.x series with
+warnings.
 
-**Prefer dedicated integration packages over langchain-community.** When a dedicated package exists (e.g. `langchain-chroma` instead of `langchain-community`'s Chroma integration), use it — dedicated packages are independently versioned and better tested.
+**Prefer dedicated integration packages over langchain-community.** When a dedicated
+package exists (e.g. `langchain-chroma` instead of `langchain-community`'s Chroma
+integration), use it — dedicated packages are independently versioned and better tested.
 
-**Community tool packages (Tavily, vector stores, etc.) should be kept at latest** unless your project requires a locked environment. These packages frequently release compatibility fixes alongside LangChain/LangGraph updates.
+**Community tool packages (Tavily, vector stores, etc.) should be kept at latest**
+unless your project requires a locked environment. These packages frequently release
+compatibility fixes alongside LangChain/LangGraph updates.
 
 </versioning-policy>
 
 ---
 
-## Environment Variables
+### Environment Variables
 
 <environment-variables>
 All keys are read from the environment at runtime. Set only the keys for services you actually use.
@@ -312,11 +346,12 @@ HUGGINGFACEHUB_API_TOKEN=<your-key>
 TAVILY_API_KEY=<your-key>          # for Tavily search
 PINECONE_API_KEY=<your-key>        # for Pinecone
 ```
+
 </environment-variables>
 
 ---
 
-## Common Mistakes
+### Common Mistakes
 
 <fix-legacy-version>
 Never start a new project on LangChain 0.3. It is maintenance-only until December 2026.
@@ -324,32 +359,42 @@ Never start a new project on LangChain 0.3. It is maintenance-only until Decembe
 # WRONG: legacy, no new features, security patches only
 langchain>=0.3,<0.4
 
-# CORRECT: LangChain 1.0 LTS
+## CORRECT: LangChain 1.0 LTS
+
 langchain>=1.0,<2.0
-```
+
+```text
 </fix-legacy-version>
 
 <fix-community-unpinned>
 `langchain-community` can break on minor version bumps — it does not follow semver.
 ```
-# WRONG: allows minor-version updates that may be breaking
+
+## WRONG: allows minor-version updates that may be breaking
+
 langchain-community>=0.4
 
-# CORRECT: pin to exact minor series
+## CORRECT: pin to exact minor series
+
 langchain-community>=0.4.0,<0.5.0
-```
+
+```text
 Also consider switching to the equivalent dedicated integration package if one exists (e.g. `langchain-chroma` instead of the community Chroma integration).
 </fix-community-unpinned>
 
 <fix-community-tool-outdated>
 Community tool packages like `langchain-tavily` and vector store integrations release compatibility fixes alongside LangChain updates. Using an old pinned version can cause import errors or broken tool schemas.
 ```
-# RISKY: old pin may be incompatible with LangChain 1.0
+
+## RISKY: old pin may be incompatible with LangChain 1.0
+
 langchain-tavily==0.0.1
 
-# BETTER: allow latest within the current major
+## BETTER: allow latest within the current major
+
 langchain-tavily>=0.1
-```
+
+```text
 </fix-community-tool-outdated>
 
 <fix-community-import-deprecated>
@@ -369,10 +414,12 @@ from langchain_chroma import Chroma                       # pip: langchain-chrom
 from langchain_pinecone import PineconeVectorStore        # pip: langchain-pinecone
 ```
 
-To find the current canonical import for any integration, search the integrations directory:
-https://python.langchain.com/docs/integrations/tools/
+To find the current canonical import for any integration, search the integrations
+directory:
+<https://python.langchain.com/docs/integrations/tools/>
 
-Each entry shows the correct package and import path. If a dedicated package exists, use it — the community path may still work but is considered legacy.
+Each entry shows the correct package and import path. If a dedicated package exists, use
+it — the community path may still work but is considered legacy.
 </fix-community-import-deprecated>
 
 <fix-core-not-installed>
@@ -393,7 +440,8 @@ Each entry shows the correct package and import path. If a dedicated package exi
     "@langchain/langgraph": "^1.0.0"
   }
 }
-```
+
+```text
 </typescript>
 </fix-core-not-installed>
 
@@ -405,6 +453,7 @@ Python 3.9 and below are not supported by LangChain 1.0.
 import sys
 assert sys.version_info >= (3, 10), "Python 3.10+ required for LangChain 1.0"
 ```
+
 </python>
 </fix-python-version>
 

@@ -36,11 +36,13 @@ import 'katex/dist/katex.min.css'; // Required for math
 Syntax highlighting via Shiki. Supports 200+ languages (lazy-loaded on demand).
 
 **Install:**
+
 ```bash
 npm install @streamdown/code
 ```
 
 **Default usage:**
+
 ```tsx
 import { code } from '@streamdown/code';
 
@@ -48,6 +50,7 @@ import { code } from '@streamdown/code';
 ```
 
 **Custom themes:**
+
 ```tsx
 import { createCodePlugin } from '@streamdown/code';
 
@@ -57,6 +60,7 @@ const code = createCodePlugin({
 ```
 
 Theme is also configurable via the `shikiTheme` prop on Streamdown:
+
 ```tsx
 <Streamdown plugins={{ code }} shikiTheme={['one-light', 'one-dark-pro']}>
   {markdown}
@@ -64,16 +68,19 @@ Theme is also configurable via the `shikiTheme` prop on Streamdown:
 ```
 
 **Features:**
+
 - Copy button on hover (disabled during streaming)
 - Download button with correct file extension
 - 200+ languages: js, ts, python, go, java, rust, c, cpp, ruby, php, swift, kotlin, etc.
 - Token caching for performance
 - Lazy language loading
 
-**Streaming behavior:** Unterminated code blocks are gracefully handled by remend. Copy/download buttons disabled when `isAnimating={true}`.
+**Streaming behavior:** Unterminated code blocks are gracefully handled by remend.
+Copy/download buttons disabled when `isAnimating={true}`.
 
-**Common issue — Shiki external package warning:**
-If using Next.js and seeing warnings, install shiki explicitly and add to `next.config.js`:
+**Common issue — Shiki external package warning:** If using Next.js and seeing warnings,
+install shiki explicitly and add to `next.config.js`:
+
 ```js
 transpilePackages: ['shiki'],
 ```
@@ -83,11 +90,13 @@ transpilePackages: ['shiki'],
 Interactive Mermaid diagrams.
 
 **Install:**
+
 ```bash
 npm install @streamdown/mermaid
 ```
 
 **Default usage:**
+
 ```tsx
 import { mermaid } from '@streamdown/mermaid';
 
@@ -95,6 +104,7 @@ import { mermaid } from '@streamdown/mermaid';
 ```
 
 **Custom config:**
+
 ```tsx
 import { createMermaidPlugin } from '@streamdown/mermaid';
 
@@ -107,6 +117,7 @@ const mermaid = createMermaidPlugin({
 ```
 
 **Mermaid options on Streamdown:**
+
 ```tsx
 <Streamdown
   plugins={{ mermaid }}
@@ -124,9 +135,12 @@ const mermaid = createMermaidPlugin({
 </Streamdown>
 ```
 
-**Supported diagram types:** Flowcharts, sequence, state, class, pie, Gantt, ER, git graphs.
+**Supported diagram types:** Flowcharts, sequence, state, class, pie, Gantt, ER, git
+graphs.
 
-**Interactive controls:** Fullscreen, download SVG, copy source, pan/zoom. Customize via `controls` prop:
+**Interactive controls:** Fullscreen, download SVG, copy source, pan/zoom. Customize via
+`controls` prop:
+
 ```tsx
 <Streamdown
   plugins={{ mermaid }}
@@ -136,18 +150,21 @@ const mermaid = createMermaidPlugin({
 >
 ```
 
-**Streaming behavior:** Diagrams render as code blocks until the mermaid block is complete.
+**Streaming behavior:** Diagrams render as code blocks until the mermaid block is
+complete.
 
 ## @streamdown/math
 
 LaTeX math via KaTeX.
 
 **Install:**
+
 ```bash
 npm install @streamdown/math
 ```
 
 **Usage (CSS import required):**
+
 ```tsx
 import { math } from '@streamdown/math';
 import 'katex/dist/katex.min.css';
@@ -156,6 +173,7 @@ import 'katex/dist/katex.min.css';
 ```
 
 **Custom config:**
+
 ```tsx
 import { createMathPlugin } from '@streamdown/math';
 
@@ -166,6 +184,7 @@ const math = createMathPlugin({
 ```
 
 **Syntax:**
+
 - Inline: `$$E = mc^2$$` (same line)
 - Block: `$$\nE = mc^2\n$$` (separate lines)
 - Default uses double `$$` only (not single `$`) to avoid conflicts with currency
@@ -177,11 +196,13 @@ const math = createMathPlugin({
 Chinese, Japanese, Korean text support.
 
 **Install:**
+
 ```bash
 npm install @streamdown/cjk
 ```
 
 **Usage:**
+
 ```tsx
 import { cjk } from '@streamdown/cjk';
 
@@ -189,6 +210,7 @@ import { cjk } from '@streamdown/cjk';
 ```
 
 **What it fixes:**
+
 - Emphasis markers adjacent to ideographic punctuation (bold, italic, strikethrough)
 - Autolinks swallowing trailing CJK punctuation
 
@@ -197,6 +219,7 @@ import { cjk } from '@streamdown/cjk';
 ## Built-in Remark Plugins
 
 **remark-gfm** — GitHub Flavored Markdown:
+
 - Tables (with alignment)
 - Task lists (`- [ ]`, `- [x]`)
 - Strikethrough (`~~text~~`)
@@ -206,8 +229,11 @@ import { cjk } from '@streamdown/cjk';
 ## Built-in Rehype Plugins
 
 1. **rehype-raw** — Preserves raw HTML in Markdown
+
 2. **rehype-sanitize** — XSS protection
+
 3. **rehype-harden** — URL/protocol restrictions:
+
    ```tsx
    {
      allowedImagePrefixes: ['*'],
@@ -233,6 +259,7 @@ import { defaultRemarkPlugins, defaultRehypePlugins } from 'streamdown';
 ```
 
 **Disable HTML entirely** by omitting rehype-raw:
+
 ```tsx
 const { raw, ...rest } = defaultRehypePlugins;
 <Streamdown rehypePlugins={Object.values(rest)}>{markdown}</Streamdown>

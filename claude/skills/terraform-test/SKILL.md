@@ -8,27 +8,36 @@ metadata:
 
 # Terraform Test
 
-Terraform's built-in testing framework validates that configuration updates don't introduce breaking changes. Tests run against temporary resources, protecting existing infrastructure and state files.
+Terraform's built-in testing framework validates that configuration updates don't
+introduce breaking changes. Tests run against temporary resources, protecting existing
+infrastructure and state files.
 
 ## Reference Files
 
-- `references/MOCK_PROVIDERS.md` — Mock provider syntax, common defaults, when to use mocks (Terraform 1.7.0+ only — skip if the user's version is below 1.7)
+- `references/MOCK_PROVIDERS.md` — Mock provider syntax, common defaults, when to use
+  mocks (Terraform 1.7.0+ only — skip if the user's version is below 1.7)
 - `references/CI_CD.md` — GitHub Actions and GitLab CI pipeline examples
-- `references/EXAMPLES.md` — Complete example test suite (unit, integration, and mock tests for a VPC module)
+- `references/EXAMPLES.md` — Complete example test suite (unit, integration, and mock
+  tests for a VPC module)
 
-Read the relevant reference file when the user asks about mocking, CI/CD integration, or wants a full example.
+Read the relevant reference file when the user asks about mocking, CI/CD integration, or
+wants a full example.
 
 ## Core Concepts
 
-- **Test file** (`.tftest.hcl` / `.tftest.json`): Contains `run` blocks that validate your configuration
-- **Run block**: A single test scenario with optional variables, providers, and assertions
+- **Test file** (`.tftest.hcl` / `.tftest.json`): Contains `run` blocks that validate
+  your configuration
+- **Run block**: A single test scenario with optional variables, providers, and
+  assertions
 - **Assert block**: Conditions that must be true for the test to pass
-- **Mock provider**: Simulates provider behavior without real infrastructure (Terraform 1.7.0+)
-- **Test modes**: `apply` (default, creates real resources) or `plan` (validates logic only)
+- **Mock provider**: Simulates provider behavior without real infrastructure (Terraform
+  1.7.0+)
+- **Test modes**: `apply` (default, creates real resources) or `plan` (validates logic
+  only)
 
 ## File Structure
 
-```
+```text
 my-module/
 ├── main.tf
 ├── variables.tf
@@ -39,7 +48,8 @@ my-module/
     └── full_stack_integration_test.tftest.hcl # apply mode — creates real resources
 ```
 
-Use `*_unit_test.tftest.hcl` for plan-mode tests and `*_integration_test.tftest.hcl` for apply-mode tests so they can be filtered separately in CI.
+Use `*_unit_test.tftest.hcl` for plan-mode tests and `*_integration_test.tftest.hcl` for
+apply-mode tests so they can be filtered separately in CI.
 
 ## Test File Structure
 
@@ -407,7 +417,9 @@ assert {
 
 ## Cleanup
 
-Resources are destroyed in **reverse run block order** after test completion. This matters for dependencies (e.g., S3 objects before bucket). Use `terraform test -no-cleanup` to skip cleanup for debugging.
+Resources are destroyed in **reverse run block order** after test completion. This
+matters for dependencies (e.g., S3 objects before bucket). Use
+`terraform test -no-cleanup` to skip cleanup for debugging.
 
 ## Running Tests
 
@@ -422,17 +434,28 @@ terraform test -no-cleanup                           # skip resource cleanup
 
 ## Best Practices
 
-1. **Naming**: `*_unit_test.tftest.hcl` for plan mode, `*_integration_test.tftest.hcl` for apply mode
-2. **Test naming**: Use descriptive run block names that explain the scenario being tested
-3. **Default to plan**: Use `command = plan` unless you need to test real resource behavior
-4. **Use mocks** for external dependencies — faster and no credentials needed (see `references/MOCK_PROVIDERS.md`)
-5. **Error messages**: Make them specific enough to diagnose failures without running the test again
-6. **Negative tests**: Use `expect_failures` to verify validation rules reject bad inputs
-7. **Variable coverage**: Test different variable combinations to validate all code paths — test variables have the highest precedence and override all other sources
-8. **Module sources**: Test files only support local paths and registry modules — not git or HTTP URLs
-9. **Parallel execution**: Use `parallel = true` for independent tests with different state files
-10. **Cleanup**: Integration tests destroy resources in reverse run block order automatically; use `-no-cleanup` for debugging
-11. **CI/CD**: Run unit tests on every PR, integration tests on merge (see `references/CI_CD.md`)
+1. **Naming**: `*_unit_test.tftest.hcl` for plan mode, `*_integration_test.tftest.hcl`
+   for apply mode
+2. **Test naming**: Use descriptive run block names that explain the scenario being
+   tested
+3. **Default to plan**: Use `command = plan` unless you need to test real resource
+   behavior
+4. **Use mocks** for external dependencies — faster and no credentials needed (see
+   `references/MOCK_PROVIDERS.md`)
+5. **Error messages**: Make them specific enough to diagnose failures without running
+   the test again
+6. **Negative tests**: Use `expect_failures` to verify validation rules reject bad
+   inputs
+7. **Variable coverage**: Test different variable combinations to validate all code
+   paths — test variables have the highest precedence and override all other sources
+8. **Module sources**: Test files only support local paths and registry modules — not
+   git or HTTP URLs
+9. **Parallel execution**: Use `parallel = true` for independent tests with different
+   state files
+10. **Cleanup**: Integration tests destroy resources in reverse run block order
+    automatically; use `-no-cleanup` for debugging
+11. **CI/CD**: Run unit tests on every PR, integration tests on merge (see
+    `references/CI_CD.md`)
 
 ## Troubleshooting
 

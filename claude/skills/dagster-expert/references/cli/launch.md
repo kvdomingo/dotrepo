@@ -4,7 +4,8 @@ triggers:
   - "materializing assets or executing jobs locally"
 ---
 
-`dg launch` executes runs of assets or jobs locally and in-process. Useful for development but will NOT execute runs on a remote Dagster deployment.
+`dg launch` executes runs of assets or jobs locally and in-process. Useful for
+development but will NOT execute runs on a remote Dagster deployment.
 
 ```bash
 dg launch --assets <selection>

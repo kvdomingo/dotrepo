@@ -31,6 +31,7 @@ remote_state {
 ```
 
 Key settings:
+
 - **encrypt = true** - Enable server-side encryption
 - **dynamodb_table** - Enable state locking
 - **path_relative_to_include()** - Unique key per unit
@@ -40,7 +41,7 @@ Key settings:
 
 Each unit gets its own state file through `path_relative_to_include()`:
 
-```
+```text
 infrastructure-live/
 ├── non-prod/us-east-1/staging/api/     → tfstate-myproject-nonprod-staging-us-east-1/non-prod/us-east-1/staging/api/terraform.tfstate
 ├── non-prod/us-east-1/staging/db/      → tfstate-myproject-nonprod-staging-us-east-1/non-prod/us-east-1/staging/db/terraform.tfstate
@@ -48,6 +49,7 @@ infrastructure-live/
 ```
 
 Benefits:
+
 - Blast radius limited to single unit
 - Independent apply/destroy operations
 - Clear state file organization
@@ -71,6 +73,7 @@ locals {
 ```
 
 This creates separate buckets per environment:
+
 - `tfstate-myproject-nonprod-staging-us-east-1`
 - `tfstate-myproject-nonprod-dev-us-east-1`
 
@@ -79,19 +82,22 @@ This creates separate buckets per environment:
 ### Prerequisites
 
 Before first Terragrunt run, create:
+
 1. S3 bucket with versioning and encryption
 2. DynamoDB table for locking
 3. IAM role with appropriate permissions
 
 ### Setup Script
 
-> **Note:** This script currently only supports AWS (S3 + DynamoDB). GCP and Azure are not yet supported.
+> **Note:** This script currently only supports AWS (S3 + DynamoDB). GCP and Azure are
+> not yet supported.
 
-The `setup-state-backend.sh` script auto-discovers accounts, regions, and environments from your directory structure and creates S3 buckets and DynamoDB lock tables.
+The `setup-state-backend.sh` script auto-discovers accounts, regions, and environments
+from your directory structure and creates S3 buckets and DynamoDB lock tables.
 
 #### Required Directory Structure
 
-```
+```text
 infrastructure-live/
 ├── setup-state-backend.sh        # Run from here
 ├── root.hcl
@@ -109,6 +115,7 @@ infrastructure-live/
 #### Required HCL Variables
 
 **account.hcl** (required):
+
 ```hcl
 locals {
   account_name   = "myproject-nonprod"  # Used in bucket name
@@ -117,6 +124,7 @@ locals {
 ```
 
 **env.hcl** (optional - for environment isolation):
+
 ```hcl
 locals {
   environment         = "staging"
@@ -140,10 +148,13 @@ locals {
 #### What It Creates
 
 For each discovered account/region/environment:
-- **S3 Bucket** with versioning, KMS encryption, public access blocked, TLS-enforced policy
+
+- **S3 Bucket** with versioning, KMS encryption, public access blocked, TLS-enforced
+  policy
 - **DynamoDB Table** with `LockID` key for state locking
 
 The script:
+
 - Parses account.hcl and env.hcl files
 - Creates S3 buckets with versioning, encryption, and TLS enforcement
 - Creates DynamoDB tables for locking
@@ -170,12 +181,14 @@ terragrunt init -migrate-state
 Terragrunt recommends against OpenTofu/Terraform workspaces:
 
 **Don't use:**
+
 ```hcl
 terraform workspace select dev
 ```
 
 **Do use:** Separate directories per environment with isolated state:
-```
+
+```text
 non-prod/us-east-1/staging/api/
 non-prod/us-east-1/dev/api/
 prod/us-east-1/prod/api/

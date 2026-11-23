@@ -4,11 +4,12 @@ triggers:
   - "how dbt tests map to Dagster asset checks"
 ---
 
-# Asset Checks
+## Asset Checks
 
-dbt tests are loaded as Dagster asset checks by default (enabled in dagster-dbt 0.23.0+).
+dbt tests are loaded as Dagster asset checks by default (enabled in dagster-dbt
+0.23.0+).
 
-## Enabling Source Tests
+### Enabling Source Tests
 
 By default, only tests on dbt models are loaded as checks. To include tests on sources:
 
@@ -39,10 +40,10 @@ def my_dbt_assets(context, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 ```
 
-## Singular Tests with Multiple Dependencies
+### Singular Tests with Multiple Dependencies
 
-For singular tests that depend on multiple models, specify the target model in the test's config
-block:
+For singular tests that depend on multiple models, specify the target model in the
+test's config block:
 
 ```sql
 {{
@@ -63,5 +64,6 @@ SELECT ...
 ```
 
 The `ref` structure mirrors dbt's
-[ref function](https://docs.getdbt.com/reference/dbt-jinja-functions/ref) parameters. Without this
-metadata, the test still runs but emits an AssetObservation instead of an asset check result.
+[ref function](https://docs.getdbt.com/reference/dbt-jinja-functions/ref) parameters.
+Without this metadata, the test still runs but emits an AssetObservation instead of an
+asset check result.

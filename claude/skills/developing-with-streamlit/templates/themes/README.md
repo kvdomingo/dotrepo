@@ -32,16 +32,18 @@ Before deploying, update `snowflake.yml` with your account-specific resources:
 # Find available compute pools
 SHOW COMPUTE POOLS;
 
-# Find available external access integrations  
+# Find available external access integrations
 SHOW EXTERNAL ACCESS INTEGRATIONS;
 ```
 
 Then edit `snowflake.yml` to replace the placeholders:
+
 - `<YOUR_COMPUTE_POOL>` → e.g., `STREAMLIT_DEDICATED_POOL`
 - `<YOUR_PYPI_INTEGRATION>` → e.g., `PYPI_ACCESS_INTEGRATION`
 - `<FROM_CONNECTION>` values are filled from your active connection
 
 Deploy with:
+
 ```bash
 snow streamlit deploy --replace
 ```
@@ -97,7 +99,7 @@ borderColor = "#282828"
 
 Each theme directory contains:
 
-```
+```text
 {theme}/
 ├── .streamlit/config.toml   # Theme colors and fonts
 ├── streamlit_app.py         # Demo app showing the theme
@@ -109,14 +111,18 @@ Each theme directory contains:
 ## Dependencies
 
 All themes require Python >=3.11 and use:
-- `snowflake-connector-python>=3.3.0` (required — `streamlit[snowflake]` silently skips this on Python 3.12+)
+
+- `snowflake-connector-python>=3.3.0` (required — `streamlit[snowflake]` silently skips
+  this on Python 3.12+)
 - `streamlit[snowflake]>=1.54.0`
 - `altair>=5.5.0`
 - `pandas>=2.2.3`
 
 ## Font licensing
 
-All bundled fonts are licensed under the [SIL Open Font License 1.1](https://openfontlicense.org/), which permits free use, redistribution, and modification:
+All bundled fonts are licensed under the
+[SIL Open Font License 1.1](https://openfontlicense.org/), which permits free use,
+redistribution, and modification:
 
 | Font | Used by | Source |
 |------|---------|--------|

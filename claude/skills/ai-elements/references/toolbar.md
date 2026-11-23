@@ -1,10 +1,11 @@
 # Toolbar
 
-A styled toolbar component for React Flow nodes with flexible positioning and custom actions.
+A styled toolbar component for React Flow nodes with flexible positioning and custom
+actions.
 
-The `Toolbar` component provides a positioned toolbar that attaches to nodes in React Flow canvases. It features modern card styling with backdrop blur and flexbox layout for action buttons and controls.
-
-
+The `Toolbar` component provides a positioned toolbar that attaches to nodes in React
+Flow canvases. It features modern card styling with backdrop blur and flexbox layout for
+action buttons and controls.
 
 ## Installation
 

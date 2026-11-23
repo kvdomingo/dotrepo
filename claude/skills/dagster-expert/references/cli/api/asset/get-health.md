@@ -10,4 +10,5 @@ Get asset health and runtime status information.
 dg api asset get-health <ASSET_KEY>
 ```
 
-For prefixed asset keys, use slash-separated syntax: `dg api asset get-health my_prefix/my_asset`.
+For prefixed asset keys, use slash-separated syntax:
+`dg api asset get-health my_prefix/my_asset`.

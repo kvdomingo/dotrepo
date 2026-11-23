@@ -4,6 +4,7 @@ triggers:
   - "duckdb polars, duckdb dataframe"
 ---
 
-# dagster-duckdb-polars
+## dagster-duckdb-polars
 
-Docs: https://docs.dagster.io/integrations/libraries/duckdb/reference#dagster-duckdb-polars
+Docs:
+<https://docs.dagster.io/integrations/libraries/duckdb/reference#dagster-duckdb-polars>

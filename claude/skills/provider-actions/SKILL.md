@@ -10,9 +10,12 @@ metadata:
 
 ## Overview
 
-Terraform Actions enable imperative operations during the Terraform lifecycle. Actions are experimental features that allow performing provider operations at specific lifecycle events (before/after create, update, destroy).
+Terraform Actions enable imperative operations during the Terraform lifecycle. Actions
+are experimental features that allow performing provider operations at specific
+lifecycle events (before/after create, update, destroy).
 
 **References:**
+
 - [Terraform Plugin Framework](https://developer.hashicorp.com/terraform/plugin/framework)
 - [Terraform Actions RFC](https://github.com/hashicorp/terraform/blob/main/docs/plugin-protocol/actions.md)
 
@@ -20,7 +23,7 @@ Terraform Actions enable imperative operations during the Terraform lifecycle. A
 
 Actions follow the standard service package structure:
 
-```
+```text
 internal/service/<service>/
 ├── <action_name>_action.go       # Action implementation
 ├── <action_name>_action_test.go  # Action tests
@@ -28,13 +31,15 @@ internal/service/<service>/
 ```
 
 Documentation structure:
-```
+
+```text
 website/docs/actions/
 └── <service>_<action_name>.html.markdown  # User-facing documentation
 ```
 
 Changelog entry:
-```
+
+```text
 .changelog/
 └── <pr_number_or_description>.txt  # Release note entry
 ```
@@ -74,6 +79,7 @@ func (a *actionType) Schema(ctx context.Context, req action.SchemaRequest, resp 
    - Mixing framework types with plugin-framework types
 
 2. **List/Map Element Types**
+
    ```go
    // WRONG - missing ElementType
    "items": schema.ListAttribute{
@@ -92,6 +98,7 @@ func (a *actionType) Schema(ctx context.Context, req action.SchemaRequest, resp 
    - Don't mark action inputs as `Computed` unless they have defaults
 
 4. **Validator Imports**
+
    ```go
    // Ensure proper imports
    "github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
@@ -109,6 +116,7 @@ func (a *actionType) Schema(ctx context.Context, req action.SchemaRequest, resp 
 ### Schema Validation Checklist
 
 Before submitting, verify:
+
 - [ ] All attributes have descriptions
 - [ ] List/Map attributes have ElementType defined
 - [ ] Validators are imported and applied correctly
@@ -165,6 +173,7 @@ func (a *actionType) Invoke(ctx context.Context, req action.InvokeRequest, resp 
 - Document all possible error cases
 
 Example error handling:
+
 ```go
 // Handle specific errors
 var notFound *types.ResourceNotFoundException
@@ -232,12 +241,14 @@ result, err := wait.WaitForStatus(ctx,
 ## Common Action Patterns
 
 ### Batch Operations
+
 - Process items in configurable batches
 - Report progress per batch
 - Handle partial failures gracefully
 - Support prefix/filter parameters
 
 ### Command Execution
+
 - Submit command and get operation ID
 - Poll for completion status
 - Retrieve and report output
@@ -245,18 +256,21 @@ result, err := wait.WaitForStatus(ctx,
 - Validate resources exist before execution
 
 ### Service Invocation
+
 - Invoke service with parameters
 - Wait for completion (if synchronous)
 - Return output/results
 - Handle service-specific errors
 
 ### Resource State Changes
+
 - Validate current state
 - Apply state change
 - Poll for target state
 - Handle transitional states
 
 ### Async Job Submission
+
 - Submit job with configuration
 - Get job ID
 - Optionally wait for completion
@@ -286,12 +300,14 @@ resource "terraform_data" "trigger" {
 ### Available Trigger Events
 
 **Terraform 1.14.0 Supported Events:**
+
 - `before_create` - Before resource creation
 - `after_create` - After resource creation
 - `before_update` - Before resource update
 - `after_update` - After resource update
 
 **Not Supported in Terraform 1.14.0:**
+
 - `before_destroy` - Not available (will cause validation error)
 - `after_destroy` - Not available (will cause validation error)
 
@@ -378,30 +394,37 @@ func sweepResources(region string) error {
 ### Testing Best Practices
 
 **Service-Specific Prerequisites**
-- Always check for service-specific prerequisites that must be met before actions can succeed
+
+- Always check for service-specific prerequisites that must be met before actions can
+  succeed
 - Document prerequisites in action documentation and test configurations
 
 **Error Pattern Matching**
+
 - Terraform wraps action errors with additional context
 - Use flexible regex patterns: `regexache.MustCompile(\`(?s)Error Title.*key phrase\`)`
 
 **Test Patterns Not Applicable to Actions**
+
 1. Actions trigger on lifecycle events, not config reapplication
 2. Before/After Destroy Tests: Not supported in Terraform 1.14.0
 
 ### Running Tests
 
 Compile test to check for errors:
+
 ```bash
 go test -c -o /dev/null ./internal/service/<service>
 ```
 
 Run specific action tests:
+
 ```bash
 TF_ACC=1 go test ./internal/service/<service> -run TestAccServiceAction_ -v
 ```
 
 Run sweep to clean up test resources:
+
 ```bash
 TF_ACC=1 go test ./internal/service/<service> -sweep=<region> -v
 ```
@@ -411,6 +434,7 @@ TF_ACC=1 go test ./internal/service/<service> -sweep=<region> -v
 Each action documentation file must include:
 
 1. **Front Matter**
+
    ```yaml
    ---
    subcategory: "Service Name"
@@ -445,11 +469,12 @@ Each action documentation file must include:
 
 Create a changelog entry in `.changelog/` directory:
 
-```
+```text
 .changelog/<pr_number_or_description>.txt
 ```
 
 Content format:
+
 ```release-note:new-action
 action/provider_service_action: Brief description of the action
 ```
@@ -461,7 +486,8 @@ Before submitting your action implementation:
 - [ ] Code compiles: `go build -o /dev/null .`
 - [ ] Tests compile: `go test -c -o /dev/null ./internal/service/<service>`
 - [ ] Code formatted: `make fmt`
-- [ ] Documentation formatted: `terrafmt fmt website/docs/actions/<action>.html.markdown`
+- [ ] Documentation formatted:
+      `terrafmt fmt website/docs/actions/<action>.html.markdown`
 - [ ] Changelog entry created
 - [ ] Schema uses correct types
 - [ ] All List/Map attributes have ElementType

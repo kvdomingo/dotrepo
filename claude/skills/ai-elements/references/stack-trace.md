@@ -1,8 +1,10 @@
 # Stack Trace
 
-Displays formatted JavaScript/Node.js error stack traces with syntax highlighting and collapsible frames.
+Displays formatted JavaScript/Node.js error stack traces with syntax highlighting and
+collapsible frames.
 
-The `StackTrace` component displays formatted JavaScript/Node.js error stack traces with clickable file paths, internal frame dimming, and collapsible content.
+The `StackTrace` component displays formatted JavaScript/Node.js error stack traces with
+clickable file paths, internal frame dimming, and collapsible content.
 
 See `scripts/stack-trace.tsx` for this example.
 
@@ -14,7 +16,8 @@ npx ai-elements@latest add stack-trace
 
 ## Usage with AI SDK
 
-Build an error display tool that shows stack traces from AI-generated code using the [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) hook.
+Build an error display tool that shows stack traces from AI-generated code using the
+[`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) hook.
 
 Add the following component to your frontend:
 

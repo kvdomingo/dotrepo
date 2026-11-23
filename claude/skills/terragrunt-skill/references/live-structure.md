@@ -2,7 +2,7 @@
 
 ## Directory Layout
 
-```
+```text
 infrastructure-live/
 ├── root.hcl                    # Root configuration
 ├── setup-state-backend.sh      # State bucket setup script
@@ -19,7 +19,7 @@ infrastructure-live/
 
 ## Example Structure
 
-```
+```text
 infrastructure-live/
 ├── root.hcl
 ├── setup-state-backend.sh
@@ -48,7 +48,9 @@ infrastructure-live/
 ## Configuration Hierarchy
 
 ### root.hcl
+
 The root configuration file contains:
+
 - Provider generation (AWS provider with role assumption)
 - Version constraints (OpenTofu/Terraform versions)
 - Remote state configuration (S3 + DynamoDB)
@@ -58,6 +60,7 @@ The root configuration file contains:
 See: [Root Configuration Guide](root-config.md)
 
 ### account.hcl
+
 Account-specific configuration:
 
 ```hcl
@@ -80,6 +83,7 @@ locals {
 ```
 
 ### region.hcl
+
 Region-specific configuration:
 
 ```hcl
@@ -89,6 +93,7 @@ locals {
 ```
 
 ### env.hcl
+
 Environment-specific configuration:
 
 ```hcl
@@ -102,7 +107,7 @@ locals {
 
 Each unit gets its own state file through `path_relative_to_include()`:
 
-```
+```text
 infrastructure-live/
 ├── non-prod/us-east-1/staging/api/ → tfstate-myproject-nonprod-staging-us-east-1/non-prod/us-east-1/staging/api/terraform.tfstate
 ├── non-prod/us-east-1/dev/api/     → tfstate-myproject-nonprod-dev-us-east-1/non-prod/us-east-1/dev/api/terraform.tfstate

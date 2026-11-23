@@ -2,9 +2,9 @@
 
 A styled panel component for React Flow-based canvases to position custom UI elements.
 
-The `Panel` component provides a positioned container for custom UI elements on React Flow canvases. It includes modern card styling with backdrop blur and flexible positioning options.
-
-
+The `Panel` component provides a positioned container for custom UI elements on React
+Flow canvases. It includes modern card styling with backdrop blur and flexible
+positioning options.
 
 ## Installation
 
@@ -14,7 +14,8 @@ npx ai-elements@latest add panel
 
 ## Features
 
-- Flexible positioning (top-left, top-right, bottom-left, bottom-right, top-center, bottom-center)
+- Flexible positioning (top-left, top-right, bottom-left, bottom-right, top-center,
+  bottom-center)
 - Rounded pill design with backdrop blur
 - Theme-aware card background
 - Flexbox layout for easy content alignment

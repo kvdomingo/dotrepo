@@ -6,7 +6,8 @@ description: "INVOKE THIS SKILL when you need human-in-the-loop approval, custom
 <overview>
 Middleware patterns for production LangChain agents:
 
-- **HumanInTheLoopMiddleware** / **humanInTheLoopMiddleware**: Pause before dangerous tool calls for human approval
+- **HumanInTheLoopMiddleware** / **humanInTheLoopMiddleware**: Pause before dangerous
+  tool calls for human approval
 - **Custom middleware**: Intercept tool calls for error handling, logging, retry logic
 - **Command resume**: Continue execution after human decisions (approve, edit, reject)
 
@@ -34,7 +35,7 @@ def send_email(to: str, subject: str, body: str) -> str:
 agent = create_agent(
     model="gpt-4.1",
     tools=[send_email],
-    checkpointer=MemorySaver(),  # Required for HITL
+    checkpointer=MemorySaver(), # Required for HITL
     middleware=[
         HumanInTheLoopMiddleware(
             interrupt_on={
@@ -43,7 +44,8 @@ agent = create_agent(
         )
     ],
 )
-```
+
+```text
 </python>
 <typescript>
 Set up an agent with HITL that pauses before sending emails for human approval.
@@ -73,6 +75,7 @@ const agent = createAgent({
   ],
 });
 ```
+
 </typescript>
 </ex-basic-hitl-setup>
 
@@ -85,20 +88,24 @@ from langgraph.types import Command
 config = {"configurable": {"thread_id": "session-1"}}
 
 # Step 1: Agent runs until it needs to call tool
+
 result1 = agent.invoke({
     "messages": [{"role": "user", "content": "Send email to john@example.com"}]
 }, config=config)
 
-# Check for interrupt
-if "__interrupt__" in result1:
-    print(f"Waiting for approval: {result1['__interrupt__']}")
+## Check for interrupt
 
-# Step 2: Human approves
+if "**interrupt**" in result1:
+    print(f"Waiting for approval: {result1['**interrupt**']}")
+
+## Step 2: Human approves
+
 result2 = agent.invoke(
     Command(resume={"decisions": [{"type": "approve"}]}),
     config=config
 )
-```
+
+```text
 </python>
 <typescript>
 Run the agent, detect an interrupt, then resume execution after human approval.
@@ -123,6 +130,7 @@ const result2 = await agent.invoke(
   config
 );
 ```
+
 </typescript>
 </ex-running-with-interrupts>
 
@@ -220,7 +228,8 @@ agent = create_agent(
 
 - Which tools require approval (per-tool policies)
 - Allowed decisions per tool (approve, edit, reject)
-- Custom middleware hooks: `before_model`, `after_model`, `wrap_tool_call`, `before_agent`, `after_agent`
+- Custom middleware hooks: `before_model`, `after_model`, `wrap_tool_call`,
+  `before_agent`, `after_agent`
 - Tool-specific middleware (apply only to certain tools)
 
 ### What You CANNOT Configure
@@ -236,13 +245,15 @@ HITL middleware requires a checkpointer to persist state.
 # WRONG
 agent = create_agent(model="gpt-4.1", tools=[send_email], middleware=[HumanInTheLoopMiddleware({...})])
 
-# CORRECT
+## CORRECT
+
 agent = create_agent(
     model="gpt-4.1", tools=[send_email],
-    checkpointer=MemorySaver(),  # Required
+    checkpointer=MemorySaver(), # Required
     middleware=[HumanInTheLoopMiddleware({...})]
 )
-```
+
+```text
 </python>
 <typescript>
 HITL requires a checkpointer to persist state.
@@ -260,6 +271,7 @@ const agent = createAgent({
   middleware: [humanInTheLoopMiddleware({ interruptOn: { send_email: true } })],
 });
 ```
+
 </typescript>
 </fix-missing-checkpointer>
 
@@ -270,9 +282,11 @@ Always provide thread_id when using HITL to track conversation state.
 # WRONG
 agent.invoke(input)  # No config!
 
-# CORRECT
+## CORRECT
+
 agent.invoke(input, config={"configurable": {"thread_id": "user-123"}})
-```
+
+```text
 </python>
 </fix-no-thread-id>
 
@@ -287,6 +301,7 @@ agent.invoke({"resume": {"decisions": [...]}})
 from langgraph.types import Command
 agent.invoke(Command(resume={"decisions": [{"type": "approve"}]}), config=config)
 ```
+
 </python>
 <typescript>
 Use Command class to resume execution after an interrupt.
@@ -294,9 +309,10 @@ Use Command class to resume execution after an interrupt.
 // WRONG
 await agent.invoke({ resume: { decisions: [...] } });
 
-// CORRECT
-import { Command } from "@langchain/langgraph";
-await agent.invoke(new Command({ resume: { decisions: [{ type: "approve" }] } }), config);
-```
+// CORRECT import { Command } from "@langchain/langgraph"; await agent.invoke(new
+Command({ resume: { decisions: [{ type: "approve" }] } }), config);
+
+```text
 </typescript>
 </fix-wrong-resume-syntax>
+```

@@ -37,7 +37,8 @@ if prompt := st.chat_input("Ask a question"):
 
 ## Streaming responses
 
-Use `st.write_stream` for token-by-token display. Pass any generator that yields strings, including the OpenAI generator directly:
+Use `st.write_stream` for token-by-token display. Pass any generator that yields
+strings, including the OpenAI generator directly:
 
 ```python
 def get_streaming_response(prompt):
@@ -68,7 +69,8 @@ with st.chat_message("assistant"):
 
 ## Chat message avatars
 
-Streamlit provides default avatars for "user" and "assistant" roles—only customize if you have a specific need. You can use icons or images:
+Streamlit provides default avatars for "user" and "assistant" roles—only customize if
+you have a specific need. You can use icons or images:
 
 ```python
 # With icons
@@ -82,7 +84,8 @@ with st.chat_message("user", avatar="https://example.com/avatar.png"):
 
 ## Suggestion chips
 
-Offer clickable suggestions before the first message. The pills disappear once the user sends a message, creating a clean onboarding experience:
+Offer clickable suggestions before the first message. The pills disappear once the user
+sends a message, creating a clean onboarding experience:
 
 ```python
 SUGGESTIONS = {
@@ -100,11 +103,13 @@ if not st.session_state.messages:
         st.rerun()
 ```
 
-The `if not st.session_state.messages` check ensures the suggestions only appear on an empty chat. Once a message is added, the pills vanish and the conversation takes over.
+The `if not st.session_state.messages` check ensures the suggestions only appear on an
+empty chat. Once a message is added, the pills vanish and the conversation takes over.
 
 ## File uploads
 
-Enable file attachments with `accept_file`. When enabled, `st.chat_input` returns a dict-like object with `text` and `files` attributes:
+Enable file attachments with `accept_file`. When enabled, `st.chat_input` returns a
+dict-like object with `text` and `files` attributes:
 
 ```python
 prompt = st.chat_input(
@@ -130,7 +135,8 @@ Use `accept_file="multiple"` to allow multiple files.
 
 ## Audio input
 
-Enable voice recording with `accept_audio`. The recorded audio is available as a WAV file:
+Enable voice recording with `accept_audio`. The recorded audio is available as a WAV
+file:
 
 ```python
 prompt = st.chat_input("Say something", accept_audio=True)
@@ -162,7 +168,8 @@ if prompt and prompt.audio:
 
 ## User feedback
 
-Add thumbs up/down feedback to assistant messages. Also supports `"stars"` and `"faces"` ratings:
+Add thumbs up/down feedback to assistant messages. Also supports `"stars"` and `"faces"`
+ratings:
 
 ```python
 with st.chat_message("assistant"):

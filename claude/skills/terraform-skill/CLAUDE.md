@@ -6,15 +6,17 @@
 
 ## What This Is
 
-This repository contains a **Claude Code skill** - executable documentation that Claude loads to provide Terraform/OpenTofu expertise. Think of it as:
+This repository contains a **Claude Code skill** - executable documentation that Claude
+loads to provide Terraform/OpenTofu expertise. Think of it as:
 
 - **Prompt engineering as infrastructure**: Version-controlled AI instructions
-- **Domain knowledge artifact**: Encoding terraform-best-practices.com into Claude's context
+- **Domain knowledge artifact**: Encoding terraform-best-practices.com into Claude's
+  context
 - **Meta-project**: Building instructions for an AI assistant
 
 ## Repository Structure
 
-```
+```text
 terraform-skill/
 ├── .claude-plugin/
 │   └── marketplace.json                  # Marketplace and plugin metadata
@@ -46,7 +48,7 @@ terraform-skill/
 
 ### Progressive Disclosure
 
-```
+```text
 User: "Create a Terraform module with tests"
        ↓
 Claude: Scans skill metadata (~100 tokens)
@@ -73,18 +75,22 @@ Response: Code following best practices
   - quick-reference.md: ~3,800 tokens
   - security-compliance.md: ~2,500 tokens
   - testing-frameworks.md: ~3,400 tokens
-- **Target:** Aim for under 500 lines for main SKILL.md (current: 524 lines - comprehensive core guidance)
+- **Target:** Aim for under 500 lines for main SKILL.md (current: 524 lines -
+  comprehensive core guidance)
 
 **Our Architecture:**
+
 - SKILL.md: 524 lines, ~4.4K tokens (comprehensive core guidance)
 - Reference files: 6 files totaling 4,091 lines, ~26K tokens
-- Progressive disclosure: ~56-70% token reduction for typical queries (vs loading all content)
+- Progressive disclosure: ~56-70% token reduction for typical queries (vs loading all
+  content)
 
 ## Content Philosophy
 
 ### What Belongs in SKILL.md
 
 ✅ **Include:**
+
 - Terraform-specific patterns and idioms
 - Decision frameworks (when to use X vs Y)
 - Version-specific features (Terraform 1.6+, 1.9+, etc.)
@@ -93,6 +99,7 @@ Response: Code following best practices
 - Quick reference tables and decision matrices
 
 ✅ **Keep:**
+
 - Scannable format (tables, headers, visual hierarchy)
 - Imperative voice ("Use X", not "You should consider X")
 - Concrete examples with inline comments
@@ -101,6 +108,7 @@ Response: Code following best practices
 ### What Doesn't Belong
 
 ❌ **Exclude:**
+
 - Generic programming advice
 - Terraform syntax basics (covered in official docs)
 - Provider-specific resource details (use MCP tools)
@@ -127,6 +135,7 @@ Each section is self-contained for selective reading.
 ### Imperative Voice
 
 ✅ **Good:**
+
 ```markdown
 Use underscores in variable names, not hyphens:
 
@@ -135,6 +144,7 @@ Use underscores in variable names, not hyphens:
 ```
 
 ❌ **Bad:**
+
 ```markdown
 You should consider using underscores instead of hyphens
 in your variable names, as this is generally preferred.
@@ -143,6 +153,7 @@ in your variable names, as this is generally preferred.
 ### Scannable Format
 
 Use:
+
 - **Tables** for comparisons and decision matrices
 - **Code blocks** with inline comments
 - **Headers** for clear section breaks
@@ -162,11 +173,13 @@ Always mark version-specific features:
 ### This Is Not Traditional Software
 
 **No build/test/compile:**
+
 - It's documentation, not code
 - No automated test suite
 - No build artifacts
 
 **Validation approach:**
+
 1. Update SKILL.md
 2. Load in Claude Code (reload skills)
 3. Test on real Terraform projects
@@ -178,6 +191,7 @@ Always mark version-specific features:
 **Before submitting a PR:**
 
 1. **Load the updated skill:**
+
    ```bash
    # If you have local clone in ~/.claude/references/
    # Claude Code auto-reloads on file changes
@@ -193,6 +207,7 @@ Always mark version-specific features:
    - Ensure no conflicts with existing guidance
 
 4. **Check token count:**
+
    ```bash
    wc -c SKILL.md  # Currently ~17,700 chars ≈ 4,400 tokens
    ```
@@ -200,12 +215,14 @@ Always mark version-specific features:
 ### When to Update
 
 **Update the skill when:**
+
 - ✅ New Terraform major/minor versions introduce features
 - ✅ Community consensus emerges on patterns
 - ✅ Real-world usage reveals gaps or ambiguities
 - ✅ Anti-patterns discovered that should be warned against
 
 **Don't update for:**
+
 - ❌ Provider-specific resource changes (use MCP tools)
 - ❌ Minor version patches without feature changes
 - ❌ Personal preferences without community consensus
@@ -224,6 +241,7 @@ When this skill is used alongside Terraform MCP server:
 | Module search | ❌ | ✅ |
 
 **Together they enable:**
+
 - Code generation following best practices
 - Up-to-date version constraints
 - Framework selection guidance
@@ -295,6 +313,7 @@ git push origin feature/your-improvement
 ```
 
 Create PR with:
+
 - Clear description of what changed
 - Why the change improves the skill
 - How you tested it
@@ -302,6 +321,7 @@ Create PR with:
 ### 5. Review Process
 
 Maintainers will check:
+
 - Content accuracy
 - Token efficiency
 - Consistency with existing patterns
@@ -312,23 +332,30 @@ Maintainers will check:
 ### Maintaining Balance
 
 As Terraform evolves, balance:
+
 - **Completeness** vs **Token efficiency**
 - **Detail** vs **Scannability**
 - **Examples** vs **Reference**
 
-**Current Status:** SKILL.md is at 524 lines, slightly above the suggested 500-line target. This is justified by:
+**Current Status:** SKILL.md is at 524 lines, slightly above the suggested 500-line
+target. This is justified by:
+
 - Comprehensive decision matrices (testing, count vs for_each)
 - Essential quick reference tables
 - Version-specific guidance (multiple Terraform versions)
 - Progressive disclosure architecture minimizes token cost
 
-The extra 24 lines provide significant value while maintaining scannability. Future updates should prioritize reference file expansion over core skill growth.
+The extra 24 lines provide significant value while maintaining scannability. Future
+updates should prioritize reference file expansion over core skill growth.
 
-Current sweet spot: ~4.4K tokens for core SKILL.md, with 6 reference files (~26K tokens) providing deep-dive content on demand. Total coverage: ~30.4K tokens structured for progressive disclosure.
+Current sweet spot: ~4.4K tokens for core SKILL.md, with 6 reference files (~26K tokens)
+providing deep-dive content on demand. Total coverage: ~30.4K tokens structured for
+progressive disclosure.
 
 ### Long-term Vision
 
 This skill should:
+
 - Stay current with Terraform/OpenTofu releases
 - Remain the definitive Claude resource for Terraform
 - Evolve with community consensus
@@ -342,4 +369,5 @@ This skill should:
 
 ---
 
-**Remember:** You're not just editing docs - you're shaping how Claude understands and applies Terraform best practices. Quality matters.
+**Remember:** You're not just editing docs - you're shaping how Claude understands and
+applies Terraform best practices. Quality matters.

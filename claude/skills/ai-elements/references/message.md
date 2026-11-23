@@ -1,12 +1,14 @@
 # Message
 
-A comprehensive suite of components for displaying chat messages, including message rendering, branching, actions, and markdown responses.
+A comprehensive suite of components for displaying chat messages, including message
+rendering, branching, actions, and markdown responses.
 
-The `Message` component suite provides a complete set of tools for building chat interfaces. It includes components for displaying messages from users and AI assistants, managing multiple response branches, adding action buttons, and rendering markdown content.
+The `Message` component suite provides a complete set of tools for building chat
+interfaces. It includes components for displaying messages from users and AI assistants,
+managing multiple response branches, adding action buttons, and rendering markdown
+content.
 
 See `scripts/message.tsx` for this example.
-
-
 
 ## Installation
 
@@ -16,18 +18,22 @@ npx ai-elements@latest add message
 
 ## Features
 
-- Displays messages from both user and AI assistant with distinct styling and automatic alignment
-- Minimalist flat design with user messages in secondary background and assistant messages full-width
-- **Response branching** with navigation controls to switch between multiple AI response versions
-- **Markdown rendering** with GFM support (tables, task lists, strikethrough), math equations, and smart streaming
-- **Action buttons** for common operations (retry, like, dislike, copy, share) with tooltips and state management
-- **File attachments** display with support for images and generic files with preview and remove functionality
+- Displays messages from both user and AI assistant with distinct styling and automatic
+  alignment
+- Minimalist flat design with user messages in secondary background and assistant
+  messages full-width
+- **Response branching** with navigation controls to switch between multiple AI response
+  versions
+- **Markdown rendering** with GFM support (tables, task lists, strikethrough), math
+  equations, and smart streaming
+- **Action buttons** for common operations (retry, like, dislike, copy, share) with
+  tooltips and state management
+- **File attachments** display with support for images and generic files with preview
+  and remove functionality
 - Code blocks with syntax highlighting and copy-to-clipboard functionality
 - Keyboard accessible with proper ARIA labels
 - Responsive design that adapts to different screen sizes
 - Seamless light/dark theme integration
-
-
 
 ## Usage with AI SDK
 
@@ -229,9 +235,12 @@ export default ActionsDemo;
 
 ### `<MessageToolbar />`
 
-A container for placing actions and branch selectors below a message. Lays out children in a horizontal row with space-between alignment.
+A container for placing actions and branch selectors below a message. Lays out children
+in a horizontal row with space-between alignment.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `...props` | `React.ComponentProps<` | - | Any other props are spread to the root div. |
+
+```text
 ```

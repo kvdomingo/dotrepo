@@ -4,11 +4,12 @@ triggers:
   - "reacting to run success, failure, or other status changes"
 ---
 
-# Run Status Sensors
+## Run Status Sensors
 
-Run status sensors monitor runs for specific status changes and trigger actions when those statuses occur.
+Run status sensors monitor runs for specific status changes and trigger actions when
+those statuses occur.
 
-## Run Failure Sensor
+### Run Failure Sensor
 
 Use `@run_failure_sensor` to monitor run failures across all jobs:
 
@@ -25,7 +26,7 @@ def failure_alert_sensor(context: dg.RunFailureSensorContext):
 
 Run failure sensors are commonly used for alerting and error notification.
 
-## Run Status Sensor
+### Run Status Sensor
 
 Use `@run_status_sensor` to monitor any run status:
 
@@ -41,7 +42,7 @@ def success_sensor(context: dg.RunStatusSensorContext):
 
 This pattern enables job-to-job dependencies based on run completion.
 
-## Available Run Statuses
+### Available Run Statuses
 
 Common run statuses for monitoring:
 
@@ -53,7 +54,7 @@ Common run statuses for monitoring:
 
 Additional statuses: `QUEUED`, `NOT_STARTED`, `MANAGED`, `STARTING`
 
-## Monitoring Specific Jobs
+### Monitoring Specific Jobs
 
 Use `monitored_jobs` to filter which jobs trigger the sensor:
 
@@ -69,7 +70,7 @@ def job_specific_sensor(context):
 
 Without `monitored_jobs`, the sensor triggers for all runs with the specified status.
 
-## Cross-Code Location Monitoring
+### Cross-Code Location Monitoring
 
 Monitor runs across all code locations:
 
@@ -85,7 +86,7 @@ def global_failure_sensor(context):
 
 Set `monitor_all_code_locations=True` to enable deployment-wide monitoring.
 
-## Context Properties
+### Context Properties
 
 **RunStatusSensorContext** provides:
 
@@ -100,7 +101,7 @@ Set `monitor_all_code_locations=True` to enable deployment-wide monitoring.
 - `failure_event`: The run failure event with error details
 - `get_step_failure_events()`: List of step-level failures with stack traces
 
-## Common Use Cases
+### Common Use Cases
 
 **Alerting**: Send notifications on run failures:
 

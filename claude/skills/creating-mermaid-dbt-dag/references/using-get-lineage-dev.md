@@ -1,15 +1,19 @@
 # Using get_lineage_dev for Lineage Retrieval
 
-This is the **preferred method** when available. The `get_lineage_dev` (or `mcp__dbt__get_lineage_dev`) MCP tool reads from the local development manifest and provides the most accurate and up-to-date lineage information.
+This is the **preferred method** when available. The `get_lineage_dev` (or
+`mcp__dbt__get_lineage_dev`) MCP tool reads from the local development manifest and
+provides the most accurate and up-to-date lineage information.
 
 ## How to use
 
 1. Call the `get_lineage_dev` MCP tool with the model's unique_id
    - The unique_id follows the format: `model.{project_name}.{model_name}`
-   - If you only have the model name, you can try with just the name or construct the unique_id
+   - If you only have the model name, you can try with just the name or construct the
+     unique_id
 
 2. The tool returns a lineage graph with:
-   - `parents`: upstream dependencies (models, sources, seeds that this model depends on)
+   - `parents`: upstream dependencies (models, sources, seeds that this model depends
+     on)
    - `children`: downstream dependencies (models, exposures that depend on this model)
 
 3. Parse the lineage response to extract:
@@ -20,7 +24,7 @@ This is the **preferred method** when available. The `get_lineage_dev` (or `mcp_
 
 ## Example usage
 
-```
+```text
 get_lineage_dev(
     unique_id="model.jaffle_shop.customers",
     depth=5  # Controls how many levels to traverse
@@ -37,6 +41,7 @@ get_lineage_dev(
 ## When to use
 
 Use this method when:
+
 - The `get_lineage_dev` MCP tool is available
 - You're working in a local development environment
 - You want the most current lineage (including uncommitted changes)

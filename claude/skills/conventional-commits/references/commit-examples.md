@@ -1,24 +1,25 @@
 # Conventional Commit Examples
 
-A comprehensive collection of commit message examples following the Conventional Commits specification.
+A comprehensive collection of commit message examples following the Conventional Commits
+specification.
 
 ## Features (feat)
 
 ### Simple Feature Addition
 
-```
+```text
 feat: add user profile page
 ```
 
 ### Feature with Scope
 
-```
+```text
 feat(auth): add two-factor authentication
 ```
 
 ### Feature with Body
 
-```
+```text
 feat(search): add semantic similarity search
 
 Implement AI-based similarity detection between documents
@@ -28,7 +29,7 @@ configurable similarity threshold.
 
 ### Feature with Issue Reference
 
-```
+```text
 feat(api): add webhook signature verification
 
 Add HMAC-SHA256 signature verification for all incoming
@@ -39,7 +40,7 @@ Closes #456
 
 ### Breaking Change Feature
 
-```
+```text
 feat(api)!: redesign authentication flow
 
 BREAKING CHANGE: The authentication endpoint now requires
@@ -53,19 +54,19 @@ Migration guide: docs/oauth-migration.md
 
 ### Simple Bug Fix
 
-```
+```text
 fix: resolve login redirect loop
 ```
 
 ### Bug Fix with Scope
 
-```
+```text
 fix(api): handle null response from webhook
 ```
 
 ### Bug Fix with Detailed Explanation
 
-```
+```text
 fix(auth): resolve concurrent login race condition
 
 Add pessimistic locking to prevent race condition when
@@ -81,7 +82,7 @@ Fixes #789
 
 ### Critical Bug Fix
 
-```
+```text
 fix(security): prevent SQL injection in search
 
 Sanitize user input before constructing SQL queries in
@@ -97,19 +98,19 @@ Fixes #CVE-2024-12345
 
 ### Simple Documentation Update
 
-```
+```text
 docs: update README with setup instructions
 ```
 
 ### Documentation with Scope
 
-```
+```text
 docs(api): add webhook endpoint documentation
 ```
 
 ### Comprehensive Documentation
 
-```
+```text
 docs(contributing): add code review guidelines
 
 Add detailed guidelines for code reviewers covering:
@@ -125,19 +126,19 @@ Related to #234
 
 ### Simple Refactoring
 
-```
+```text
 refactor: extract validation logic to service
 ```
 
 ### Refactoring with Scope
 
-```
+```text
 refactor(models): simplify tenant scoping logic
 ```
 
 ### Large Refactoring
 
-```
+```text
 refactor(services): migrate to Result pattern
 
 Convert all service objects to return explicit Result
@@ -158,13 +159,13 @@ No behavior changes - pure refactoring.
 
 ### Simple Performance Improvement
 
-```
+```text
 perf: add database index for user lookups
 ```
 
 ### Performance with Details
 
-```
+```text
 perf(queries): eliminate N+1 queries in artifacts index
 
 Add eager loading for associated records when fetching
@@ -177,7 +178,7 @@ After: 0.3s page load time
 
 ### Database Optimization
 
-```
+```text
 perf(db): add composite index for tenant queries
 
 Add composite index on (tenant_id, created_at) for the
@@ -192,19 +193,19 @@ ON artifacts(tenant_id, created_at DESC);
 
 ### Simple Test Addition
 
-```
+```text
 test: add specs for user authentication
 ```
 
 ### Test with Scope
 
-```
+```text
 test(integration): add webhook processing tests
 ```
 
 ### Comprehensive Test Suite
 
-```
+```text
 test(services): add complete coverage for CreateOrderService
 
 Add unit tests covering:
@@ -221,19 +222,19 @@ Increases coverage from 67% to 95%.
 
 ### Dependency Update
 
-```
+```text
 chore(deps): bump rails from 7.1.0 to 7.2.0
 ```
 
 ### Build Configuration
 
-```
+```text
 chore: update Docker configuration for production
 ```
 
 ### Maintenance Work
 
-```
+```text
 chore(ci): add security scanning to GitHub Actions
 
 Add Brakeman security scanning and bundler-audit to
@@ -244,13 +245,13 @@ the CI pipeline. Scans run on every PR and main branch push.
 
 ### Code Formatting
 
-```
+```text
 style: format code with StandardRB
 ```
 
 ### CSS Updates
 
-```
+```text
 style(ui): update button spacing and colors
 
 Align button styles with design system:
@@ -263,13 +264,13 @@ Align button styles with design system:
 
 ### Build System Changes
 
-```
+```text
 build: configure webpack for code splitting
 ```
 
 ### Docker Configuration
 
-```
+```text
 build(docker): optimize production image size
 
 Reduce Docker image size from 1.2GB to 400MB by:
@@ -282,13 +283,13 @@ Reduce Docker image size from 1.2GB to 400MB by:
 
 ### CI Configuration
 
-```
+```text
 ci: add parallel test execution
 ```
 
 ### GitHub Actions Update
 
-```
+```text
 ci(actions): add automatic dependency updates
 
 Configure Dependabot to automatically open PRs for:
@@ -301,7 +302,7 @@ Configure Dependabot to automatically open PRs for:
 
 ### Simple Revert
 
-```
+```text
 revert: revert "feat: add export feature"
 
 This reverts commit a1b2c3d4.
@@ -309,7 +310,7 @@ This reverts commit a1b2c3d4.
 
 ### Revert with Explanation
 
-```
+```text
 revert: revert "perf: add caching layer"
 
 This reverts commit a1b2c3d4.
@@ -325,7 +326,7 @@ Related to #567
 
 ### Issue References and Co-authors
 
-```
+```text
 feat(ml): add document classification
 
 Implement AI-based classification of documents into
@@ -338,7 +339,7 @@ Co-authored-by: Jane Doe <jane@example.com>
 
 ### Breaking Change with Migration
 
-```
+```text
 feat(api)!: change webhook payload structure
 
 BREAKING CHANGE: Webhook payloads now nest data under "payload" key.
@@ -373,7 +374,7 @@ Closes #234
 
 ### Multi-Tenant Feature
 
-```
+```text
 feat(tenants): add custom subdomain support
 
 Allow tenants to configure custom subdomains instead of
@@ -388,7 +389,7 @@ Closes #789
 
 ### API Integration
 
-```
+```text
 feat(integrations): add third-party data synchronization
 
 Sync data from external services via webhooks. Includes
@@ -403,7 +404,7 @@ Related to #400 (sync architecture)
 
 ### AI Feature
 
-```
+```text
 feat(ai): add content extraction from documents
 
 Extract structured data from documents using LLM.
@@ -417,7 +418,7 @@ Closes #234
 
 ### Security Fix
 
-```
+```text
 fix(auth): prevent session fixation attacks
 
 Reset session ID on successful login to prevent session
@@ -432,7 +433,7 @@ Fixes GHSA-2024-001
 
 ### Database Migration
 
-```
+```text
 feat(db): add document embeddings for similarity search
 
 Add new document_embeddings table to store vector embeddings
@@ -451,7 +452,7 @@ Closes #567
 
 ### Background Job
 
-```
+```text
 feat(jobs): add retry logic for webhook processing
 
 Add exponential backoff retry for failed webhook processing.
@@ -465,7 +466,7 @@ Closes #345
 
 ### UI Component
 
-```
+```text
 feat(ui): add confidence badge component
 
 Add component for displaying AI confidence scores with
@@ -481,7 +482,7 @@ Closes #678
 
 ### Test Coverage
 
-```
+```text
 test(system): add end-to-end workflow test
 
 Add comprehensive system test covering:
@@ -499,7 +500,7 @@ Closes #890
 
 ### Performance Optimization
 
-```
+```text
 perf(api): optimize webhook processing
 
 Reduce webhook processing time from ~500ms to ~50ms by:
@@ -517,7 +518,7 @@ Closes #456
 
 ### ❌ Vague Description
 
-```
+```text
 fix: update stuff
 chore: changes
 feat: improvements
@@ -525,47 +526,47 @@ feat: improvements
 
 ### ❌ Past Tense
 
-```
+```text
 feat: added user profile
 fix: fixed login bug
 ```
 
 ### ❌ Capitalized First Letter
 
-```
+```text
 Feat: Add user profile
 Fix: Resolve login issue
 ```
 
 ### ❌ Ending Period
 
-```
+```text
 feat: add user profile.
 fix: resolve login issue.
 ```
 
 ### ❌ Too Long First Line
 
-```
+```text
 feat: add a really comprehensive user profile page with avatar upload, bio editing, social links, and activity feed
 ```
 
 ### ❌ Multiple Unrelated Changes
 
-```
+```text
 feat: add user profile, fix login bug, update README, refactor database queries
 ```
 
 ### ❌ Missing Type
 
-```
+```text
 add user profile
 resolve login issue
 ```
 
 ### ✅ Corrected Versions
 
-```
+```text
 feat: add user profile
 fix: resolve login bug
 docs: update README with setup instructions
@@ -578,7 +579,7 @@ refactor: optimize database queries
 
 Save to `.gitmessage`:
 
-```
+```text
 # <type>(<scope>): <description>
 #
 # [optional body]
@@ -598,6 +599,7 @@ Save to `.gitmessage`:
 ```
 
 Configure Git to use it:
+
 ```bash
 git config commit.template .gitmessage
 ```
@@ -605,11 +607,13 @@ git config commit.template .gitmessage
 ## Quick Reference
 
 **Basic Format:**
-```
+
+```text
 <type>(<scope>): <description>
 ```
 
 **Common Types:**
+
 - `feat:` New feature
 - `fix:` Bug fix
 - `docs:` Documentation
@@ -620,14 +624,16 @@ git config commit.template .gitmessage
 - `chore:` Maintenance
 
 **Breaking Changes:**
-```
+
+```text
 feat!: change API
 # or
 BREAKING CHANGE: footer
 ```
 
 **Issue References:**
-```
+
+```text
 Closes #123
 Fixes #456
 Related to #789

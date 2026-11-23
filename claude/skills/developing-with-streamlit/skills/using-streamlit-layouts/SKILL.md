@@ -10,7 +10,8 @@ How you structure your app affects usability more than you think.
 
 ## Sidebar: navigation + global filters only
 
-The sidebar should only contain navigation and app-level filters. Main content goes in the main area.
+The sidebar should only contain navigation and app-level filters. Main content goes in
+the main area.
 
 ```python
 # GOOD
@@ -29,10 +30,12 @@ with st.sidebar:
 ```
 
 **What goes in sidebar:**
+
 - Global filters (date range, user selection, region)
 - App info (version, feedback link)
 
 **What stays out:**
+
 - Main content, charts, tables, results
 
 ## Columns: max 4, set alignment
@@ -89,7 +92,8 @@ Options: `"left"` (default), `"center"`, `"right"`, `"distribute"`
 
 ## Bordered containers
 
-Use `border=True` on containers for visual grouping. See `building-streamlit-dashboards` for dashboard-specific patterns like KPI cards.
+Use `border=True` on containers for visual grouping. See `building-streamlit-dashboards`
+for dashboard-specific patterns like KPI cards.
 
 ```python
 with st.container(border=True):
@@ -163,6 +167,7 @@ if st.button("Delete item"):
 ```
 
 **Key points:**
+
 - Dialogs rerun independently from the main script
 - Use `st.session_state` to pass widget values from the dialog to the main app
 - Call `st.rerun()` to close dialog and refresh main app
@@ -170,6 +175,7 @@ if st.button("Delete item"):
 - `st.sidebar` is not supported inside dialogs
 
 **When to use dialogs:**
+
 - Confirmation prompts
 - Settings panels
 - Forms that don't need to be always visible

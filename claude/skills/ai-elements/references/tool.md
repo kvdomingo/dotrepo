@@ -2,7 +2,9 @@
 
 A collapsible component for displaying tool invocation details in AI chatbot interfaces.
 
-The `Tool` component displays a collapsible interface for showing/hiding tool details. It is designed to take the `ToolUIPart` type from the AI SDK and display it in a collapsible interface.
+The `Tool` component displays a collapsible interface for showing/hiding tool details.
+It is designed to take the `ToolUIPart` type from the AI SDK and display it in a
+collapsible interface.
 
 See `scripts/tool.tsx` for this example.
 
@@ -14,7 +16,8 @@ npx ai-elements@latest add tool
 
 ## Usage in AI SDK
 
-Build a simple stateful weather app that renders the last message in a tool using [`useChat`](/docs/reference/ai-sdk-ui/use-chat).
+Build a simple stateful weather app that renders the last message in a tool using
+[`useChat`](/docs/reference/ai-sdk-ui/use-chat).
 
 Add the following component to your frontend:
 
@@ -106,10 +109,10 @@ const Example = () => {
 function formatWeatherResult(result: WeatherToolOutput): string {
   return `**Weather for ${result.location}**
 
-**Temperature:** ${result.temperature}  
-**Conditions:** ${result.conditions}  
-**Humidity:** ${result.humidity}  
-**Wind Speed:** ${result.windSpeed}  
+**Temperature:** ${result.temperature}
+**Conditions:** ${result.conditions}
+**Humidity:** ${result.humidity}
+**Wind Speed:** ${result.windSpeed}
 
 *Last updated: ${result.lastUpdated}*`;
 }
@@ -201,13 +204,16 @@ See `scripts/tool-input-available.tsx` for this example.
 
 ### Output Available (Completed)
 
-Shows a completed tool with successful results. Opens by default to show the results. In this instance, the output is a JSON object, so we can use the `CodeBlock` component to display it.
+Shows a completed tool with successful results. Opens by default to show the results. In
+this instance, the output is a JSON object, so we can use the `CodeBlock` component to
+display it.
 
 See `scripts/tool-output-available.tsx` for this example.
 
 ### Output Error
 
-Shows a tool that encountered an error during execution. Opens by default to display the error.
+Shows a tool that encountered an error during execution. Opens by default to display the
+error.
 
 See `scripts/tool-output-error.tsx` for this example.
 

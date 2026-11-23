@@ -22,12 +22,16 @@ Patterns for writing acceptance tests using
 [terraform-plugin-testing](https://github.com/hashicorp/terraform-plugin-testing)
 with the [Plugin Framework](https://github.com/hashicorp/terraform-plugin-framework).
 
-Source: [HashiCorp Testing Patterns](https://developer.hashicorp.com/terraform/plugin/testing/testing-patterns)
+Source:
+[HashiCorp Testing Patterns](https://developer.hashicorp.com/terraform/plugin/testing/testing-patterns)
 
 **References** (load when needed):
-- `references/checks.md` — statecheck, plancheck, knownvalue types, tfjsonpath, comparers
+
+- `references/checks.md` — statecheck, plancheck, knownvalue types, tfjsonpath,
+  comparers
 - `references/sweepers.md` — sweeper setup, TestMain, dependencies
-- `references/ephemeral.md` — ephemeral resource testing, echoprovider, multi-step patterns
+- `references/ephemeral.md` — ephemeral resource testing, echoprovider, multi-step
+  patterns
 
 ---
 

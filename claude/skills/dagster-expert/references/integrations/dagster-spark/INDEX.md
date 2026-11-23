@@ -4,6 +4,6 @@ triggers:
   - "distributed data processing with Apache Spark"
 ---
 
-# dagster-spark
+## dagster-spark
 
-Docs: https://docs.dagster.io/integrations/libraries/spark
+Docs: <https://docs.dagster.io/integrations/libraries/spark>

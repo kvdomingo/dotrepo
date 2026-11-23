@@ -1,6 +1,8 @@
 # Using get_lineage for Lineage Retrieval
 
-This is the **fallback method** when `get_lineage_dev` is not available. The `get_lineage` (or `mcp__dbt__get_lineage`) MCP tool reads from the production manifest in dbt Cloud.
+This is the **fallback method** when `get_lineage_dev` is not available. The
+`get_lineage` (or `mcp__dbt__get_lineage`) MCP tool reads from the production manifest
+in dbt Cloud.
 
 ## How to use
 
@@ -8,17 +10,20 @@ This is the **fallback method** when `get_lineage_dev` is not available. The `ge
    - The unique_id follows the format: `model.{project_name}.{model_name}`
    - Must provide the full unique_id (not just the model name)
 
-2. The tool returns a **flat list** of all nodes connected to the target resource (both upstream and downstream)
+2. The tool returns a **flat list** of all nodes connected to the target resource (both
+   upstream and downstream)
 
 3. Each node in the list contains:
    - `uniqueId`: The resource's unique identifier
    - `name`: The resource name
-   - `resourceType`: The type of resource (Model, Source, Seed, Snapshot, Exposure, Metric, Test, etc.)
+   - `resourceType`: The type of resource (Model, Source, Seed, Snapshot, Exposure,
+     Metric, Test, etc.)
    - `parentIds`: List of unique IDs that this resource directly depends on
 
 4. To find parents and children, traverse the graph:
    - **Direct parents**: Look at the `parentIds` field of your target node
-   - **Direct children**: Find all nodes where your target's `uniqueId` appears in their `parentIds` list
+   - **Direct children**: Find all nodes where your target's `uniqueId` appears in their
+     `parentIds` list
 
 ## Example usage
 
@@ -73,6 +78,7 @@ get_lineage(
 ## Traversing the graph
 
 **Finding upstream dependencies (parents):**
+
 ```python
 # What does this node depend on?
 target_node = find_node_by_id(result, "model.jaffle_shop.customers")
@@ -81,6 +87,7 @@ direct_parents = target_node["parentIds"]
 ```
 
 **Finding downstream dependents (children):**
+
 ```python
 # What depends on this node?
 target_id = "model.jaffle_shop.customers"
@@ -121,6 +128,7 @@ direct_children = [
 ## When to use
 
 Use this method when:
+
 - The `get_lineage` MCP tool is available
 - `get_lineage_dev` is NOT available
 - You want to see the production lineage (not local changes)

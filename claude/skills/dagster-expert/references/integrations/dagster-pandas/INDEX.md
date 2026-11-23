@@ -4,6 +4,6 @@ triggers:
   - "Pandas DataFrame type checking and validation"
 ---
 
-# dagster-pandas
+## dagster-pandas
 
-Docs: https://docs.dagster.io/integrations/libraries/pandas
+Docs: <https://docs.dagster.io/integrations/libraries/pandas>

@@ -2,25 +2,34 @@
 
 ## Overview
 
-This guide provides CI/CD pipeline templates for **Terragrunt Stacks** (explicit stacks using `terragrunt.stack.hcl`). These templates are suggestions that can be adapted to your organization's needs.
+This guide provides CI/CD pipeline templates for **Terragrunt Stacks** (explicit stacks
+using `terragrunt.stack.hcl`). These templates are suggestions that can be adapted to
+your organization's needs.
 
 **Key features:**
+
 - `terragrunt stack run` commands for explicit stacks
 - OIDC-based authentication (no static credentials)
 - SSH-based Git access (recommended over HTTPS)
 - Provider caching for performance
-- Selective unit targeting with `--filter` ([docs](https://terragrunt.gruntwork.io/docs/features/filter/))
+- Selective unit targeting with `--filter`
+  ([docs](https://terragrunt.gruntwork.io/docs/features/filter/))
 
 > **Why SSH over HTTPS?**
-> - **Enhanced security**: SSH keys provide stronger authentication than passwords or tokens
-> - **Credential-free operations**: Once configured, no credentials needed for each Git operation
-> - **No token expiration**: Unlike HTTPS tokens, SSH keys don't expire unexpectedly mid-pipeline
+>
+> - **Enhanced security**: SSH keys provide stronger authentication than passwords or
+>   tokens
+> - **Credential-free operations**: Once configured, no credentials needed for each Git
+>   operation
+> - **No token expiration**: Unlike HTTPS tokens, SSH keys don't expire unexpectedly
+>   mid-pipeline
 
 ---
 
 ## Terragrunt Stack Commands
 
-When working with explicit stacks (`terragrunt.stack.hcl`), use `terragrunt stack run` instead of `terragrunt run-all`:
+When working with explicit stacks (`terragrunt.stack.hcl`), use `terragrunt stack run`
+instead of `terragrunt run-all`:
 
 ```bash
 # Navigate to stack directory
@@ -54,7 +63,9 @@ terragrunt stack run destroy
 | `--out-dir` | Save plan files to directory | Artifact storage for apply stage |
 | `--parallelism N` | Limit concurrent units | Prevent rate limiting |
 
-> **Note:** The `.terragrunt-stack` directory is auto-generated. Use `terragrunt stack generate` to pre-generate it, or `terragrunt stack clean` to remove it.
+> **Note:** The `.terragrunt-stack` directory is auto-generated. Use
+> `terragrunt stack generate` to pre-generate it, or `terragrunt stack clean` to remove
+> it.
 
 ---
 
@@ -62,7 +73,9 @@ terragrunt stack run destroy
 
 > **Best Practice: Reusable Templates**
 >
-> Structure GitLab CI with reusable templates (`.template-name`) that can be extended and overridden:
+> Structure GitLab CI with reusable templates (`.template-name`) that can be extended
+> and overridden:
+>
 > - **Consistency**: All jobs follow the same patterns
 > - **Maintainability**: Update logic in one place
 > - **Flexibility**: Override specific steps when needed
@@ -419,7 +432,8 @@ gcp:dev:apply:
 
 ### Targeting Specific Units
 
-When you need to deploy specific units within a stack (e.g., only the database component):
+When you need to deploy specific units within a stack (e.g., only the database
+component):
 
 ```yaml
 # Example: Target a specific unit within the stack
@@ -450,6 +464,7 @@ gcp:dev:dynamodb:apply:
 ```
 
 > **Tip:** Use `--queue-include-dir` to target multiple units:
+>
 > ```bash
 > terragrunt stack run plan \
 >   --queue-include-dir ".terragrunt-stack/s3" \
@@ -460,9 +475,13 @@ gcp:dev:dynamodb:apply:
 
 ## GitHub Actions
 
-> **Work in Progress**: GitHub Actions workflows are under development. For now, refer to the GitLab CI examples above and adapt them for GitHub Actions using:
-> - [aws-actions/configure-aws-credentials](https://github.com/aws-actions/configure-aws-credentials) for AWS OIDC
-> - [google-github-actions/auth](https://github.com/google-github-actions/auth) for GCP Workload Identity
+> **Work in Progress**: GitHub Actions workflows are under development. For now, refer
+> to the GitLab CI examples above and adapt them for GitHub Actions using:
+>
+> - [aws-actions/configure-aws-credentials](https://github.com/aws-actions/configure-aws-credentials)
+>   for AWS OIDC
+> - [google-github-actions/auth](https://github.com/google-github-actions/auth) for GCP
+>   Workload Identity
 > - [actions/cache](https://github.com/actions/cache) for provider caching
 
 ### Key Differences from GitLab CI
@@ -730,21 +749,32 @@ module "gcp_workload_identity" {
 ## References
 
 ### Terragrunt Stack Commands
-- [Terragrunt Stacks](https://terragrunt.gruntwork.io/docs/features/stacks/) - Official documentation for explicit stacks
-- [Terragrunt Run Command](https://terragrunt.gruntwork.io/docs/reference/cli/commands/run/) - CLI reference for run flags
-- [Run Queue](https://terragrunt.gruntwork.io/docs/features/run-queue/) - Queue flags and filtering
+
+- [Terragrunt Stacks](https://terragrunt.gruntwork.io/docs/features/stacks/) - Official
+  documentation for explicit stacks
+- [Terragrunt Run Command](https://terragrunt.gruntwork.io/docs/reference/cli/commands/run/) -
+  CLI reference for run flags
+- [Run Queue](https://terragrunt.gruntwork.io/docs/features/run-queue/) - Queue flags
+  and filtering
 
 ### CI/CD Basics
+
 - [Terragrunt Performance Guide](performance.md)
 - [GitLab CI/CD Documentation](https://docs.gitlab.com/ee/ci/)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 
 ### GitLab OIDC Authentication (Official)
-- [GitLab CI/CD with AWS](https://docs.gitlab.com/ci/cloud_services/aws/) - Official GitLab documentation for AWS OIDC integration
-- [Configure OIDC in AWS (GitLab Guided Exploration)](https://gitlab.com/guided-explorations/aws/configure-openid-connect-in-aws) - Step-by-step AWS IAM Identity Provider setup
-- [Configure OIDC in GCP (GitLab Guided Exploration)](https://gitlab.com/guided-explorations/gcp/configure-openid-connect-in-gcp) - Step-by-step GCP Workload Identity Federation setup
+
+- [GitLab CI/CD with AWS](https://docs.gitlab.com/ci/cloud_services/aws/) - Official
+  GitLab documentation for AWS OIDC integration
+- [Configure OIDC in AWS (GitLab Guided Exploration)](https://gitlab.com/guided-explorations/aws/configure-openid-connect-in-aws) -
+  Step-by-step AWS IAM Identity Provider setup
+- [Configure OIDC in GCP (GitLab Guided Exploration)](https://gitlab.com/guided-explorations/gcp/configure-openid-connect-in-gcp) -
+  Step-by-step GCP Workload Identity Federation setup
 
 ### GitHub Actions OIDC Authentication
+
 - [AWS OIDC for GitHub Actions](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
 - [GCP Workload Identity Federation](https://cloud.google.com/iam/docs/workload-identity-federation)
-- [google-github-actions/auth](https://github.com/google-github-actions/auth) - Official GitHub Action for GCP authentication
+- [google-github-actions/auth](https://github.com/google-github-actions/auth) - Official
+  GitHub Action for GCP authentication

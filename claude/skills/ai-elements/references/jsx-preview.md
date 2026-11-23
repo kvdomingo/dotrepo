@@ -1,8 +1,11 @@
 # JSX Preview
 
-A component that dynamically renders JSX strings with streaming support for AI-generated UI.
+A component that dynamically renders JSX strings with streaming support for AI-generated
+UI.
 
-The `JSXPreview` component renders JSX strings dynamically, supporting streaming scenarios where JSX may be incomplete. It automatically closes unclosed tags during streaming, making it ideal for displaying AI-generated UI components in real-time.
+The `JSXPreview` component renders JSX strings dynamically, supporting streaming
+scenarios where JSX may be incomplete. It automatically closes unclosed tags during
+streaming, making it ideal for displaying AI-generated UI components in real-time.
 
 See `scripts/jsx-preview.tsx` for this example.
 

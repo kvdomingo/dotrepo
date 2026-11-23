@@ -1,8 +1,12 @@
 # Transcription
 
-A composable component for displaying interactive, synchronized transcripts from AI SDK transcribe() results with click-to-seek functionality.
+A composable component for displaying interactive, synchronized transcripts from AI SDK
+transcribe() results with click-to-seek functionality.
 
-The `Transcription` component provides a flexible render props interface for displaying audio transcripts with synchronized playback. It automatically highlights the current segment based on playback time and supports click-to-seek functionality for interactive navigation.
+The `Transcription` component provides a flexible render props interface for displaying
+audio transcripts with synchronized playback. It automatically highlights the current
+segment based on playback time and supports click-to-seek functionality for interactive
+navigation.
 
 See `scripts/transcription.tsx` for this example.
 
@@ -27,7 +31,8 @@ npx ai-elements@latest add transcription
 
 ### `<Transcription />`
 
-Root component that provides context and manages transcript state. Uses render props pattern for rendering segments.
+Root component that provides context and manages transcript state. Uses render props
+pattern for rendering segments.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -51,27 +56,38 @@ Individual segment button with automatic state styling and click-to-seek functio
 
 ### Render Props Pattern
 
-The component uses a render props pattern where the `children` prop is a function that receives each segment and its index. This provides maximum flexibility for custom rendering while still benefiting from automatic state management and context.
+The component uses a render props pattern where the `children` prop is a function that
+receives each segment and its index. This provides maximum flexibility for custom
+rendering while still benefiting from automatic state management and context.
 
 ### Segment Highlighting
 
-Segments are automatically styled based on their relationship to the current playback time:
+Segments are automatically styled based on their relationship to the current playback
+time:
 
-- **Active** (`isActive`): When `currentTime` is within the segment's time range. Styled with primary color.
-- **Past** (`isPast`): When `currentTime` is after the segment's end time. Styled with muted foreground.
-- **Future**: When `currentTime` is before the segment's start time. Styled with dimmed muted foreground.
+- **Active** (`isActive`): When `currentTime` is within the segment's time range. Styled
+  with primary color.
+- **Past** (`isPast`): When `currentTime` is after the segment's end time. Styled with
+  muted foreground.
+- **Future**: When `currentTime` is before the segment's start time. Styled with dimmed
+  muted foreground.
 
 ### Click-to-Seek
 
-When `onSeek` is provided, segments become interactive buttons. Clicking a segment calls `onSeek` with the segment's start time, allowing your audio/video player to seek to that position.
+When `onSeek` is provided, segments become interactive buttons. Clicking a segment calls
+`onSeek` with the segment's start time, allowing your audio/video player to seek to that
+position.
 
 ### Empty Segment Filtering
 
-The component automatically filters out segments with empty or whitespace-only text to avoid rendering unnecessary elements.
+The component automatically filters out segments with empty or whitespace-only text to
+avoid rendering unnecessary elements.
 
 ### State Management
 
-Uses Radix UI's `useControllableState` hook to support both controlled and uncontrolled patterns. When `currentTime` is provided, the component operates in controlled mode. Otherwise, it maintains its own internal state.
+Uses Radix UI's `useControllableState` hook to support both controlled and uncontrolled
+patterns. When `currentTime` is provided, the component operates in controlled mode.
+Otherwise, it maintains its own internal state.
 
 ## Data Format
 
@@ -117,4 +133,5 @@ Default segment appearance:
 - Segments maintain inline layout with `gap-1` spacing
 - `text-sm` and `leading-relaxed` provide comfortable reading
 - Click events on segments still fire the `onClick` handler if provided
-- The `onSeek` callback is called both when segments are clicked and when controlled `currentTime` changes
+- The `onSeek` callback is called both when segments are clicked and when controlled
+  `currentTime` changes

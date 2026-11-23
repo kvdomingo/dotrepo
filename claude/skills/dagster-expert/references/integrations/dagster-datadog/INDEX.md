@@ -4,6 +4,6 @@ triggers:
   - "monitoring and observability with Datadog"
 ---
 
-# dagster-datadog
+## dagster-datadog
 
-Docs: https://docs.dagster.io/integrations/libraries/datadog
+Docs: <https://docs.dagster.io/integrations/libraries/datadog>

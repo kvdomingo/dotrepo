@@ -1,9 +1,10 @@
 # Code Patterns & Structure
 
-> **Part of:** [terraform-skill](../SKILL.md)
-> **Purpose:** Comprehensive patterns for Terraform/OpenTofu code structure and modern features
+> **Part of:** [terraform-skill](../SKILL.md) **Purpose:** Comprehensive patterns for
+> Terraform/OpenTofu code structure and modern features
 
-This document provides detailed code patterns, structure guidelines, and modern Terraform features. For high-level principles, see the [main skill file](../SKILL.md).
+This document provides detailed code patterns, structure guidelines, and modern
+Terraform features. For high-level principles, see the [main skill file](../SKILL.md).
 
 ---
 
@@ -96,7 +97,8 @@ variable "environment" {
 
 ### Variable Type Preferences
 
-- Prefer **simple types** (`string`, `number`, `list()`, `map()`) over `object()` unless strict validation needed
+- Prefer **simple types** (`string`, `number`, `list()`, `map()`) over `object()` unless
+  strict validation needed
 - Use `optional()` for optional object attributes (Terraform 1.3+)
 - Use `any` to disable validation at certain depths or support multiple types
 
@@ -174,6 +176,7 @@ output "subnet_id" {  # Should be plural "subnet_ids"
 ### When to use count
 
 ✓ **Simple numeric replication:**
+
 ```hcl
 resource "aws_subnet" "public" {
   count = 3
@@ -183,6 +186,7 @@ resource "aws_subnet" "public" {
 ```
 
 ✓ **Boolean conditions (create or don't):**
+
 ```hcl
 # ✅ GOOD - Boolean condition
 resource "aws_nat_gateway" "this" {
@@ -200,6 +204,7 @@ resource "aws_nat_gateway" "this" {
 ### When to use for_each
 
 ✓ **Reference resources by key:**
+
 ```hcl
 resource "aws_subnet" "private" {
   for_each = toset(var.availability_zones)
@@ -213,6 +218,7 @@ resource "aws_subnet" "private" {
 ```
 
 ✓ **Items may be added/removed from middle:**
+
 ```hcl
 # ❌ BAD with count - removing middle item recreates all subsequent resources
 resource "aws_subnet" "private" {
@@ -232,6 +238,7 @@ resource "aws_subnet" "private" {
 ```
 
 ✓ **Creating multiple named resources:**
+
 ```hcl
 variable "environments" {
   default = {
@@ -260,7 +267,8 @@ resource "aws_instance" "app" {
 
 ### Count to For_Each Migration
 
-**When to migrate:** When you need stable resource addressing or items might be added/removed from middle of list.
+**When to migrate:** When you need stable resource addressing or items might be
+added/removed from middle of list.
 
 **Migration steps:**
 
@@ -326,6 +334,7 @@ moved {
 ```
 
 **Benefits after migration:**
+
 - Removing "us-east-1b" only destroys that subnet (not c)
 - Adding new AZ doesn't affect existing subnets
 - Resources have stable addresses by AZ name
@@ -552,6 +561,7 @@ version = ">= 5.0"  # Any version 5.0 or higher (risky - breaking changes)
 ### Versioning Strategy by Component
 
 **Terraform itself:**
+
 ```hcl
 # versions.tf
 terraform {
@@ -561,6 +571,7 @@ terraform {
 ```
 
 **Providers:**
+
 ```hcl
 # versions.tf
 terraform {
@@ -578,6 +589,7 @@ terraform {
 ```
 
 **Modules:**
+
 ```hcl
 # Production - pin exact version
 module "vpc" {
@@ -595,16 +607,19 @@ module "vpc" {
 ### Update Strategy
 
 **Security patches:**
+
 - Update immediately
 - Test in dev → stage → prod
 - Prioritize provider and Terraform core updates
 
 **Minor versions:**
+
 - Regular maintenance windows (monthly/quarterly)
 - Review changelog for breaking changes
 - Test thoroughly before production
 
 **Major versions:**
+
 - Planned upgrade cycles
 - Dedicated testing period
 - May require code changes
@@ -845,11 +860,13 @@ resource "aws_subnet" "public" {
 ```
 
 **Why this matters:**
+
 - Prevents deletion errors when destroying infrastructure
 - Ensures correct dependency order without explicit `depends_on`
 - Particularly useful for complex VPC configurations with secondary CIDR blocks
 
 **Common use cases:**
+
 - VPC with secondary CIDR blocks
 - Resources that depend on optional configurations
 - Complex deletion order requirements

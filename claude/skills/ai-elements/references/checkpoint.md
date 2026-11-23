@@ -1,8 +1,12 @@
 # Checkpoint
 
-A simple component for marking conversation history points and restoring the chat to a previous state.
+A simple component for marking conversation history points and restoring the chat to a
+previous state.
 
-The `Checkpoint` component provides a way to mark specific points in a conversation history and restore the chat to that state. Inspired by VSCode's Copilot checkpoint feature, it allows users to revert to an earlier conversation state while maintaining a clear visual separation between different conversation segments.
+The `Checkpoint` component provides a way to mark specific points in a conversation
+history and restore the chat to that state. Inspired by VSCode's Copilot checkpoint
+feature, it allows users to revert to an earlier conversation state while maintaining a
+clear visual separation between different conversation segments.
 
 See `scripts/checkpoint.tsx` for this example.
 
@@ -24,7 +28,8 @@ npx ai-elements@latest add checkpoint
 
 ## Usage with AI SDK
 
-Build a chat interface with conversation checkpoints that allow users to restore to previous states.
+Build a chat interface with conversation checkpoints that allow users to restore to
+previous states.
 
 Add the following component to your frontend:
 
@@ -143,7 +148,8 @@ useEffect(() => {
 
 ### Branching Conversations
 
-Use checkpoints to enable conversation branching where users can explore different conversation paths:
+Use checkpoints to enable conversation branching where users can explore different
+conversation paths:
 
 ```tsx
 const restoreAndBranch = (messageIndex: number) => {

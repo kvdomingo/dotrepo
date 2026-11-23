@@ -1,8 +1,12 @@
 # Audio Player
 
-A composable audio player component built on media-chrome, with shadcn styling and flexible controls.
+A composable audio player component built on media-chrome, with shadcn styling and
+flexible controls.
 
-The `AudioPlayer` component provides a flexible and customizable audio playback interface built on top of media-chrome. It features a composable architecture that allows you to build audio experiences with custom controls, metadata display, and seamless integration with AI-generated audio content.
+The `AudioPlayer` component provides a flexible and customizable audio playback
+interface built on top of media-chrome. It features a composable architecture that
+allows you to build audio experiences with custom controls, metadata display, and
+seamless integration with AI-generated audio content.
 
 See `scripts/audio-player.tsx` for this example.
 
@@ -42,16 +46,18 @@ See `scripts/audio-player-remote.tsx` for this example.
 
 ### `<AudioPlayer />`
 
-Root MediaController component. Accepts all MediaController props except `audio` (which is set to `true` by default).
+Root MediaController component. Accepts all MediaController props except `audio` (which
+is set to `true` by default).
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `style` | `CSSProperties` | - | Custom CSS properties can be passed to override media-chrome theming variables. |
-| `...props` | `Omit<React.ComponentProps<typeof MediaController>, ` | - | Any other props are spread to the MediaController component. |
+| `...props` | `Omit<React.ComponentProps<typeof MediaController>,` | - | Any other props are spread to the MediaController component. |
 
 ### `<AudioPlayerElement />`
 
-The audio element that contains the media source. Accepts either a remote URL or AI SDK Speech Result data.
+The audio element that contains the media source. Accepts either a remote URL or AI SDK
+Speech Result data.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

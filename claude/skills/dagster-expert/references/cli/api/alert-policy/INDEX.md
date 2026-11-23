@@ -5,11 +5,11 @@ triggers:
   - "managing alert policies in Dagster Plus (listing, syncing from YAML)"
 ---
 
-# dg api alert-policy Reference
+## dg api alert-policy Reference
 
 Commands for managing alert policies in Dagster Plus.
 
-## Reference Files Index
+### Reference Files Index
 
 <!-- BEGIN GENERATED INDEX -->
 

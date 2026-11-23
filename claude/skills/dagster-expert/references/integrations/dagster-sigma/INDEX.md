@@ -4,6 +4,6 @@ triggers:
   - "BI and analytics assets with Sigma"
 ---
 
-# dagster-sigma
+## dagster-sigma
 
-Docs: https://docs.dagster.io/integrations/libraries/sigma
+Docs: <https://docs.dagster.io/integrations/libraries/sigma>

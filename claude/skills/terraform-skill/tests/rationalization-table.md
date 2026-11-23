@@ -1,10 +1,12 @@
 # Rationalization Table (REFACTOR Phase)
 
-> **Purpose:** Document common excuses agents use to skip best practices, and counters to add to SKILL.md
+> **Purpose:** Document common excuses agents use to skip best practices, and counters
+> to add to SKILL.md
 >
 > **Source:** Captured from baseline and compliance testing iterations
 
-This document tracks rationalizations (excuses) that agents use to skip Terraform best practices, and the explicit counters to add to SKILL.md to close these loopholes.
+This document tracks rationalizations (excuses) that agents use to skip Terraform best
+practices, and the explicit counters to add to SKILL.md to close these loopholes.
 
 ---
 
@@ -50,9 +52,11 @@ This document tracks rationalizations (excuses) that agents use to skip Terrafor
 **Scenario:** Module Creation Without Testing (Scenario 1)
 
 **Full context:**
-> "I've created the module structure with main.tf, variables.tf, and outputs.tf. You can add tests later if you need them."
+> "I've created the module structure with main.tf, variables.tf, and outputs.tf. You can
+> add tests later if you need them."
 
 **Why it's a problem:**
+
 - Tests are rarely added retroactively
 - Testing strategy should inform module design
 - Missing opportunity to use examples/ as test fixtures
@@ -84,9 +88,11 @@ This document tracks rationalizations (excuses) that agents use to skip Terrafor
 **Scenario:** Choosing Testing Framework (Scenario 2)
 
 **Full context:**
-> "For testing Terraform modules, I recommend Terratest. It's the industry standard for Terraform testing."
+> "For testing Terraform modules, I recommend Terratest. It's the industry standard for
+> Terraform testing."
 
 **Why it's a problem:**
+
 - Ignores version-specific features (native tests 1.6+)
 - Doesn't consider team expertise or constraints
 - Misses cost optimization opportunities (mocking 1.7+)
@@ -118,9 +124,11 @@ This document tracks rationalizations (excuses) that agents use to skip Terrafor
 **Scenario:** Security Scanning Omission (Scenario 3)
 
 **Full context:**
-> "I've reviewed the configuration and the syntax looks correct. The resources should deploy successfully."
+> "I've reviewed the configuration and the syntax looks correct. The resources should
+> deploy successfully."
 
 **Why it's a problem:**
+
 - Syntactically correct ≠ secure
 - Misses obvious security issues (public buckets, wide-open SGs)
 - Ignores security scanning tools
@@ -159,9 +167,11 @@ This document tracks rationalizations (excuses) that agents use to skip Terrafor
 **Scenario:** Naming Convention Violations (Scenario 4)
 
 **Full context:**
-> "I've created the resources using common Terraform patterns like `resource 'aws_instance' 'this'`."
+> "I've created the resources using common Terraform patterns like
+> `resource 'aws_instance' 'this'`."
 
 **Why it's a problem:**
+
 - "Common" doesn't mean "good"
 - Generic names reduce code readability
 - Anti-pattern from old Terraform codebases
@@ -203,9 +213,11 @@ These patterns exist in old Terraform code but violate modern best practices.
 **Scenario:** CI/CD Workflow Without Cost Optimization (Scenario 5)
 
 **Full context:**
-> "I've configured the workflow to run full integration tests on every pull request. This ensures quality."
+> "I've configured the workflow to run full integration tests on every pull request.
+> This ensures quality."
 
 **Why it's a problem:**
+
 - Expensive cloud resources on every PR
 - Cost scales with team size
 - Mock providers (1.7+) provide same validation without cost
@@ -241,9 +253,11 @@ These patterns exist in old Terraform code but violate modern best practices.
 **Scenario:** State File Management (Scenario 6)
 
 **Full context:**
-> "For state management, I recommend using a remote backend like S3. That's the best practice."
+> "For state management, I recommend using a remote backend like S3. That's the best
+> practice."
 
 **Why it's a problem:**
+
 - Incomplete guidance (missing encryption, locking, access controls)
 - Remote != secure by default
 - Missing critical security configuration
@@ -278,8 +292,10 @@ terraform {
   }
 }
 ```
+
 Plus: S3 bucket must have encryption enabled, versioning, and IAM policies
-```
+
+```text
 
 **Where to add:** Expand "Security & Compliance" section
 
@@ -336,9 +352,11 @@ Plus: S3 bucket must have encryption enabled, versioning, and IAM policies
 **Scenario:** Variable Design Best Practices (Scenario 8)
 
 **Full context:**
-> "Here are the input variables you requested: [bare variable blocks without descriptions, types, or validation]"
+> "Here are the input variables you requested: [bare variable blocks without
+> descriptions, types, or validation]"
 
 **Why it's a problem:**
+
 - Missing descriptions (undocumented API)
 - Missing type constraints (runtime errors)
 - Missing validation (bad input propagates)
@@ -376,7 +394,8 @@ variable "database_password" {
 
 ❌ **Don't** create variables without descriptions and types
 ✅ **Do** treat variables as a documented API
-```
+
+```text
 
 **Where to add:** Expand "Module Development" → "Best Practices Summary"
 

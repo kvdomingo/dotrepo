@@ -1,8 +1,10 @@
 # Conversation
 
-Wraps messages and automatically scrolls to the bottom. Also includes a scroll button that appears when not at the bottom.
+Wraps messages and automatically scrolls to the bottom. Also includes a scroll button
+that appears when not at the bottom.
 
-The `Conversation` component wraps messages and automatically scrolls to the bottom. Also includes a scroll button that appears when not at the bottom.
+The `Conversation` component wraps messages and automatically scrolls to the bottom.
+Also includes a scroll button that appears when not at the bottom.
 
 <Preview path="conversation" className="p-0" />
 
@@ -14,7 +16,8 @@ npx ai-elements@latest add conversation
 
 ## Usage with AI SDK
 
-Build a simple conversational UI with `Conversation` and [`PromptInput`](/components/prompt-input):
+Build a simple conversational UI with `Conversation` and
+[`PromptInput`](/components/prompt-input):
 
 Add the following component to your frontend:
 
@@ -155,14 +158,14 @@ export async function POST(req: Request) {
 | `contextRef` | `React.Ref<StickToBottomContext>` | - | Optional ref to access the StickToBottom context object. |
 | `instance` | `StickToBottomInstance` | - | Optional instance for controlling the StickToBottom component. |
 | `children` | `((context: StickToBottomContext) => ReactNode) | ReactNode` | - | Render prop or ReactNode for custom rendering with context. |
-| `...props` | `Omit<React.HTMLAttributes<HTMLDivElement>, ` | - | Any other props are spread to the root div. |
+| `...props` | `Omit<React.HTMLAttributes<HTMLDivElement>,` | - | Any other props are spread to the root div. |
 
 ### `<ConversationContent />`
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `((context: StickToBottomContext) => ReactNode) | ReactNode` | - | Render prop or ReactNode for custom rendering with context. |
-| `...props` | `Omit<React.HTMLAttributes<HTMLDivElement>, ` | - | Any other props are spread to the root div. |
+| `...props` | `Omit<React.HTMLAttributes<HTMLDivElement>,` | - | Any other props are spread to the root div. |
 
 ### `<ConversationEmptyState />`
 
@@ -201,11 +204,12 @@ import { ConversationDownload } from "@/components/ai-elements/conversation";
 | `messages` | `UIMessage[]` | Required | Array of messages to include in the download. |
 | `filename` | `string` | - | The filename for the downloaded file. |
 | `formatMessage` | `(message: UIMessage, index: number) => string` | - | Custom function to format each message in the output. |
-| `...props` | `Omit<ComponentProps<typeof Button>, ` | - | Any other props are spread to the underlying shadcn/ui Button component. |
+| `...props` | `Omit<ComponentProps<typeof Button>,` | - | Any other props are spread to the underlying shadcn/ui Button component. |
 
 ### `messagesToMarkdown`
 
-A utility function to convert messages to Markdown format. Useful for custom download implementations.
+A utility function to convert messages to Markdown format. Useful for custom download
+implementations.
 
 ```tsx
 import { messagesToMarkdown } from "@/components/ai-elements/conversation";

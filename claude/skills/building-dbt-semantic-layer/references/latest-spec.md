@@ -1,12 +1,16 @@
 # Latest Semantic Layer YAML Spec
 
-This is the authoring guide for the **latest** dbt Semantic Layer YAML spec, supported in **dbt Core 1.12+** and **Fusion** (always).
+This is the authoring guide for the **latest** dbt Semantic Layer YAML spec, supported
+in **dbt Core 1.12+** and **Fusion** (always).
 
-In the latest spec, semantic models are configured as metadata annotations on your dbt models rather than as separate top-level resources. Measures are replaced by simple metrics defined directly within models.
+In the latest spec, semantic models are configured as metadata annotations on your dbt
+models rather than as separate top-level resources. Measures are replaced by simple
+metrics defined directly within models.
 
 ## Contents
 
-- Implementation Workflow (Steps 1-4: enable semantic model, entities, dimensions, metrics)
+- Implementation Workflow (Steps 1-4: enable semantic model, entities, dimensions,
+  metrics)
 - YAML Format Reference (derived semantics, simple metric options, advanced metrics)
 - Advanced Metrics (derived, cumulative, ratio, conversion)
 - Cross-Model (Top-Level) Metrics
@@ -18,7 +22,10 @@ In the latest spec, semantic models are configured as metadata annotations on yo
 
 ### Step 1: Enable Semantic Model
 
-Add a `semantic_model:` block to the model's YAML with `enabled: true`. Set `agg_time_dimension` at the model level to the primary time column. If the model does not have a time column, warn the user that it cannot contain time-based metrics. Ask the user if they want to create a derived time dimension.
+Add a `semantic_model:` block to the model's YAML with `enabled: true`. Set
+`agg_time_dimension` at the model level to the primary time column. If the model does
+not have a time column, warn the user that it cannot contain time-based metrics. Ask the
+user if they want to create a derived time dimension.
 
 ```yaml
 models:
@@ -30,7 +37,9 @@ models:
 
 ### Step 2: Define Entities
 
-Identify the primary key column (check for `_id` suffix, uniqueness tests, or explicit config). Add an `entity:` block to that column's entry. If the model has foreign keys, define those as `entity: type: foreign`.
+Identify the primary key column (check for `_id` suffix, uniqueness tests, or explicit
+config). Add an `entity:` block to that column's entry. If the model has foreign keys,
+define those as `entity: type: foreign`.
 
 ```yaml
 models:
@@ -54,6 +63,7 @@ Entity types: `primary`, `foreign`, `unique`, `natural` (SCD Type II only).
 ### Step 3: Define Dimensions
 
 Scan columns for dimension candidates:
+
 - Time columns -> `dimension: type: time` with `granularity` at the column level
 - Categorical columns (strings, booleans) -> `dimension: type: categorical`
 
@@ -88,7 +98,9 @@ models:
 
 ### Step 4: Define Simple Metrics
 
-Create simple metrics for the model. For each metric, collect: name, description, label, aggregation type, and expression. Supported agg types: `sum`, `min`, `max`, `average`, `median`, `count`, `count_distinct`, `percentile`, `sum_boolean`.
+Create simple metrics for the model. For each metric, collect: name, description, label,
+aggregation type, and expression. Supported agg types: `sum`, `min`, `max`, `average`,
+`median`, `count`, `count_distinct`, `percentile`, `sum_boolean`.
 
 ```yaml
 models:
@@ -140,10 +152,11 @@ models:
 
 ### Derived Dimensions and Entities
 
-Use the `derived_semantics` block for dimensions or entities that are not a direct 1:1 mapping to a physical column. The `expr` field is required.
+Use the `derived_semantics` block for dimensions or entities that are not a direct 1:1
+mapping to a physical column. The `expr` field is required.
 
 ```yaml
-models: 
+models:
   - name: orders
     [...]
     derived_semantics:
@@ -164,7 +177,7 @@ models:
 Simple metrics support these additional properties:
 
 ```yaml
-models: 
+models:
   - name: orders
     [...]
     metrics:
@@ -182,7 +195,7 @@ models:
 For percentile aggregation:
 
 ```yaml
-models: 
+models:
   - name: orders
     [...]
     metrics:
@@ -197,14 +210,17 @@ models:
 
 ### Advanced Metrics
 
-Simple metrics defined within a model serve as building blocks. Advanced metrics that reference simple metrics _within the same model_ go under the model's `metrics:` key. Advanced metrics that reference metrics _across different models_ go under the top-level `metrics:` key.
+Simple metrics defined within a model serve as building blocks. Advanced metrics that
+reference simple metrics _within the same model_ go under the model's `metrics:` key.
+Advanced metrics that reference metrics _across different models_ go under the top-level
+`metrics:` key.
 
 #### Derived Metrics
 
 Combine multiple metrics using an expression.
 
 ```yaml
-models: 
+models:
   - name: orders
     [...]
     metrics:
@@ -223,7 +239,7 @@ models:
 With offset window (period-over-period):
 
 ```yaml
-models: 
+models:
   - name: orders
     [...]
     metrics:
@@ -242,7 +258,7 @@ models:
 With filter on input metric:
 
 ```yaml
-models: 
+models:
   - name: orders
     [...]
     metrics:
@@ -263,7 +279,8 @@ models:
 
 #### Cumulative Metrics
 
-Aggregate a metric over a running window or grain-to-date period. Requires a [time spine](time-spine.md).
+Aggregate a metric over a running window or grain-to-date period. Requires a
+[time spine](time-spine.md).
 
 ```yaml
 metrics:
@@ -304,7 +321,8 @@ metrics:
 
 #### Ratio Metrics
 
-Create a ratio between two metrics. Numerator and denominator can be strings (metric name) or dicts (with `name`, `filter`, `alias`).
+Create a ratio between two metrics. Numerator and denominator can be strings (metric
+name) or dicts (with `name`, `filter`, `alias`).
 
 ```yaml
 metrics:
@@ -351,7 +369,8 @@ metrics:
     window: 7 days
 ```
 
-With constant properties (ensure same dimension value across base and conversion events):
+With constant properties (ensure same dimension value across base and conversion
+events):
 
 ```yaml
 metrics:
@@ -371,7 +390,8 @@ metrics:
 
 ### Cross-Model (Top-Level) Metrics
 
-For metrics depending on multiple semantic models, define them at the top-level `metrics:` key:
+For metrics depending on multiple semantic models, define them at the top-level
+`metrics:` key:
 
 ```yaml
 metrics:
@@ -389,7 +409,8 @@ metrics:
 
 ### SCD Type II Dimensions
 
-For slowly changing dimension tables, use `validity_params` on time dimensions and `natural` entity type:
+For slowly changing dimension tables, use `validity_params` on time dimensions and
+`natural` entity type:
 
 ```yaml
 models:
@@ -431,10 +452,12 @@ SCD Type II semantic models cannot contain simple metrics.
 
 - `semantic_model:` block at model level with `enabled: true`
 - `agg_time_dimension:` at model level (not nested under `semantic_model:`)
-- `entity:` and `dimension:` blocks on columns (a column can have one or the other, not both)
+- `entity:` and `dimension:` blocks on columns (a column can have one or the other, not
+  both)
 - `granularity:` required at column level for time dimensions
 - `metrics:` array at model level for single-model metrics
-- Top-level `metrics:` key for cross-model metrics (derived, ratio, cumulative, conversion only)
+- Top-level `metrics:` key for cross-model metrics (derived, ratio, cumulative,
+  conversion only)
 - Use `derived_semantics:` for computed dimensions/entities not tied to a single column
 
 ## Common Pitfalls

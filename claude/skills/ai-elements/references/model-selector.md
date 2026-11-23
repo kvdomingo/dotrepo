@@ -2,7 +2,9 @@
 
 A searchable command palette for selecting AI models in your chat interface.
 
-The `ModelSelector` component provides a searchable command palette interface for selecting AI models. It's built on top of the cmdk library and provides a keyboard-navigable interface with search functionality.
+The `ModelSelector` component provides a searchable command palette interface for
+selecting AI models. It's built on top of the cmdk library and provides a
+keyboard-navigable interface with search functionality.
 
 See `scripts/model-selector.tsx` for this example.
 

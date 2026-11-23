@@ -18,7 +18,8 @@ Common issues and solutions when working with Terraform Stacks.
 **Issue:** Component A references Component B, and Component B references Component A.
 
 **Error Message:**
-```
+
+```text
 Error: Cycle detected in component dependencies
 ```
 
@@ -74,7 +75,8 @@ component "app" {
 **Issue:** Variable block validation errors during `terraform stacks validate`.
 
 **Error Message:**
-```
+
+```text
 Error: Unsupported argument
   on variables.tfcomponent.hcl line 5:
   5:   validation {
@@ -82,7 +84,8 @@ Error: Unsupported argument
 Validation blocks are not supported in Stack configurations
 ```
 
-**Solution:** Remove `validation` blocks from variable declarations. Stacks do not support validation blocks:
+**Solution:** Remove `validation` blocks from variable declarations. Stacks do not
+support validation blocks:
 
 ```hcl
 # Incorrect
@@ -108,7 +111,8 @@ Move validation logic into the underlying modules if needed.
 **Issue:** Variables fail validation when `type` is not specified.
 
 **Error Message:**
-```
+
+```text
 Error: Missing required argument
   on variables.tfcomponent.hcl line 3:
   3: variable "region" {
@@ -116,7 +120,8 @@ Error: Missing required argument
 The argument "type" is required in Stack variable declarations
 ```
 
-**Solution:** Always specify `type` for variables - it's required in Stacks (unlike traditional Terraform):
+**Solution:** Always specify `type` for variables - it's required in Stacks (unlike
+traditional Terraform):
 
 ```hcl
 # Incorrect
@@ -136,7 +141,8 @@ variable "region" {
 **Issue:** Modules with embedded provider blocks cause errors.
 
 **Error Message:**
-```
+
+```text
 Error: Provider configuration not allowed in module
 
 Modules used with Terraform Stacks cannot contain provider blocks
@@ -144,8 +150,10 @@ Modules used with Terraform Stacks cannot contain provider blocks
 
 **Solution:**
 
-1. **Remove provider blocks from modules** - configure providers in Stack configuration instead
-2. **Use modules that don't contain provider blocks** (most public registry modules are compatible)
+1. **Remove provider blocks from modules** - configure providers in Stack configuration
+   instead
+2. **Use modules that don't contain provider blocks** (most public registry modules are
+   compatible)
 3. **Fork and modify modules** if necessary to remove provider blocks
 
 ## Deployment Issues
@@ -154,7 +162,8 @@ Modules used with Terraform Stacks cannot contain provider blocks
 
 **Issue:** The HCP Terraform UI doesn't provide an option to destroy Stack deployments.
 
-**Why:** Stack deployment destruction is only available through configuration, not the UI.
+**Why:** Stack deployment destruction is only available through configuration, not the
+UI.
 
 **Solution:** Set `destroy = true` in the deployment block and upload the configuration:
 
@@ -180,7 +189,8 @@ deployment "old_environment" {
 5. After destruction completes, remove the deployment block entirely
 6. Upload configuration again to clean up the deployment definition
 
-**Important:** You cannot destroy deployments from the UI. This is by design to prevent accidental destruction.
+**Important:** You cannot destroy deployments from the UI. This is by design to prevent
+accidental destruction.
 
 ### Deployment Stuck in "Planning" State
 
@@ -190,7 +200,8 @@ deployment "old_environment" {
 
 1. **Provider authentication failed** - Check OIDC configuration and IAM roles
 2. **Module download failed** - Verify module sources are accessible
-3. **Provider version conflict** - Check `.terraform.lock.hcl` matches required providers
+3. **Provider version conflict** - Check `.terraform.lock.hcl` matches required
+   providers
 
 **Diagnosis:**
 
@@ -214,11 +225,13 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 **Issue:** Deployment is waiting for approval but CLI doesn't show approval prompt.
 
-**Why:** CLI monitoring commands are non-blocking and don't automatically prompt for approval.
+**Why:** CLI monitoring commands are non-blocking and don't automatically prompt for
+approval.
 
 **Solution:**
 
 **Option 1: Approve via CLI**
+
 ```bash
 # Approve all pending plans in a deployment run
 terraform stacks deployment-run approve-all-plans -deployment-run-id=sdr-ABC123
@@ -228,6 +241,7 @@ terraform stacks deployment-group approve-all-plans -deployment-group=canary
 ```
 
 **Option 2: Configure auto-approve** (Premium feature)
+
 ```hcl
 deployment_auto_approve "safe_changes" {
   deployment_group = deployment_group.canary
@@ -246,7 +260,8 @@ deployment_auto_approve "safe_changes" {
 **Issue:** Provider authentication fails with OIDC/workload identity.
 
 **Error Messages:**
-```
+
+```text
 Error: Error assuming role with web identity
 Error: Failed to retrieve credentials
 Error: Invalid identity token
@@ -312,11 +327,14 @@ provider "aws" "this" {
 ```
 
 **Azure - Verify federated credential:**
+
 - Application ID matches the one in provider configuration
-- Subject matches: `organization:<org>:project:<project>:stack:<stack>:deployment:<deployment>`
+- Subject matches:
+  `organization:<org>:project:<project>:stack:<stack>:deployment:<deployment>`
 - Issuer is `https://app.terraform.io`
 
 **GCP - Verify workload identity pool:**
+
 - Provider configuration includes correct workload identity provider
 - Service account has necessary IAM permissions
 - Attribute mapping includes `google.subject` from token claims
@@ -333,7 +351,8 @@ provider "aws" "this" {
 **Issue:** Provider version conflicts or "could not retrieve provider" errors.
 
 **Error Messages:**
-```
+
+```text
 Error: Failed to install provider
 Error: Provider version not found
 Error: Checksum mismatch for provider
@@ -376,13 +395,15 @@ required_providers {
 **Issue:** Modules from the Terraform public registry cause errors during plan or apply.
 
 **Common Errors:**
-```
+
+```text
 Error: Unsupported attribute
 Error: Invalid reference
 Error: Missing required argument
 ```
 
 **Known Problematic Modules:**
+
 - `terraform-aws-modules/alb/aws` - Some versions have compatibility issues
 - `terraform-aws-modules/ecs-service/aws` - May have issues with certain configurations
 
@@ -421,7 +442,8 @@ component "alb" {
 **Issue:** Stack can't find local module sources.
 
 **Error Message:**
-```
+
+```text
 Error: Module not found
   Could not load module ./modules/vpc
 ```
@@ -444,7 +466,7 @@ component "vpc" {
 
 2. **Ensure module directory exists** with proper structure:
 
-```
+```text
 my-stack/
 ├── components.tfcomponent.hcl
 └── modules/
@@ -463,7 +485,8 @@ my-stack/
 **Issue:** Component output is not available to referencing component.
 
 **Error Message:**
-```
+
+```text
 Error: Reference to unknown component
   Component "vpc" has not been defined
 ```
@@ -519,7 +542,8 @@ component "app" {
 **Issue:** Deployment with deferred changes doesn't complete after multiple iterations.
 
 **Error Message:**
-```
+
+```text
 Error: Maximum deferred change iterations reached
 ```
 
@@ -539,11 +563,13 @@ Error: Maximum deferred change iterations reached
 **Issue:** API request for diagnostics returns empty results.
 
 **Request:**
+
 ```bash
 curl "https://app.terraform.io/api/v2/stack-deployment-steps/{step-id}/stack-diagnostics"
 ```
 
 **Response:**
+
 ```json
 {
   "data": []
@@ -577,11 +603,13 @@ curl -L -s -H "Authorization: Bearer $TOKEN" \
 
 ### CLI Watch Commands Hang in CI/CD
 
-**Issue:** Commands like `terraform stacks deployment-run watch` never return in CI/CD pipelines.
+**Issue:** Commands like `terraform stacks deployment-run watch` never return in CI/CD
+pipelines.
 
 **Why:** Watch commands stream output indefinitely and are designed for interactive use.
 
-**Solution:** Use API polling instead of watch commands. See `api-monitoring.md` for complete workflow.
+**Solution:** Use API polling instead of watch commands. See `api-monitoring.md` for
+complete workflow.
 
 ### Artifacts Endpoint Returns 404
 
@@ -590,7 +618,8 @@ curl -L -s -H "Authorization: Bearer $TOKEN" \
 **Possible Causes:**
 
 1. **Step hasn't completed yet** - wait for step status to be "completed"
-2. **Wrong artifact name** - use one of: plan-description, plan-debug-log, apply-description, apply-debug-log
+2. **Wrong artifact name** - use one of: plan-description, plan-debug-log,
+   apply-description, apply-debug-log
 3. **Invalid step ID** - verify step ID from deployment-steps endpoint
 
 **Solution:**
@@ -652,7 +681,8 @@ curl -L -H "Authorization: Bearer $TOKEN" \
 ### Check HCP Terraform Status
 
 If experiencing widespread issues, check HCP Terraform status page:
-- https://status.hashicorp.com
+
+- <https://status.hashicorp.com>
 
 ### Review Configuration Version
 
@@ -665,6 +695,7 @@ terraform stacks configuration list
 ### Contact Support
 
 For issues not covered here:
+
 1. Gather relevant error messages and diagnostics
 2. Note the configuration sequence number
 3. Include deployment run IDs

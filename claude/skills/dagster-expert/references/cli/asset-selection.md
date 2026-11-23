@@ -4,7 +4,8 @@ triggers:
   - "filtering assets by tag, group, kind, upstream, or downstream"
 ---
 
-Reference for the asset selection syntax used by `dg list defs --assets` and `dg launch --assets`.
+Reference for the asset selection syntax used by `dg list defs --assets` and
+`dg launch --assets`.
 
 ## Attributes
 

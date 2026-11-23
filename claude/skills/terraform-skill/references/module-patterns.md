@@ -3,7 +3,9 @@
 > **Part of:** [terraform-skill](../SKILL.md)
 > **Purpose:** Best practices for Terraform/OpenTofu module development
 
-This document provides detailed guidance on creating reusable, maintainable Terraform modules. For high-level principles, see the [main skill file](../SKILL.md#core-principles).
+This document provides detailed guidance on creating reusable, maintainable Terraform
+modules. For high-level principles, see the
+[main skill file](../SKILL.md#core-principles).
 
 ---
 
@@ -24,7 +26,8 @@ This document provides detailed guidance on creating reusable, maintainable Terr
 
 ### Module Type Classification
 
-Terraform modules can be organized into three distinct types, each serving a specific purpose:
+Terraform modules can be organized into three distinct types, each serving a specific
+purpose:
 
 | Type | When to Use | Scope | Example |
 |------|-------------|-------|---------|
@@ -37,6 +40,7 @@ Terraform modules can be organized into three distinct types, each serving a spe
 ### Resource Module
 
 **Characteristics:**
+
 - Smallest building block
 - Single logical group of resources
 - Highly reusable across projects
@@ -44,7 +48,8 @@ Terraform modules can be organized into three distinct types, each serving a spe
 - Clear, focused purpose
 
 **Examples:**
-```
+
+```text
 modules/
 ├── vpc/                    # Resource module
 │   ├── main.tf            # VPC + subnets + route tables
@@ -63,6 +68,7 @@ modules/
 ### Infrastructure Module
 
 **Characteristics:**
+
 - Combines multiple resource modules
 - Purpose-specific (e.g., "web application infrastructure")
 - May span multiple services
@@ -70,7 +76,8 @@ modules/
 - Moderate reusability
 
 **Examples:**
-```
+
+```text
 modules/
 └── web-application/        # Infrastructure module
     ├── main.tf            # Orchestrates multiple resource modules
@@ -98,6 +105,7 @@ module "ecs" {
 ### Composition
 
 **Characteristics:**
+
 - Highest level of abstraction
 - Complete environment or application
 - Combines infrastructure modules
@@ -105,7 +113,8 @@ module "ecs" {
 - Not reusable (environment-specific values)
 
 **Examples:**
-```
+
+```text
 environments/
 ├── prod/                   # Composition
 │   ├── main.tf            # Complete production environment
@@ -126,7 +135,7 @@ environments/
 
 ### Decision Tree: Which Module Type?
 
-```
+```text
 Question 1: Is this environment-specific configuration?
 ├─ YES → Composition (environments/prod/, environments/staging/)
 └─ NO  → Continue
@@ -142,7 +151,8 @@ Question 3: Is it a focused group of related resources?
 ### File Organization Standards
 
 **Required files in all modules:**
-```
+
+```text
 main.tf        # Resource definitions, module calls, data sources
 variables.tf   # Input variable declarations
 outputs.tf     # Output value declarations
@@ -151,7 +161,8 @@ README.md      # Usage documentation
 ```
 
 **Conditional files:**
-```
+
+```text
 terraform.tfvars  # ONLY at composition level (NEVER in modules)
 locals.tf         # For complex local value calculations
 data.tf           # Optional: Data sources (if main.tf gets large)
@@ -159,6 +170,7 @@ backend.tf        # ONLY at composition level (remote state config)
 ```
 
 **Why separate files?**
+
 - **Consistency:** Same structure across all modules
 - **Discoverability:** Know where to find specific types of configuration
 - **Maintainability:** Easier to navigate and modify
@@ -171,6 +183,7 @@ backend.tf        # ONLY at composition level (remote state config)
 ### 1. Smaller Scopes = Better Performance + Reduced Blast Radius
 
 **Benefits:**
+
 - Faster `terraform plan` and `terraform apply` operations
 - Isolated failures don't affect unrelated infrastructure
 - Easier to reason about changes
@@ -197,12 +210,14 @@ environments/prod/
 ### 2. Always Use Remote State
 
 **Why:**
+
 - **Prevents race conditions** with multiple developers
 - **Provides disaster recovery** (state versioning)
 - **Enables team collaboration** (shared access)
 - **Supports state locking** (prevents concurrent modifications)
 
 **Never:**
+
 ```hcl
 # ❌ BAD - Local state (default)
 # State stored in local terraform.tfstate file
@@ -211,6 +226,7 @@ environments/prod/
 ```
 
 **Always:**
+
 ```hcl
 # ✅ GOOD - Remote state
 terraform {
@@ -229,6 +245,7 @@ terraform {
 **Pattern:** Connect compositions via remote state data sources
 
 **Why:**
+
 - Loose coupling between infrastructure components
 - Teams can work independently
 - Changes to one stack don't require rebuilding others
@@ -267,6 +284,7 @@ module "ec2" {
 ```
 
 **Best practices:**
+
 - Use remote state for cross-team dependencies
 - Document which outputs are consumed by other stacks
 - Version outputs (don't break downstream consumers)
@@ -275,6 +293,7 @@ module "ec2" {
 ### 4. Keep Resource Modules Simple
 
 **Principles:**
+
 - Don't hardcode values
 - Use variables for all configurable parameters
 - Use data sources for external dependencies
@@ -360,7 +379,7 @@ module "rds" {
 
 ### Standard Layout
 
-```
+```text
 my-module/
 ├── README.md                # Usage documentation
 ├── LICENSE                  # MIT or Apache 2.0 (for public modules)
@@ -391,12 +410,15 @@ my-module/
 ### License Files
 
 For public modules, always include a LICENSE file:
+
 - **MIT License** - Simple, permissive (common for public modules)
 - **Apache 2.0** - Permissive with patent grant protection
 
-**Important:** Do NOT store LICENSE templates in this skill. Generate them during module creation using user preference.
+**Important:** Do NOT store LICENSE templates in this skill. Generate them during module
+creation using user preference.
 
 **When to include:**
+
 - ✅ Public modules (GitHub, Terraform Registry)
 - ✅ Open-source projects
 - ❌ Private internal modules (optional)
@@ -406,7 +428,8 @@ For public modules, always include a LICENSE file:
 
 **Before generating any module or configuration:**
 
-1. **Ask the user:** "Will this be for Terraform or OpenTofu? (Both are supported equally)"
+1. **Ask the user:** "Will this be for Terraform or OpenTofu? (Both are supported
+   equally)"
 
 2. **Use the preference throughout:**
    - Command examples: `terraform` vs `tofu`
@@ -416,6 +439,7 @@ For public modules, always include a LICENSE file:
    - Binary references
 
 3. **Document the choice:**
+
    ```markdown
    ## Requirements
 
@@ -426,6 +450,7 @@ For public modules, always include a LICENSE file:
    ```
 
 4. **Example command variations:**
+
    ```bash
    # Terraform
    terraform init
@@ -438,9 +463,11 @@ For public modules, always include a LICENSE file:
    tofu plan
    ```
 
-**Note:** The choice is primarily about commands and documentation. The HCL code itself is identical.
+**Note:** The choice is primarily about commands and documentation. The HCL code itself
+is identical.
 
 **Default behavior:**
+
 - If user doesn't specify: Ask explicitly
 - If project already exists: Detect from existing files (`.terraform/` or `.tofu/`)
 - If still unclear: Default to showing both options in documentation
@@ -556,7 +583,8 @@ resource "aws_instance" "server" {
 }
 ```
 
-**Why?** When you remove an item from the middle, `for_each` doesn't reshuffle other resources.
+**Why?** When you remove an item from the middle, `for_each` doesn't reshuffle other
+resources.
 
 ### ❌ DON'T: Use `count` When Order Matters
 
@@ -571,11 +599,12 @@ resource "aws_instance" "server" {
 }
 ```
 
-**Problem:** If you remove `var.server_names[1]`, Terraform will destroy and recreate all instances after it.
+**Problem:** If you remove `var.server_names[1]`, Terraform will destroy and recreate
+all instances after it.
 
 ### ✅ DO: Separate Root Module from Reusable Modules
 
-```
+```text
 # Root module (environment-specific)
 prod/
   main.tf          # Calls modules with prod-specific values
@@ -695,7 +724,7 @@ resource "aws_instance" "app" {
 
 **Fix:** Use separate root modules:
 
-```
+```text
 environments/
   dev/
     main.tf
@@ -724,7 +753,8 @@ data "terraform_remote_state" "security" {
 
 **Problem:** Changes to one state file break others.
 
-**Fix:** Use module outputs when possible, reserve remote state for truly separate teams.
+**Fix:** Use module outputs when possible, reserve remote state for truly separate
+teams.
 
 ---
 
@@ -734,7 +764,7 @@ data "terraform_remote_state" "security" {
 
 Follow the Terraform Registry convention:
 
-```
+```text
 terraform-<PROVIDER>-<NAME>
 
 Examples:
@@ -747,7 +777,7 @@ terraform-google-network
 
 Use organization-specific prefixes:
 
-```
+```text
 <ORG>-terraform-<PROVIDER>-<NAME>
 
 Examples:
@@ -776,7 +806,8 @@ Quick checklist:
 
 ### Pre-commit Hooks
 
-When creating new modules, always include pre-commit hooks for automated validation and documentation generation:
+When creating new modules, always include pre-commit hooks for automated validation and
+documentation generation:
 
 **Standard .pre-commit-config.yaml template:**
 
@@ -806,12 +837,14 @@ pre-commit run -a
 ```
 
 **Best practices:**
+
 - Include `.pre-commit-config.yaml` in all new modules
 - Pin to specific pre-commit-terraform version
 - Update version regularly
 
 **For module generation:**
 When generating new modules, also create:
+
 - `.pre-commit-config.yaml` (from template above)
 - `LICENSE` file (MIT or Apache 2.0, based on user preference)
 - `.gitignore` (from template below)
@@ -832,14 +865,18 @@ Additional resources:
 ```
 
 **When to include attribution:**
+
 - ✅ All new modules created with terraform-skill guidance
 - ✅ Public modules (GitHub, Terraform Registry)
 - ✅ Private modules shared within organizations
 - ⚠️ Optional for one-off environment configurations
 
-**Rationale:** This is a derivative work as defined in the Apache 2.0 License Section 1. Attribution supports the open-source ecosystem and helps others discover these best practices.
+**Rationale:** This is a derivative work as defined in the Apache 2.0 License Section 1.
+Attribution supports the open-source ecosystem and helps others discover these best
+practices.
 
 **README Structure with Attribution:**
+
 ```markdown
 # Module Name
 
@@ -925,6 +962,7 @@ secrets/
 ### What to Test in Terraform Modules
 
 **Core testing areas:**
+
 - **Input validation** - Variables accept valid values and reject invalid ones
 - **Resource creation** - Resources are created as expected with correct attributes
 - **Output correctness** - Outputs return expected values and types
@@ -932,6 +970,7 @@ secrets/
 - **Destroy completeness** - All resources are cleaned up properly
 
 **When to write tests:**
+
 - During development for reusable modules
 - Before publishing modules to registry
 - After significant refactoring
@@ -940,16 +979,19 @@ secrets/
 ### Testing Layers
 
 **1. Syntax validation:**
+
 ```bash
 terraform fmt -check -recursive
 ```
 
 **2. Configuration validity:**
+
 ```bash
 terraform validate
 ```
 
 **3. Plan preview:**
+
 ```bash
 terraform plan
 # Review: Are expected resources being created?
@@ -957,6 +999,7 @@ terraform plan
 ```
 
 **4. Integration testing:**
+
 ```bash
 # Apply and verify
 terraform apply -auto-approve
@@ -1022,6 +1065,7 @@ terraform plan -detailed-exitcode
 ```
 
 **Why idempotency matters:**
+
 - Proves configuration is stable
 - No resource churn on repeated applies
 - Safe to run in CI/CD pipelines
@@ -1046,6 +1090,7 @@ AFTER_COUNT=$(terraform state list | wc -l)
 ### Testing Anti-patterns
 
 **❌ Don't:**
+
 - Skip idempotency testing (most important test)
 - Test only happy paths (test validation failures too)
 - Forget to clean up test resources
@@ -1053,6 +1098,7 @@ AFTER_COUNT=$(terraform state list | wc -l)
 - Test Terraform syntax (terraform validate does this)
 
 **✅ Do:**
+
 - Test that validation blocks reject invalid input
 - Verify outputs have expected types and formats
 - Test conditional resource creation (count/for_each)
@@ -1063,18 +1109,21 @@ AFTER_COUNT=$(terraform state list | wc -l)
 ### Testing Strategy by Module Type
 
 **Resource modules:**
+
 - Focus on input validation
 - Test resource creation with minimal config
 - Verify outputs are correct
 - Test idempotency
 
 **Infrastructure modules:**
+
 - Test module composition works
 - Verify cross-module dependencies
 - Test with different configurations
 - Integration tests in test account
 
 **Compositions:**
+
 - Smoke tests (can it plan?)
 - Test with production-like values
 - Verify remote state connectivity
@@ -1085,6 +1134,7 @@ AFTER_COUNT=$(terraform state list | wc -l)
 **Strategies:**
 
 1. **Use mocking for unit tests** (Terraform 1.7+)
+
    ```hcl
    mock_provider "aws" {
      mock_data "aws_ami" {
@@ -1096,6 +1146,7 @@ AFTER_COUNT=$(terraform state list | wc -l)
    ```
 
 2. **Tag test resources for tracking**
+
    ```hcl
    tags = {
      Environment = "test"
@@ -1105,11 +1156,13 @@ AFTER_COUNT=$(terraform state list | wc -l)
    ```
 
 3. **Run integration tests only on main branch**
+
    ```yaml
    if: github.ref == 'refs/heads/main'
    ```
 
 4. **Use smaller instance types**
+
    ```hcl
    instance_type = var.environment == "test" ? "t3.micro" : var.instance_type
    ```
@@ -1119,7 +1172,8 @@ AFTER_COUNT=$(terraform state list | wc -l)
    - Run destroy in CI/CD after tests complete
    - Use terraform-compliance to enforce TTL tags
 
-**For testing framework details, see:** [Testing Frameworks Guide](testing-frameworks.md)
+**For testing framework details, see:**
+[Testing Frameworks Guide](testing-frameworks.md)
 
 ---
 

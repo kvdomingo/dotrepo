@@ -1,8 +1,12 @@
 # Speech Input
 
-A button component that captures voice input and converts it to text, with cross-browser support.
+A button component that captures voice input and converts it to text, with cross-browser
+support.
 
-The `SpeechInput` component provides an easy-to-use interface for capturing voice input in your application. It uses the Web Speech API for real-time transcription in supported browsers (Chrome, Edge), and falls back to MediaRecorder with an external transcription service for browsers that don't support Web Speech API (Firefox, Safari).
+The `SpeechInput` component provides an easy-to-use interface for capturing voice input
+in your application. It uses the Web Speech API for real-time transcription in supported
+browsers (Chrome, Edge), and falls back to MediaRecorder with an external transcription
+service for browsers that don't support Web Speech API (Firefox, Safari).
 
 See `scripts/speech-input.tsx` for this example.
 
@@ -42,7 +46,8 @@ The component extends the shadcn/ui Button component, so all Button props are av
 
 ### Speech Recognition Modes
 
-The component automatically detects browser capabilities and uses the best available method:
+The component automatically detects browser capabilities and uses the best available
+method:
 
 | Browser         | Mode           | Behavior                                               |
 | --------------- | -------------- | ------------------------------------------------------ |
@@ -68,18 +73,22 @@ When the Web Speech API is unavailable, the component falls back to recording au
 4. Waits for transcription result
 5. Passes result to `onTranscriptionChange`
 
-**Note**: The `onAudioRecorded` prop is required for this mode to work. Without it, the button will be disabled in Firefox/Safari.
+**Note**: The `onAudioRecorded` prop is required for this mode to work. Without it, the
+button will be disabled in Firefox/Safari.
 
 ### Transcription Processing
 
-The component only calls `onTranscriptionChange` with **final transcripts**. Interim results (Web Speech API) are ignored to prevent incomplete text from being processed.
+The component only calls `onTranscriptionChange` with **final transcripts**. Interim
+results (Web Speech API) are ignored to prevent incomplete text from being processed.
 
 ### Visual States
 
 - **Default State**: Standard button appearance with microphone icon
 - **Listening State**: Pulsing animation with accent colors to indicate active listening
-- **Processing State**: Loading spinner while waiting for transcription (MediaRecorder mode)
-- **Disabled State**: Button is disabled when no API is available or required props are missing
+- **Processing State**: Loading spinner while waiting for transcription (MediaRecorder
+  mode)
+- **Disabled State**: Button is disabled when no API is available or required props are
+  missing
 
 ### Lifecycle
 
@@ -99,7 +108,9 @@ The component provides cross-browser support through a two-tier system:
 | Firefox | MediaRecorder  | `onAudioRecorded` prop |
 | Safari  | MediaRecorder  | `onAudioRecorded` prop |
 
-For full cross-browser support, provide the `onAudioRecorded` callback that sends audio to a transcription service like OpenAI Whisper, Google Cloud Speech-to-Text, or AssemblyAI.
+For full cross-browser support, provide the `onAudioRecorded` callback that sends audio
+to a transcription service like OpenAI Whisper, Google Cloud Speech-to-Text, or
+AssemblyAI.
 
 ## Accessibility
 
@@ -110,7 +121,8 @@ For full cross-browser support, provide the `onAudioRecorded` callback that send
 
 ## Usage with MediaRecorder Fallback
 
-To support Firefox and Safari, provide an `onAudioRecorded` callback that sends audio to a transcription service:
+To support Firefox and Safari, provide an `onAudioRecorded` callback that sends audio to
+a transcription service:
 
 ```tsx
 const handleAudioRecorded = async (audioBlob: Blob): Promise<string> => {

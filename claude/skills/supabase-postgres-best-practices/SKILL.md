@@ -12,11 +12,14 @@ metadata:
 
 # Supabase Postgres Best Practices
 
-Comprehensive performance optimization guide for Postgres, maintained by Supabase. Contains rules across 8 categories, prioritized by impact to guide automated query optimization and schema design.
+Comprehensive performance optimization guide for Postgres, maintained by Supabase.
+Contains rules across 8 categories, prioritized by impact to guide automated query
+optimization and schema design.
 
 ## When to Apply
 
 Reference these guidelines when:
+
 - Writing SQL queries or designing schemas
 - Implementing indexes or query optimization
 - Reviewing database performance issues
@@ -41,13 +44,14 @@ Reference these guidelines when:
 
 Read individual rule files for detailed explanations and SQL examples:
 
-```
+```text
 references/query-missing-indexes.md
 references/query-partial-indexes.md
 references/_sections.md
 ```
 
 Each rule file contains:
+
 - Brief explanation of why it matters
 - Incorrect SQL example with explanation
 - Correct SQL example with explanation
@@ -57,8 +61,8 @@ Each rule file contains:
 
 ## References
 
-- https://www.postgresql.org/docs/current/
-- https://supabase.com/docs
-- https://wiki.postgresql.org/wiki/Performance_Optimization
-- https://supabase.com/docs/guides/database/overview
-- https://supabase.com/docs/guides/auth/row-level-security
+- <https://www.postgresql.org/docs/current/>
+- <https://supabase.com/docs>
+- <https://wiki.postgresql.org/wiki/Performance_Optimization>
+- <https://supabase.com/docs/guides/database/overview>
+- <https://supabase.com/docs/guides/auth/row-level-security>

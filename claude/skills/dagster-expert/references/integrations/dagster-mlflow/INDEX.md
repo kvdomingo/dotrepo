@@ -4,6 +4,6 @@ triggers:
   - "ML experiment tracking and model management with MLflow"
 ---
 
-# dagster-mlflow
+## dagster-mlflow
 
-Docs: https://docs.dagster.io/integrations/libraries/mlflow
+Docs: <https://docs.dagster.io/integrations/libraries/mlflow>

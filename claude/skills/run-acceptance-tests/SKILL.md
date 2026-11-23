@@ -14,8 +14,9 @@ To run a focussed acceptance test named `TestAccFeatureHappyPath`:
 1. Run `go test -run=TestAccFeatureHappyPath` with the following environment
    variables:
    - `TF_ACC=1`
-   
+
    Default to non-verbose test output.
+
 1. The acceptance tests may require additional environment variables for
    specific providers. If the test output indicates missing environment
    variables, then suggest how to set up these environment variables securely.

@@ -1,6 +1,7 @@
 # Mock Providers
 
-Mock providers simulate provider behavior without creating real infrastructure (Terraform 1.7.0+). Use them for fast, credential-free unit tests.
+Mock providers simulate provider behavior without creating real infrastructure
+(Terraform 1.7.0+). Use them for fast, credential-free unit tests.
 
 ## Basic Mock Provider
 
@@ -153,12 +154,14 @@ mock_provider "aws" {
 ## When to Use Mocks
 
 **Good fit:**
+
 - Testing Terraform logic, conditionals, `for_each`/`count` expressions
 - Validating variable transformations and output calculations
 - Local development without cloud credentials
 - Fast CI/CD feedback loops
 
 **Not a good fit:**
+
 - Validating actual provider API behavior
 - Testing real resource creation side effects
 - End-to-end integration testing

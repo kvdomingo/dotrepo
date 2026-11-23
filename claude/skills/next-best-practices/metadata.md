@@ -4,9 +4,11 @@ Add SEO metadata to Next.js pages using the Metadata API.
 
 ## Important: Server Components Only
 
-The `metadata` object and `generateMetadata` function are **only supported in Server Components**. They cannot be used in Client Components.
+The `metadata` object and `generateMetadata` function are
+**only supported in Server Components**. They cannot be used in Client Components.
 
 If the target page has `'use client'`:
+
 1. Remove `'use client'` if possible, move client logic to child components
 2. Or extract metadata to a parent Server Component layout
 3. Or split the file: Server Component with metadata imports Client Components
@@ -79,7 +81,8 @@ export const metadata: Metadata = {
 
 ## Metadata File Conventions
 
-Reference: https://nextjs.org/docs/app/getting-started/project-structure#metadata-file-conventions
+Reference:
+<https://nextjs.org/docs/app/getting-started/project-structure#metadata-file-conventions>
 
 Place these files in `app/` directory (or route segments):
 
@@ -98,7 +101,7 @@ Place these files in `app/` directory (or route segments):
 
 For most sites, **static metadata files provide excellent SEO coverage**:
 
-```
+```text
 app/
 ├── favicon.ico
 ├── opengraph-image.png     # Works for both OG and Twitter
@@ -108,17 +111,19 @@ app/
 ```
 
 **Tips:**
-- A single `opengraph-image.png` covers both Open Graph and Twitter (Twitter falls back to OG)
+
+- A single `opengraph-image.png` covers both Open Graph and Twitter (Twitter falls back
+  to OG)
 - Static `title` and `description` in layout metadata is sufficient for most pages
 - Only use dynamic `generateMetadata` when content varies per page
 
 ---
 
-# OG Image Generation
+## OG Image Generation
 
 Generate dynamic Open Graph images using `next/og`.
 
-## Important Rules
+### Important Rules
 
 1. **Use `next/og`** - not `@vercel/og` (it's built into Next.js)
 2. **No searchParams** - OG images can't access search params, use route params instead
@@ -133,7 +138,7 @@ import { ImageResponse } from 'next/og'
 // export const runtime = 'edge'
 ```
 
-## Basic OG Image
+### Basic OG Image
 
 ```tsx
 // app/opengraph-image.tsx
@@ -165,7 +170,7 @@ export default function Image() {
 }
 ```
 
-## Dynamic OG Image
+### Dynamic OG Image
 
 ```tsx
 // app/blog/[slug]/opengraph-image.tsx
@@ -206,7 +211,7 @@ export default async function Image({ params }: Props) {
 }
 ```
 
-## Custom Fonts
+### Custom Fonts
 
 ```tsx
 import { ImageResponse } from 'next/og'
@@ -232,19 +237,20 @@ export default async function Image() {
 }
 ```
 
-## File Naming
+### File Naming
 
 - `opengraph-image.tsx` - Open Graph (Facebook, LinkedIn)
 - `twitter-image.tsx` - Twitter/X cards (optional, falls back to OG)
 
-## Styling Notes
+### Styling Notes
 
 ImageResponse uses Flexbox layout:
+
 - Use `display: 'flex'`
 - No CSS Grid support
 - Styles must be inline objects
 
-## Multiple OG Images
+### Multiple OG Images
 
 Use `generateImageMetadata` for multiple images per route:
 
@@ -269,7 +275,7 @@ export default async function Image({ params, id }) {
 }
 ```
 
-## Multiple Sitemaps
+### Multiple Sitemaps
 
 Use `generateSitemaps` for large sites:
 

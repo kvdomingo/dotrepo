@@ -6,19 +6,25 @@ license: Apache-2.0
 
 # Streamlit environment
 
-Use whatever dependency management the project already has (pip, poetry, conda, etc.). If starting fresh and uv is available, it's a good default—fast, reliable, and creates isolated environments automatically.
+Use whatever dependency management the project already has (pip, poetry, conda, etc.).
+If starting fresh and uv is available, it's a good default—fast, reliable, and creates
+isolated environments automatically.
 
 If uv is not installed, ask the user before installing it.
 
 ## CRITICAL: Always Use Latest Streamlit
 
-**Always specify `streamlit>=1.53.0`** (or latest) in dependencies. Many Streamlit features and patterns in these skills require recent versions. Older streamlit versions will cause errors with:
+**Always specify `streamlit>=1.53.0`** (or latest) in dependencies. Many Streamlit
+features and patterns in these skills require recent versions. Older streamlit versions
+will cause errors with:
+
 - Material icons (`:material/icon_name:`)
 - `st.pills()`, `st.segmented_control()`
 - Modern caching decorators
 - Navigation APIs
 
-When setting up a new project or fixing an existing one, **always check and update the streamlit version**.
+When setting up a new project or fixing an existing one,
+**always check and update the streamlit version**.
 
 ## Using uv
 
@@ -51,6 +57,7 @@ uv add streamlit
 ```
 
 This creates:
+
 - `pyproject.toml` with dependencies
 - `uv.lock` for reproducible builds
 - `.venv/` virtual environment
@@ -83,13 +90,14 @@ uv add plotly snowflake-connector-python
 
 Keep it simple. For most apps:
 
-```
+```text
 my-streamlit-app/
 ├── .venv/
 └── streamlit_app.py
 ```
 
 Only add more when needed:
+
 - `app_pages/` → Only for multi-page apps
 - `.streamlit/config.toml` → Only if customizing theme or settings
 - `.streamlit/secrets.toml` → Only if using secrets (add to `.gitignore`)
@@ -97,9 +105,11 @@ Only add more when needed:
 
 ## Convention
 
-Name your main file `streamlit_app.py` for consistency. This is what Streamlit expects by default.
+Name your main file `streamlit_app.py` for consistency. This is what Streamlit expects
+by default.
 
 **What goes in the main module:**
+
 - When using navigation: it's a router that defines pages and runs them
 - When there's no navigation: it's the home page with your main content
 

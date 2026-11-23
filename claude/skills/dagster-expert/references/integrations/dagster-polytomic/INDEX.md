@@ -4,6 +4,6 @@ triggers:
   - "polytomic, data sync"
 ---
 
-# dagster-polytomic
+## dagster-polytomic
 
-Docs: https://docs.dagster.io/integrations/libraries/polytomic
+Docs: <https://docs.dagster.io/integrations/libraries/polytomic>

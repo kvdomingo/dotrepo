@@ -13,7 +13,8 @@ Deep Agents are an opinionated agent framework built on LangChain/LangGraph with
 - **Human-in-the-loop**: Approval workflows for sensitive operations
 - **Skills**: On-demand loading of specialized capabilities
 
-The agent harness provides these capabilities automatically - you configure, not implement.
+The agent harness provides these capabilities automatically - you configure, not
+implement.
 </overview>
 
 <when-to-use>
@@ -62,7 +63,8 @@ config = {"configurable": {"thread_id": "user-123"}}
 result = agent.invoke({
     "messages": [{"role": "user", "content": "What's the weather in Tokyo?"}]
 }, config=config)
-```
+
+```text
 </python>
 <typescript>
 Create a basic deep agent with a custom tool and invoke it with a user message.
@@ -87,6 +89,7 @@ const result = await agent.invoke({
   messages: [{ role: "user", content: "What's the weather in Tokyo?" }]
 }, config);
 ```
+
 </typescript>
 </ex-basic-agent>
 
@@ -111,7 +114,8 @@ agent = create_deep_agent(
     checkpointer=MemorySaver(),
     store=InMemoryStore()
 )
-```
+
+```text
 </python>
 <typescript>
 Configure a deep agent with all available options including subagents, skills, and persistence.
@@ -132,6 +136,7 @@ const agent = await createDeepAgent({
   store: new InMemoryStore()
 });
 ```
+
 </typescript>
 </ex-full-configuration>
 
@@ -151,7 +156,8 @@ Every deep agent has access to:
 Skills use **progressive disclosure** - agents only load content when relevant.
 
 ### Directory Structure
-```
+
+```text
 skills/
 └── my-skill/
     ├── SKILL.md        # Required: main skill file
@@ -160,6 +166,7 @@ skills/
 ```
 
 ### SKILL.md Format
+
 ```markdown
 ---
 name: my-skill
@@ -177,6 +184,7 @@ Conditions when this skill applies.
 ## Instructions
 Step-by-step guidance for the agent.
 ```
+
 </skill-md-format>
 
 <skills-vs-memory>
@@ -207,7 +215,8 @@ agent = create_deep_agent(
 result = agent.invoke({
     "messages": [{"role": "user", "content": "Use the python-testing skill"}]
 }, config={"configurable": {"thread_id": "session-1"}})
-```
+
+```text
 </python>
 <typescript>
 Set up an agent with skills directory and filesystem backend for on-demand skill loading.
@@ -225,6 +234,7 @@ const result = await agent.invoke({
   messages: [{ role: "user", content: "Use the python-testing skill" }]
 }, { configurable: { thread_id: "session-1" } });
 ```
+
 </typescript>
 </ex-skills-with-filesystem-backend>
 
@@ -240,11 +250,11 @@ from langgraph.store.memory import InMemoryStore
 store = InMemoryStore()
 
 # Load skill content into store
-skill_content = """---
-name: python-testing
-description: Best practices for Python testing with pytest
----
-# Python Testing Skill
+
+## skill_content = """--- name: python-testing description: Best practices for Python testing with pytest
+
+## Python Testing Skill
+
 ..."""
 
 store.put(
@@ -258,7 +268,8 @@ agent = create_deep_agent(
     store=store,
     skills=["/skills/"]
 )
-```
+
+```text
 </python>
 </ex-skills-with-store-backend>
 
@@ -289,6 +300,7 @@ agent = create_deep_agent(interrupt_on={"write_file": True})
 # CORRECT
 agent = create_deep_agent(interrupt_on={"write_file": True}, checkpointer=MemorySaver())
 ```
+
 </python>
 <typescript>
 Interrupts require a checkpointer.
@@ -296,9 +308,10 @@ Interrupts require a checkpointer.
 // WRONG
 const agent = await createDeepAgent({ interruptOn: { write_file: true } });
 
-// CORRECT
-const agent = await createDeepAgent({ interruptOn: { write_file: true }, checkpointer: new MemorySaver() });
-```
+// CORRECT const agent = await createDeepAgent({ interruptOn: { write_file: true },
+checkpointer: new MemorySaver() });
+
+```text
 </typescript>
 </fix-checkpointer-for-interrupts>
 
@@ -312,6 +325,7 @@ agent = create_deep_agent(backend=lambda rt: StoreBackend(rt))
 # CORRECT
 agent = create_deep_agent(backend=lambda rt: StoreBackend(rt), store=InMemoryStore())
 ```
+
 </python>
 <typescript>
 StoreBackend requires a Store instance for persistent memory across threads.
@@ -319,9 +333,10 @@ StoreBackend requires a Store instance for persistent memory across threads.
 // WRONG
 const agent = await createDeepAgent({ backend: (config) => new StoreBackend(config) });
 
-// CORRECT
-const agent = await createDeepAgent({ backend: (config) => new StoreBackend(config), store: new InMemoryStore() });
-```
+// CORRECT const agent = await createDeepAgent({ backend: (config) => new
+StoreBackend(config), store: new InMemoryStore() });
+
+```text
 </typescript>
 </fix-store-for-memory>
 
@@ -338,6 +353,7 @@ config = {"configurable": {"thread_id": "user-123"}}
 agent.invoke({"messages": [...]}, config=config)
 agent.invoke({"messages": [...]}, config=config)
 ```
+
 </python>
 <typescript>
 Use consistent thread_id to maintain conversation context across invocations.
@@ -350,7 +366,8 @@ await agent.invoke({ messages: [{ role: "user", content: "What did I say?" }] })
 const config = { configurable: { thread_id: "user-123" } };
 await agent.invoke({ messages: [...] }, config);
 await agent.invoke({ messages: [...] }, config);
-```
+
+```text
 </typescript>
 </fix-thread-id-for-conversations>
 
@@ -368,6 +385,7 @@ description: Python testing best practices with pytest fixtures and mocking
 # My Skill
 This is my skill...
 ```
+
 </fix-frontmatter-required>
 
 <fix-backend-for-skills>
@@ -377,12 +395,14 @@ Skills require a proper backend to load from the filesystem.
 # WRONG: Skills won't load without proper backend
 agent = create_deep_agent(skills=["./skills/"])
 
-# CORRECT: Use FilesystemBackend for local skills
+## CORRECT: Use FilesystemBackend for local skills
+
 agent = create_deep_agent(
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
     skills=["./skills/"]
 )
-```
+
+```text
 </python>
 </fix-backend-for-skills>
 
@@ -401,6 +421,7 @@ name: python-testing
 description: Python testing best practices with pytest fixtures, mocking, and async patterns
 ---
 ```
+
 </fix-specific-skill-descriptions>
 
 <fix-subagent-skills>
@@ -413,11 +434,13 @@ agent = create_deep_agent(
     subagents=[{"name": "helper", ...}]  # No skills
 )
 
-# CORRECT: Provide skills explicitly
+## CORRECT: Provide skills explicitly
+
 agent = create_deep_agent(
     skills=["/main-skills/"],
     subagents=[{"name": "helper", "skills": ["/helper-skills/"], ...}]
 )
-```
+
+```text
 </python>
 </fix-subagent-skills>

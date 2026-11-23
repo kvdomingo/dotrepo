@@ -1,8 +1,10 @@
 # Suggestion
 
-A suggestion component that displays a horizontal row of clickable suggestions for user interaction.
+A suggestion component that displays a horizontal row of clickable suggestions for user
+interaction.
 
-The `Suggestion` component displays a horizontal row of clickable suggestions for user interaction.
+The `Suggestion` component displays a horizontal row of clickable suggestions for user
+interaction.
 
 See `scripts/suggestion.tsx` for this example.
 
@@ -121,4 +123,4 @@ See `scripts/suggestion-input.tsx` for this example.
 |------|------|---------|-------------|
 | `suggestion` | `string` | Required | The suggestion string to display and emit on click. |
 | `onClick` | `(suggestion: string) => void` | - | Callback fired when the suggestion is clicked. |
-| `...props` | `Omit<React.ComponentProps<typeof Button>, ` | - | Any other props are spread to the underlying shadcn/ui Button component. |
+| `...props` | `Omit<React.ComponentProps<typeof Button>,` | - | Any other props are spread to the underlying shadcn/ui Button component. |

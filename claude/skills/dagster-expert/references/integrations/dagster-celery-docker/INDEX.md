@@ -4,6 +4,6 @@ triggers:
   - "celery docker, distributed container execution"
 ---
 
-# dagster-celery-docker
+## dagster-celery-docker
 
-Docs: https://docs.dagster.io/integrations/libraries/celery-docker
+Docs: <https://docs.dagster.io/integrations/libraries/celery-docker>

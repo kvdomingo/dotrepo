@@ -8,7 +8,8 @@ Detect and prevent invalid patterns when crossing Server/Client component bounda
 
 Client components **cannot** be async functions. Only Server Components can be async.
 
-**Detect:** File has `'use client'` AND component is `async function` or returns `Promise`
+**Detect:** File has `'use client'` AND component is `async function` or returns
+`Promise`
 
 ```tsx
 // Bad: async client component
@@ -48,6 +49,7 @@ const Dashboard = async () => {
 Props passed from Server → Client must be JSON-serializable.
 
 **Detect:** Server component passes these to a client component:
+
 - Functions (except Server Actions with `'use server'`)
 - `Date` objects
 - `Map`, `Set`, `WeakMap`, `WeakSet`

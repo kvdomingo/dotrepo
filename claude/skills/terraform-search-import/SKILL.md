@@ -9,9 +9,11 @@ compatibility: Requires Terraform >= 1.14 and providers with list resource suppo
 
 # Terraform Search and Bulk Import
 
-Discover existing cloud resources using declarative queries and generate configuration for bulk import into Terraform state.
+Discover existing cloud resources using declarative queries and generate configuration
+for bulk import into Terraform state.
 
 **References:**
+
 - [Terraform Search - list block](https://developer.hashicorp.com/terraform/language/block/tfquery/list)
 - [Bulk Import](https://developer.hashicorp.com/terraform/language/import/bulk)
 
@@ -35,17 +37,22 @@ Discover existing cloud resources using declarative queries and generate configu
 ## Decision Tree
 
 1. **Identify target resource type** (e.g., aws_s3_bucket, aws_instance)
+
 2. **Check if supported**: Run `./scripts/list_resources.sh <provider>`
+
 3. **Choose workflow**:
    - ** If supported**: Check for terraform version available.
    - ** If terraform version is above 1.14.0** Use Terraform Search workflow (below)
-   - ** If not supported or terraform version is below 1.14.0 **: Use Manual Discovery workflow (see [references/MANUAL-IMPORT.md](references/MANUAL-IMPORT.md))
-   
-   **Note**: The list of supported resources is rapidly expanding. Always verify current support before using manual import.
+   - ** If not supported or terraform version is below 1.14.0 **: Use Manual Discovery
+     workflow (see [references/MANUAL-IMPORT.md](references/MANUAL-IMPORT.md))
+
+   **Note**: The list of supported resources is rapidly expanding. Always verify current
+   support before using manual import.
 
 ## Prerequisites
 
-Before writing queries, verify the provider supports list resources for your target resource type.
+Before writing queries, verify the provider supports list resources for your target
+resource type.
 
 ### Discover Available List Resources
 
@@ -63,7 +70,8 @@ Or manually query the provider schema:
 terraform providers schema -json | jq '.provider_schemas | to_entries | map({key: (.key | split("/")[-1]), value: (.value.list_resource_schemas // {} | keys)})'
 ```
 
-Terraform Search requires an initialized working directory. Ensure you have a configuration with the required provider before running queries:
+Terraform Search requires an initialized working directory. Ensure you have a
+configuration with the required provider before running queries:
 
 ```hcl
 # terraform.tf
@@ -90,6 +98,7 @@ Run `terraform init` to download the provider, then proceed with queries.
 ## Query File Structure
 
 Query files use `.tfquery.hcl` extension and support:
+
 - `provider` blocks for authentication
 - `list` blocks for resource discovery
 - `variable` and `locals` blocks for parameterization
@@ -128,7 +137,8 @@ list "<list_type>" "<symbolic_name>" {
 
 ## Supported List Resources
 
-Provider support for list resources varies by version. **Always check what's available for your specific provider version using the discovery script.**
+Provider support for list resources varies by version. **Always check what's available
+for your specific provider version using the discovery script.**
 
 ## Query Examples
 
@@ -147,7 +157,7 @@ list "aws_instance" "all" {
 # Find instances by tag
 list "aws_instance" "production" {
   provider = aws
-  
+
   config {
     filter {
       name   = "tag:Environment"
@@ -159,7 +169,7 @@ list "aws_instance" "production" {
 # Find instances by type
 list "aws_instance" "large" {
   provider = aws
-  
+
   config {
     filter {
       name   = "instance-type"
@@ -183,7 +193,7 @@ locals {
 list "aws_instance" "all_regions" {
   for_each = toset(local.regions)
   provider = aws
-  
+
   config {
     region = each.value
   }
@@ -200,7 +210,7 @@ variable "target_environment" {
 
 list "aws_instance" "by_env" {
   provider = aws
-  
+
   config {
     filter {
       name   = "tag:Environment"
@@ -225,7 +235,7 @@ terraform query -var='target_environment=production'
 
 ## Query Output Format
 
-```
+```text
 list.aws_instance.all   account_id=123456789012,id=i-0abc123,region=us-west-2   web-server
 ```
 
@@ -278,7 +288,7 @@ resource "aws_instance" "web_server" {
   ami           = var.ami_id
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
-  
+
   tags = {
     Name        = "web-server"
     Environment = var.environment
@@ -305,11 +315,13 @@ import {
 ## Best Practices
 
 ### Query Design
+
 - Start broad, then add filters to narrow results
 - Use `limit` to prevent overwhelming output
 - Test queries before generating configuration
 
 ### Configuration Management
+
 - Review all generated code before applying
 - Remove unnecessary default values
 - Use consistent naming conventions
@@ -345,7 +357,7 @@ provider "aws" {
 
 list "aws_instance" "team_instances" {
   provider = aws
-  
+
   config {
     filter {
       name   = "tag:Owner"
@@ -356,7 +368,7 @@ list "aws_instance" "team_instances" {
       values = ["running"]
     }
   }
-  
+
   limit = 50
 }
 ```

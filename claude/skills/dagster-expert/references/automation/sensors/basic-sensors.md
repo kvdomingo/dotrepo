@@ -4,11 +4,12 @@ triggers:
   - "event-driven automation with file watching or custom polling"
 ---
 
-# Basic Sensors
+## Basic Sensors
 
-For the basic sensor pattern with cursors, see the main SKILL.md Quick Reference section.
+For the basic sensor pattern with cursors, see the main SKILL.md Quick Reference
+section.
 
-## File Watching Sensor
+### File Watching Sensor
 
 A canonical file sensor that monitors a directory for new files and triggers runs:
 
@@ -48,16 +49,21 @@ def file_sensor(context: dg.SensorEvaluationContext):
     )
 ```
 
-**Key pattern**: Store file names and modification times in the cursor to track which files have been processed.
+**Key pattern**: Store file names and modification times in the cursor to track which
+files have been processed.
 
-## Cursor State Management
+### Cursor State Management
 
 **Best practices for cursors**:
 
-- **Use JSON for structured state**: `json.dumps()` and `json.loads()` make it easy to store dictionaries or lists
-- **Handle missing cursor**: Always check if `context.cursor` is None on first evaluation
-- **Update cursor atomically**: Return the new cursor value in `SensorResult` or call `context.update_cursor()`
-- **Keep cursors small**: Cursors are stored in the database; avoid storing large data structures
+- **Use JSON for structured state**: `json.dumps()` and `json.loads()` make it easy to
+  store dictionaries or lists
+- **Handle missing cursor**: Always check if `context.cursor` is None on first
+  evaluation
+- **Update cursor atomically**: Return the new cursor value in `SensorResult` or call
+  `context.update_cursor()`
+- **Keep cursors small**: Cursors are stored in the database; avoid storing large data
+  structures
 
 **Two ways to update cursors**:
 
@@ -73,7 +79,7 @@ context.update_cursor(json.dumps(new_state))
 yield dg.RunRequest(...)
 ```
 
-## Evaluation Configuration
+### Evaluation Configuration
 
 **Control evaluation frequency**:
 
@@ -87,9 +93,11 @@ def my_sensor(context):
     ...
 ```
 
-**Important**: `minimum_interval_seconds` is a minimum, not exact. If sensor evaluation takes 10 seconds and the interval is 30 seconds, the next evaluation happens 30 seconds after the previous evaluation started (20 seconds after it completed).
+**Important**: `minimum_interval_seconds` is a minimum, not exact. If sensor evaluation
+takes 10 seconds and the interval is 30 seconds, the next evaluation happens 30 seconds
+after the previous evaluation started (20 seconds after it completed).
 
-## SensorEvaluationContext
+### SensorEvaluationContext
 
 Properties available in sensor context:
 

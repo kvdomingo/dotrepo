@@ -4,6 +4,6 @@ triggers:
   - "in-process analytical queries with DuckDB"
 ---
 
-# dagster-duckdb
+## dagster-duckdb
 
-Docs: https://docs.dagster.io/integrations/libraries/duckdb
+Docs: <https://docs.dagster.io/integrations/libraries/duckdb>

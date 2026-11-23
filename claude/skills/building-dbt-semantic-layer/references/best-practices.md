@@ -1,21 +1,27 @@
 # Semantic Layer Best Practices
 
-Synthesized from the [dbt Semantic Layer best practices guide](https://docs.getdbt.com/best-practices/how-we-build-our-metrics/semantic-layer-1-intro).
+Synthesized from the
+[dbt Semantic Layer best practices guide](https://docs.getdbt.com/best-practices/how-we-build-our-metrics/semantic-layer-1-intro).
 
 ## Core Principles
 
-1. **Prefer normalization** - Let MetricFlow denormalize dynamically for end users rather than pre-building wide tables
-2. **Compute in metrics, not rollups** - Define calculations in metrics instead of frozen aggregations
-3. **Start simple** - Build simple metrics first before advancing to ratio and derived types
+1. **Prefer normalization** - Let MetricFlow denormalize dynamically for end users
+   rather than pre-building wide tables
+2. **Compute in metrics, not rollups** - Define calculations in metrics instead of
+   frozen aggregations
+3. **Start simple** - Build simple metrics first before advancing to ratio and derived
+   types
 
 ## Semantic Model Design
 
 ### Entities
+
 - Each semantic model needs exactly **one primary entity**
 - Use singular naming (`order` not `order_id`) with `expr` for the column reference
 - Foreign entities enable joins between semantic models
 
 ### Dimensions
+
 - Always include a **primary time dimension** when the model has metrics or measures
 - Set granularity appropriately for time dimensions
 - Use computed expressions for derived dimensions (e.g., categorizing by thresholds)
@@ -23,29 +29,35 @@ Synthesized from the [dbt Semantic Layer best practices guide](https://docs.getd
 ### Measures (Legacy Spec) / Simple Metrics (Latest Spec)
 
 **Legacy spec** (dbt Core 1.6-1.11):
+
 - Create measures for quantitative values you'll aggregate
 - Use `expr: 1` with `agg: sum` for counting records
 - Measures are the building blocks for all metric types
 - Define components consistently: **entities -> dimensions -> measures**
 
 **Latest spec** (dbt Core 1.12+ / Fusion):
+
 - Define simple metrics directly on the model for quantitative aggregations
 - Use `expr: 1` with `agg: count` or `agg: sum` for counting records
 - Simple metrics are the building blocks for advanced metric types
-- Define components consistently: **entities (on columns) -> dimensions (on columns) -> simple metrics**
+- Define components consistently:
+  **entities (on columns) -> dimensions (on columns) -> simple metrics**
 
 ## Metric Design
 
 ### Required Properties
+
 Every metric needs: `name`, `description`, `label`, and `type`
 
 ### Type Progression
+
 1. **Simple** - Single aggregation with optional filters (start here)
 2. **Ratio** - Numerator divided by denominator
 3. **Derived** - Calculations combining multiple metrics
 4. **Cumulative** - Running totals or windowed aggregations
 
 ### Naming
+
 - Use clear business-friendly labels for downstream tools
 - Use double underscores to disambiguate dimensions (`orders__location`)
 
@@ -77,6 +89,7 @@ mf query --metrics <metric_name> --group-by <dimension>
 ## When to Use Marts
 
 Use intermediate marts strategically for:
+
 - Grouping related tables
 - Attaching metrics to dimensional tables
 - Complex joins that benefit from materialization

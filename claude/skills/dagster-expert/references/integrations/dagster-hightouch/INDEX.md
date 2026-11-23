@@ -4,6 +4,6 @@ triggers:
   - "reverse ETL and data activation with Hightouch"
 ---
 
-# dagster-hightouch
+## dagster-hightouch
 
-Docs: https://docs.dagster.io/integrations/libraries/hightouch
+Docs: <https://docs.dagster.io/integrations/libraries/hightouch>

@@ -2,7 +2,9 @@
 
 Lightweight inline code display for terminal commands and short code references.
 
-The `Snippet` component provides a lightweight way to display terminal commands and short code snippets with copy functionality. Built on top of InputGroup, it's designed for brief code references in text.
+The `Snippet` component provides a lightweight way to display terminal commands and
+short code snippets with copy functionality. Built on top of InputGroup, it's designed
+for brief code references in text.
 
 See `scripts/snippet.tsx` for this example.
 
@@ -51,7 +53,7 @@ See `scripts/snippet-plain.tsx` for this example.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `...props` | `Omit<React.ComponentProps<typeof InputGroupInput>, ` | - | Spread to the InputGroupInput component. Value and readOnly are set automatically. |
+| `...props` | `Omit<React.ComponentProps<typeof InputGroupInput>,` | - | Spread to the InputGroupInput component. Value and readOnly are set automatically. |
 
 ### `<SnippetCopyButton />`
 

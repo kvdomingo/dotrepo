@@ -5,7 +5,8 @@ Ephemeral resources reference external data without persisting it to plan or
 state artifacts, which means standard plan checks and state checks cannot
 directly assert on ephemeral resource data.
 
-Source: [Ephemeral Resource Acceptance Tests](https://developer.hashicorp.com/terraform/plugin/testing/acceptance-tests/ephemeral-resources)
+Source:
+[Ephemeral Resource Acceptance Tests](https://developer.hashicorp.com/terraform/plugin/testing/acceptance-tests/ephemeral-resources)
 
 **Requires Terraform >= 1.10.0** — gate all ephemeral tests with
 `tfversion.SkipBelow(tfversion.Version1_10_0)`.

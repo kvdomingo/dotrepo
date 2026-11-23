@@ -1,6 +1,7 @@
 # Unit test overrides
 
-When configuring your unit test, you can override the output of macros, project variables, or environment variables for a given unit test.
+When configuring your unit test, you can override the output of macros, project
+variables, or environment variables for a given unit test.
 
 `models/schema.yml`
 
@@ -32,10 +33,12 @@ When configuring your unit test, you can override the output of macros, project 
 
 ## Macros
 
-You can override the output of any macro in your unit test defition. 
+You can override the output of any macro in your unit test defition.
 
 If the model you're unit testing uses these macros, you must override them:
-  - `is_incremental`: If you're unit testing an incremental model, you must explicity set `is_incremental` to `true` or `false`.
+
+- `is_incremental`: If you're unit testing an incremental model, you must explicity set
+  `is_incremental` to `true` or `false`.
 
 `models/schema.yml`
 
@@ -47,12 +50,16 @@ If the model you're unit testing uses these macros, you must override them:
       overrides:
         macros:
           # unit test this model in "full refresh" mode
-          is_incremental: false 
+          is_incremental: false
       ...
 
   ```
 
-  - `dbt_utils.star`: If you're unit testing a model that uses the `star` macro, you must explicity set `star` to a list of columns. This is because the `star` only accepts a relation for the `from` argument; the unit test mock input data is injected directly into the model SQL, replacing the `ref()` or `source()` function, causing the `star` macro to fail unless overidden.
+- `dbt_utils.star`: If you're unit testing a model that uses the `star` macro, you must
+  explicity set `star` to a list of columns. This is because the `star` only accepts a
+  relation for the `from` argument; the unit test mock input data is injected directly
+  into the model SQL, replacing the `ref()` or `source()` function, causing the `star`
+  macro to fail unless overidden.
 
 `models/schema.yml`
 
@@ -64,7 +71,7 @@ If the model you're unit testing uses these macros, you must override them:
       overrides:
         macros:
           # explicity set star to relevant list of columns
-          dbt_utils.star: col_a,col_b,col_c 
+          dbt_utils.star: col_a,col_b,col_c
       ...
 
-  ``` 
+  ```

@@ -4,6 +4,6 @@ triggers:
   - "Slack notifications or alerts from Dagster"
 ---
 
-# dagster-slack
+## dagster-slack
 
-Docs: https://docs.dagster.io/integrations/libraries/slack
+Docs: <https://docs.dagster.io/integrations/libraries/slack>

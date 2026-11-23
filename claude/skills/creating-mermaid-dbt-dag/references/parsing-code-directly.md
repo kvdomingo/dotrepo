@@ -1,32 +1,39 @@
 # Parsing Code Directly for Lineage Retrieval
 
-This is the **last resort method** when all other approaches fail (no MCP tools available, manifest.json too large or missing). Directly parse the model's SQL/Python code to extract dependencies.
+This is the **last resort method** when all other approaches fail (no MCP tools
+available, manifest.json too large or missing). Directly parse the model's SQL/Python
+code to extract dependencies.
 
 ## How to use
 
 1. Locate the model file:
-   - Use Glob to find the model file: `models/**/{model_name}.sql` or `models/**/{model_name}.py`
+   - Use Glob to find the model file: `models/**/{model_name}.sql` or
+     `models/**/{model_name}.py`
    - Check common locations: `models/staging/`, `models/marts/`, etc.
 
 2. Read the model file and extract dependencies:
 
    **For SQL models:**
    - Look for `{{ ref('model_name') }}` calls - these are model dependencies
-   - Look for `{{ source('source_name', 'table_name') }}` calls - these are source dependencies
+   - Look for `{{ source('source_name', 'table_name') }}` calls - these are source
+     dependencies
    - Parse both single and double quoted strings
 
    **For Python models:**
    - Look for `dbt.ref('model_name')` calls - these are model dependencies
-   - Look for `dbt.source('source_name', 'table_name')` calls - these are source dependencies
+   - Look for `dbt.source('source_name', 'table_name')` calls - these are source
+     dependencies
 
 3. Find downstream dependencies (children):
    - Use Grep to search for references to this model in other files
    - Search for `{{ ref('current_model_name') }}` across the project
-   - Search in common model directories: `models/staging/`, `models/intermediate/`, `models/marts/`
+   - Search in common model directories: `models/staging/`, `models/intermediate/`,
+     `models/marts/`
 
 4. Determine node types (best effort):
    - **Models**: Files in `models/` directory with `.sql` or `.py` extension
-   - **Sources**: References found in `{{ source() }}` calls (you may need to check `models/sources.yml` or similar)
+   - **Sources**: References found in `{{ source() }}` calls (you may need to check
+     `models/sources.yml` or similar)
    - **Seeds**: Files in `seeds/` directory with `.csv` extension
    - **Exposures**: Check `models/**/*.yml` for exposure definitions
 
@@ -62,6 +69,7 @@ Use the `Grep` tool (not bash grep) and `Glob` tool (not bash find) for all sear
 ## When to use
 
 Use this method **only** when:
+
 - All MCP lineage tools are unavailable
 - manifest.json is too large (>10MB) or doesn't exist
 - You just need a basic lineage view
@@ -69,7 +77,9 @@ Use this method **only** when:
 
 ## Important notes
 
-⚠️ This method provides **best-effort lineage** and may be incomplete. If possible, try to:
+⚠️ This method provides **best-effort lineage** and may be incomplete. If possible, try
+to:
+
 1. Generate a fresh manifest with `dbt parse` and use the manifest.json method instead
 2. Enable the dbt MCP server to use the tool-based approaches
 3. Warn the user that the lineage may be incomplete

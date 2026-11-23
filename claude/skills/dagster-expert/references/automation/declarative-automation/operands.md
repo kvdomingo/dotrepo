@@ -4,11 +4,12 @@ triggers:
   - "base condition building blocks like missing() or newly_updated()"
 ---
 
-# Declarative Automation: Operands
+## Declarative Automation: Operands
 
-Operands are base conditions that evaluate to true or false for a given asset or asset partition. They represent fundamental states and events.
+Operands are base conditions that evaluate to true or false for a given asset or asset
+partition. They represent fundamental states and events.
 
-## Complete List of Operands
+### Complete List of Operands
 
 | Operand                                                     | Description                                                            | Type   |
 | ----------------------------------------------------------- | ---------------------------------------------------------------------- | ------ |
@@ -23,7 +24,7 @@ Operands are base conditions that evaluate to true or false for a given asset or
 | `AutomationCondition.will_be_requested()`                   | Target will be requested in this tick                                  | Status |
 | `AutomationCondition.initial_evaluation()`                  | This is the first evaluation of this condition                         | Event  |
 
-## Status vs Event Operands
+### Status vs Event Operands
 
 **Status operands** are persistent and remain true for multiple evaluations:
 
@@ -41,38 +42,48 @@ Operands are base conditions that evaluate to true or false for a given asset or
 - `cron_tick_passed()` - True only on the first tick after the cron tick
 - `initial_evaluation()` - True only on the very first evaluation
 
-## Detailed Descriptions
+### Detailed Descriptions
 
 **`missing()`**: True if the asset partition has never been materialized or observed.
 
-**`in_progress()`**: True if the asset partition is part of an in-progress run or backfill. Combines `run_in_progress()` and `backfill_in_progress()`.
+**`in_progress()`**: True if the asset partition is part of an in-progress run or
+backfill. Combines `run_in_progress()` and `backfill_in_progress()`.
 
 **`execution_failed()`**: True if the latest execution of the asset partition failed.
 
-**`newly_updated()`**: True if the asset partition was materialized or observed since the previous evaluation. For observations, only true if the data version changed.
+**`newly_updated()`**: True if the asset partition was materialized or observed since
+the previous evaluation. For observations, only true if the data version changed.
 
-**`newly_requested()`**: True if the asset partition was requested on the previous evaluation tick.
+**`newly_requested()`**: True if the asset partition was requested on the previous
+evaluation tick.
 
-**`code_version_changed()`**: True if the asset's code version has changed since the previous evaluation.
+**`code_version_changed()`**: True if the asset's code version has changed since the
+previous evaluation.
 
-**`cron_tick_passed(cron_schedule, cron_timezone)`**: True on the first evaluation after a tick of the specified cron schedule occurs.
+**`cron_tick_passed(cron_schedule, cron_timezone)`**: True on the first evaluation after
+a tick of the specified cron schedule occurs.
 
 Parameters:
 
 - `cron_schedule` (str): Cron expression
 - `cron_timezone` (str): Timezone string (default: "UTC")
 
-**`in_latest_time_window(lookback_delta)`**: True for time partitions within the latest time window. For unpartitioned or non-time-partitioned assets, always true.
+**`in_latest_time_window(lookback_delta)`**: True for time partitions within the latest
+time window. For unpartitioned or non-time-partitioned assets, always true.
 
 Parameter:
 
-- `lookback_delta` (Optional[timedelta]): If provided, returns partitions within this delta of the latest window end. For daily partitions with `lookback_delta=timedelta(hours=48)`, returns the latest 2 partitions.
+- `lookback_delta` (Optional[timedelta]): If provided, returns partitions within this
+  delta of the latest window end. For daily partitions with
+  `lookback_delta=timedelta(hours=48)`, returns the latest 2 partitions.
 
-**`will_be_requested()`**: True if the asset partition will be requested in the current tick. Used internally for run grouping (see [advanced.md](advanced.md)).
+**`will_be_requested()`**: True if the asset partition will be requested in the current
+tick. Used internally for run grouping (see [advanced.md](advanced.md)).
 
-**`initial_evaluation()`**: True only on the first evaluation after the condition is applied or modified.
+**`initial_evaluation()`**: True only on the first evaluation after the condition is
+applied or modified.
 
-## Composite Conditions
+### Composite Conditions
 
 Built from base operands for convenience:
 
@@ -83,9 +94,10 @@ Built from base operands for convenience:
 | `AutomationCondition.any_deps_in_progress()`                          | `any_deps_match(in_progress())`                                                           |
 | `AutomationCondition.all_deps_updated_since_cron(schedule, timezone)` | `all_deps_match(newly_updated().since(cron_tick_passed(schedule, timezone)))`             |
 
-## Usage
+### Usage
 
-Operands are composed using operators (see [operators.md](operators.md)) to build complex conditions:
+Operands are composed using operators (see [operators.md](operators.md)) to build
+complex conditions:
 
 ```python
 import dagster as dg

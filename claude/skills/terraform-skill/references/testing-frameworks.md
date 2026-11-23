@@ -3,7 +3,9 @@
 > **Part of:** [terraform-skill](../SKILL.md)
 > **Purpose:** Detailed guides for Terraform/OpenTofu testing frameworks
 
-This document provides in-depth guidance on testing frameworks for Infrastructure as Code. For the decision matrix and high-level overview, see the [main skill file](../SKILL.md#testing-strategy-framework).
+This document provides in-depth guidance on testing frameworks for Infrastructure as
+Code. For the decision matrix and high-level overview, see the
+[main skill file](../SKILL.md#testing-strategy-framework).
 
 ---
 
@@ -125,6 +127,7 @@ mcp__terraform__get_provider_details({
 ```
 
 **Why This Matters:**
+
 - Some blocks are **sets** (unordered, no indexing with `[0]`)
 - Some blocks are **lists** (ordered, indexable)
 - Some attributes are **computed** (only known after apply)
@@ -140,6 +143,7 @@ mcp__terraform__get_provider_details({
 ### Working with Set-Type Blocks
 
 **Problem:** Cannot index sets with `[0]`
+
 ```hcl
 # ❌ WRONG: This will fail
 condition = aws_s3_bucket_server_side_encryption_configuration.this.rule[0].bucket_key_enabled == true
@@ -147,6 +151,7 @@ condition = aws_s3_bucket_server_side_encryption_configuration.this.rule[0].buck
 ```
 
 **Solution 1:** Use `command = apply` to materialize the set
+
 ```hcl
 run "test_encryption" {
   command = apply  # Creates real/mocked resources
@@ -161,6 +166,7 @@ run "test_encryption" {
 ```
 
 **Solution 2:** Check at resource level (avoid accessing nested blocks)
+
 ```hcl
 run "test_encryption_exists" {
   command = plan
@@ -174,6 +180,7 @@ run "test_encryption_exists" {
 ```
 
 **Solution 3:** Use for expressions (works in apply mode)
+
 ```hcl
 run "test_encryption_algorithm" {
   command = apply
@@ -198,12 +205,14 @@ run "test_encryption_algorithm" {
 #### Use `command = plan`
 
 **When:**
+
 - Checking input validation
 - Verifying resource will be created
 - Testing variable defaults
 - Checking resource attributes that are **input-derived** (not computed)
 
 **Example:**
+
 ```hcl
 run "test_input_validation" {
   command = plan  # Fast, no resource creation
@@ -223,12 +232,14 @@ run "test_input_validation" {
 #### Use `command = apply`
 
 **When:**
+
 - Checking computed attributes (IDs, ARNs, generated names)
 - Accessing set-type blocks
 - Verifying actual resource behavior
 - Testing with real/mocked provider responses
 
 **Example:**
+
 ```hcl
 run "test_computed_values" {
   command = apply  # Executes and gets computed values
@@ -248,6 +259,7 @@ run "test_computed_values" {
 #### Common Pitfall: Checking Computed Values in Plan Mode
 
 **Problem:**
+
 ```hcl
 run "test_bucket_prefix" {
   command = plan  # ❌ WRONG MODE
@@ -266,6 +278,7 @@ run "test_bucket_prefix" {
 ```
 
 **Solution:**
+
 ```hcl
 run "test_bucket_prefix" {
   command = apply  # ✅ CORRECT MODE or check differently
@@ -283,7 +296,8 @@ run "test_bucket_prefix" {
 ```
 
 **Quick Decision Guide:**
-```
+
+```text
 Checking input values? → command = plan
 Checking computed values? → command = apply
 Accessing set-type blocks? → command = apply
@@ -543,7 +557,7 @@ stage(t, "teardown", func() {
 
 ### Framework Selection
 
-```
+```text
 Quick syntax check? → terraform validate + fmt
 Security scan? → trivy + checkov
 Terraform 1.6+, simple logic? → Native tests

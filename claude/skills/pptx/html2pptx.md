@@ -1,6 +1,7 @@
 # HTML to PowerPoint Guide
 
-Convert HTML slides to PowerPoint presentations with accurate positioning using the `html2pptx.js` library.
+Convert HTML slides to PowerPoint presentations with accurate positioning using the
+`html2pptx.js` library.
 
 ## Table of Contents
 
@@ -36,6 +37,7 @@ Every HTML slide must include proper body dimensions:
 ### Critical Text Rules
 
 **ALL text MUST be inside `<p>`, `<h1>`-`<h6>`, `<ul>`, or `<ol>` tags:**
+
 - ✅ Correct: `<div><p>Text here</p></div>`
 - ❌ Wrong: `<div>Text here</div>` - **Text will NOT appear in PowerPoint**
 - ❌ Wrong: `<span>Text</span>` - **Text will NOT appear in PowerPoint**
@@ -44,36 +46,46 @@ Every HTML slide must include proper body dimensions:
 **NEVER use manual bullet symbols (•, -, *, etc.)** - Use `<ul>` or `<ol>` lists instead
 
 **ONLY use web-safe fonts that are universally available:**
-- ✅ Web-safe fonts: `Arial`, `Helvetica`, `Times New Roman`, `Georgia`, `Courier New`, `Verdana`, `Tahoma`, `Trebuchet MS`, `Impact`, `Comic Sans MS`
-- ❌ Wrong: `'Segoe UI'`, `'SF Pro'`, `'Roboto'`, custom fonts - **Might cause rendering issues**
+
+- ✅ Web-safe fonts: `Arial`, `Helvetica`, `Times New Roman`, `Georgia`, `Courier New`,
+  `Verdana`, `Tahoma`, `Trebuchet MS`, `Impact`, `Comic Sans MS`
+- ❌ Wrong: `'Segoe UI'`, `'SF Pro'`, `'Roboto'`, custom fonts -
+  **Might cause rendering issues**
 
 ### Styling
 
-- Use `display: flex` on body to prevent margin collapse from breaking overflow validation
+- Use `display: flex` on body to prevent margin collapse from breaking overflow
+  validation
 - Use `margin` for spacing (padding included in size)
 - Inline formatting: Use `<b>`, `<i>`, `<u>` tags OR `<span>` with CSS styles
-  - `<span>` supports: `font-weight: bold`, `font-style: italic`, `text-decoration: underline`, `color: #rrggbb`
-  - `<span>` does NOT support: `margin`, `padding` (not supported in PowerPoint text runs)
+  - `<span>` supports: `font-weight: bold`, `font-style: italic`,
+    `text-decoration: underline`, `color: #rrggbb`
+  - `<span>` does NOT support: `margin`, `padding` (not supported in PowerPoint text
+    runs)
   - Example: `<span style="font-weight: bold; color: #667eea;">Bold blue text</span>`
 - Flexbox works - positions calculated from rendered layout
 - Use hex colors with `#` prefix in CSS
-- **Text alignment**: Use CSS `text-align` (`center`, `right`, etc.) when needed as a hint to PptxGenJS for text formatting if text lengths are slightly off
+- **Text alignment**: Use CSS `text-align` (`center`, `right`, etc.) when needed as a
+  hint to PptxGenJS for text formatting if text lengths are slightly off
 
 ### Shape Styling (DIV elements only)
 
-**IMPORTANT: Backgrounds, borders, and shadows only work on `<div>` elements, NOT on text elements (`<p>`, `<h1>`-`<h6>`, `<ul>`, `<ol>`)**
+**IMPORTANT: Backgrounds, borders, and shadows only work on `<div>` elements, NOT on
+text elements (`<p>`, `<h1>`-`<h6>`, `<ul>`, `<ol>`)**
 
 - **Backgrounds**: CSS `background` or `background-color` on `<div>` elements only
   - Example: `<div style="background: #f0f0f0;">` - Creates a shape with background
 - **Borders**: CSS `border` on `<div>` elements converts to PowerPoint shape borders
   - Supports uniform borders: `border: 2px solid #333333`
-  - Supports partial borders: `border-left`, `border-right`, `border-top`, `border-bottom` (rendered as line shapes)
+  - Supports partial borders: `border-left`, `border-right`, `border-top`,
+    `border-bottom` (rendered as line shapes)
   - Example: `<div style="border-left: 8pt solid #E76F51;">`
 - **Border radius**: CSS `border-radius` on `<div>` elements for rounded corners
   - `border-radius: 50%` or higher creates circular shape
   - Percentages <50% calculated relative to shape's smaller dimension
   - Supports px and pt units (e.g., `border-radius: 8pt;`, `border-radius: 12px;`)
-  - Example: `<div style="border-radius: 25%;">` on 100x200px box = 25% of 100px = 25px radius
+  - Example: `<div style="border-radius: 25%;">` on 100x200px box = 25% of 100px = 25px
+    radius
 - **Box shadows**: CSS `box-shadow` on `<div>` elements converts to PowerPoint shadows
   - Supports outer shadows only (inset shadows are ignored to prevent corruption)
   - Example: `<div style="box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);">`
@@ -81,7 +93,8 @@ Every HTML slide must include proper body dimensions:
 
 ### Icons & Gradients
 
-- **CRITICAL: Never use CSS gradients (`linear-gradient`, `radial-gradient`)** - They don't convert to PowerPoint
+- **CRITICAL: Never use CSS gradients (`linear-gradient`, `radial-gradient`)** - They
+  don't convert to PowerPoint
 - **ALWAYS create gradient/icon PNGs FIRST using Sharp, then reference in HTML**
 - For gradients: Rasterize SVG to PNG background images
 - For icons: Rasterize react-icons SVG to PNG images
@@ -185,6 +198,7 @@ h1 { color: #2d3748; font-size: 32pt; }
 ### Dependencies
 
 These libraries have been globally installed and are available to use:
+
 - `pptxgenjs`
 - `playwright`
 - `sharp`
@@ -211,18 +225,22 @@ await pptx.writeFile('output.pptx');
 ### API Reference
 
 #### Function Signature
+
 ```javascript
 await html2pptx(htmlFile, pres, options)
 ```
 
 #### Parameters
+
 - `htmlFile` (string): Path to HTML file (absolute or relative)
 - `pres` (pptxgen): PptxGenJS presentation instance with layout already set
 - `options` (object, optional):
-  - `tmpDir` (string): Temporary directory for generated files (default: `process.env.TMPDIR || '/tmp'`)
+  - `tmpDir` (string): Temporary directory for generated files (default:
+    `process.env.TMPDIR || '/tmp'`)
   - `slide` (object): Existing slide to reuse (default: creates new slide)
 
 #### Returns
+
 ```javascript
 {
     slide: pptxgenSlide,           // The created/updated slide
@@ -240,9 +258,11 @@ The library automatically validates and collects all errors before throwing:
 1. **HTML dimensions must match presentation layout** - Reports dimension mismatches
 2. **Content must not overflow body** - Reports overflow with exact measurements
 3. **CSS gradients** - Reports unsupported gradient usage
-4. **Text element styling** - Reports backgrounds/borders/shadows on text elements (only allowed on divs)
+4. **Text element styling** - Reports backgrounds/borders/shadows on text elements (only
+   allowed on divs)
 
-**All validation errors are collected and reported together** in a single error message, allowing you to fix all issues at once instead of one at a time.
+**All validation errors are collected and reported together** in a single error message,
+allowing you to fix all issues at once instead of one at a time.
 
 ### Working with Placeholders
 
@@ -301,11 +321,13 @@ createPresentation().catch(console.error);
 
 ## Using PptxGenJS
 
-After converting HTML to slides with `html2pptx`, you'll use PptxGenJS to add dynamic content like charts, images, and additional elements.
+After converting HTML to slides with `html2pptx`, you'll use PptxGenJS to add dynamic
+content like charts, images, and additional elements.
 
 ### ⚠️ Critical Rules
 
 #### Colors
+
 - **NEVER use `#` prefix** with hex colors in PptxGenJS - causes file corruption
 - ✅ Correct: `color: "FF0000"`, `fill: { color: "0066CC" }`
 - ❌ Wrong: `color: "#FF0000"` (breaks document)
@@ -365,18 +387,23 @@ slide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
 
 ### Adding Charts
 
-**Required for most charts:** Axis labels using `catAxisTitle` (category) and `valAxisTitle` (value).
+**Required for most charts:** Axis labels using `catAxisTitle` (category) and
+`valAxisTitle` (value).
 
 **Chart Data Format:**
+
 - Use **single series with all labels** for simple bar/line charts
 - Each series creates a separate legend entry
 - Labels array defines X-axis values
 
 **Time Series Data - Choose Correct Granularity:**
-- **< 30 days**: Use daily grouping (e.g., "10-01", "10-02") - avoid monthly aggregation that creates single-point charts
+
+- **< 30 days**: Use daily grouping (e.g., "10-01", "10-02") - avoid monthly aggregation
+  that creates single-point charts
 - **30-365 days**: Use monthly grouping (e.g., "2024-01", "2024-02")
 - **> 365 days**: Use yearly grouping (e.g., "2023", "2024")
-- **Validate**: Charts with only 1 data point likely indicate incorrect aggregation for the time period
+- **Validate**: Charts with only 1 data point likely indicate incorrect aggregation for
+  the time period
 
 ```javascript
 const { slide, placeholders } = await html2pptx('slide.html', pptx);
@@ -411,7 +438,8 @@ slide.addChart(pptx.charts.BAR, [{
 
 #### Scatter Chart
 
-**IMPORTANT**: Scatter chart data format is unusual - first series contains X-axis values, subsequent series contain Y-values:
+**IMPORTANT**: Scatter chart data format is unusual - first series contains X-axis
+values, subsequent series contain Y-values:
 
 ```javascript
 // Prepare data
@@ -465,7 +493,8 @@ slide.addChart(pptx.charts.LINE, [{
 
 #### Pie Chart (No Axis Labels Required)
 
-**CRITICAL**: Pie charts require a **single data series** with all categories in the `labels` array and corresponding values in the `values` array.
+**CRITICAL**: Pie charts require a **single data series** with all categories in the
+`labels` array and corresponding values in the `values` array.
 
 ```javascript
 slide.addChart(pptx.charts.PIE, [{
@@ -506,9 +535,12 @@ slide.addChart(pptx.charts.LINE, [
 
 ### Chart Colors
 
-**CRITICAL**: Use hex colors **without** the `#` prefix - including `#` causes file corruption.
+**CRITICAL**: Use hex colors **without** the `#` prefix - including `#` causes file
+corruption.
 
-**Align chart colors with your chosen design palette**, ensuring sufficient contrast and distinctiveness for data visualization. Adjust colors for:
+**Align chart colors with your chosen design palette**, ensuring sufficient contrast and
+distinctiveness for data visualization. Adjust colors for:
+
 - Strong contrast between adjacent series
 - Readability against slide backgrounds
 - Accessibility (avoid red-green only combinations)
@@ -614,6 +646,7 @@ slide.addTable(mergedTableData, {
 ### Table Options
 
 Common table options:
+
 - `x, y, w, h` - Position and size
 - `colW` - Array of column widths (in inches)
 - `rowH` - Array of row heights (in inches)

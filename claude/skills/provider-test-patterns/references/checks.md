@@ -3,7 +3,8 @@
 Detailed reference for `statecheck` and `plancheck` packages from
 `terraform-plugin-testing`. Read this when writing assertions for test steps.
 
-Source: [State Checks](https://developer.hashicorp.com/terraform/plugin/testing/acceptance-tests/state-checks/resource),
+Source:
+[State Checks](https://developer.hashicorp.com/terraform/plugin/testing/acceptance-tests/state-checks/resource),
 [Plan Checks](https://developer.hashicorp.com/terraform/plugin/testing/acceptance-tests/plan-checks)
 
 ---

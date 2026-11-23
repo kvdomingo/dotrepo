@@ -4,36 +4,37 @@ triggers:
   - "configuring or customizing DbtProjectComponent"
 ---
 
-# Component-Based Integration
+## Component-Based Integration
 
-The Component-based approach uses `DbtProjectComponent` to define dbt assets via YAML configuration.
-This is the recommended approach for new projects.
+The Component-based approach uses `DbtProjectComponent` to define dbt assets via YAML
+configuration. This is the recommended approach for new projects.
 
 > For initial setup and scaffolding, see [Scaffolding](scaffolding.md).
 
-## Overview
+### Overview
 
-`DbtProjectComponent` is a StateBackedComponent that automatically compiles and caches your dbt
-project's manifest. See
-[StateBackedComponents](../../components/state-backed/using.md) for general
-state management patterns.
+`DbtProjectComponent` is a StateBackedComponent that automatically compiles and caches
+your dbt project's manifest. See
+[StateBackedComponents](../../components/state-backed/using.md) for general state
+management patterns.
 
-### dbt-Specific State Management
+#### dbt-Specific State Management
 
-**What state is managed**: The dbt `manifest.json` file, which contains all dbt models, tests,
-sources, and their relationships.
+**What state is managed**: The dbt `manifest.json` file, which contains all dbt models,
+tests, sources, and their relationships.
 
-**How it's compiled**: Runs `dbt parse` (and `dbt deps` if needed) to generate the manifest.
+**How it's compiled**: Runs `dbt parse` (and `dbt deps` if needed) to generate the
+manifest.
 
-**Configuration**: Use `prepare_if_dev` setting to control whether manifest is recompiled during
-local development (defaults to `true`).
+**Configuration**: Use `prepare_if_dev` setting to control whether manifest is
+recompiled during local development (defaults to `true`).
 
-In CI/CD, use `dg utils refresh-defs-state` or `dg plus deploy refresh-defs-state` to compile the
-manifest before deployment.
+In CI/CD, use `dg utils refresh-defs-state` or `dg plus deploy refresh-defs-state` to
+compile the manifest before deployment.
 
-## Basic Configuration
+### Basic Configuration
 
-### Selecting Models
+#### Selecting Models
 
 Use dbt selection syntax to filter which models are included:
 
@@ -43,7 +44,7 @@ attributes:
   exclude: "tag:deprecated"
 ```
 
-### CLI Arguments
+#### CLI Arguments
 
 Customize the dbt command executed for asset materialization:
 
@@ -56,9 +57,9 @@ attributes:
 
 CLI args support template variables for dynamic values based on execution context.
 
-## Translation and Customization
+### Translation and Customization
 
-### Simple Customization: YAML Translation Block
+#### Simple Customization: YAML Translation Block
 
 For basic metadata customization, use the `translation` block:
 
@@ -71,7 +72,7 @@ attributes:
 
 Template variables have access to the dbt node properties.
 
-### Advanced Customization: Subclassing
+#### Advanced Customization: Subclassing
 
 For complex customization, create a subclass and override `get_asset_spec()`:
 
@@ -102,7 +103,7 @@ Then use your custom component in `defs.yaml`:
 type: my_project.components.custom_dbt_component.CustomDbtComponent
 ```
 
-### dbt Meta Config
+#### dbt Meta Config
 
 Define custom metadata in your dbt project files that can be consumed by your custom
 `get_asset_spec()` implementation:
@@ -116,7 +117,7 @@ models:
 
 This metadata is accessible via the manifest in your translator code.
 
-## Incremental Models and Partitioning
+### Incremental Models and Partitioning
 
 To partition incremental dbt models:
 
@@ -141,13 +142,13 @@ post_processing:
         partitions_def: "{{ my_partitions_def }}"
 ```
 
-The `context.partition_time_window` variable is available in `cli_args` during execution. Dagster
-automatically converts the vars dict to JSON format for dbt CLI.
+The `context.partition_time_window` variable is available in `cli_args` during
+execution. Dagster automatically converts the vars dict to JSON format for dbt CLI.
 
-For multiple partitions definitions, create separate `DbtProjectComponent` instances and use
-`select` to filter models for each.
+For multiple partitions definitions, create separate `DbtProjectComponent` instances and
+use `select` to filter models for each.
 
-## Metadata
+### Metadata
 
 Enable automatic metadata fetching during materialization:
 
@@ -163,16 +164,17 @@ attributes:
 
 Both metadata types are fetched in parallel during dbt execution.
 
-## Asset Checks
+### Asset Checks
 
-See [Asset Checks](asset-checks.md) for details on how dbt tests are loaded as Dagster asset checks.
+See [Asset Checks](asset-checks.md) for details on how dbt tests are loaded as Dagster
+asset checks.
 
-## Dependencies
+### Dependencies
 
-See [Dependencies](dependencies.md) for details on how Dagster parses dbt project dependencies and
-patterns for defining additional dependencies.
+See [Dependencies](dependencies.md) for details on how Dagster parses dbt project
+dependencies and patterns for defining additional dependencies.
 
-### Referencing dbt Models in Other Components
+#### Referencing dbt Models in Other Components
 
 Use the `asset_key_for_model` method to reference dbt models from other components:
 
@@ -184,7 +186,7 @@ attributes:
     - "{{ context.load_component('dbt_component').asset_key_for_model('customers') }}"
 ```
 
-## Scheduling
+### Scheduling
 
 Use standard Dagster scheduling approaches with asset selections:
 
@@ -205,7 +207,7 @@ daily_schedule = dg.ScheduleDefinition(
 For declarative automation, configure AutomationConditions via custom `get_asset_spec()`
 implementation.
 
-## Runtime Configuration
+### Runtime Configuration
 
 Override the `execute()` method to customize execution behavior:
 
@@ -237,6 +239,6 @@ class ConfigurableDbtComponent(DbtProjectComponent):
 
 Define `op_config_schema` property to specify available config options.
 
-## dbt Cloud
+### dbt Cloud
 
 For dbt Cloud projects, see [dbt Cloud Integration](dbt-cloud.md).

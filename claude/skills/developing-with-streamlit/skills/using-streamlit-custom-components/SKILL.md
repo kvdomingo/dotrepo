@@ -10,7 +10,8 @@ Extend Streamlit with third-party custom components from the community.
 
 ## What are custom components?
 
-Custom components are standalone Python libraries that add features not in Streamlit's core API. They're built by the community and can be installed like any Python package.
+Custom components are standalone Python libraries that add features not in Streamlit's
+core API. They're built by the community and can be installed like any Python package.
 
 ## Installation
 
@@ -20,7 +21,8 @@ Install using the PyPI package name (not the repo name—they can differ):
 uv add <pypi-package-name>
 ```
 
-Then import according to the component's documentation. The import name often differs from the package name too.
+Then import according to the component's documentation. The import name often differs
+from the package name too.
 
 ## Use with caution
 
@@ -31,16 +33,18 @@ Components are not maintained by Streamlit. Before adopting:
 - **Check popularity** - GitHub stars, downloads, community usage
 - **Consider alternatives** - Can you achieve this with core Streamlit?
 
-Custom components can break when Streamlit updates, so prefer core features when possible.
+Custom components can break when Streamlit updates, so prefer core features when
+possible.
 
 ## Popular custom components
 
 ### streamlit-keyup
 
-Text input that fires on every keystroke instead of waiting for enter/blur. Useful for live search.
+Text input that fires on every keystroke instead of waiting for enter/blur. Useful for
+live search.
 
-- **Repo:** https://github.com/blackary/streamlit-keyup
-- **Docs:** https://pypi.org/project/streamlit-keyup/
+- **Repo:** <https://github.com/blackary/streamlit-keyup>
+- **Docs:** <https://pypi.org/project/streamlit-keyup/>
 
 ```bash
 uv add streamlit-keyup
@@ -56,10 +60,11 @@ st.dataframe(filtered)
 
 ### streamlit-bokeh
 
-Official replacement for `st.bokeh_chart` (removed from Streamlit API). Maintained by Streamlit.
+Official replacement for `st.bokeh_chart` (removed from Streamlit API). Maintained by
+Streamlit.
 
-- **Repo:** https://github.com/streamlit/streamlit-bokeh
-- **Docs:** https://pypi.org/project/streamlit-bokeh/
+- **Repo:** <https://github.com/streamlit/streamlit-bokeh>
+- **Docs:** <https://pypi.org/project/streamlit-bokeh/>
 
 ```bash
 uv add streamlit-bokeh
@@ -76,10 +81,11 @@ streamlit_bokeh(p)
 
 ### streamlit-aggrid
 
-Interactive dataframes with sorting, filtering, cell editing, grouping, and pivoting. Use when you need customization beyond what `st.dataframe` and `st.data_editor` offer.
+Interactive dataframes with sorting, filtering, cell editing, grouping, and pivoting.
+Use when you need customization beyond what `st.dataframe` and `st.data_editor` offer.
 
-- **Repo:** https://github.com/PablocFonseca/streamlit-aggrid
-- **Docs:** https://pypi.org/project/streamlit-aggrid/
+- **Repo:** <https://github.com/PablocFonseca/streamlit-aggrid>
+- **Docs:** <https://pypi.org/project/streamlit-aggrid/>
 
 ```bash
 uv add streamlit-aggrid
@@ -92,6 +98,7 @@ AgGrid(df, editable=True, filter=True)
 ```
 
 **When to use aggrid over st.dataframe:**
+
 - Interactive row grouping and pivoting
 - Advanced filtering and sorting UI
 - Complex cell editing workflows
@@ -101,8 +108,8 @@ AgGrid(df, editable=True, filter=True)
 
 Interactive maps powered by Folium.
 
-- **Repo:** https://github.com/randyzwitch/streamlit-folium
-- **Docs:** https://folium.streamlit.app/
+- **Repo:** <https://github.com/randyzwitch/streamlit-folium>
+- **Docs:** <https://folium.streamlit.app/>
 
 ```bash
 uv add streamlit-folium
@@ -120,8 +127,8 @@ st_folium(m, width=700)
 
 Tableau-like drag-and-drop data exploration.
 
-- **Repo:** https://github.com/Kanaries/pygwalker
-- **Docs:** https://docs.kanaries.net/pygwalker
+- **Repo:** <https://github.com/Kanaries/pygwalker>
+- **Docs:** <https://docs.kanaries.net/pygwalker>
 
 ```bash
 uv add pygwalker
@@ -137,8 +144,8 @@ pyg.walk(df, env="Streamlit")
 
 A collection of community utilities. Cherry-pick what you need.
 
-- **Repo:** https://github.com/arnaudmiribel/streamlit-extras
-- **Docs:** https://extras.streamlit.app/
+- **Repo:** <https://github.com/arnaudmiribel/streamlit-extras>
+- **Docs:** <https://extras.streamlit.app/>
 
 ```bash
 uv add streamlit-extras
@@ -160,7 +167,7 @@ value = vertical_slider("Volume", min_value=0, max_value=100, default_value=50)
 
 ## Discover more
 
-Browse the custom component gallery: https://streamlit.io/components
+Browse the custom component gallery: <https://streamlit.io/components>
 
 Filter by category, popularity, and recency to find custom components for your use case.
 

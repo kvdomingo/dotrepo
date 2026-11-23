@@ -6,7 +6,8 @@ license: Apache-2.0
 
 # Creating Streamlit themes
 
-Build professional, brand-aligned themes using `.streamlit/config.toml`. This skill covers design principles and complete configuration for polished, cohesive themes.
+Build professional, brand-aligned themes using `.streamlit/config.toml`. This skill
+covers design principles and complete configuration for polished, cohesive themes.
 
 ## Theme file setup
 
@@ -23,7 +24,9 @@ base = "light"                         # or "dark"
 # base = "https://example.com/theme.toml"  # Remote URL
 ```
 
-When using `base`, you only need to override the values you want to change. Theme files referenced via `base` can only contain a single `[theme]` section—`[theme.light]` and `[theme.dark]` variants are not supported in external theme files.
+When using `base`, you only need to override the values you want to change. Theme files
+referenced via `base` can only contain a single `[theme]` section—`[theme.light]` and
+`[theme.dark]` variants are not supported in external theme files.
 
 ## Color configuration
 
@@ -43,7 +46,8 @@ codeBackgroundColor = "#f6f8fa"    # Code block background
 borderColor = "#d0d7de"            # Widget borders
 ```
 
-**Design principle:** Choose a `primaryColor` dark enough to contrast with white text. Streamlit renders the text of primary buttons white against the primary color.
+**Design principle:** Choose a `primaryColor` dark enough to contrast with white text.
+Streamlit renders the text of primary buttons white against the primary color.
 
 ### Color palette
 
@@ -90,13 +94,15 @@ dataframeBorderColor = "#d0d7de"
 dataframeHeaderBackgroundColor = "#f6f8fa"
 ```
 
-Ensure `textColor` is readable against `dataframeHeaderBackgroundColor`—headers use the main text color.
+Ensure `textColor` is readable against `dataframeHeaderBackgroundColor`—headers use the
+main text color.
 
 ## Typography
 
 ### Font families
 
-Use built-in fonts, load from Google Fonts, or define custom fonts from font files (see below):
+Use built-in fonts, load from Google Fonts, or define custom fonts from font files (see
+below):
 
 ```toml
 [theme]
@@ -112,9 +118,12 @@ font = "'IBM Plex Sans':https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:w
 
 ### Self-hosting custom fonts
 
-Use `[[theme.fontFaces]]` tables to load fonts via Streamlit's static file serving. Font files must be placed in a `static/` directory and served through the app—they cannot be arbitrary local file paths.
+Use `[[theme.fontFaces]]` tables to load fonts via Streamlit's static file serving. Font
+files must be placed in a `static/` directory and served through the app—they cannot be
+arbitrary local file paths.
 
-**Before adding fonts to config.toml:** Verify the font files exist in the static directory.
+**Before adding fonts to config.toml:** Verify the font files exist in the static
+directory.
 
 ```toml
 [[theme.fontFaces]]
@@ -131,7 +140,9 @@ weight = 700
 font = "CustomFont"
 ```
 
-**Attributes:** `family` (name), `url` (path to OTF/TTF/WOFF/WOFF2), `weight` (400, "200 800", or "bold"), `style` ("normal"/"italic"/"oblique"), `unicodeRange` (e.g., "U+0000-00FF").
+**Attributes:** `family` (name), `url` (path to OTF/TTF/WOFF/WOFF2), `weight` (400, "200
+800", or "bold"), `style` ("normal"/"italic"/"oblique"), `unicodeRange` (e.g.,
+"U+0000-00FF").
 
 Changes to `fontFaces` require a server restart.
 
@@ -174,7 +185,8 @@ showWidgetBorder = true            # Show borders on unfocused widgets
 showSidebarBorder = true           # Show divider between sidebar and content
 ```
 
-**Radius keywords:** `"none"` (0), `"small"` (4px), `"medium"` (8px), `"large"` (12px), `"full"` (pill shape).
+**Radius keywords:** `"none"` (0), `"small"` (4px), `"medium"` (8px), `"large"` (12px),
+`"full"` (pill shape).
 
 ## Sidebar customization
 
@@ -214,7 +226,9 @@ backgroundColor = "#f6f8fa"
 backgroundColor = "#010409"
 ```
 
-Users can switch between modes in the app settings menu only if both `[theme.light]` and `[theme.dark]` are defined. A custom theme with just `[theme]` locks the app to a single mode.
+Users can switch between modes in the app settings menu only if both `[theme.light]` and
+`[theme.dark]` are defined. A custom theme with just `[theme]` locks the app to a single
+mode.
 
 ## Detecting current theme
 
@@ -235,6 +249,7 @@ if st.context.theme.base == "dark":
 ### Color contrast
 
 Ensure WCAG AA compliance (4.5:1 ratio for text):
+
 - Light themes: Dark text (#1F2328) on light backgrounds (#ffffff)
 - Dark themes: Light text (#e6edf3) on dark backgrounds (#0d1117)
 - Primary colors must contrast with white button text
@@ -244,6 +259,7 @@ Ensure WCAG AA compliance (4.5:1 ratio for text):
 Build cohesive palettes using these approaches:
 
 **Monochromatic:** Single hue with varying lightness (e.g., shadcn's zinc grays)
+
 ```toml
 primaryColor = "#18181B"
 textColor = "#09090B"
@@ -252,6 +268,7 @@ grayColor = "#71717A"
 ```
 
 **Brand accent:** Neutral base with one brand color (e.g., Stripe's purple)
+
 ```toml
 primaryColor = "#635bff"           # Brand purple
 backgroundColor = "#ffffff"
@@ -259,6 +276,7 @@ textColor = "#425466"              # Neutral gray
 ```
 
 **Complementary:** Brand primary with supporting accent colors
+
 ```toml
 primaryColor = "#29B5E8"           # Brand blue (Snowflake)
 textColor = "#11567F"              # Darker blue for text
@@ -271,12 +289,15 @@ redColor = "#DE350B"               # Error states
 - **Body text:** 14-16px, weight 400
 - **Headings:** Decreasing scale from h1 (28-40px) to h6 (12-14px)
 - **Code:** Monospace font, slightly smaller than body (0.85-0.875rem)
-- **Font pairing:** Use the same font for body and headings for consistency, or pair complementary fonts (e.g., serif headings with sans-serif body). Code should always use a distinct monospace font.
+- **Font pairing:** Use the same font for body and headings for consistency, or pair
+  complementary fonts (e.g., serif headings with sans-serif body). Code should always
+  use a distinct monospace font.
 
 ### Visual hierarchy
 
 Create depth with background layers:
-```
+
+```text
 Main content:        #ffffff (lightest)
 Secondary elements:  #f6f8fa (slightly darker)
 Sidebar:             #f6f8fa or contrasting brand color
@@ -412,7 +433,8 @@ secondaryBackgroundColor = "#f6f8fa"
 
 ### Forgetting sidebar contrast
 
-When using a dark sidebar with a light main section, adjust all sidebar colors—not just `textColor`:
+When using a dark sidebar with a light main section, adjust all sidebar colors—not just
+`textColor`:
 
 ```toml
 # BAD: Only changed backgroundColor
@@ -431,11 +453,14 @@ borderColor = "#1E6D94"
 ## IMPORTANT: No custom CSS unless explicitly requested
 
 **DO NOT use custom CSS or HTML for theming.** This includes:
+
 - `st.markdown(..., unsafe_allow_html=True)` with `<style>` or inline styles
 - `st.html()` with `<style>` blocks
 - Any HTML/CSS for colors, backgrounds, fonts, or visual styling
 
-**Only use CSS if the user explicitly asks for it** (e.g., "add custom CSS", "use st.html for styling"). For brand colors, theming, and visual identity—always use `config.toml`.
+**Only use CSS if the user explicitly asks for it** (e.g., "add custom CSS", "use
+st.html for styling"). For brand colors, theming, and visual identity—always use
+`config.toml`.
 
 Native theming is cleaner, more maintainable, and won't break with Streamlit updates.
 
@@ -448,13 +473,16 @@ st.button("Submit", key="submit")
 st.html("""<style>.st-key-submit button { width: 100%; }</style>""")
 ```
 
-**Never use CSS for theming (colors, backgrounds, fonts) unless explicitly asked. Use config.toml instead.**
+**Never use CSS for theming (colors, backgrounds, fonts) unless explicitly asked. Use
+config.toml instead.**
 
 ## Development workflow
 
-Most theme options update live after saving `config.toml` and rerunning. Font-related options (`fontFaces`) require a server restart.
+Most theme options update live after saving `config.toml` and rerunning. Font-related
+options (`fontFaces`) require a server restart.
 
-Test your theme with: buttons (primary contrast), forms (borders, focus), dataframes (headers), code blocks, charts, and sidebar.
+Test your theme with: buttons (primary contrast), forms (borders, focus), dataframes
+(headers), code blocks, charts, and sidebar.
 
 ## Theme templates
 
@@ -475,7 +503,8 @@ Each theme uses Google Fonts for easy setup. See `templates/themes/README.md`.
 
 ## Related skills
 
-- [improving-streamlit-design](../improving-streamlit-design/SKILL.md) - Visual polish with icons, badges, spacing
+- [improving-streamlit-design](../improving-streamlit-design/SKILL.md) - Visual polish
+  with icons, badges, spacing
 
 ## References
 

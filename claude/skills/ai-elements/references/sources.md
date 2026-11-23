@@ -1,8 +1,10 @@
 # Sources
 
-A component that allows a user to view the sources or citations used to generate a response.
+A component that allows a user to view the sources or citations used to generate a
+response.
 
-The `Sources` component allows a user to view the sources or citations used to generate a response.
+The `Sources` component allows a user to view the sources or citations used to generate
+a response.
 
 See `scripts/sources.tsx` for this example.
 
@@ -169,7 +171,8 @@ export async function POST(req: Request) {
 
 ## Features
 
-- Collapsible component that allows a user to view the sources or citations used to generate a response
+- Collapsible component that allows a user to view the sources or citations used to
+  generate a response
 - Customizable trigger and content components
 - Support for custom sources or citations
 - Responsive design with mobile-friendly controls

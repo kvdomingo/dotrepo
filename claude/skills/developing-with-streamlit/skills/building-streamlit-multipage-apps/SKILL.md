@@ -10,7 +10,7 @@ Structure and navigation for apps with multiple pages.
 
 ## Directory structure
 
-```
+```text
 streamlit_app.py          # Main entry point
 app_pages/
     home.py
@@ -18,7 +18,8 @@ app_pages/
     settings.py
 ```
 
-**Important:** Name your pages directory `app_pages/` (not `pages/`). Using `pages/` conflicts with Streamlit's old auto-discovery API and can cause unexpected behavior.
+**Important:** Name your pages directory `app_pages/` (not `pages/`). Using `pages/`
+conflicts with Streamlit's old auto-discovery API and can cause unexpected behavior.
 
 ## Main module
 
@@ -44,7 +45,8 @@ st.title(f"{page.icon} {page.title}")
 page.run()
 ```
 
-**Note:** When you handle titles in `streamlit_app.py`, individual pages should NOT use `st.title` again.
+**Note:** When you handle titles in `streamlit_app.py`, individual pages should NOT use
+`st.title` again.
 
 ## Navigation position
 
@@ -54,7 +56,8 @@ page.run()
 page = st.navigation([...], position="top")
 ```
 
-Creates a clean horizontal menu. Great for simple apps. Sections are supported too—they appear as dropdowns in the top nav.
+Creates a clean horizontal menu. Great for simple apps. Sections are supported too—they
+appear as dropdowns in the top nav.
 
 **Many pages or nested sections → Sidebar:**
 
@@ -73,7 +76,9 @@ page = st.navigation({
 
 **Mixed: Some pages ungrouped:**
 
-Use an empty string key `""` for pages that shouldn't be in a section. These ungrouped pages always appear first, before any named groups. Put all ungrouped pages in a single `""` key:
+Use an empty string key `""` for pages that shouldn't be in a section. These ungrouped
+pages always appear first, before any named groups. Put all ungrouped pages in a single
+`""` key:
 
 ```python
 page = st.navigation({
@@ -114,9 +119,11 @@ st.session_state.user = get_user()
 st.session_state.settings = load_settings()
 ```
 
-**Tip:** Use `st.session_state.setdefault("key", default_value)` to initialize values only if they don't exist.
+**Tip:** Use `st.session_state.setdefault("key", default_value)` to initialize values
+only if they don't exist.
 
 **Why main module (for global state):**
+
 - Runs before every page
 - Ensures state is initialized
 - Single source of truth
@@ -168,11 +175,15 @@ st.page_link("app_pages/home.py", label="Home", icon=":material/home:")
 st.page_link("https://example.com", label="External", icon=":material/open_in_new:")
 ```
 
-> **Note:** Prefer `st.navigation` over `st.page_link` for standard navigation. Do not use `st.page_link` to recreate the nav bar you get with `st.navigation`. Only use `st.page_link` when linking to pages from somewhere other than the sidebar, or when building a more complex navigation menu.
+> **Note:** Prefer `st.navigation` over `st.page_link` for standard navigation. Do not
+> use `st.page_link` to recreate the nav bar you get with `st.navigation`. Only use
+> `st.page_link` when linking to pages from somewhere other than the sidebar, or when
+> building a more complex navigation menu.
 
 ## Conditional pages
 
-Show different pages based on user role, authentication, or any other condition by building the pages list dynamically:
+Show different pages based on user role, authentication, or any other condition by
+building the pages list dynamically:
 
 ```python
 # streamlit_app.py
@@ -191,6 +202,7 @@ page.run()
 ```
 
 Common conditions for showing/hiding pages:
+
 - `st.user.is_logged_in` for authenticated users
 - `st.session_state` flags (roles, permissions, feature flags)
 - Environment variables or secrets
@@ -198,7 +210,8 @@ Common conditions for showing/hiding pages:
 
 ## Imports from pages
 
-When importing from page files in `app_pages/`, always import from the root directory perspective:
+When importing from page files in `app_pages/`, always import from the root directory
+perspective:
 
 ```python
 # app_pages/dashboard.py - GOOD

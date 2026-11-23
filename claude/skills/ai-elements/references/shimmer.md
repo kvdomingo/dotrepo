@@ -1,8 +1,11 @@
 # Shimmer
 
-An animated text shimmer component for creating eye-catching loading states and progressive reveal effects.
+An animated text shimmer component for creating eye-catching loading states and
+progressive reveal effects.
 
-The `Shimmer` component provides an animated shimmer effect that sweeps across text, perfect for indicating loading states, progressive reveals, or drawing attention to dynamic content in AI applications.
+The `Shimmer` component provides an animated shimmer effect that sweeps across text,
+perfect for indicating loading states, progressive reveals, or drawing attention to
+dynamic content in AI applications.
 
 See `scripts/shimmer.tsx` for this example.
 

@@ -9,11 +9,14 @@ metadata:
 
 # Vercel React Best Practices
 
-Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 69 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
+Comprehensive performance optimization guide for React and Next.js applications,
+maintained by Vercel. Contains 69 rules across 8 categories, prioritized by impact to
+guide automated refactoring and code generation.
 
 ## When to Apply
 
 Reference these guidelines when:
+
 - Writing new React components or Next.js pages
 - Implementing data fetching (client or server-side)
 - Reviewing code for performance issues
@@ -37,7 +40,8 @@ Reference these guidelines when:
 
 ### 1. Eliminating Waterfalls (CRITICAL)
 
-- `async-cheap-condition-before-await` - Check cheap sync conditions before awaiting flags or remote values
+- `async-cheap-condition-before-await` - Check cheap sync conditions before awaiting
+  flags or remote values
 - `async-defer-await` - Move await into branches where actually used
 - `async-parallel` - Use Promise.all() for independent operations
 - `async-dependencies` - Use better-all for partial dependencies
@@ -132,12 +136,13 @@ Reference these guidelines when:
 
 Read individual rule files for detailed explanations and code examples:
 
-```
+```text
 rules/async-parallel.md
 rules/bundle-barrel-imports.md
 ```
 
 Each rule file contains:
+
 - Brief explanation of why it matters
 - Incorrect code example with explanation
 - Correct code example with explanation

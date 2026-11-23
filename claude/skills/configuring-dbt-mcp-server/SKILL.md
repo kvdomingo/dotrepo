@@ -10,7 +10,9 @@ metadata:
 
 ## Overview
 
-The dbt MCP server connects AI tools to dbt's CLI, Semantic Layer, Discovery API, and Admin API. This skill guides users through setup with the correct configuration for their use case.
+The dbt MCP server connects AI tools to dbt's CLI, Semantic Layer, Discovery API, and
+Admin API. This skill guides users through setup with the correct configuration for
+their use case.
 
 ## Decision Flow
 
@@ -34,6 +36,7 @@ flowchart TB
 ## Questions to Ask
 
 ### 1. Server Type
+
 **Ask:** "Do you want to use the **local** or **remote** dbt MCP server?"
 
 | Local Server                                                                                                                                             | Remote Server                                               |
@@ -45,13 +48,16 @@ flowchart TB
 | No credit consumption                                                                                                                                    | Consumes dbt Copilot credits                                |
 
 ### 2. MCP Client
+
 **Ask:** "Which MCP client are you using?"
+
 - Claude Desktop
 - Claude Code (CLI)
 - Cursor
 - VS Code
 
 ### 3. Use Case (Local Server Only)
+
 **Ask:** "What's your use case?"
 
 | CLI Only | Platform Only | Platform + CLI |
@@ -60,6 +66,7 @@ flowchart TB
 | No platform account needed | OAuth or token auth | Requires paths + credentials |
 
 ### 4. Tools to Enable
+
 **Ask:** "Which tools do you want enabled?" (show defaults)
 
 | Tool Category | Default | Environment Variable |
@@ -74,7 +81,8 @@ flowchart TB
 ## Prerequisites
 
 ### Local Server
-1. **Install `uv`**: https://docs.astral.sh/uv/getting-started/installation/
+
+1. **Install `uv`**: <https://docs.astral.sh/uv/getting-started/installation/>
 2. **Have a dbt project** (for CLI commands)
 3. **Find paths:**
    - `DBT_PROJECT_DIR`: Folder containing `dbt_project.yml`
@@ -85,17 +93,21 @@ flowchart TB
      - Windows: `where dbt`
 
 ### Remote Server
+
 1. **dbt Cloud account** with AI features enabled
 2. **Production environment ID** (from Orchestration page)
 3. **Personal access token** or service token
 
-See [How to Find Your Credentials](references/finding-credentials.md) for detailed guidance on obtaining tokens and IDs.
+See [How to Find Your Credentials](references/finding-credentials.md) for detailed
+guidance on obtaining tokens and IDs.
 
 ## Credential Security
 
-- Always use environment variable references (e.g., `${DBT_TOKEN}`) instead of literal token values in configuration files that may be committed to version control
+- Always use environment variable references (e.g., `${DBT_TOKEN}`) instead of literal
+  token values in configuration files that may be committed to version control
 - Never log, display, or echo token values in terminal output
-- When using `.env` files, ensure they are added to `.gitignore` to prevent accidental commits
+- When using `.env` files, ensure they are added to `.gitignore` to prevent accidental
+  commits
 - Recommend users rotate tokens regularly and use the minimum required permission set
 
 ## Configuration Templates
@@ -170,7 +182,8 @@ See [How to Find Your Credentials](references/finding-credentials.md) for detail
 ```
 
 **.env file contents:**
-```
+
+```text
 DBT_HOST=cloud.getdbt.com
 DBT_TOKEN=<set-via-env-or-secret-manager>
 DBT_ACCOUNT_ID=<your-account-id>
@@ -198,6 +211,7 @@ DBT_PATH=/path/to/dbt
 ```
 
 **Additional headers for SQL/Fusion tools:**
+
 ```json
 {
   "headers": {
@@ -212,6 +226,7 @@ DBT_PATH=/path/to/dbt
 ## Client-Specific Setup
 
 ### Claude Desktop
+
 1. Click **Claude menu** in system menu bar (not in-app)
 2. Select **Settings...**
 3. Go to **Developer** tab
@@ -221,41 +236,53 @@ DBT_PATH=/path/to/dbt
 7. **Verify:** Look for MCP server indicator in bottom-right of input box
 
 **Config location:**
+
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ### Claude Code (CLI)
+
 Run:
+
 ```bash
 claude mcp add dbt -s user -- uvx dbt-mcp
 ```
+
 This adds the server to your user scope/config (on this system: `~/.claude.json`).
 
 For a project-specific setup, run:
+
 ```bash
 claude mcp add dbt -s project -- uvx dbt-mcp
 ```
+
 This adds the server to `.mcp.json` in your project root.
 
 Alternatively, you can use the manual configuration below.
 
-**Manual configuration:**
-Edit `~/.claude.json` (user scope) or create `.mcp.json` (project scope) in your project root:
+**Manual configuration:** Edit `~/.claude.json` (user scope) or create `.mcp.json`
+(project scope) in your project root:
 
 - `~/.claude.json`: Global across all projects
-- `.mcp.json`: Project-specific, can be committed to version control for team sharing. If using token auth, use environment variable references — never commit literal tokens.
+- `.mcp.json`: Project-specific, can be committed to version control for team sharing.
+  If using token auth, use environment variable references — never commit literal
+  tokens.
 
-For project-specific dbt setups, use `.mcp.json` so your team shares the same configuration.
+For project-specific dbt setups, use `.mcp.json` so your team shares the same
+configuration.
 
-Once the config is created, make sure to add the JSON configuration under the `mcpServers` key.
+Once the config is created, make sure to add the JSON configuration under the
+`mcpServers` key.
 
 ### Cursor
+
 1. Open **Cursor menu** → **Settings** → **Cursor Settings** → **MCP**
 2. Add the JSON configuration
 3. Update paths and credentials
 4. Save
 
 ### VS Code
+
 1. Open **Command Palette** (Cmd/Ctrl + Shift + P)
 2. Run **"MCP: Open User Configuration"** (or Workspace for project-specific)
 3. Add the JSON configuration (note: VS Code uses `servers` not `mcpServers`):
@@ -279,6 +306,7 @@ Once the config is created, make sure to add the JSON configuration under the `m
 5. **Verify:** Run **"MCP: List Servers"** from Command Palette
 
 **WSL Users:** Configure in Remote settings, not local user settings:
+
 - Run **"Preferences: Open Remote Settings"** from Command Palette
 - Use full Linux paths (e.g., `/home/user/project`, not Windows paths)
 
@@ -287,17 +315,23 @@ Once the config is created, make sure to add the JSON configuration under the `m
 ### Test Local Server Config
 
 **Recommended: Use .env file**
-1. Create a .env file in your project root directory and add minimum environment variables for the CLI tools:
+
+1. Create a .env file in your project root directory and add minimum environment
+   variables for the CLI tools:
+
 ```bash
 DBT_PROJECT_DIR=/path/to/project
 DBT_PATH=/path/to/dbt
 ```
+
 2. Test the server:
+
 ```bash
 uvx --env-file .env dbt-mcp
 ```
 
 **Alternative: Environment variables**
+
 ```bash
 # Temporary test (variables only last for this session)
 export DBT_PROJECT_DIR=/path/to/project
@@ -308,11 +342,14 @@ uvx dbt-mcp
 No errors = successful configuration.
 
 ### Verify in Client
+
 After setup, ask the AI:
+
 - "What dbt tools do you have access to?"
 - "List my dbt metrics" (if Semantic Layer enabled)
 - "Show my dbt models" (if Discovery enabled)
 
 See [Troubleshooting](references/troubleshooting.md) for common issues and fixes.
 
-See [Environment Variable Reference](references/environment-variables.md) for the full list of supported variables.
+See [Environment Variable Reference](references/environment-variables.md) for the full
+list of supported variables.

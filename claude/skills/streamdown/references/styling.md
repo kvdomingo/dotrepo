@@ -110,7 +110,8 @@ Override any Markdown element via the `components` prop:
 </Streamdown>
 ```
 
-**Available elements:** h1-h6, p, strong, em, ul, ol, li, a, code, pre, blockquote, table, thead, tbody, tr, th, td, img, hr, sup, sub, section
+**Available elements:** h1-h6, p, strong, em, ul, ol, li, a, code, pre, blockquote,
+table, thead, tbody, tr, th, td, img, hr, sup, sub, section
 
 ## Scoped Styling
 
@@ -132,6 +133,7 @@ Use `className` prop for instance-specific styles:
 ## Theme Examples
 
 **Minimal Gray:**
+
 ```css
 :root {
   --primary: 0 0% 20%;
@@ -142,6 +144,7 @@ Use `className` prop for instance-specific styles:
 ```
 
 **Vibrant Blue:**
+
 ```css
 :root {
   --primary: 217 91% 60%;
@@ -152,6 +155,7 @@ Use `className` prop for instance-specific styles:
 ```
 
 **No Borders:**
+
 ```css
 :root {
   --border: transparent;

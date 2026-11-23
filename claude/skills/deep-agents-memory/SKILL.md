@@ -10,7 +10,8 @@ Deep Agents use pluggable backends for file operations and memory:
 **Long-term (StoreBackend)**: Persists across threads and sessions
 **Hybrid (CompositeBackend)**: Route different paths to different backends
 
-FilesystemMiddleware provides tools: `ls`, `read_file`, `write_file`, `edit_file`, `glob`, `grep`
+FilesystemMiddleware provides tools: `ls`, `read_file`, `write_file`, `edit_file`,
+`glob`, `grep`
 </overview>
 
 <backend-selection>
@@ -30,12 +31,14 @@ Default StateBackend stores files ephemerally within a thread.
 ```python
 from deepagents import create_deep_agent
 
-agent = create_deep_agent()  # Default: StateBackend
+agent = create_deep_agent() # Default: StateBackend
 result = agent.invoke({
     "messages": [{"role": "user", "content": "Write notes to /draft.txt"}]
 }, config={"configurable": {"thread_id": "thread-1"}})
+
 # /draft.txt is lost when thread ends
-```
+
+```text
 </python>
 <typescript>
 Default StateBackend stores files ephemerally within a thread.
@@ -48,6 +51,7 @@ const result = await agent.invoke({
 }, { configurable: { thread_id: "thread-1" } });
 // /draft.txt is lost when thread ends
 ```
+
 </typescript>
 </ex-default-state-backend>
 
@@ -68,9 +72,11 @@ composite_backend = lambda rt: CompositeBackend(
 
 agent = create_deep_agent(backend=composite_backend, store=store)
 
-# /draft.txt -> ephemeral (StateBackend)
-# /memories/user-prefs.txt -> persistent (StoreBackend)
-```
+## /draft.txt -> ephemeral (StateBackend)
+
+## /memories/user-prefs.txt -> persistent (StoreBackend)
+
+```text
 </python>
 <typescript>
 Configure CompositeBackend to route paths to different storage backends.
@@ -91,6 +97,7 @@ const agent = await createDeepAgent({
 // /draft.txt -> ephemeral (StateBackend)
 // /memories/user-prefs.txt -> persistent (StoreBackend)
 ```
+
 </typescript>
 </ex-composite-backend-for-hybrid>
 
@@ -102,10 +109,12 @@ Files in /memories/ persist across threads via StoreBackend routing.
 config1 = {"configurable": {"thread_id": "thread-1"}}
 agent.invoke({"messages": [{"role": "user", "content": "Save to /memories/style.txt"}]}, config=config1)
 
-config2 = {"configurable": {"thread_id": "thread-2"}}
-agent.invoke({"messages": [{"role": "user", "content": "Read /memories/style.txt"}]}, config=config2)
-# Thread 2 can read file saved by Thread 1
-```
+config2 = {"configurable": {"thread_id": "thread-2"}} agent.invoke({"messages":
+[{"role": "user", "content": "Read /memories/style.txt"}]}, config=config2)
+
+## Thread 2 can read file saved by Thread 1
+
+```text
 </python>
 <typescript>
 Files in /memories/ persist across threads via StoreBackend routing.
@@ -118,6 +127,7 @@ const config2 = { configurable: { thread_id: "thread-2" } };
 await agent.invoke({ messages: [{ role: "user", content: "Read /memories/style.txt" }] }, config2);
 // Thread 2 can read file saved by Thread 1
 ```
+
 </typescript>
 </ex-cross-session-memory>
 
@@ -130,13 +140,14 @@ from deepagents.backends import FilesystemBackend
 from langgraph.checkpoint.memory import MemorySaver
 
 agent = create_deep_agent(
-    backend=FilesystemBackend(root_dir=".", virtual_mode=True),  # Restrict access
+    backend=FilesystemBackend(root_dir=".", virtual_mode=True), # Restrict access
     interrupt_on={"write_file": True, "edit_file": True},
     checkpointer=MemorySaver()
 )
 
-# Agent can read/write actual files on disk
-```
+## Agent can read/write actual files on disk
+
+```text
 </python>
 <typescript>
 Use FilesystemBackend for local development with real disk access and human-in-the-loop.
@@ -150,9 +161,11 @@ const agent = await createDeepAgent({
   checkpointer: new MemorySaver()
 });
 ```
+
 </typescript>
 
-**Security: Never use FilesystemBackend in web servers - use StateBackend or sandbox instead.**
+**Security: Never use FilesystemBackend in web servers - use StateBackend or sandbox
+instead.**
 </ex-filesystem-backend-local-dev>
 
 <ex-store-in-custom-tools>
@@ -184,7 +197,8 @@ agent = create_agent(
     tools=[get_user_preference, save_user_preference],
     store=store
 )
-```
+
+```text
 </python>
 </ex-store-in-custom-tools>
 
@@ -213,6 +227,7 @@ agent = create_deep_agent(backend=lambda rt: StoreBackend(rt))
 # CORRECT
 agent = create_deep_agent(backend=lambda rt: StoreBackend(rt), store=InMemoryStore())
 ```
+
 </python>
 <typescript>
 StoreBackend requires a store instance.
@@ -220,9 +235,10 @@ StoreBackend requires a store instance.
 // WRONG
 const agent = await createDeepAgent({ backend: (c) => new StoreBackend(c) });
 
-// CORRECT
-const agent = await createDeepAgent({ backend: (c) => new StoreBackend(c), store: new InMemoryStore() });
-```
+// CORRECT const agent = await createDeepAgent({ backend: (c) => new StoreBackend(c),
+store: new InMemoryStore() });
+
+```text
 </typescript>
 </fix-storebackend-requires-store>
 
@@ -234,6 +250,7 @@ StateBackend files are thread-scoped - use same thread_id or StoreBackend for cr
 agent.invoke({"messages": [...]}, config={"configurable": {"thread_id": "thread-1"}})  # Write
 agent.invoke({"messages": [...]}, config={"configurable": {"thread_id": "thread-2"}})  # File not found!
 ```
+
 </python>
 <typescript>
 StateBackend files are thread-scoped - use same thread_id or StoreBackend for cross-thread access.

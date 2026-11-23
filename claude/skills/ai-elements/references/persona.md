@@ -1,8 +1,13 @@
 # Persona
 
-An animated AI visual component powered by Rive that responds to different states like listening, thinking, and speaking.
+An animated AI visual component powered by Rive that responds to different states like
+listening, thinking, and speaking.
 
-The `Persona` component displays an animated AI visual that responds to different conversational states. Built with Rive WebGL2, it provides smooth, high-performance animations for various AI interaction states including idle, listening, thinking, speaking, and asleep. The component supports multiple visual variants to match different design aesthetics.
+The `Persona` component displays an animated AI visual that responds to different
+conversational states. Built with Rive WebGL2, it provides smooth, high-performance
+animations for various AI interaction states including idle, listening, thinking,
+speaking, and asleep. The component supports multiple visual variants to match different
+design aesthetics.
 
 See `scripts/persona-obsidian.tsx` for this example.
 
@@ -24,7 +29,8 @@ npx ai-elements@latest add persona
 
 ## Variants
 
-The Persona component comes with 6 distinct visual variants, each with its own unique aesthetic:
+The Persona component comes with 6 distinct visual variants, each with its own unique
+aesthetic:
 
 ### Obsidian (Default)
 
@@ -70,21 +76,29 @@ The root component that renders the animated AI visual.
 
 ## States
 
-The Persona component responds to five distinct states, each triggering different animations:
+The Persona component responds to five distinct states, each triggering different
+animations:
 
 - **idle**: The default resting state when the AI is not active
-- **listening**: Displayed when the AI is actively listening to user input (e.g., during voice recording)
+- **listening**: Displayed when the AI is actively listening to user input (e.g., during
+  voice recording)
 - **thinking**: Shown when the AI is processing or generating a response
-- **speaking**: Active when the AI is delivering a response (e.g., text-to-speech output)
+- **speaking**: Active when the AI is delivering a response (e.g., text-to-speech
+  output)
 - **asleep**: A dormant state for when the AI is inactive or in low-power mode
 
 ## React Strict Mode (Vite)
 
-The Persona component uses WebGL2 for rendering. Browsers limit the number of active WebGL2 contexts (~8–16), and React Strict Mode (enabled by default in Vite dev) double-mounts components, which can exhaust that limit and crash the page.
+The Persona component uses WebGL2 for rendering. Browsers limit the number of active
+WebGL2 contexts (~8–16), and React Strict Mode (enabled by default in Vite dev)
+double-mounts components, which can exhaust that limit and crash the page.
 
-The component includes a built-in guard that defers WebGL2 initialization by one frame, preventing context creation during Strict Mode's throw-away mount. This means the component works in Vite dev mode out of the box — no configuration needed.
+The component includes a built-in guard that defers WebGL2 initialization by one frame,
+preventing context creation during Strict Mode's throw-away mount. This means the
+component works in Vite dev mode out of the box — no configuration needed.
 
-If you still experience crashes (for example, when rendering many Persona instances simultaneously), reduce the number of concurrent Persona components on screen.
+If you still experience crashes (for example, when rendering many Persona instances
+simultaneously), reduce the number of concurrent Persona components on screen.
 
 ## Usage Examples
 

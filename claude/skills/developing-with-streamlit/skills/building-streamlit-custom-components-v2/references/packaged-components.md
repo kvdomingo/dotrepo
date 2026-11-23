@@ -1,14 +1,18 @@
 ## Packaged CCv2 components (template-only, mandatory)
 
-For packaged CCv2 components, agents **MUST** use Streamlit's official template as the starting point for every new component project.
+For packaged CCv2 components, agents **MUST** use Streamlit's official template as the
+starting point for every new component project.
 
 - [Streamlit component-template](https://github.com/streamlit/component-template)
 
-Never hand-scaffold the package/manifest/build layout and never copy/paste a packaged component scaffold from blog posts, gists, docs, or other internet sources.
+Never hand-scaffold the package/manifest/build layout and never copy/paste a packaged
+component scaffold from blog posts, gists, docs, or other internet sources.
 
-If a request starts from a non-template scaffold, stop and regenerate from the template first, then port logic into the generated project.
+If a request starts from a non-template scaffold, stop and regenerate from the template
+first, then port logic into the generated project.
 
-Follow your generated project's README. **Only keep reading if you need to debug template wiring or customize behavior after template generation.**
+Follow your generated project's README. **Only keep reading if you need to debug
+template wiring or customize behavior after template generation.**
 
 ## Contents
 
@@ -32,9 +36,12 @@ Follow your generated project's README. **Only keep reading if you need to debug
 If the request is for a packaged CCv2 component:
 
 - Start from the official template first (no exceptions).
-- Never manually scaffold a custom package/manifest/build layout before template generation.
-- Never copy a packaged component scaffold from the internet, even as a "starting point."
-- If given existing non-template scaffolding, regenerate from the template and migrate code into it.
+- Never manually scaffold a custom package/manifest/build layout before template
+  generation.
+- Never copy a packaged component scaffold from the internet, even as a "starting
+  point."
+- If given existing non-template scaffolding, regenerate from the template and migrate
+  code into it.
 - Customize only after generation so you retain known-good packaging defaults.
 
 ### Prerequisites (packaged components)
@@ -44,7 +51,8 @@ If the request is for a packaged CCv2 component:
 
 ### Start inline, then graduate to packaged
 
-Inline components are great for getting started quickly. Move to a packaged component when you hit any of these:
+Inline components are great for getting started quickly. Move to a packaged component
+when you hit any of these:
 
 - You need **multiple frontend files** (components/modules) instead of one big string.
 - You want to pull in **frontend libraries** (npm deps) and run a bundler.
@@ -52,18 +60,26 @@ Inline components are great for getting started quickly. Move to a packaged comp
 
 ### Frontend framework note (React is optional)
 
-The official Streamlit `component-template` v2 supports both **React + TypeScript (Vite)** and **Pure TypeScript (Vite)** (no React). CCv2 also works with **any frontend framework that compiles to JavaScript** (Svelte, Vue, Angular, vanilla TS/JS, etc.).
+The official Streamlit `component-template` v2 supports both
+**React + TypeScript (Vite)** and **Pure TypeScript (Vite)** (no React). CCv2 also works
+with **any frontend framework that compiles to JavaScript** (Svelte, Vue, Angular,
+vanilla TS/JS, etc.).
 
-The only requirement is that you produce JS/CSS assets into your component’s `asset_dir`, then register them from Python via `html=...`, `js="..."`, and `css="..."` using **asset-dir-relative** paths/globs.
+The only requirement is that you produce JS/CSS assets into your component’s
+`asset_dir`, then register them from Python via `html=...`, `js="..."`, and `css="..."`
+using **asset-dir-relative** paths/globs.
 
 ### TypeScript support (recommended)
 
-For end-to-end type safety while authoring the frontend, install `@streamlit/component-v2-lib`:
+For end-to-end type safety while authoring the frontend, install
+`@streamlit/component-v2-lib`:
 
 - [npm package](https://www.npmjs.com/package/@streamlit/component-v2-lib)
 - [docs](https://docs.streamlit.io/develop/api-reference/custom-components/component-v2-lib)
 
-It provides TypeScript types like `FrontendRenderer` / `FrontendRendererArgs` so your `export default` renderer gets a **typed** `data` payload and typed state/trigger keys via generics.
+It provides TypeScript types like `FrontendRenderer` / `FrontendRendererArgs` so your
+`export default` renderer gets a **typed** `data` payload and typed state/trigger keys
+via generics.
 
 ### Generate a new CCv2 component project
 
@@ -73,7 +89,8 @@ This command is the required starting point for every packaged CCv2 component:
 uvx --from cookiecutter cookiecutter gh:streamlit/component-template --directory cookiecutter/v2
 ```
 
-If you run this non-interactively, pass explicit cookiecutter values (do not rely on defaults):
+If you run this non-interactively, pass explicit cookiecutter values (do not rely on
+defaults):
 
 Template keys:
 
@@ -88,7 +105,8 @@ Template keys:
 
 Recommended non-interactive invocation:
 
-This sample uses a **hypothetical breadcrumb component** name so the values are concrete and meaningful:
+This sample uses a **hypothetical breadcrumb component** name so the values are concrete
+and meaningful:
 
 ```bash
 uvx --from cookiecutter cookiecutter gh:streamlit/component-template \
@@ -106,7 +124,8 @@ uvx --from cookiecutter cookiecutter gh:streamlit/component-template \
 
 Notes:
 
-- Choice values must match template options exactly (`framework` is `"React + Typescript"` or `"Pure Typescript"`).
+- Choice values must match template options exactly (`framework` is
+  `"React + Typescript"` or `"Pure Typescript"`).
 - Passing all keys avoids template placeholder names and post-generation rename churn.
 
 Offline/airgapped:
@@ -151,9 +170,10 @@ Why this order:
 
 ### Packaged component workflow (copy/paste checklist)
 
-Use this when debugging or customizing after generation; it's designed to prevent the common "built assets exist but Streamlit can't load them" failure modes.
+Use this when debugging or customizing after generation; it's designed to prevent the
+common "built assets exist but Streamlit can't load them" failure modes.
 
-```
+```text
 Packaged CCv2 checklist
 - [ ] Generate project from `component-template` v2
 - [ ] Confirm this is template-generated (not hand-scaffolded, not copied from internet snippets)
@@ -169,22 +189,29 @@ Packaged CCv2 checklist
 ### Verify the build output (prevents most load failures)
 
 - Ensure the manifest’s `asset_dir` exists and contains the built assets.
-- Ensure each glob you register from Python matches **exactly one** file under `asset_dir`:
+- Ensure each glob you register from Python matches **exactly one** file under
+  `asset_dir`:
   - Typical: `js="index-*.js"` and `css="index-*.css"`
   - If multiple matches: clean the build output (template: `npm run clean`) and rebuild.
 
 ### Template invariants (don’t break these)
 
-You typically shouldn’t need to touch these, but they explain most “why won’t this load?” failures:
+You typically shouldn’t need to touch these, but they explain most “why won’t this
+load?” failures:
 
-- **Component key**: the Python registration key must match the manifest: `"<project.name>.<component.name>"`.
-- **Manifest must ship inside the Python package**: the template places a minimal CCv2 manifest at `<import_name>/pyproject.toml` with `asset_dir = "frontend/build"`.
-- **Asset paths are asset-dir-relative strings**: `js="index-*.js"` (template default output) or `js="assets/index-*.js"` (if you configured an `assets/` subdir).
-- **Globs must match exactly one file**: if `index-*.js` matches multiple hashed builds, clean the build output (`npm run clean`) and rebuild.
+- **Component key**: the Python registration key must match the manifest:
+  `"<project.name>.<component.name>"`.
+- **Manifest must ship inside the Python package**: the template places a minimal CCv2
+  manifest at `<import_name>/pyproject.toml` with `asset_dir = "frontend/build"`.
+- **Asset paths are asset-dir-relative strings**: `js="index-*.js"` (template default
+  output) or `js="assets/index-*.js"` (if you configured an `assets/` subdir).
+- **Globs must match exactly one file**: if `index-*.js` matches multiple hashed builds,
+  clean the build output (`npm run clean`) and rebuild.
 
 ### Rename checklist (avoid placeholder-name drift)
 
-Template defaults like `streamlit-component-x` / `streamlit_component_x` should be replaced everywhere early.
+Template defaults like `streamlit-component-x` / `streamlit_component_x` should be
+replaced everywhere early.
 
 Rename all of these together:
 
@@ -201,12 +228,16 @@ Rename all of these together:
 
 Keep the blast radius small:
 
-- If you change output layout, update only the `js=`/`css=` asset-dir-relative globs in the Python wrapper.
-- For Vite, keep `base: "./"` so relative URLs work when served from Streamlit’s component URLs.
+- If you change output layout, update only the `js=`/`css=` asset-dir-relative globs in
+  the Python wrapper.
+- For Vite, keep `base: "./"` so relative URLs work when served from Streamlit’s
+  component URLs.
 
 ### Verification recommendation
 
-Validate packaged components with `streamlit run ...`, not plain `python -c "import ..."` checks.
+Validate packaged components with `streamlit run ...`, not plain
+`python -c "import ..."` checks.
 
 - Streamlit discovers component manifests as part of runtime setup.
-- Plain import checks can report false-negative `asset_dir` registration errors for otherwise-correct packaged components.
+- Plain import checks can report false-negative `asset_dir` registration errors for
+  otherwise-correct packaged components.

@@ -4,7 +4,8 @@ triggers:
   - "view current Dagster Plus CLI configuration"
 ---
 
-View the current Dagster Plus CLI configuration, including organization, deployment, API token, and URL.
+View the current Dagster Plus CLI configuration, including organization, deployment, API
+token, and URL.
 
 ```bash
 dg plus config view

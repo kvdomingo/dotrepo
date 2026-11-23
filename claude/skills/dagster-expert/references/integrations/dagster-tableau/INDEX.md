@@ -4,6 +4,6 @@ triggers:
   - "Tableau BI dashboard assets"
 ---
 
-# dagster-tableau
+## dagster-tableau
 
-Docs: https://docs.dagster.io/integrations/libraries/tableau
+Docs: <https://docs.dagster.io/integrations/libraries/tableau>

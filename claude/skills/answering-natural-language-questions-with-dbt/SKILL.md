@@ -10,14 +10,18 @@ metadata:
 
 ## Overview
 
-Answer data questions using the best available method: semantic layer first, then SQL modification, then model discovery, then manifest analysis. Always exhaust options before saying "cannot answer."
+Answer data questions using the best available method: semantic layer first, then SQL
+modification, then model discovery, then manifest analysis. Always exhaust options
+before saying "cannot answer."
 
 **Use for:** Business questions from users that need data answers
+
 - "What were total sales last month?"
 - "How many active customers do we have?"
 - "Show me revenue by region"
 
 **Not for:**
+
 - Validating model logic during development
 - Testing dbt models or semantic layer definitions
 - Building or modifying dbt models
@@ -88,7 +92,8 @@ When `list_metrics` and `query_metrics` are available:
 2. `get_dimensions` - verify required dimensions exist
 3. `query_metrics` - execute with appropriate filters
 
-If semantic layer can't answer directly (missing dimension, need custom logic) → go to Approach 2.
+If semantic layer can't answer directly (missing dimension, need custom logic) → go to
+Approach 2.
 
 ## Approach 2: Modified Compiled SQL
 
@@ -125,7 +130,8 @@ FROM (compiled_metric_sql)
 GROUP BY 1
 ```
 
-**Note:** The compiled SQL contains resolved table names, not `{{ ref() }}`. Work with the raw SQL as returned.
+**Note:** The compiled SQL contains resolved table names, not `{{ ref() }}`. Work with
+the raw SQL as returned.
 
 ## Approach 3: Model Discovery
 
@@ -154,11 +160,13 @@ jq '.nodes["model.project_name.model_name"].columns' target/catalog.json
 ```
 
 3. Write SQL based on discovered schema
-4. Explain: "This SQL should run in your warehouse. I cannot execute it without database access."
+4. Explain: "This SQL should run in your warehouse. I cannot execute it without database
+   access."
 
 ## Suggesting Improvements
 
-**When in a dbt project**, suggest semantic layer changes after answering (or when cannot answer):
+**When in a dbt project**, suggest semantic layer changes after answering (or when
+cannot answer):
 
 | Gap | Suggestion |
 |-----|------------|
@@ -167,6 +175,7 @@ jq '.nodes["model.project_name.model_name"].columns' target/catalog.json
 | No semantic layer | "Consider adding a semantic layer for this data" |
 
 **Stay at semantic layer level.** Do NOT suggest:
+
 - Database schema changes
 - ETL pipeline modifications
 - "Ask your data engineering team to..."

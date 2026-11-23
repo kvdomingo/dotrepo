@@ -4,6 +4,6 @@ triggers:
   - "parallel and distributed computing with Dask"
 ---
 
-# dagster-dask
+## dagster-dask
 
-Docs: https://docs.dagster.io/integrations/libraries/dask
+Docs: <https://docs.dagster.io/integrations/libraries/dask>

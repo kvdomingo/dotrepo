@@ -1,10 +1,11 @@
 # Connection
 
-A custom connection line component for React Flow-based canvases with animated bezier curve styling.
+A custom connection line component for React Flow-based canvases with animated bezier
+curve styling.
 
-The `Connection` component provides a styled connection line for React Flow canvases. It renders an animated bezier curve with a circle indicator at the target end, using consistent theming through CSS variables.
-
-
+The `Connection` component provides a styled connection line for React Flow canvases. It
+renders an animated bezier curve with a circle indicator at the target end, using
+consistent theming through CSS variables.
 
 ## Installation
 

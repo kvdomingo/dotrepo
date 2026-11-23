@@ -4,15 +4,17 @@ triggers:
   - "customizing conditions with without(), replace(), allow(), or ignore()"
 ---
 
-# Declarative Automation: Customization
+## Declarative Automation: Customization
 
-Start with one of the three main conditions (`eager()`, `on_cron()`, `on_missing()`) and customize them using these patterns.
+Start with one of the three main conditions (`eager()`, `on_cron()`, `on_missing()`) and
+customize them using these patterns.
 
-## Pattern 1: Removing Sub-conditions with without()
+### Pattern 1: Removing Sub-conditions with without()
 
 Remove unwanted sub-conditions from composite conditions.
 
-**Allow missing upstreams**: By default, `eager()` waits for all dependencies. Remove this requirement:
+**Allow missing upstreams**: By default, `eager()` waits for all dependencies. Remove
+this requirement:
 
 ```python
 import dagster as dg
@@ -24,7 +26,8 @@ condition = (
 )
 ```
 
-**Update all time partitions**: By default, `eager()` only updates the latest time partition. Remove this restriction:
+**Update all time partitions**: By default, `eager()` only updates the latest time
+partition. Remove this restriction:
 
 ```python
 condition = (
@@ -34,11 +37,12 @@ condition = (
 )
 ```
 
-## Pattern 2: Replacing Sub-conditions with replace()
+### Pattern 2: Replacing Sub-conditions with replace()
 
 Swap one sub-condition for another with different parameters.
 
-**Multiple cron schedules**: Execute at 9 AM but wait for dependencies to update since midnight:
+**Multiple cron schedules**: Execute at 9 AM but wait for dependencies to update since
+midnight:
 
 ```python
 NINE_AM_CRON = "0 9 * * *"
@@ -50,7 +54,8 @@ condition = dg.AutomationCondition.on_cron(NINE_AM_CRON).replace(
 )
 ```
 
-**Partition lookback window**: Expand `on_missing()` to consider the last 24 hours of partitions:
+**Partition lookback window**: Expand `on_missing()` to consider the last 24 hours of
+partitions:
 
 ```python
 import datetime
@@ -63,7 +68,7 @@ condition = dg.AutomationCondition.on_missing().replace(
 )
 ```
 
-## Pattern 3: Filtering Dependencies with allow() and ignore()
+### Pattern 3: Filtering Dependencies with allow() and ignore()
 
 Control which dependencies are considered.
 
@@ -83,11 +88,12 @@ condition = dg.AutomationCondition.eager().ignore(
 )
 ```
 
-## Pattern 4: Boolean Composition
+### Pattern 4: Boolean Composition
 
 Combine multiple conditions with AND (`&`), OR (`|`), NOT (`~`).
 
-**Scheduled with dependency-driven fallback**: Run every 5 minutes or when dependencies update (if updated today):
+**Scheduled with dependency-driven fallback**: Run every 5 minutes or when dependencies
+update (if updated today):
 
 ```python
 daily_success_condition = dg.AutomationCondition.newly_updated().since(
@@ -119,7 +125,7 @@ condition = (
 )
 ```
 
-## Pattern 5: Custom Event-Based Conditions
+### Pattern 5: Custom Event-Based Conditions
 
 Build conditions from operands and operators for specific scenarios.
 
@@ -143,7 +149,7 @@ condition = (
 )
 ```
 
-## Combining Patterns
+### Combining Patterns
 
 Multiple patterns can be combined for complex requirements:
 
@@ -159,4 +165,5 @@ condition = (
 ).with_label("custom_backfill_with_checks")
 ```
 
-This condition uses `eager()` as the base, removes the latest partition restriction, ignores a specific dependency, and adds a check requirement.
+This condition uses `eager()` as the base, removes the latest partition restriction,
+ignores a specific dependency, and adds a check requirement.

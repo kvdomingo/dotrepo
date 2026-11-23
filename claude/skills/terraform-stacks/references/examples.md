@@ -18,7 +18,8 @@ Complete, working examples for common Terraform Stacks scenarios.
 Basic Stack with a single environment deployment.
 
 ### File Structure
-```
+
+```text
 simple-stack/
 ├── variables.tfcomponent.hcl
 ├── providers.tfcomponent.hcl
@@ -32,6 +33,7 @@ simple-stack/
 ```
 
 ### variables.tfcomponent.hcl
+
 ```hcl
 variable "aws_region" {
   type    = string
@@ -53,6 +55,7 @@ variable "app_name" {
 ```
 
 ### providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -64,7 +67,7 @@ required_providers {
 provider "aws" "main" {
   config {
     region = var.aws_region
-    
+
     assume_role_with_web_identity {
       role_arn           = var.role_arn
       web_identity_token = var.identity_token
@@ -74,15 +77,16 @@ provider "aws" "main" {
 ```
 
 ### components.tfcomponent.hcl
+
 ```hcl
 component "webapp" {
   source = "./modules/webapp"
-  
+
   inputs = {
     app_name = var.app_name
     region   = var.aws_region
   }
-  
+
   providers = {
     aws = provider.aws.main
   }
@@ -90,6 +94,7 @@ component "webapp" {
 ```
 
 ### deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -112,10 +117,12 @@ deployment_group "production" {
 
 ## Stack with Private Registry Modules
 
-Example Stack using modules from a private HCP Terraform registry, combining both private and public registry sources.
+Example Stack using modules from a private HCP Terraform registry, combining both
+private and public registry sources.
 
 ### File Structure
-```
+
+```text
 private-registry-stack/
 ├── variables.tfcomponent.hcl
 ├── providers.tfcomponent.hcl
@@ -125,6 +132,7 @@ private-registry-stack/
 ```
 
 ### variables.tfcomponent.hcl
+
 ```hcl
 variable "aws_region" {
   type    = string
@@ -160,6 +168,7 @@ variable "db_password" {
 ```
 
 ### providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -197,6 +206,7 @@ provider "random" "main" {
 ```
 
 ### components.tfcomponent.hcl
+
 ```hcl
 locals {
   name_prefix = "${var.app_name}-${var.environment}"
@@ -307,6 +317,7 @@ component "application" {
 ```
 
 ### outputs.tfcomponent.hcl
+
 ```hcl
 output "vpc_id" {
   type        = string
@@ -329,6 +340,7 @@ output "database_endpoint" {
 ```
 
 ### deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -374,10 +386,13 @@ deployment_group "production" {
 
 ### Key Points
 
-- **Private registry modules** use the format `app.terraform.io/<org>/<module>/<provider>`
+- **Private registry modules** use the format
+  `app.terraform.io/<org>/<module>/<provider>`
 - **Version constraints** ensure consistent module versions across environments
-- **Mixed sources**: Combining private registry modules (VPC, security groups, application) with public registry modules (RDS)
-- **Authentication**: HCP Terraform workspaces automatically authenticate to private registries; CLI users need credentials configured
+- **Mixed sources**: Combining private registry modules (VPC, security groups,
+  application) with public registry modules (RDS)
+- **Authentication**: HCP Terraform workspaces automatically authenticate to private
+  registries; CLI users need credentials configured
 - **Terraform Enterprise**: Replace `app.terraform.io` with your instance hostname
 
 ## Multi-Environment Stack
@@ -385,6 +400,7 @@ deployment_group "production" {
 Stack with development, staging, and production deployments.
 
 ### variables.tfcomponent.hcl
+
 ```hcl
 variable "aws_region" {
   type = string
@@ -413,6 +429,7 @@ variable "role_arn" {
 ```
 
 ### providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -424,12 +441,12 @@ required_providers {
 provider "aws" "this" {
   config {
     region = var.aws_region
-    
+
     assume_role_with_web_identity {
       role_arn           = var.role_arn
       web_identity_token = var.identity_token
     }
-    
+
     default_tags {
       tags = {
         Environment = var.environment
@@ -441,6 +458,7 @@ provider "aws" "this" {
 ```
 
 ### components.tfcomponent.hcl
+
 ```hcl
 locals {
   name_prefix = "myapp-${var.environment}"
@@ -448,12 +466,12 @@ locals {
 
 component "vpc" {
   source = "./modules/vpc"
-  
+
   inputs = {
     name_prefix = local.name_prefix
     cidr_block  = "10.0.0.0/16"
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -461,7 +479,7 @@ component "vpc" {
 
 component "compute" {
   source = "./modules/compute"
-  
+
   inputs = {
     name_prefix    = local.name_prefix
     vpc_id         = component.vpc.vpc_id
@@ -469,7 +487,7 @@ component "compute" {
     instance_count = var.instance_count
     instance_type  = var.instance_type
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -477,6 +495,7 @@ component "compute" {
 ```
 
 ### outputs.tfcomponent.hcl
+
 ```hcl
 output "vpc_id" {
   type  = string
@@ -490,6 +509,7 @@ output "load_balancer_url" {
 ```
 
 ### deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -497,7 +517,7 @@ identity_token "aws" {
 
 locals {
   role_arn = "arn:aws:iam::123456789012:role/terraform-stacks"
-  
+
   environments = {
     dev = {
       region         = "us-east-1"
@@ -579,6 +599,7 @@ deployment_auto_approve "dev_auto" {
 Stack that deploys identical infrastructure across multiple AWS regions.
 
 ### variables.tfcomponent.hcl
+
 ```hcl
 variable "regions" {
   type = set(string)
@@ -599,6 +620,7 @@ variable "app_name" {
 ```
 
 ### providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -609,15 +631,15 @@ required_providers {
 
 provider "aws" "regional" {
   for_each = var.regions
-  
+
   config {
     region = each.value
-    
+
     assume_role_with_web_identity {
       role_arn           = var.role_arn
       web_identity_token = var.identity_token
     }
-    
+
     default_tags {
       tags = {
         Region    = each.value
@@ -630,18 +652,19 @@ provider "aws" "regional" {
 ```
 
 ### components.tfcomponent.hcl
+
 ```hcl
 component "regional_infrastructure" {
   for_each = var.regions
-  
+
   source = "./modules/regional-infra"
-  
+
   inputs = {
     region      = each.value
     app_name    = var.app_name
     name_suffix = each.value
   }
-  
+
   providers = {
     aws = provider.aws.regional[each.value]
   }
@@ -649,7 +672,7 @@ component "regional_infrastructure" {
 
 component "global_route53" {
   source = "./modules/route53"
-  
+
   inputs = {
     app_name     = var.app_name
     domain_name  = "example.com"
@@ -658,7 +681,7 @@ component "global_route53" {
       region => comp.load_balancer_dns
     }
   }
-  
+
   # Use one region's provider for global resources
   providers = {
     aws = provider.aws.regional["us-west-1"]
@@ -667,6 +690,7 @@ component "global_route53" {
 ```
 
 ### outputs.tfcomponent.hcl
+
 ```hcl
 output "regional_endpoints" {
   type = map(string)
@@ -683,6 +707,7 @@ output "global_domain" {
 ```
 
 ### deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -714,6 +739,7 @@ Two Stacks where the application Stack depends on the network Stack.
 ### Network Stack
 
 #### network-stack/variables.tfcomponent.hcl
+
 ```hcl
 variable "vpc_cidr" {
   type = string
@@ -738,6 +764,7 @@ variable "role_arn" {
 ```
 
 #### network-stack/providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -749,7 +776,7 @@ required_providers {
 provider "aws" "this" {
   config {
     region = var.aws_region
-    
+
     assume_role_with_web_identity {
       role_arn           = var.role_arn
       web_identity_token = var.identity_token
@@ -759,15 +786,16 @@ provider "aws" "this" {
 ```
 
 #### network-stack/components.tfcomponent.hcl
+
 ```hcl
 component "vpc" {
   source = "./modules/vpc"
-  
+
   inputs = {
     cidr_block  = var.vpc_cidr
     environment = var.environment
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -775,12 +803,12 @@ component "vpc" {
 
 component "security_groups" {
   source = "./modules/security-groups"
-  
+
   inputs = {
     vpc_id      = component.vpc.vpc_id
     environment = var.environment
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -788,6 +816,7 @@ component "security_groups" {
 ```
 
 #### network-stack/outputs.tfcomponent.hcl
+
 ```hcl
 output "vpc_id" {
   type  = string
@@ -811,6 +840,7 @@ output "app_security_group_id" {
 ```
 
 #### network-stack/deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -860,6 +890,7 @@ deployment_group "network" {
 ### Application Stack
 
 #### application-stack/variables.tfcomponent.hcl
+
 ```hcl
 variable "vpc_id" {
   type = string
@@ -892,6 +923,7 @@ variable "role_arn" {
 ```
 
 #### application-stack/providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -903,7 +935,7 @@ required_providers {
 provider "aws" "this" {
   config {
     region = var.aws_region
-    
+
     assume_role_with_web_identity {
       role_arn           = var.role_arn
       web_identity_token = var.identity_token
@@ -913,17 +945,18 @@ provider "aws" "this" {
 ```
 
 #### application-stack/components.tfcomponent.hcl
+
 ```hcl
 component "application" {
   source = "./modules/app"
-  
+
   inputs = {
     vpc_id            = var.vpc_id
     subnet_ids        = var.subnet_ids
     security_group_id = var.security_group_id
     instance_count    = var.instance_count
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -931,6 +964,7 @@ component "application" {
 ```
 
 #### application-stack/deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -965,6 +999,7 @@ deployment_group "application" {
 Stack that deploys to both AWS and Azure.
 
 ### variables.tfcomponent.hcl
+
 ```hcl
 variable "aws_region" {
   type = string
@@ -1006,6 +1041,7 @@ variable "app_name" {
 ```
 
 ### providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -1021,7 +1057,7 @@ required_providers {
 provider "aws" "this" {
   config {
     region = var.aws_region
-    
+
     assume_role_with_web_identity {
       role_arn           = var.aws_role_arn
       web_identity_token = var.aws_identity_token
@@ -1032,11 +1068,11 @@ provider "aws" "this" {
 provider "azurerm" "this" {
   config {
     features {}
-    
+
     subscription_id = var.azure_subscription_id
     tenant_id       = var.azure_tenant_id
     client_id       = var.azure_client_id
-    
+
     use_oidc = true
     oidc_token = var.azure_identity_token
   }
@@ -1044,15 +1080,16 @@ provider "azurerm" "this" {
 ```
 
 ### components.tfcomponent.hcl
+
 ```hcl
 component "aws_infrastructure" {
   source = "./modules/aws-infra"
-  
+
   inputs = {
     region   = var.aws_region
     app_name = var.app_name
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -1060,12 +1097,12 @@ component "aws_infrastructure" {
 
 component "azure_infrastructure" {
   source = "./modules/azure-infra"
-  
+
   inputs = {
     location = var.azure_location
     app_name = var.app_name
   }
-  
+
   providers = {
     azurerm = provider.azurerm.this
   }
@@ -1073,6 +1110,7 @@ component "azure_infrastructure" {
 ```
 
 ### deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -1107,6 +1145,7 @@ deployment_group "multi_cloud" {
 Full production-grade Stack with VPC, RDS, ECS, and monitoring.
 
 ### variables.tfcomponent.hcl
+
 ```hcl
 variable "aws_region" {
   type        = string
@@ -1149,6 +1188,7 @@ variable "role_arn" {
 ```
 
 ### providers.tfcomponent.hcl
+
 ```hcl
 required_providers {
   aws = {
@@ -1164,12 +1204,12 @@ required_providers {
 provider "aws" "this" {
   config {
     region = var.aws_region
-    
+
     assume_role_with_web_identity {
       role_arn           = var.role_arn
       web_identity_token = var.identity_token
     }
-    
+
     default_tags {
       tags = {
         Environment = var.environment
@@ -1186,6 +1226,7 @@ provider "random" "this" {
 ```
 
 ### components.tfcomponent.hcl
+
 ```hcl
 locals {
   name_prefix = "${var.app_name}-${var.environment}"
@@ -1193,13 +1234,13 @@ locals {
 
 component "vpc" {
   source = "./modules/vpc"
-  
+
   inputs = {
     name_prefix = local.name_prefix
     cidr_block  = var.vpc_cidr
     azs_count   = 3
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -1207,12 +1248,12 @@ component "vpc" {
 
 component "security_groups" {
   source = "./modules/security-groups"
-  
+
   inputs = {
     name_prefix = local.name_prefix
     vpc_id      = component.vpc.vpc_id
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -1220,14 +1261,14 @@ component "security_groups" {
 
 component "rds" {
   source = "./modules/rds"
-  
+
   inputs = {
     name_prefix        = local.name_prefix
     instance_class     = var.db_instance_class
     subnet_ids         = component.vpc.private_subnet_ids
     security_group_ids = [component.security_groups.database_sg_id]
   }
-  
+
   providers = {
     aws    = provider.aws.this
     random = provider.random.this
@@ -1236,11 +1277,11 @@ component "rds" {
 
 component "ecs_cluster" {
   source = "./modules/ecs-cluster"
-  
+
   inputs = {
     name_prefix = local.name_prefix
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -1248,7 +1289,7 @@ component "ecs_cluster" {
 
 component "ecs_service" {
   source = "./modules/ecs-service"
-  
+
   inputs = {
     name_prefix      = local.name_prefix
     cluster_id       = component.ecs_cluster.cluster_id
@@ -1257,7 +1298,7 @@ component "ecs_service" {
     security_group_id = component.security_groups.app_sg_id
     database_endpoint = component.rds.endpoint
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -1265,7 +1306,7 @@ component "ecs_service" {
 
 component "alb" {
   source = "./modules/alb"
-  
+
   inputs = {
     name_prefix       = local.name_prefix
     vpc_id            = component.vpc.vpc_id
@@ -1273,7 +1314,7 @@ component "alb" {
     security_group_id = component.security_groups.alb_sg_id
     target_group_arn  = component.ecs_service.target_group_arn
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -1281,13 +1322,13 @@ component "alb" {
 
 component "cloudwatch" {
   source = "./modules/cloudwatch"
-  
+
   inputs = {
     name_prefix  = local.name_prefix
     cluster_name = component.ecs_cluster.cluster_name
     service_name = component.ecs_service.service_name
   }
-  
+
   providers = {
     aws = provider.aws.this
   }
@@ -1295,6 +1336,7 @@ component "cloudwatch" {
 ```
 
 ### outputs.tfcomponent.hcl
+
 ```hcl
 output "load_balancer_url" {
   type        = string
@@ -1321,6 +1363,7 @@ output "ecs_cluster_name" {
 ```
 
 ### deployments.tfdeploy.hcl
+
 ```hcl
 identity_token "aws" {
   audience = ["aws.workload.identity"]
@@ -1384,18 +1427,21 @@ deployment_auto_approve "staging_safe" {
 ## Testing Configurations
 
 ### Validate Stack Configuration
+
 ```bash
 terraform stacks providers lock
 terraform stacks validate
 ```
 
 ### Plan Specific Deployment
+
 ```bash
 terraform stacks plan --deployment=development
 terraform stacks plan --deployment=production
 ```
 
 ### Apply Deployment
+
 ```bash
 terraform stacks apply --deployment=staging
 ```
@@ -1406,7 +1452,8 @@ Example of safely removing a deployment from your Stack.
 
 ### Scenario
 
-You want to decommission the "development" deployment while keeping staging and production active.
+You want to decommission the "development" deployment while keeping staging and
+production active.
 
 ### Step 1: Mark Deployment for Destruction
 
@@ -1478,7 +1525,8 @@ HCP Terraform will destroy all resources in the development deployment.
 
 ### Step 3: Remove the Deployment Block
 
-After the deployment is successfully destroyed, remove the entire deployment block from your configuration:
+After the deployment is successfully destroyed, remove the entire deployment block from
+your configuration:
 
 ```hcl
 identity_token "aws" {
@@ -1523,7 +1571,12 @@ deployment_group "production" {
 
 ### Important Notes
 
-- **Provider Authentication**: The `destroy` argument ensures your configuration retains the provider authentication needed to destroy resources
-- **Do Not Remove Immediately**: Don't remove the deployment block until after the destruction is complete
-- **Verify Before Removing**: Check HCP Terraform UI to confirm all resources are destroyed before removing the block
-- **Alternative**: You could manually destroy resources through HCP Terraform UI, but using `destroy = true` is the recommended approach for maintaining infrastructure-as-code practices
+- **Provider Authentication**: The `destroy` argument ensures your configuration retains
+  the provider authentication needed to destroy resources
+- **Do Not Remove Immediately**: Don't remove the deployment block until after the
+  destruction is complete
+- **Verify Before Removing**: Check HCP Terraform UI to confirm all resources are
+  destroyed before removing the block
+- **Alternative**: You could manually destroy resources through HCP Terraform UI, but
+  using `destroy = true` is the recommended approach for maintaining
+  infrastructure-as-code practices

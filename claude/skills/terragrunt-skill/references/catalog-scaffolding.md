@@ -1,6 +1,7 @@
 # Catalog Scaffolding
 
-The `terragrunt catalog` command provides an interactive way to browse available units and stacks from your catalog and scaffold new deployments.
+The `terragrunt catalog` command provides an interactive way to browse available units
+and stacks from your catalog and scaffold new deployments.
 
 ## Browsing the Catalog
 
@@ -26,7 +27,10 @@ catalog {
 
 ## Using Boilerplate for Scaffolding
 
-When you select a unit or stack from the catalog, Terragrunt uses [Boilerplate](https://github.com/gruntwork-io/boilerplate) to scaffold the configuration. Units and stacks can include a `boilerplate.yml` to prompt for required values:
+When you select a unit or stack from the catalog, Terragrunt uses
+[Boilerplate](https://github.com/gruntwork-io/boilerplate) to scaffold the
+configuration. Units and stacks can include a `boilerplate.yml` to prompt for required
+values:
 
 ```yaml
 # units/rds/boilerplate.yml
@@ -84,6 +88,7 @@ inputs = {
 ## Scaffold Directory Structure
 
 When scaffolding, Terragrunt:
+
 1. Clones the catalog repository (if not cached)
 2. Presents available units/stacks for selection
 3. Prompts for boilerplate variables

@@ -5,11 +5,11 @@ triggers:
   - "listing or inspecting Dagster Plus agents"
 ---
 
-# dg api agent Reference
+## dg api agent Reference
 
 Commands for listing and inspecting Dagster Plus agents.
 
-## Reference Files Index
+### Reference Files Index
 
 <!-- BEGIN GENERATED INDEX -->
 

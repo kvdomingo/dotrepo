@@ -1,13 +1,18 @@
 # Legacy Semantic Layer YAML Spec
 
-This is the authoring guide for the **legacy** dbt Semantic Layer YAML spec, supported in **dbt Core 1.6 through 1.11**. dbt Core 1.12+ also supports this spec but the [latest spec](latest-spec.md) is recommended for new projects.
+This is the authoring guide for the **legacy** dbt Semantic Layer YAML spec, supported
+in **dbt Core 1.6 through 1.11**. dbt Core 1.12+ also supports this spec but the
+[latest spec](latest-spec.md) is recommended for new projects.
 
-In the legacy spec, semantic models are defined as top-level resources separate from dbt model definitions. Measures are a core concept used as building blocks for metrics.
+In the legacy spec, semantic models are defined as top-level resources separate from dbt
+model definitions. Measures are a core concept used as building blocks for metrics.
 
 ## Contents
 
-- Implementation Workflow (Steps 1-4: semantic model, entities, dimensions, measures/metrics)
-- YAML Format Reference (complete spec, measure properties, percentile, non-additive dimensions)
+- Implementation Workflow (Steps 1-4: semantic model, entities, dimensions,
+  measures/metrics)
+- YAML Format Reference (complete spec, measure properties, percentile, non-additive
+  dimensions)
 - Metrics (simple, derived, cumulative, ratio, conversion)
 - SCD Type II Dimensions
 - Key Formatting Rules
@@ -17,7 +22,10 @@ In the legacy spec, semantic models are defined as top-level resources separate 
 
 ### Step 1: Define Semantic Model
 
-Create a top-level `semantic_models:` entry that references the dbt model via `ref()`. Set `defaults.agg_time_dimension` to the primary time column. If the model does not have a time column, warn the user that it cannot contain time-based measures or metrics. Ask the user if they want to create a derived time dimension.
+Create a top-level `semantic_models:` entry that references the dbt model via `ref()`.
+Set `defaults.agg_time_dimension` to the primary time column. If the model does not have
+a time column, warn the user that it cannot contain time-based measures or metrics. Ask
+the user if they want to create a derived time dimension.
 
 ```yaml
 semantic_models:
@@ -29,7 +37,9 @@ semantic_models:
 
 ### Step 2: Define Entities
 
-Identify the primary key column. Add it to the `entities:` array with `type: primary`. Use `expr` to reference the actual column name when the entity name differs from it. If the model has foreign keys, define those as `type: foreign`.
+Identify the primary key column. Add it to the `entities:` array with `type: primary`.
+Use `expr` to reference the actual column name when the entity name differs from it. If
+the model has foreign keys, define those as `type: foreign`.
 
 ```yaml
 semantic_models:
@@ -62,6 +72,7 @@ semantic_models:
 ### Step 3: Define Dimensions
 
 Scan columns for dimension candidates:
+
 - Time columns -> `type: time` with `type_params.time_granularity`
 - Categorical columns (strings, booleans) -> `type: categorical`
 
@@ -92,7 +103,7 @@ semantic_models:
 Computed dimensions use `expr`:
 
 ```yaml
-semantic_models: 
+semantic_models:
   - name: orders
     [...]
     dimensions:
@@ -103,9 +114,11 @@ semantic_models:
 
 ### Step 4: Define Measures and Metrics
 
-Add a `measures:` array under the semantic model for aggregations. Then define top-level `metrics:` that reference those measures via `type_params`.
+Add a `measures:` array under the semantic model for aggregations. Then define top-level
+`metrics:` that reference those measures via `type_params`.
 
-Supported agg types: `sum`, `min`, `max`, `average`, `sum_boolean`, `count_distinct`, `median`, `percentile`.
+Supported agg types: `sum`, `min`, `max`, `average`, `sum_boolean`, `count_distinct`,
+`median`, `percentile`.
 
 ```yaml
 semantic_models:
@@ -197,7 +210,7 @@ semantic_models:
 ### Percentile Measures
 
 ```yaml
-semantic_models: 
+semantic_models:
   - name: orders
     [...]
     measures:
@@ -215,7 +228,7 @@ semantic_models:
 For measures like account balances or MRR that shouldn't be summed across time:
 
 ```yaml
-semantic_models: 
+semantic_models:
   - name: orders
     [...]
     measures:
@@ -239,7 +252,8 @@ semantic_models:
 
 ### Metrics
 
-All metrics are defined at the top-level `metrics:` key, referencing measures via `type_params`.
+All metrics are defined at the top-level `metrics:` key, referencing measures via
+`type_params`.
 
 #### Simple Metrics
 
@@ -327,7 +341,8 @@ metrics:
 
 #### Cumulative Metrics
 
-Aggregate a measure over a running window or grain-to-date period. Requires a [time spine](time-spine.md).
+Aggregate a measure over a running window or grain-to-date period. Requires a
+[time spine](time-spine.md).
 
 ```yaml
 metrics:
@@ -378,7 +393,8 @@ metrics:
 
 #### Ratio Metrics
 
-Create a ratio between two metrics. Numerator and denominator can be strings (metric name) or dicts (with `name`, `filter`, `alias`).
+Create a ratio between two metrics. Numerator and denominator can be strings (metric
+name) or dicts (with `name`, `filter`, `alias`).
 
 ```yaml
 metrics:
@@ -453,7 +469,8 @@ metrics:
 
 ### SCD Type II Dimensions
 
-For slowly changing dimension tables, use `validity_params` under `type_params` and `natural` entity type:
+For slowly changing dimension tables, use `validity_params` under `type_params` and
+`natural` entity type:
 
 ```yaml
 semantic_models:

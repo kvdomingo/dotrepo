@@ -3,7 +3,8 @@
 > **Part of:** [terraform-skill](../SKILL.md)
 > **Purpose:** Security best practices and compliance patterns for Terraform/OpenTofu
 
-This document provides security hardening guidance and compliance automation strategies for infrastructure-as-code.
+This document provides security hardening guidance and compliance automation strategies
+for infrastructure-as-code.
 
 ---
 
@@ -52,7 +53,7 @@ curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/inst
 
 **Example Output:**
 
-```
+```text
 Result #1 HIGH Security group rule allows egress to multiple public internet addresses
 ────────────────────────────────────────────────────────────────────────────────
   security.tf:15-20
@@ -294,7 +295,7 @@ export AWS_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 
 **In .gitignore:**
 
-```
+```text
 *.tfvars
 .env
 secrets/

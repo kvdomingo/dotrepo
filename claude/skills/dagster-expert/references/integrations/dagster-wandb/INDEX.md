@@ -4,8 +4,8 @@ triggers:
   - "ML experiment tracking with Weights & Biases"
 ---
 
-# dagster-wandb
+## dagster-wandb
 
 > **Community-supported integration.**
 
-Docs: https://docs.dagster.io/integrations/libraries/wandb
+Docs: <https://docs.dagster.io/integrations/libraries/wandb>

@@ -4,8 +4,8 @@ triggers:
   - "lakehouse storage with Delta Lake"
 ---
 
-# dagster-deltalake
+## dagster-deltalake
 
 > **Community-supported integration.**
 
-Docs: https://docs.dagster.io/integrations/libraries/deltalake
+Docs: <https://docs.dagster.io/integrations/libraries/deltalake>

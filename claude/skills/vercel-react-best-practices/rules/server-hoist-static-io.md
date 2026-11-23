@@ -9,7 +9,10 @@ tags: server, io, performance, next.js, route-handlers, og-image
 
 **Impact: HIGH (avoids repeated file/network I/O per request)**
 
-When loading static assets (fonts, logos, images, config files) in route handlers or server functions, hoist the I/O operation to module level. Module-level code runs once when the module is first imported, not on every request. This eliminates redundant file system reads or network fetches that would otherwise run on every invocation.
+When loading static assets (fonts, logos, images, config files) in route handlers or
+server functions, hoist the I/O operation to module level. Module-level code runs once
+when the module is first imported, not on every request. This eliminates redundant file
+system reads or network fetches that would otherwise run on every invocation.
 
 **Incorrect (reads font file on every request):**
 
@@ -144,6 +147,10 @@ When not to use this pattern:
 - Large files that would consume too much memory if kept loaded
 - Sensitive data that shouldn't persist in memory
 
-With Vercel's [Fluid Compute](https://vercel.com/docs/fluid-compute), module-level caching is especially effective because multiple concurrent requests share the same function instance. The static assets stay loaded in memory across requests without cold start penalties.
+With Vercel's [Fluid Compute](https://vercel.com/docs/fluid-compute), module-level
+caching is especially effective because multiple concurrent requests share the same
+function instance. The static assets stay loaded in memory across requests without cold
+start penalties.
 
-In traditional serverless, each cold start re-executes module-level code, but subsequent warm invocations reuse the loaded assets until the instance is recycled.
+In traditional serverless, each cold start re-executes module-level code, but subsequent
+warm invocations reuse the loaded assets until the instance is recycled.

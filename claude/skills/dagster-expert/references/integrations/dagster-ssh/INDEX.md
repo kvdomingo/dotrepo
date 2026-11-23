@@ -4,6 +4,6 @@ triggers:
   - "remote command execution via SSH"
 ---
 
-# dagster-ssh
+## dagster-ssh
 
-Docs: https://docs.dagster.io/integrations/libraries/ssh
+Docs: <https://docs.dagster.io/integrations/libraries/ssh>

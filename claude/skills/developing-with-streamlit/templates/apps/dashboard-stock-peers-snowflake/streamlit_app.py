@@ -127,7 +127,7 @@ def stocks_to_str(stocks):
 
 def generate_stock_data_query(tickers: list[str], days: int) -> str:
     """Generate SQL query that creates synthetic stock price data.
-    
+
     NOTE: This uses f-strings for VALUES clause construction which is acceptable
     for synthetic data generation with controlled inputs. For production apps
     with real tables, always use parameterized queries as shown above.
@@ -139,9 +139,9 @@ def generate_stock_data_query(tickers: list[str], days: int) -> str:
         growth_rate = 0.0003 + (hash(ticker) % 10) * 0.00005
         volatility = 0.02 + (hash(ticker) % 5) * 0.005
         ticker_values.append(f"('{ticker}', {base_price}, {growth_rate}, {volatility})")
-    
+
     tickers_cte = ", ".join(ticker_values)
-    
+
     return f"""
     WITH tickers AS (
         SELECT column1 AS ticker, column2 AS base_price, column3 AS growth_rate, column4 AS volatility
@@ -152,16 +152,16 @@ def generate_stock_data_query(tickers: list[str], days: int) -> str:
         FROM TABLE(GENERATOR(ROWCOUNT => {days}))
     ),
     raw_prices AS (
-        SELECT 
+        SELECT
             d.trade_date,
             t.ticker,
-            t.base_price * POWER(1 + t.growth_rate, DATEDIFF(day, DATEADD(day, -{days}, CURRENT_DATE()), d.trade_date)) 
+            t.base_price * POWER(1 + t.growth_rate, DATEDIFF(day, DATEADD(day, -{days}, CURRENT_DATE()), d.trade_date))
                 * (1 + (RANDOM() / 10000000000000000000.0 - 0.5) * t.volatility * 2) AS close_price
         FROM date_series d
         CROSS JOIN tickers t
         WHERE DAYOFWEEK(d.trade_date) NOT IN (0, 6)  -- Exclude weekends
     )
-    SELECT 
+    SELECT
         trade_date AS date,
         ticker,
         ROUND(close_price, 2) AS close_price
@@ -177,7 +177,7 @@ def load_stock_data(tickers: list[str], days: int) -> pd.DataFrame:
     query = generate_stock_data_query(tickers, days)
     df = conn.query(query)
     df.columns = df.columns.str.lower()
-    
+
     # Pivot to get tickers as columns
     pivoted = df.pivot(index="date", columns="ticker", values="close_price")
     pivoted.index = pd.to_datetime(pivoted.index)

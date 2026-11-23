@@ -47,6 +47,7 @@ description: Use when working with Terraform or OpenTofu - creating modules,
 ```
 
 **Do NOT add:**
+
 - ❌ `author` field (put in README.md)
 - ❌ `version` field (managed by release workflow)
 - ❌ `license` field (put in README.md and LICENSE)
@@ -71,17 +72,20 @@ description: >-
 ```
 
 **Bad example:**
+
 ```yaml
 description: Comprehensive skill for Terraform development covering testing, modules, CI/CD, and production patterns
 ```
 
-**Why:** Description must focus on WHEN to use (triggers/symptoms), not WHAT it does (workflow summary). See plan file and writing-skills documentation for rationale.
+**Why:** Description must focus on WHEN to use (triggers/symptoms), not WHAT it does
+(workflow summary). See plan file and writing-skills documentation for rationale.
 
 ### Token Efficiency
 
 **SKILL.md Target:** <1,500 words
 
 **Techniques:**
+
 - Use progressive disclosure (move details to references/*.md)
 - Prefer tables over prose
 - Compress link sections (pipe-separated)
@@ -91,7 +95,7 @@ description: Comprehensive skill for Terraform development covering testing, mod
 
 ### File Organization
 
-```
+```text
 terraform-skill/
 ├── SKILL.md                    # Core skill (<500 lines guideline)
 ├── references/                     # Reference files (progressive disclosure)
@@ -116,6 +120,7 @@ terraform-skill/
 **NO CHANGES WITHOUT TESTING FIRST**
 
 This applies to:
+
 - ✅ New content additions
 - ✅ Edits to existing content
 - ✅ Reorganization or refactoring
@@ -125,7 +130,8 @@ This applies to:
 
 ### Why This Matters
 
-Without testing, we don't know if changes actually improve agent behavior. Per official skill standards (writing-skills), this is TDD for documentation:
+Without testing, we don't know if changes actually improve agent behavior. Per official
+skill standards (writing-skills), this is TDD for documentation:
 
 - **RED:** Run scenarios WITHOUT your changes (baseline)
 - **GREEN:** Add changes, verify behavior improves
@@ -166,6 +172,7 @@ mv ~/.claude/references/terraform-skill.disabled ~/.claude/references/terraform-
 #### 5. Verify Improvement
 
 Compare baseline vs compliance:
+
 - Does agent now follow your guidance?
 - Are patterns applied proactively?
 - No new rationalizations introduced?
@@ -173,6 +180,7 @@ Compare baseline vs compliance:
 #### 6. Document in PR
 
 Include in PR description:
+
 - Which scenarios tested
 - Baseline behavior (what agent did without change)
 - Compliance behavior (what agent does with change)
@@ -199,12 +207,14 @@ For each PR, include this checklist:
 ❌ "You should consider using underscores"
 
 **Scannable format:**
+
 - Tables for comparisons
 - ✅ DO vs ❌ DON'T side-by-side
 - Code blocks with inline comments
 - Clear section headers
 
 **Version-specific markers:**
+
 ```markdown
 **Native Tests** (Terraform 1.6+, OpenTofu 1.6+)
 ```
@@ -214,6 +224,7 @@ For each PR, include this checklist:
 **One excellent example beats many mediocre ones**
 
 **Good example:**
+
 - Complete and runnable
 - Well-commented explaining WHY
 - From real scenario
@@ -221,6 +232,7 @@ For each PR, include this checklist:
 - Ready to adapt
 
 **Avoid:**
+
 - Multiple language implementations
 - Fill-in-the-blank templates
 - Contrived examples
@@ -228,11 +240,13 @@ For each PR, include this checklist:
 ### Decision Frameworks
 
 **Include WHEN information:**
+
 - When to use approach A vs B
 - What factors influence the decision
 - Tradeoffs and considerations
 
 **Use tables:**
+
 ```markdown
 | Your Situation | Recommended Approach |
 |----------------|---------------------|
@@ -242,11 +256,12 @@ For each PR, include this checklist:
 
 ## Commit Message Format
 
-This project uses [Conventional Commits](https://www.conventionalcommits.org/) to automate releases and changelog generation.
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) to
+automate releases and changelog generation.
 
 ### Format
 
-```
+```text
 <type>: <description>
 
 [optional body]
@@ -295,11 +310,14 @@ git commit -m "chore: update workflow dependencies"
 ### Why This Matters
 
 Conventional commits enable:
+
 - **Automatic versioning** - Commit type determines version bump
 - **Generated changelogs** - Changes grouped by type (features, fixes, etc.)
 - **Release automation** - Releases created on merge to master
 
-When you merge a PR, the release workflow analyzes all commits since the last release and:
+When you merge a PR, the release workflow analyzes all commits since the last release
+and:
+
 1. Calculates the appropriate version bump
 2. Updates version in marketplace.json (marketplace, plugin, and git ref)
 3. Generates changelog entry
@@ -310,6 +328,7 @@ When you merge a PR, the release workflow analyzes all commits since the last re
 ### Pull Request Process
 
 1. **Create feature branch** from `master`
+
    ```bash
    git checkout -b feature/improve-testing-guidance
    ```
@@ -319,6 +338,7 @@ When you merge a PR, the release workflow analyzes all commits since the last re
 3. **Test changes** (see Testing Requirements)
 
 4. **Commit with conventional commit format**
+
    ```bash
    git commit -m "feat: add native test mocking guidance for 1.7+"
    git commit -m "fix: correct security scanning tool recommendations"
@@ -330,6 +350,7 @@ When you merge a PR, the release workflow analyzes all commits since the last re
 ### PR Template
 
 Use the template in `.github/PULL_REQUEST_TEMPLATE.md` - it includes:
+
 - Testing checklist
 - Standards compliance verification
 - Change description
@@ -338,6 +359,7 @@ Use the template in `.github/PULL_REQUEST_TEMPLATE.md` - it includes:
 ### Review Criteria
 
 PRs will be reviewed for:
+
 1. **Standards compliance** - Frontmatter, description format
 2. **Testing evidence** - Baseline vs compliance documented
 3. **Token efficiency** - Not adding unnecessary content
@@ -356,23 +378,27 @@ Releases are **fully automated** based on conventional commits:
    - `CHANGELOG.md` (generated from commits)
 5. Creates git tag and GitHub Release
 
-**Contributors don't need to manage versions** - just use conventional commits in your PRs.
+**Contributors don't need to manage versions** - just use conventional commits in your
+PRs.
 
 For details, see the [Releases section in README.md](README.md#releases).
 
 ## Questions?
 
 - **Issues:** [GitHub Issues](https://github.com/antonbabenko/terraform-skill/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/antonbabenko/terraform-skill/discussions)
+- **Discussions:**
+  [GitHub Discussions](https://github.com/antonbabenko/terraform-skill/discussions)
 - **Author:** [@antonbabenko](https://github.com/antonbabenko)
 
 ## Additional Resources
 
 **For contributors:**
+
 - [CLAUDE.md](CLAUDE.md) - Detailed development guidelines and architecture
 - [tests/baseline-scenarios.md](tests/baseline-scenarios.md) - Testing scenarios
 
 **Skill standards:**
+
 - [Claude Code Skills Documentation](https://docs.claude.ai/docs/agent-skills)
 - writing-skills (reference skill for skill development)
 

@@ -4,6 +4,6 @@ triggers:
   - "analytics and BI with Omni"
 ---
 
-# dagster-omni
+## dagster-omni
 
-Docs: https://docs.dagster.io/integrations/libraries/omni
+Docs: <https://docs.dagster.io/integrations/libraries/omni>

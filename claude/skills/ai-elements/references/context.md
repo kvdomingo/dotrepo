@@ -1,8 +1,12 @@
 # Context
 
-A compound component system for displaying AI model context window usage, token consumption, and cost estimation.
+A compound component system for displaying AI model context window usage, token
+consumption, and cost estimation.
 
-The `Context` component provides a comprehensive view of AI model usage through a compound component system. It displays context window utilization, token consumption breakdown (input, output, reasoning, cache), and cost estimation in an interactive hover card interface.
+The `Context` component provides a comprehensive view of AI model usage through a
+compound component system. It displays context window utilization, token consumption
+breakdown (input, output, reasoning, cache), and cost estimation in an interactive hover
+card interface.
 
 See `scripts/context.tsx` for this example.
 
@@ -15,7 +19,8 @@ npx ai-elements@latest add context
 ## Features
 
 - **Compound Component Architecture**: Flexible composition of context display elements
-- **Visual Progress Indicator**: Circular SVG progress ring showing context usage percentage
+- **Visual Progress Indicator**: Circular SVG progress ring showing context usage
+  percentage
 - **Token Breakdown**: Detailed view of input, output, reasoning, and cached tokens
 - **Cost Estimation**: Real-time cost calculation using the `tokenlens` library
 - **Intelligent Formatting**: Automatic token count formatting (K, M, B suffixes)
@@ -74,7 +79,8 @@ npx ai-elements@latest add context
 
 ### Usage Components
 
-All usage components (`ContextInputUsage`, `ContextOutputUsage`, `ContextReasoningUsage`, `ContextCacheUsage`) share the same props:
+All usage components (`ContextInputUsage`, `ContextOutputUsage`,
+`ContextReasoningUsage`, `ContextCacheUsage`) share the same props:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -84,15 +90,18 @@ All usage components (`ContextInputUsage`, `ContextOutputUsage`, `ContextReasoni
 
 ## Component Architecture
 
-The Context component uses a compound component pattern with React Context for data sharing:
+The Context component uses a compound component pattern with React Context for data
+sharing:
 
 1. **`<Context>`** - Root provider component that holds all context data
-2. **`<ContextTrigger>`** - Interactive trigger element (default: button with percentage)
+2. **`<ContextTrigger>`** - Interactive trigger element (default: button with
+   percentage)
 3. **`<ContextContent>`** - Hover card content container
 4. **`<ContextContentHeader>`** - Header section with progress visualization
 5. **`<ContextContentBody>`** - Body section for usage breakdowns
 6. **`<ContextContentFooter>`** - Footer section for total cost
-7. **Usage Components** - Individual token usage displays (Input, Output, Reasoning, Cache)
+7. **Usage Components** - Individual token usage displays (Input, Output, Reasoning,
+   Cache)
 
 ## Token Formatting
 
@@ -105,7 +114,8 @@ The component uses `Intl.NumberFormat` with compact notation for automatic forma
 
 ## Cost Calculation
 
-When a `modelId` is provided, the component automatically calculates costs using the `tokenlens` library:
+When a `modelId` is provided, the component automatically calculates costs using the
+`tokenlens` library:
 
 - **Input tokens**: Cost based on model's input pricing
 - **Output tokens**: Cost based on model's output pricing

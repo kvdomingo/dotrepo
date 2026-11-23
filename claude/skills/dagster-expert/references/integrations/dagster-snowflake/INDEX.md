@@ -4,6 +4,6 @@ triggers:
   - "interacting with Snowflake from Dagster"
 ---
 
-# dagster-snowflake
+## dagster-snowflake
 
-Docs: https://docs.dagster.io/integrations/libraries/snowflake
+Docs: <https://docs.dagster.io/integrations/libraries/snowflake>

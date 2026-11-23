@@ -10,10 +10,16 @@ metadata:
 
 ## Preferences
 
-1. **Use MCP tools if available** (`dbt_build`, `dbt_run`, `dbt_show`, etc.) - they handle paths, timeouts, and formatting automatically
-2. **Use `build` instead of `run` or `test`** - `test` doesn't refresh the model, so testing a model change requires `build`. `build` does a `run` and a `test` of each node (model, seed, snapshot) in the order of the DAG
-3. **Always use `--quiet`** with `--warn-error-options '{"error": ["NoNodesForSelectionCriteria"]}'` to reduce output while catching selector typos
-4. **Always use `--select`** - never run the entire project without explicit user approval
+1. **Use MCP tools if available** (`dbt_build`, `dbt_run`, `dbt_show`, etc.) - they
+   handle paths, timeouts, and formatting automatically
+2. **Use `build` instead of `run` or `test`** - `test` doesn't refresh the model, so
+   testing a model change requires `build`. `build` does a `run` and a `test` of each
+   node (model, seed, snapshot) in the order of the DAG
+3. **Always use `--quiet`** with
+   `--warn-error-options '{"error": ["NoNodesForSelectionCriteria"]}'` to reduce output
+   while catching selector typos
+4. **Always use `--select`** - never run the entire project without explicit user
+   approval
 
 ## Quick Reference
 
@@ -47,7 +53,8 @@ Three CLIs exist. **Ask the user which one if unsure.**
 | **dbt Fusion** | `~/.local/bin/dbt` or `dbtf` | Faster and has stronger SQL comprehension |
 | **dbt Cloud CLI** | `~/.local/bin/dbt` | Go-based, runs on platform |
 
-**Common setup:** Core in venv + Fusion at `~/.local/bin`. Running `dbt` uses Core. Use `dbtf` or `~/.local/bin/dbt` for Fusion.
+**Common setup:** Core in venv + Fusion at `~/.local/bin`. Running `dbt` uses Core. Use
+`dbtf` or `~/.local/bin/dbt` for Fusion.
 
 ## Selectors
 
@@ -70,16 +77,19 @@ Three CLIs exist. **Ask the user which one if unsure.**
 ```
 
 **Resource type filter:**
+
 ```bash
 --resource-type model
 --resource-type test --resource-type unit_test
 ```
 
-Valid types: `model`, `test`, `unit_test`, `snapshot`, `seed`, `source`, `exposure`, `metric`, `semantic_model`, `saved_query`, `analysis`
+Valid types: `model`, `test`, `unit_test`, `snapshot`, `seed`, `source`, `exposure`,
+`metric`, `semantic_model`, `saved_query`, `analysis`
 
 ## List
 
-Use `dbt list` to preview what will be selected before running. Helpful for validating complex selectors.
+Use `dbt list` to preview what will be selected before running. Helpful for validating
+complex selectors.
 
 ```bash
 dbt list --select my_model+              # Preview selection
@@ -88,8 +98,11 @@ dbt list --output json                   # JSON output
 dbt list --select my_model --output json --output-keys unique_id name resource_type config
 ```
 
-**Available output keys for `--output json`:**
-`unique_id`, `name`, `resource_type`, `package_name`, `original_file_path`, `path`, `alias`, `description`, `columns`, `meta`, `tags`, `config`, `depends_on`, `patch_path`, `schema`, `database`, `relation_name`, `raw_code`, `compiled_code`, `language`, `docs`, `group`, `access`, `version`, `fqn`, `refs`, `sources`, `metrics`
+**Available output keys for `--output json`:** `unique_id`, `name`, `resource_type`,
+`package_name`, `original_file_path`, `path`, `alias`, `description`, `columns`, `meta`,
+`tags`, `config`, `depends_on`, `patch_path`, `schema`, `database`, `relation_name`,
+`raw_code`, `compiled_code`, `language`, `docs`, `group`, `access`, `version`, `fqn`,
+`refs`, `sources`, `metrics`
 
 ## Show
 
@@ -124,6 +137,7 @@ cat target/run_results.json | jq '.results[] | select(.status != "success")'
 ```
 
 **Key fields:**
+
 - `status`: success, error, fail, skipped, warn
 - `execution_time`: seconds spent executing
 - `compiled_code`: rendered SQL
@@ -138,6 +152,7 @@ dbt build --select my_model --defer --state prod-artifacts
 ```
 
 **Flags:**
+
 - `--defer` - enable deferral to state manifest
 - `--state <path>` - path to manifest from previous run (e.g., production artifacts)
 - `--favor-state` - prefer node definitions from state even if they exist locally

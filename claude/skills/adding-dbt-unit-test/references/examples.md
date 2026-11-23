@@ -1,6 +1,7 @@
 ## Another example of unit testing a model
 
-This example creates a new `dim_customers` model with a field `is_valid_email_address` that calculates whether or not the customer’s email is valid: 
+This example creates a new `dim_customers` model with a field `is_valid_email_address`
+that calculates whether or not the customer’s email is valid:
 
 `dim_customers.sql`
 
@@ -16,7 +17,7 @@ accepted_email_domains as (
     select * from {{ ref('top_level_email_domains') }}
 
 ),
-	
+
 check_valid_emails as (
 
     select
@@ -39,7 +40,9 @@ check_valid_emails as (
 select * from check_valid_emails
 ```
 
-The logic posed in this example can be challenging to validate. You can add a unit test to this model to ensure the `is_valid_email_address` logic captures all known edge cases: emails without `.`, emails without `@`, and emails from invalid domains.
+The logic posed in this example can be challenging to validate. You can add a unit test
+to this model to ensure the `is_valid_email_address` logic captures all known edge
+cases: emails without `.`, emails without `@`, and emails from invalid domains.
 
 `dbt_project.yml`
 
@@ -123,7 +126,8 @@ unit_tests:
 
 ### Fixture `csv` example
 
-Or, you can provide the name of a CSV file in the `test-paths` location (`tests/fixtures` by default): 
+Or, you can provide the name of a CSV file in the `test-paths` location
+(`tests/fixtures` by default):
 
 `models/schema.yml`
 
@@ -173,7 +177,8 @@ unit_tests:
 
 ### Fixture `sql` example
 
-Or, you can provide the name of a SQL file in the `test-paths` location (`tests/fixtures` by default): 
+Or, you can provide the name of a SQL file in the `test-paths` location
+(`tests/fixtures` by default):
 
 `models/schema.yml`
 
@@ -199,5 +204,6 @@ select 2 as id, 'michelle', null as loaded_at as name
 ```
 
 **Notes**
+
 - Contrary to dbt SQL models, Jinja is unsupported within SQL fixtures for unit tests.
 - You must supply mock data for _all columns_ when using the `sql` format.

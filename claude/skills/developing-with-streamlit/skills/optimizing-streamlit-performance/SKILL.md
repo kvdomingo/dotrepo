@@ -6,7 +6,8 @@ license: Apache-2.0
 
 # Streamlit performance
 
-Performance is the biggest win. Without caching and fragments, your app reruns everything on every interaction.
+Performance is the biggest win. Without caching and fragments, your app reruns
+everything on every interaction.
 
 ## Caching
 
@@ -39,7 +40,8 @@ def load_model():
     return torch.load("model.pt")
 ```
 
-**Critical warning:** Never mutate `@st.cache_resource` returns—changes affect all users:
+**Critical warning:** Never mutate `@st.cache_resource` returns—changes affect all
+users:
 
 ```python
 # BAD: Mutating shared resource
@@ -79,6 +81,7 @@ def load_reference_data():
 ```
 
 **Guidelines:**
+
 - Real-time dashboards → `ttl="1m"` or less
 - Metrics/reports → `ttl="5m"` to `ttl="15m"`
 - Reference data → `ttl="1h"` or more
@@ -86,7 +89,9 @@ def load_reference_data():
 
 ### Prevent unbounded cache growth
 
-**Important:** Caches without `ttl` or `max_entries` can grow indefinitely and cause memory issues. For any cached function that stores changing objects (user-specific data, parameterized queries), set limits:
+**Important:** Caches without `ttl` or `max_entries` can grow indefinitely and cause
+memory issues. For any cached function that stores changing objects (user-specific data,
+parameterized queries), set limits:
 
 ```python
 # BAD: Unbounded cache - memory will grow indefinitely
@@ -105,7 +110,8 @@ def get_user_data(user_id):
     return fetch_user(user_id)
 ```
 
-Use `ttl` for time-based expiration OR `max_entries` for size-based limits. You usually don't need both.
+Use `ttl` for time-based expiration OR `max_entries` for size-based limits. You usually
+don't need both.
 
 ### Caching anti-patterns
 
@@ -165,6 +171,7 @@ live_metrics()
 ```
 
 For auto-refreshing metrics, use `run_every`:
+
 ```python
 @st.fragment(run_every="30s")
 def auto_refresh_metrics():
@@ -173,11 +180,13 @@ def auto_refresh_metrics():
 auto_refresh_metrics()
 ```
 
-Use for: live metrics, refresh buttons, interactive charts that don't affect global state.
+Use for: live metrics, refresh buttons, interactive charts that don't affect global
+state.
 
 ## Forms to batch interactions
 
-By default, every widget interaction triggers a full rerun. Use `st.form` to batch multiple inputs and only rerun on submit.
+By default, every widget interaction triggers a full rerun. Use `st.form` to batch
+multiple inputs and only rerun on submit.
 
 ```python
 # BAD: Reruns on every keystroke and selection
@@ -206,19 +215,23 @@ with st.form("search", border=False):
 ```
 
 **When to use forms:**
+
 - Multiple related inputs (signup, filters, settings)
 - Text inputs where typing triggers expensive operations
 - Any UI where "submit" semantics make sense
 
-**When NOT to use forms:** If inputs depend on each other (e.g., selecting a country should update available cities), forms won't work since there's no rerun until submit.
+**When NOT to use forms:** If inputs depend on each other (e.g., selecting a country
+should update available cities), forms won't work since there's no rerun until submit.
 
 ## Conditional rendering
 
 **This is critical and often missed.**
 
-Layout containers like `st.tabs`, `st.expander`, and `st.popover` always render all their content, even when hidden or collapsed.
+Layout containers like `st.tabs`, `st.expander`, and `st.popover` always render all
+their content, even when hidden or collapsed.
 
-To render content only when needed, use elements like `st.segmented_control`, `st.toggle`, or `@st.dialog` with conditional logic:
+To render content only when needed, use elements like `st.segmented_control`,
+`st.toggle`, or `@st.dialog` with conditional logic:
 
 ```python
 # BAD: Heavy content loads even when tab not visible
@@ -245,6 +258,7 @@ if st.toggle("Show advanced options"):
 ## Pre-computation
 
 Move expensive work outside the main flow:
+
 - Compute aggregations in SQL/dbt, not Python
 - Pre-compute metrics in scheduled jobs
 - Use materialized views for complex queries
@@ -261,9 +275,12 @@ def load_data():
 
 ### For very large datasets (over ~100M rows)
 
-> **Note:** This is only an escape hatch when serialization becomes too slow. In most cases, data this large shouldn't be loaded entirely into memory—prefer using a database that queries and loads data on demand.
+> **Note:** This is only an escape hatch when serialization becomes too slow. In most
+> cases, data this large shouldn't be loaded entirely into memory—prefer using a
+> database that queries and loads data on demand.
 
-`@st.cache_data` uses pickle which slows with huge data. Use `@st.cache_resource` instead:
+`@st.cache_data` uses pickle which slows with huge data. Use `@st.cache_resource`
+instead:
 
 ```python
 @st.cache_resource  # No serialization overhead
@@ -311,6 +328,7 @@ for result in results:
 ```
 
 **Prefer alternatives when possible:**
+
 - `@st.cache_data` for expensive computations
 - `@st.fragment(run_every="5s")` for periodic updates
 

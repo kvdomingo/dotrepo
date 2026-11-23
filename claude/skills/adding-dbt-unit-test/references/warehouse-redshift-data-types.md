@@ -20,4 +20,5 @@ unit_tests:
            json_field: '{"bar": "baz", "balance": 7.77, "active": false}'
 ```
 
-Currently, the `array` data type is not supported for YAML format `dict` inputs. Use the `sql` format instead if you need to mock `array` inputs or outputs.
+Currently, the `array` data type is not supported for YAML format `dict` inputs. Use the
+`sql` format instead if you need to mock `array` inputs or outputs.

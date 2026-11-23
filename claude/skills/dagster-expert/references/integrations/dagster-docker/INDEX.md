@@ -4,6 +4,6 @@ triggers:
   - "containerized execution with Docker"
 ---
 
-# dagster-docker
+## dagster-docker
 
-Docs: https://docs.dagster.io/integrations/libraries/docker
+Docs: <https://docs.dagster.io/integrations/libraries/docker>

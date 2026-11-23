@@ -1,6 +1,7 @@
 # Writing Data Tests in dbt
 
-Write high-value tests that catch real data issues without burning warehouse credits on low-signal checks. Testing should drive action, not accumulate alerts.
+Write high-value tests that catch real data issues without burning warehouse credits on
+low-signal checks. Testing should drive action, not accumulate alerts.
 
 ## When to Use
 
@@ -13,11 +14,16 @@ Write high-value tests that catch real data issues without burning warehouse cre
 
 ### Data Hygiene
 
-Issues you address in your staging/bronze layer. Hygienic data meets expectations around formatting (correct values and structure), completeness (no unexpected nulls), and granularity (no duplicates).
+Issues you address in your staging/bronze layer. Hygienic data meets expectations around
+formatting (correct values and structure), completeness (no unexpected nulls), and
+granularity (no duplicates).
 
 ### Business-Focused Anomalies
 
-Unexpected behavior based on what you know to be typical in your business. These tests need periodic adjustment as business context shifts. Revenue volatility or user retention changes may be due to a sale, but could also reflect a problem in data ingestion or now-invalid transformation logic.
+Unexpected behavior based on what you know to be typical in your business. These tests
+need periodic adjustment as business context shifts. Revenue volatility or user
+retention changes may be due to a sale, but could also reflect a problem in data
+ingestion or now-invalid transformation logic.
 
 ## Where Tests Belong in the Pipeline
 
@@ -115,11 +121,13 @@ Not all tests provide equal value. Use this framework to prioritize:
 
 ## Before Writing Tests
 
-Check that required packages are installed (see [managing-packages](./managing-packages.md)).
+Check that required packages are installed (see
+[managing-packages](./managing-packages.md)).
 
 ### Review Discovery Findings
 
-If you used the instructions in [discovering-data](./discovering-data.md), your findings tell you exactly what to test:
+If you used the instructions in [discovering-data](./discovering-data.md), your findings
+tell you exactly what to test:
 
 | Discovery Finding | Test Action |
 |-------------------|-------------|
@@ -131,7 +139,8 @@ If you used the instructions in [discovering-data](./discovering-data.md), your 
 
 ## Document Debugging Steps
 
-Non-obvious tests should have documented first steps for debugging. Add these to test descriptions or a shared framework document.
+Non-obvious tests should have documented first steps for debugging. Add these to test
+descriptions or a shared framework document.
 
 ```yaml
 models:
@@ -167,7 +176,8 @@ Use `where` to limit scope:
 
 ### Over-testing business logic
 
-Don't check that the SQL ran correctly, think of places that an assumption about the data itself could prove false and write a test to detect it.
+Don't check that the SQL ran correctly, think of places that an assumption about the
+data itself could prove false and write a test to detect it.
 
 ```yaml
 # WRONG: 10 expression tests for one model

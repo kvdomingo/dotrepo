@@ -4,6 +4,7 @@ triggers:
   - "snowflake pyspark, snowflake spark"
 ---
 
-# dagster-snowflake-pyspark
+## dagster-snowflake-pyspark
 
-Docs: https://docs.dagster.io/integrations/libraries/snowflake/reference#dagster-snowflake-pyspark
+Docs:
+<https://docs.dagster.io/integrations/libraries/snowflake/reference#dagster-snowflake-pyspark>

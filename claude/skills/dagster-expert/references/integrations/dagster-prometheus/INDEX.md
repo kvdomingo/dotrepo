@@ -4,6 +4,6 @@ triggers:
   - "metrics collection with Prometheus"
 ---
 
-# dagster-prometheus
+## dagster-prometheus
 
-Docs: https://docs.dagster.io/integrations/libraries/prometheus
+Docs: <https://docs.dagster.io/integrations/libraries/prometheus>

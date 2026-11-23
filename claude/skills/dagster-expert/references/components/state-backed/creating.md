@@ -4,11 +4,14 @@ triggers:
   - "building a component that fetches and caches external state"
 ---
 
-# Creating State-Backed Components
+## Creating State-Backed Components
 
-## Overview
+### Overview
 
-State-backed components are for integrations where Dagster definitions depend on external systems (APIs, compiled artifacts) rather than just code and config files. The framework manages fetching, storing, and loading this state so that expensive operations (API calls, compilation) don't run on every code server load.
+State-backed components are for integrations where Dagster definitions depend on
+external systems (APIs, compiled artifacts) rather than just code and config files. The
+framework manages fetching, storing, and loading this state so that expensive operations
+(API calls, compilation) don't run on every code server load.
 
 Subclasses implement three abstract members:
 
@@ -16,7 +19,7 @@ Subclasses implement three abstract members:
 - **`write_state_to_path`** — fetches external state and writes it to a local path
 - **`build_defs_from_state`** — builds definitions from the cached state
 
-## Basic Structure
+### Basic Structure
 
 ```python nocheckundefined
 from pathlib import Path
@@ -65,11 +68,12 @@ attributes:
     management_type: LOCAL_FILESYSTEM
 ```
 
-## The `defs_state_config` Property
+### The `defs_state_config` Property
 
-### User-configurable (recommended)
+#### User-configurable (recommended)
 
-Expose a `defs_state` field so users can choose the management strategy in YAML. This is the OmniComponent pattern:
+Expose a `defs_state` field so users can choose the management strategy in YAML. This is
+the OmniComponent pattern:
 
 ```python
 from dagster.components.utils.defs_state import (
@@ -87,11 +91,13 @@ class MyComponent(dg.StateBackedComponent, dg.Model, dg.Resolvable):
         return DefsStateConfig.from_args(self.defs_state, default_key=self.__class__.__name__)
 ```
 
-The `default_key` is used when the user doesn't specify a `key` in YAML. Convention: `ClassName` or `ClassName[discriminator]`.
+The `default_key` is used when the user doesn't specify a `key` in YAML. Convention:
+`ClassName` or `ClassName[discriminator]`.
 
-### Hardcoded
+#### Hardcoded
 
-Construct `DefsStateConfig` directly when the strategy should not be user-configurable. This is the DbtProjectComponent pattern:
+Construct `DefsStateConfig` directly when the strategy should not be user-configurable.
+This is the DbtProjectComponent pattern:
 
 ```python
 from dagster.components.utils.defs_state import DefsStateConfig
@@ -110,13 +116,16 @@ class MyToolComponent(dg.StateBackedComponent, dg.Resolvable):
         )
 ```
 
-**Key format convention:** `ClassName[discriminator]` — the discriminator distinguishes multiple instances of the same component type (e.g., different dbt projects).
+**Key format convention:** `ClassName[discriminator]` — the discriminator distinguishes
+multiple instances of the same component type (e.g., different dbt projects).
 
-## State Serialization Strategies
+### State Serialization Strategies
 
-### Dagster serdes (for API responses)
+#### Dagster serdes (for API responses)
 
-Define typed state objects with `@whitelist_for_serdes` and `@record`, then serialize with `dg.serialize_value()` / `dg.deserialize_value()`. Best when state comes from API responses. Used by OmniComponent.
+Define typed state objects with `@whitelist_for_serdes` and `@record`, then serialize
+with `dg.serialize_value()` / `dg.deserialize_value()`. Best when state comes from API
+responses. Used by OmniComponent.
 
 ```python
 from dagster_shared.record import record
@@ -158,9 +167,11 @@ class MyComponent(dg.StateBackedComponent, dg.Model, dg.Resolvable):
         return dg.Definitions(assets=[])
 ```
 
-### Tool's native format (for tools with existing artifacts)
+#### Tool's native format (for tools with existing artifacts)
 
-Write tool artifacts directly and read them with the tool's own parser. Best when the tool already produces a well-defined artifact format. Used by DbtProjectComponent (writes dbt manifest, reads it with dbt's manifest parser).
+Write tool artifacts directly and read them with the tool's own parser. Best when the
+tool already produces a well-defined artifact format. Used by DbtProjectComponent
+(writes dbt manifest, reads it with dbt's manifest parser).
 
 ```python nocheckundefined
 class MyToolComponent(dg.StateBackedComponent, dg.Resolvable):
@@ -180,9 +191,14 @@ class MyToolComponent(dg.StateBackedComponent, dg.Resolvable):
         return dg.Definitions(assets=[])
 ```
 
-## Notes
+### Notes
 
-- **Async support:** `write_state_to_path` can be `async`. The framework detects this automatically. Use async when calling async APIs (e.g., `await client.fetch(...)`).
-- **Handling `state_path=None`:** `build_defs_from_state` receives `state_path=None` when no state has been written yet. Return `dg.Definitions()` (empty) in this case.
-- **Do not override `build_defs`:** The base class `build_defs` manages the state lifecycle (refresh timing, storage). Override `build_defs_from_state` instead.
-- **MRO:** Use `dg.StateBackedComponent, dg.Model, dg.Resolvable` for pydantic-based components, or `dg.StateBackedComponent, dg.Resolvable` with `@dataclass` for dataclass-based components.
+- **Async support:** `write_state_to_path` can be `async`. The framework detects this
+  automatically. Use async when calling async APIs (e.g., `await client.fetch(...)`).
+- **Handling `state_path=None`:** `build_defs_from_state` receives `state_path=None`
+  when no state has been written yet. Return `dg.Definitions()` (empty) in this case.
+- **Do not override `build_defs`:** The base class `build_defs` manages the state
+  lifecycle (refresh timing, storage). Override `build_defs_from_state` instead.
+- **MRO:** Use `dg.StateBackedComponent, dg.Model, dg.Resolvable` for pydantic-based
+  components, or `dg.StateBackedComponent, dg.Resolvable` with `@dataclass` for
+  dataclass-based components.

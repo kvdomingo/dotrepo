@@ -30,7 +30,8 @@ All three are automatically included in `create_deep_agent()`.
 <how-subagents-work>
 Main agent has `task` tool -> creates fresh subagent -> subagent executes autonomously -> returns final report.
 
-**Default subagent**: "general-purpose" - automatically available with same tools/config as main agent.
+**Default subagent**: "general-purpose" - automatically available with same tools/config
+as main agent.
 </how-subagents-work>
 
 <ex-custom-subagents>
@@ -57,7 +58,8 @@ agent = create_deep_agent(
 )
 
 # Main agent delegates: task(agent="researcher", instruction="Research AI trends")
-```
+
+```text
 </python>
 <typescript>
 Create a custom "researcher" subagent with specialized tools for academic paper search.
@@ -84,6 +86,7 @@ const agent = await createDeepAgent({
 
 // Main agent delegates: task(agent="researcher", instruction="Research AI trends")
 ```
+
 </typescript>
 </ex-custom-subagents>
 
@@ -101,12 +104,13 @@ agent = create_deep_agent(
             "description": "Deploy code to production",
             "system_prompt": "You deploy code after tests pass.",
             "tools": [run_tests, deploy_to_prod],
-            "interrupt_on": {"deploy_to_prod": True},  # Require approval
+            "interrupt_on": {"deploy_to_prod": True}, # Require approval
         }
     ],
-    checkpointer=MemorySaver()  # Required for interrupts
+    checkpointer=MemorySaver() # Required for interrupts
 )
-```
+
+```text
 </python>
 </ex-subagent-with-hitl>
 
@@ -121,6 +125,7 @@ Subagents are stateless - provide complete instructions in a single call.
 # CORRECT: Complete instructions upfront
 # task(agent='research', instruction='Find data on AI, save to /research/, return summary')
 ```
+
 </python>
 <typescript>
 Subagents are stateless - provide complete instructions in a single call.
@@ -131,7 +136,8 @@ Subagents are stateless - provide complete instructions in a single call.
 
 // CORRECT: Complete instructions upfront
 // task research: Find data on AI, save to /research/, return summary
-```
+
+```text
 </typescript>
 </fix-subagents-are-stateless>
 
@@ -151,6 +157,7 @@ agent = create_deep_agent(
     subagents=[{"name": "helper", "skills": ["/helper-skills/"], ...}]
 )
 ```
+
 </python>
 </fix-custom-subagents-dont-inherit-skills>
 
@@ -173,6 +180,7 @@ write_todos(todos: list[dict]) -> None
 ```
 
 Each todo item has:
+
 - `content`: Description of the task
 - `status`: One of `"pending"`, `"in_progress"`, `"completed"`
 </todolist-tool>
@@ -183,20 +191,27 @@ Invoke an agent that automatically creates a todo list for a multi-step task.
 ```python
 from deepagents import create_deep_agent
 
-agent = create_deep_agent()  # TodoListMiddleware included by default
+agent = create_deep_agent() # TodoListMiddleware included by default
 
-result = agent.invoke({
-    "messages": [{"role": "user", "content": "Create a REST API: design models, implement CRUD, add auth, write tests"}]
-}, config={"configurable": {"thread_id": "session-1"}})
+result = agent.invoke({ "messages": [{"role": "user", "content": "Create a REST API:
+design models, implement CRUD, add auth, write tests"}] }, config={"configurable":
+{"thread_id": "session-1"}})
 
-# Agent's planning via write_todos:
-# [
-#   {"content": "Design data models", "status": "in_progress"},
-#   {"content": "Implement CRUD endpoints", "status": "pending"},
-#   {"content": "Add authentication", "status": "pending"},
-#   {"content": "Write tests", "status": "pending"}
-# ]
-```
+## Agent's planning via write_todos
+
+## [
+
+## {"content": "Design data models", "status": "in_progress"}
+
+## {"content": "Implement CRUD endpoints", "status": "pending"}
+
+## {"content": "Add authentication", "status": "pending"}
+
+## {"content": "Write tests", "status": "pending"}
+
+## ]
+
+```text
 </python>
 <typescript>
 Invoke an agent that automatically creates a todo list for a multi-step task.
@@ -209,6 +224,7 @@ const result = await agent.invoke({
   messages: [{ role: "user", content: "Create a REST API: design models, implement CRUD, add auth, write tests" }]
 }, { configurable: { thread_id: "session-1" } });
 ```
+
 </typescript>
 </ex-todolist-usage>
 
@@ -218,11 +234,13 @@ Access the todo list from the agent's final state after invocation.
 ```python
 result = agent.invoke({...}, config={"configurable": {"thread_id": "session-1"}})
 
-# Access todo list from final state
+## Access todo list from final state
+
 todos = result.get("todos", [])
 for todo in todos:
     print(f"[{todo['status']}] {todo['content']}")
-```
+
+```text
 </python>
 </ex-access-todo-state>
 
@@ -237,12 +255,13 @@ agent.invoke({"messages": [...]})
 config = {"configurable": {"thread_id": "user-session"}}
 agent.invoke({"messages": [...]}, config=config)  # Todos preserved
 ```
+
 </python>
 </fix-todolist-requires-thread-id>
 
 ---
 
-## Human-in-the-Loop (Approval Workflows)
+### Human-in-the-Loop (Approval Workflows)
 
 <when-to-use-hitl>
 
@@ -262,13 +281,14 @@ from langgraph.checkpoint.memory import MemorySaver
 
 agent = create_deep_agent(
     interrupt_on={
-        "write_file": True,  # All decisions allowed
+        "write_file": True, # All decisions allowed
         "execute_sql": {"allowed_decisions": ["approve", "reject"]},
-        "read_file": False,  # No interrupts
+        "read_file": False, # No interrupts
     },
-    checkpointer=MemorySaver()  # REQUIRED for interrupts
+    checkpointer=MemorySaver() # REQUIRED for interrupts
 )
-```
+
+```text
 </python>
 <typescript>
 Configure which tools require human approval before execution.
@@ -285,6 +305,7 @@ const agent = await createDeepAgent({
   checkpointer: new MemorySaver()  // REQUIRED
 });
 ```
+
 </typescript>
 </ex-hitl-setup>
 
@@ -303,19 +324,24 @@ agent = create_deep_agent(
 
 config = {"configurable": {"thread_id": "session-1"}}
 
-# Step 1: Agent proposes write_file - execution pauses
+## Step 1: Agent proposes write_file - execution pauses
+
 result = agent.invoke({
     "messages": [{"role": "user", "content": "Write config to /prod.yaml"}]
 }, config=config)
 
-# Step 2: Check for interrupts
+## Step 2: Check for interrupts
+
 state = agent.get_state(config)
 if state.next:
     print(f"Pending action")
 
-# Step 3: Approve and resume
-result = agent.invoke(Command(resume={"decisions": [{"type": "approve"}]}), config=config)
-```
+## Step 3: Approve and resume
+
+result = agent.invoke(Command(resume={"decisions": [{"type": "approve"}]}),
+config=config)
+
+```text
 </python>
 <typescript>
 Complete workflow: trigger an interrupt, check state, approve action, and resume execution.
@@ -346,6 +372,7 @@ result = await agent.invoke(
   new Command({ resume: { decisions: [{ type: "approve" }] } }), config
 );
 ```
+
 </typescript>
 </ex-approval-workflow>
 
@@ -411,9 +438,11 @@ Checkpointer is required when using interrupt_on for HITL workflows.
 # WRONG
 agent = create_deep_agent(interrupt_on={"write_file": True})
 
-# CORRECT
+## CORRECT
+
 agent = create_deep_agent(interrupt_on={"write_file": True}, checkpointer=MemorySaver())
-```
+
+```text
 </python>
 <typescript>
 Checkpointer is required when using interruptOn for HITL workflows.
@@ -424,6 +453,7 @@ const agent = await createDeepAgent({ interruptOn: { write_file: true } });
 // CORRECT
 const agent = await createDeepAgent({ interruptOn: { write_file: true }, checkpointer: new MemorySaver() });
 ```
+
 </typescript>
 </fix-checkpointer-required>
 
@@ -434,12 +464,16 @@ A consistent thread_id is required to resume interrupted workflows.
 # WRONG: Can't resume without thread_id
 agent.invoke({"messages": [...]})
 
-# CORRECT
+## CORRECT
+
 config = {"configurable": {"thread_id": "session-1"}}
 agent.invoke({...}, config=config)
-# Resume with Command using same config
+
+## Resume with Command using same config
+
 agent.invoke(Command(resume={"decisions": [{"type": "approve"}]}), config=config)
-```
+
+```text
 </python>
 <typescript>
 A consistent thread_id is required to resume interrupted workflows.
@@ -453,6 +487,7 @@ await agent.invoke({ messages: [...] }, config);
 // Resume with Command using same config
 await agent.invoke(new Command({ resume: { decisions: [{ type: "approve" }] } }), config);
 ```
+
 </typescript>
 </fix-thread-id-required-for-resumption>
 

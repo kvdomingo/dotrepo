@@ -1,8 +1,10 @@
 # Open In Chat
 
-A dropdown menu for opening queries in various AI chat platforms including ChatGPT, Claude, T3, Scira, and v0.
+A dropdown menu for opening queries in various AI chat platforms including ChatGPT,
+Claude, T3, Scira, and v0.
 
-The `OpenIn` component provides a dropdown menu that allows users to open queries in different AI chat platforms with a single click.
+The `OpenIn` component provides a dropdown menu that allows users to open queries in
+different AI chat platforms with a single click.
 
 See `scripts/open-in-chat.tsx` for this example.
 
@@ -64,4 +66,5 @@ npx ai-elements@latest add open-in-chat
 
 ### `<OpenInItem />`, `<OpenInLabel />`, `<OpenInSeparator />`
 
-Additional composable components for custom dropdown menu items, labels, and separators that follow the same props pattern as their underlying radix-ui counterparts.
+Additional composable components for custom dropdown menu items, labels, and separators
+that follow the same props pattern as their underlying radix-ui counterparts.

@@ -23,6 +23,7 @@ st.dataframe(df)
 ```
 
 **Why st.connection:**
+
 - Automatic connection pooling
 - Built-in caching
 - Handles reconnection
@@ -30,13 +31,15 @@ st.dataframe(df)
 
 ## Caller's rights connection (Streamlit 1.53+)
 
-For apps running in Snowflake, use caller's rights to run queries with the viewer's permissions instead of the app owner's:
+For apps running in Snowflake, use caller's rights to run queries with the viewer's
+permissions instead of the app owner's:
 
 ```python
 conn = st.connection("snowflake", type="snowflake-callers-rights")
 ```
 
 This is useful when:
+
 - Different users should see different data based on their Snowflake roles
 - You want row-level security to apply based on the viewer
 - You don't want the app to have elevated permissions
@@ -61,7 +64,9 @@ df = conn.query("SELECT * FROM reference_data", ttl=3600)
 
 Store credentials in `.streamlit/secrets.toml` (never commit this file).
 
-**CRITICAL**: Derive the `account` and `host` values from the user's Snowflake CLI connection config. Run `snow connection list` and use the exact values. A wrong `account` will redirect to the wrong login page.
+**CRITICAL**: Derive the `account` and `host` values from the user's Snowflake CLI
+connection config. Run `snow connection list` and use the exact values. A wrong
+`account` will redirect to the wrong login page.
 
 ```toml
 # .streamlit/secrets.toml
@@ -76,7 +81,8 @@ schema = "your_schema"
 ```
 
 Add to `.gitignore`:
-```
+
+```text
 .streamlit/secrets.toml
 ```
 
@@ -168,11 +174,15 @@ if prompt := st.chat_input("Ask anything"):
     st.session_state.messages.append({"role": "assistant", "content": response})
 ```
 
-See `building-streamlit-chat-ui` for more chat patterns (avatars, suggestions, history management).
+See `building-streamlit-chat-ui` for more chat patterns (avatars, suggestions, history
+management).
 
 ## Python 3.12+ dependency caveat
 
-`streamlit[snowflake]` gates `snowflake-connector-python` on `python_version < "3.12"`. On Python 3.12+, the connector is silently skipped and you get `No module named 'snowflake'` at runtime. Always add `snowflake-connector-python>=3.3.0` as an explicit dependency in `pyproject.toml`:
+`streamlit[snowflake]` gates `snowflake-connector-python` on `python_version < "3.12"`.
+On Python 3.12+, the connector is silently skipped and you get
+`No module named 'snowflake'` at runtime. Always add `snowflake-connector-python>=3.3.0`
+as an explicit dependency in `pyproject.toml`:
 
 ```toml
 dependencies = [

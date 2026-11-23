@@ -5,11 +5,11 @@ triggers:
   - "uploading or downloading artifacts in Dagster Plus"
 ---
 
-# dg api artifact Reference
+## dg api artifact Reference
 
 Commands for uploading and downloading artifacts in Dagster Plus.
 
-## Reference Files Index
+### Reference Files Index
 
 <!-- BEGIN GENERATED INDEX -->
 

@@ -4,6 +4,6 @@ triggers:
   - "Looker BI dashboard assets"
 ---
 
-# dagster-looker
+## dagster-looker
 
-Docs: https://docs.dagster.io/integrations/libraries/looker
+Docs: <https://docs.dagster.io/integrations/libraries/looker>

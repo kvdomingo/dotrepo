@@ -1,12 +1,13 @@
 # Linked Stacks Reference
 
-Complete reference for linking Terraform Stacks together using published outputs and upstream inputs.
+Complete reference for linking Terraform Stacks together using published outputs and
+upstream inputs.
 
 ## Publish Output Block
 
 Exports outputs from a Stack for consumption by other Stacks (linked Stacks).
 
-###Syntax
+### Syntax
 
 ```hcl
 publish_output "<output_name>" {
@@ -27,7 +28,8 @@ Reference deployment outputs using: `deployment.<deployment_name>.<output_name>`
 
 ### Important Notes
 
-- Must apply the Stack's deployment configuration before downstream Stacks can reference outputs
+- Must apply the Stack's deployment configuration before downstream Stacks can reference
+  outputs
 - Published outputs create a snapshot that other Stacks can read
 - Changes to published outputs automatically trigger runs in downstream Stacks
 
@@ -111,7 +113,8 @@ upstream_input "<input_name>" {
 
 - **input_name** (label, required): Local name for this upstream input
 - **type** (required): Must be "stack"
-- **source** (required): Full Stack address in format: `app.terraform.io/<org>/<project>/<stack-name>`
+- **source** (required): Full Stack address in format:
+  `app.terraform.io/<org>/<project>/<stack-name>`
 
 ### Accessing Upstream Outputs
 
@@ -184,4 +187,6 @@ deployment "us_east_app" {
 
 ## Complete Working Example
 
-For a complete example showing full Stack configurations with all files (variables, providers, components, outputs, deployments) for both upstream and downstream Stacks, see the "Linked Stacks (Cross-Stack Dependencies)" section in `examples.md`.
+For a complete example showing full Stack configurations with all files (variables,
+providers, components, outputs, deployments) for both upstream and downstream Stacks,
+see the "Linked Stacks (Cross-Stack Dependencies)" section in `examples.md`.

@@ -108,6 +108,7 @@ locals {
 ### Provider Generation
 
 The provider block configures:
+
 - **region**: From region.hcl
 - **allowed_account_ids**: Prevents accidental deployment to wrong account
 - **assume_role**: Cross-account access via IAM role
@@ -127,6 +128,7 @@ remote_state {
 ```
 
 Key features:
+
 - **Environment isolation**: `state_bucket_suffix` creates separate buckets
 - **Unique keys**: `path_relative_to_include()` ensures unique state per unit
 - **Locking**: DynamoDB table prevents concurrent modifications

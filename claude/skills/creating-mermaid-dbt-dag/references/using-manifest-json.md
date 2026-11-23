@@ -1,6 +1,7 @@
 # Using manifest.json for Lineage Retrieval
 
-This is the **second fallback method** when MCP lineage tools are not available. Read and parse the `manifest.json` file directly to extract lineage information.
+This is the **second fallback method** when MCP lineage tools are not available. Read
+and parse the `manifest.json` file directly to extract lineage information.
 
 ## How to use
 
@@ -9,10 +10,12 @@ This is the **second fallback method** when MCP lineage tools are not available.
    - May also be in project root as `manifest.json`
 
 2. Read the manifest.json file:
-   - First check the file size - if it's very large (>10MB), you may need to use streaming or partial reads
+   - First check the file size - if it's very large (>10MB), you may need to use
+     streaming or partial reads
    - Look for the target model in the `nodes` section
 
 3. Extract lineage from the manifest structure:
+
    ```json
    {
      "nodes": {
@@ -30,7 +33,8 @@ This is the **second fallback method** when MCP lineage tools are not available.
 
 4. Build the lineage graph:
    - **Parents**: Found in the `depends_on.nodes` array
-   - **Children**: Search all nodes for ones that have this model in their `depends_on.nodes`
+   - **Children**: Search all nodes for ones that have this model in their
+     `depends_on.nodes`
 
 5. For each node in the lineage, extract:
    - `unique_id`
@@ -55,12 +59,15 @@ This is the **second fallback method** when MCP lineage tools are not available.
 ## When to use
 
 Use this method when:
+
 - Both `get_lineage_dev` and `get_lineage` MCP tools are NOT available
 - The manifest.json file exists and is reasonably sized (<10MB)
 - You need complete lineage information
 
 ## Tips
 
-- If the manifest is very large, consider reading it in chunks or using grep/search instead
-- If you only need a specific model's lineage, you can use Grep to find just that section
+- If the manifest is very large, consider reading it in chunks or using grep/search
+  instead
+- If you only need a specific model's lineage, you can use Grep to find just that
+  section
 - Check the manifest file size before attempting to read the entire file

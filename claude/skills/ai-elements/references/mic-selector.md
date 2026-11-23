@@ -1,8 +1,12 @@
 # Mic Selector
 
-A composable dropdown component for selecting audio input devices with permission handling and device change detection.
+A composable dropdown component for selecting audio input devices with permission
+handling and device change detection.
 
-The `MicSelector` component provides a flexible and composable interface for selecting microphone input devices. Built on shadcn/ui's Command and Popover components, it features automatic device detection, permission handling, dynamic device list updates, and intelligent device name parsing.
+The `MicSelector` component provides a flexible and composable interface for selecting
+microphone input devices. Built on shadcn/ui's Command and Popover components, it
+features automatic device detection, permission handling, dynamic device list updates,
+and intelligent device name parsing.
 
 See `scripts/mic-selector.tsx` for this example.
 
@@ -42,7 +46,8 @@ Root Popover component that provides context for all child components.
 
 ### `<MicSelectorTrigger />`
 
-Button that opens the microphone selector popover. Automatically tracks its width to match the popover content.
+Button that opens the microphone selector popover. Automatically tracks its width to
+match the popover content.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -75,12 +80,13 @@ Search input for filtering microphones.
 
 ### `<MicSelectorList />`
 
-Wrapper for the list of microphone items. Uses render props pattern to provide access to device data.
+Wrapper for the list of microphone items. Uses render props pattern to provide access to
+device data.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `(devices: MediaDeviceInfo[]) => ReactNode` | - | Render function that receives the array of available devices. |
-| `...props` | `Omit<React.ComponentProps<typeof CommandList>, ` | - | Any other props are spread to the CommandList component. |
+| `...props` | `Omit<React.ComponentProps<typeof CommandList>,` | - | Any other props are spread to the CommandList component. |
 
 ### `<MicSelectorEmpty />`
 
@@ -102,7 +108,8 @@ Selectable item representing a microphone.
 
 ### `<MicSelectorLabel />`
 
-Displays a formatted microphone label with intelligent device ID parsing. Automatically extracts and styles device IDs in the format (XXXX:XXXX).
+Displays a formatted microphone label with intelligent device ID parsing. Automatically
+extracts and styles device IDs in the format (XXXX:XXXX).
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -113,7 +120,8 @@ Displays a formatted microphone label with intelligent device ID parsing. Automa
 
 ### `useAudioDevices()`
 
-A custom hook for managing audio input devices. This hook is used internally by the `MicSelector` component but can also be used independently.
+A custom hook for managing audio input devices. This hook is used internally by the
+`MicSelector` component but can also be used independently.
 
 ```tsx
 import { useAudioDevices } from "@repo/elements/mic-selector";
@@ -153,12 +161,16 @@ export default function Example() {
 
 The component implements a two-stage permission approach:
 
-1. **Without Permission**: Initially loads devices without requesting permission. Device labels may show as generic names (e.g., "Microphone 1").
-2. **With Permission**: When the popover is opened and permission hasn't been granted, automatically requests microphone access and displays actual device names.
+1. **Without Permission**: Initially loads devices without requesting permission. Device
+   labels may show as generic names (e.g., "Microphone 1").
+2. **With Permission**: When the popover is opened and permission hasn't been granted,
+   automatically requests microphone access and displays actual device names.
 
 ### Device Label Parsing
 
-The `MicSelectorLabel` component intelligently parses device names that include hardware IDs in the format `(XXXX:XXXX)`. It splits the label into the device name and ID, styling the ID with muted text for better readability.
+The `MicSelectorLabel` component intelligently parses device names that include hardware
+IDs in the format `(XXXX:XXXX)`. It splits the label into the device name and ID,
+styling the ID with muted text for better readability.
 
 For example: `"MacBook Pro Microphone (1a2b:3c4d)"` becomes:
 
@@ -167,11 +179,13 @@ For example: `"MacBook Pro Microphone (1a2b:3c4d)"` becomes:
 
 ### Width Synchronization
 
-The `MicSelectorTrigger` uses a ResizeObserver to track its width and automatically synchronizes it with the `MicSelectorContent` popover width for a cohesive appearance.
+The `MicSelectorTrigger` uses a ResizeObserver to track its width and automatically
+synchronizes it with the `MicSelectorContent` popover width for a cohesive appearance.
 
 ### Device Change Detection
 
-The component listens for `devicechange` events (e.g., plugging/unplugging microphones) and automatically updates the device list in real-time.
+The component listens for `devicechange` events (e.g., plugging/unplugging microphones)
+and automatically updates the device list in real-time.
 
 ## Accessibility
 

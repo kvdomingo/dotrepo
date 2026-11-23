@@ -1,6 +1,7 @@
 # Planning dbt Models
 
-Before writing dbt models, you must make a plan. Start with the desired output and work backwards to identify the necessary inputs.
+Before writing dbt models, you must make a plan. Start with the desired output and work
+backwards to identify the necessary inputs.
 
 ## When to Use
 
@@ -13,7 +14,8 @@ Use this approach when:
 
 ### Step 1: Mock the final output
 
-Create a spreadsheet or markdown table with the **ideal output** you want to produce. Include:
+Create a spreadsheet or markdown table with the **ideal output** you want to produce.
+Include:
 
 - Primary key (or surrogate key if not possible)
 - Column names that match business requirements
@@ -33,7 +35,8 @@ _In practice, use `dbt_utils.generate_surrogate_key` for the surrogate key_
 
 ### Step 2: Mock the SQL query for this output
 
-Write pseudocode or actual SQL that would produce this table, even if you don't know what table you're selecting from yet:
+Write pseudocode or actual SQL that would produce this table, even if you don't know
+what table you're selecting from yet:
 
 ```sql
 select
@@ -45,7 +48,8 @@ from ???
 group by 1, 2
 ```
 
-**Key insight:** If you can't write the query logic, your output table structure needs refinement.
+**Key insight:** If you can't write the query logic, your output table structure needs
+refinement.
 
 ### Step 3: Identify gaps and iterate
 
@@ -58,7 +62,8 @@ As you write the query, you'll discover what the **upstream model** needs to pro
 - What about products with no transactions on a given day?
 - Do I need a running balance or just daily aggregates?
 
-**Example iteration:** Realized we need a running total, not a daily sum. This means we need window functions over transaction history, not a simple GROUP BY.
+**Example iteration:** Realized we need a running total, not a daily sum. This means we
+need window functions over transaction history, not a simple GROUP BY.
 
 ### Step 4: Mock the required upstream models
 
@@ -75,7 +80,8 @@ Based on your query needs, mock each table you're selecting from:
 
 ### Step 5: Update final model SQL based on new upstream structure
 
-Now write the query to produce your final output, selecting from the mocked upstream model:
+Now write the query to produce your final output, selecting from the mocked upstream
+model:
 
 ```sql
 with running_balance as (
@@ -121,7 +127,8 @@ This reveals we need:
 
 ### Step 6: Match with input data
 
-Now that you know what inputs you need, look at the actual resources available in your dbt project:
+Now that you know what inputs you need, look at the actual resources available in your
+dbt project:
 
 - What tables exist?
 - What grain are they at?
@@ -144,11 +151,13 @@ Don't wait to test edge cases:
 - What if a product has no transactions for several days?
 - How do you handle null transaction dates or quantities?
 
-Add unit tests for the planned models with mocked inputs from your identified dependencies. These tests should fail until the model has been correctly implemented.
+Add unit tests for the planned models with mocked inputs from your identified
+dependencies. These tests should fail until the model has been correctly implemented.
 
 ### Step 8: Implement the planned models
 
-Once you've worked backwards to existing models or source data, you can now implement with real code. Reuse existing models wherever possible.
+Once you've worked backwards to existing models or source data, you can now implement
+with real code. Reuse existing models wherever possible.
 
 Run the unit tests to ensure that the model matches the requirements.
 
@@ -186,7 +195,7 @@ One row per transaction with running balance
 2. Add window function for cumulative quantity on hand
 3. Filter to end-of-day balance per product
 
-## Unit tests 
+## Unit tests
 - Running balance correctly accumulates across multiple transactions for same product
 - End-of-day quantity reflects the last transaction when multiple occur on the same day
 - Value on hand equals quantity on hand multiplied by unit cost
@@ -194,14 +203,18 @@ One row per transaction with running balance
 
 ## Common Pitfalls
 
-**Starting to code before understanding the output**. Leads to multiple refactors and unclear model purposes
+**Starting to code before understanding the output**. Leads to multiple refactors and
+unclear model purposes
 
-**Not iterating on the mockup**. If you can't write the SQL, revise your output structure
+**Not iterating on the mockup**. If you can't write the SQL, revise your output
+structure
 
-**Forgetting about data quality**. Consider null handling, duplicates, and edge cases in your planning
+**Forgetting about data quality**. Consider null handling, duplicates, and edge cases in
+your planning
 
 ## Related Concepts
 
-- **Test-Driven Development (TDD)**: Similar philosophy of defining expected output first
+- **Test-Driven Development (TDD)**: Similar philosophy of defining expected output
+  first
 - **Kimball Methodology**: Start with business questions, work back to data requirements
 - **Dimensional Modeling**: Understanding fact/dimension grain before implementation

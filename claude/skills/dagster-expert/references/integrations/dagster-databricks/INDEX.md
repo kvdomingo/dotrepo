@@ -4,6 +4,6 @@ triggers:
   - "Spark-based data processing on Databricks"
 ---
 
-# dagster-databricks
+## dagster-databricks
 
-Docs: https://docs.dagster.io/integrations/libraries/databricks
+Docs: <https://docs.dagster.io/integrations/libraries/databricks>

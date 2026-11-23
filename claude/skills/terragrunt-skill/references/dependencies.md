@@ -1,12 +1,13 @@
 # Unit Interdependencies
 
-Units within a stack can depend on each other, creating a DAG (Directed Acyclic Graph) of resources.
+Units within a stack can depend on each other, creating a DAG (Directed Acyclic Graph)
+of resources.
 
 ## Dependency Patterns
 
 ### Fan-Out Pattern (EKS Example)
 
-```
+```text
 eks (core cluster)
 ├── eks-config (depends on eks)
 ├── karpenter (depends on eks)
@@ -15,7 +16,7 @@ eks (core cluster)
 
 ### Chain Pattern (Frontend Example)
 
-```
+```text
 s3 → cloudfront → route53
       ↑
      acm
@@ -23,7 +24,7 @@ s3 → cloudfront → route53
 
 ### Multiple Dependencies (CloudFront Example)
 
-```
+```text
 cloudfront
 ├── depends on acm (for SSL certificate)
 └── depends on s3 (for origin bucket)
@@ -203,11 +204,13 @@ terragrunt stack run apply --filter '.terragrunt-stack/karpenter...'
 
 ## Best Practices
 
-1. **Always provide mock outputs** - Required for plan/validate without real dependencies
+1. **Always provide mock outputs** - Required for plan/validate without real
+   dependencies
 2. **Use `enabled` for optional dependencies** - Don't fetch outputs for unused features
 3. **Use `skip_outputs` for conditional fetching** - Based on actual usage in inputs
 4. **Allow path overrides** - `try(values.X_path, "../default")` for flexibility
-5. **Document required outputs** - In mock_outputs, show what the dependency must provide
+5. **Document required outputs** - In mock_outputs, show what the dependency must
+   provide
 
 ## References
 

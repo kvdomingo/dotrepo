@@ -5,39 +5,47 @@
 [![OpenTofu](https://img.shields.io/badge/OpenTofu-1.6+-FFD814)](https://opentofu.org/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-Comprehensive Terraform and OpenTofu best practices skill for Claude Code. Get instant guidance on testing strategies, module patterns, CI/CD workflows, and production-ready infrastructure code.
+Comprehensive Terraform and OpenTofu best practices skill for Claude Code. Get instant
+guidance on testing strategies, module patterns, CI/CD workflows, and production-ready
+infrastructure code.
 
 ## What This Skill Provides
 
 🧪 **Testing Frameworks**
+
 - Decision matrix for choosing between native tests and Terratest
 - Testing strategy workflows (static → integration → E2E)
 - Real-world examples and patterns
 
 📦 **Module Development**
+
 - Structure and naming conventions
 - Versioning strategies
 - Public vs private module patterns
 
 🔄 **CI/CD Integration**
+
 - GitHub Actions workflows
 - GitLab CI examples
 - Cost optimization patterns
 - Compliance automation
 
 🔒 **Security & Compliance**
+
 - Trivy, Checkov integration
 - Policy-as-code patterns
 - Compliance scanning workflows
 
 📋 **Quick Reference**
+
 - Decision flowcharts
 - Common patterns (✅ DO vs ❌ DON'T)
 - Cheat sheets for rapid consultation
 
 ## Installation
 
-This plugin is distributed via Claude Code marketplace using `.claude-plugin/marketplace.json`.
+This plugin is distributed via Claude Code marketplace using
+`.claude-plugin/marketplace.json`.
 
 ### Claude Code (Recommended)
 
@@ -65,7 +73,8 @@ git clone git@github.com:antonbabenko/terraform-skill.git ~/.claude/skills/terra
 ### Verify Installation
 
 After installation, try:
-```
+
+```text
 "Create a Terraform module with testing for an S3 bucket"
 ```
 
@@ -90,6 +99,7 @@ Claude will automatically use the skill when working with Terraform/OpenTofu cod
 ### Testing Strategy Framework
 
 Decision matrices for:
+
 - When to use native tests (Terraform 1.6+)
 - When to use Terratest (Go-based)
 - Multi-environment testing patterns
@@ -123,6 +133,7 @@ Decision matrices for:
 ### Common Patterns & Anti-patterns
 
 Side-by-side ✅ DO vs ❌ DON'T examples for:
+
 - Variable naming
 - Resource naming
 - Module composition
@@ -132,19 +143,22 @@ Side-by-side ✅ DO vs ❌ DON'T examples for:
 ## Why This Skill?
 
 **Based on Production Experience:**
-- Patterns from [terraform-best-practices.com](https://www.terraform-best-practices.com/)
+
+- Patterns from
+  [terraform-best-practices.com](https://www.terraform-best-practices.com/)
 - Community-tested approaches from terraform-aws-modules
 - AWS Hero expertise in enterprise IaC
 - Real-world usage across 100+ modules
 
 **Version-Specific Guidance:**
+
 - Terraform 1.0+ features
 - OpenTofu 1.6+ compatibility
 - Native test framework (1.6+)
 - Current tooling ecosystem (2024-2026)
 
-**Decision Frameworks:**
-Not just "what to do" but "when and why" - helping you make informed architecture decisions.
+**Decision Frameworks:** Not just "what to do" but "when and why" - helping you make
+informed architecture decisions.
 
 ## Requirements
 
@@ -155,6 +169,7 @@ Not just "what to do" but "when and why" - helping you make informed architectur
 ## Contributing
 
 See [CLAUDE.md](CLAUDE.md) for:
+
 - Skill development guidelines
 - Content structure philosophy
 - How to propose improvements
@@ -179,23 +194,34 @@ Releases are created automatically when changes are pushed to master.
 ## Related Resources
 
 ### Official Documentation
-- [Terraform Language](https://developer.hashicorp.com/terraform/docs) - HashiCorp official docs
-- [Terraform Testing](https://developer.hashicorp.com/terraform/language/tests) - Native test framework
+
+- [Terraform Language](https://developer.hashicorp.com/terraform/docs) - HashiCorp
+  official docs
+- [Terraform Testing](https://developer.hashicorp.com/terraform/language/tests) - Native
+  test framework
 - [OpenTofu Documentation](https://opentofu.org/docs/) - OpenTofu official docs
-- [HashiCorp Best Practices](https://developer.hashicorp.com/terraform/cloud-docs/recommended-practices) - Cloud best practices
+- [HashiCorp Best Practices](https://developer.hashicorp.com/terraform/cloud-docs/recommended-practices) -
+  Cloud best practices
 
 ### Community Resources
+
 - [Awesome Terraform](https://github.com/shuaibiyy/awesome-tf)
-- [Terraform Best Practices](https://terraform-best-practices.com) - Comprehensive guide (base for this skill)
-- [terraform-aws-modules](https://github.com/terraform-aws-modules) - Production-grade AWS modules
+- [Terraform Best Practices](https://terraform-best-practices.com) - Comprehensive guide
+  (base for this skill)
+- [terraform-aws-modules](https://github.com/terraform-aws-modules) - Production-grade
+  AWS modules
 - [Terratest](https://terratest.gruntwork.io/docs/) - Go testing framework for Terraform
 - [Google Cloud Best Practices](https://docs.cloud.google.com/docs/terraform/best-practices/general-style-structure)
 - [AWS Terraform Best Practices](https://docs.aws.amazon.com/prescriptive-guidance/latest/terraform-aws-provider-best-practices/introduction.html)
 
 ### Development Tools
-- [pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) - Pre-commit hooks for Terraform
-- [terraform-docs](https://terraform-docs.io/) - Generate documentation from Terraform modules
-- [terraform-switcher](https://github.com/warrensbox/terraform-switcher) - Terraform version manager
+
+- [pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) -
+  Pre-commit hooks for Terraform
+- [terraform-docs](https://terraform-docs.io/) - Generate documentation from Terraform
+  modules
+- [terraform-switcher](https://github.com/warrensbox/terraform-switcher) - Terraform
+  version manager
 - [TFLint](https://github.com/terraform-linters/tflint) - Terraform linter
 - [Trivy](https://github.com/aquasecurity/trivy) - Security scanner for IaC
 
@@ -204,7 +230,8 @@ Releases are created automatically when changes are pushed to master.
 **License:** Apache 2.0 - see [LICENSE](LICENSE)
 
 If you create derivative works or skills based on this skill, please include:
-```
+
+```text
 Based on terraform-skill by Anton Babenko
 https://github.com/antonbabenko/terraform-skill
 terraform-best-practices.com | Compliance.tf

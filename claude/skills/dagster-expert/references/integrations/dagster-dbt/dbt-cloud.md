@@ -4,12 +4,12 @@ triggers:
   - "integrating dbt Cloud with Dagster"
 ---
 
-# dbt Cloud Integration
+## dbt Cloud Integration
 
-The dagster-dbt library provides integration with dbt Cloud via the v2 API (recommended) for
-projects hosted on dbt Cloud.
+The dagster-dbt library provides integration with dbt Cloud via the v2 API (recommended)
+for projects hosted on dbt Cloud.
 
-## When to Use
+### When to Use
 
 Use the dbt Cloud integration when:
 
@@ -17,18 +17,20 @@ Use the dbt Cloud integration when:
 - You want to trigger dbt Cloud jobs from Dagster
 - You want to import dbt Cloud job metadata into Dagster as assets
 
-For dbt Core projects (self-hosted), use the [Component-Based](component-based-integration.md) or
-[Pythonic](pythonic-integration.md) integration instead.
+For dbt Core projects (self-hosted), use the
+[Component-Based](component-based-integration.md) or [Pythonic](pythonic-integration.md)
+integration instead.
 
-## Key Components
+### Key Components
 
 - **`DbtCloudWorkspace`**: Resource for accessing a dbt Cloud workspace
 - **`DbtCloudCredentials`**: Authentication credentials (account_id, token, access_url)
 - **`dbt_cloud_assets`**: Decorator for defining assets from a dbt Cloud job
 - **`load_dbt_cloud_asset_specs()`**: Load asset specs from dbt Cloud job
-- **`build_dbt_cloud_polling_sensor()`**: Create a sensor that polls for dbt Cloud job completion
+- **`build_dbt_cloud_polling_sensor()`**: Create a sensor that polls for dbt Cloud job
+  completion
 
-## Basic Setup
+### Basic Setup
 
 ```python
 import dagster as dg
@@ -62,7 +64,7 @@ defs = dg.Definitions(
 )
 ```
 
-## Features
+### Features
 
 The dbt Cloud integration:
 

@@ -1,8 +1,12 @@
 # Task
 
-A collapsible task list component for displaying AI workflow progress, with status indicators and optional descriptions.
+A collapsible task list component for displaying AI workflow progress, with status
+indicators and optional descriptions.
 
-The `Task` component provides a structured way to display task lists or workflow progress with collapsible details, status indicators, and progress tracking. It consists of a main `Task` container with `TaskTrigger` for the clickable header and `TaskContent` for the collapsible content area.
+The `Task` component provides a structured way to display task lists or workflow
+progress with collapsible details, status indicators, and progress tracking. It consists
+of a main `Task` container with `TaskTrigger` for the clickable header and `TaskContent`
+for the collapsible content area.
 
 See `scripts/task.tsx` for this example.
 
@@ -14,7 +18,8 @@ npx ai-elements@latest add task
 
 ## Usage with AI SDK
 
-Build a mock async programming agent using [`experimental_generateObject`](/docs/reference/ai-sdk-ui/use-object).
+Build a mock async programming agent using
+[`experimental_generateObject`](/docs/reference/ai-sdk-ui/use-object).
 
 Add the following component to your frontend:
 

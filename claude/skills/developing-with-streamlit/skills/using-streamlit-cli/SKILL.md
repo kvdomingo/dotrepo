@@ -5,7 +5,8 @@ description: Documents Streamlit CLI commands for running apps, managing configu
 
 # Using the Streamlit CLI
 
-The Streamlit CLI is the primary tool for running Streamlit applications and managing configuration. This skill covers all essential commands and configuration options.
+The Streamlit CLI is the primary tool for running Streamlit applications and managing
+configuration. This skill covers all essential commands and configuration options.
 
 ## Running Streamlit apps
 
@@ -42,7 +43,8 @@ python -m streamlit run app.py
 
 ### Running with `uv` (recommended)
 
-Use `uv run` to run Streamlit in a virtual environment with automatic dependency management:
+Use `uv run` to run Streamlit in a virtual environment with automatic dependency
+management:
 
 ```bash
 # Run with uv (automatically uses/creates virtual environment)
@@ -56,6 +58,7 @@ uv run streamlit run app.py -- arg1 arg2
 ```
 
 Using `uv run` is the recommended approach because it:
+
 - Automatically manages virtual environments
 - Resolves and installs dependencies from `pyproject.toml`
 - Ensures reproducible environments across machines
@@ -63,9 +66,12 @@ Using `uv run` is the recommended approach because it:
 
 ## Setting configuration with `streamlit run`
 
-Configuration options follow the pattern `--<section>.<option>=<value>` and must come after the script name.
+Configuration options follow the pattern `--<section>.<option>=<value>` and must come
+after the script name.
 
-> **Recommendation:** For persistent configuration, use `.streamlit/config.toml` in your project directory instead of command-line flags. This keeps your run command simple and makes configuration easier to manage and share with your team.
+> **Recommendation:** For persistent configuration, use `.streamlit/config.toml` in your
+> project directory instead of command-line flags. This keeps your run command simple
+> and makes configuration easier to manage and share with your team.
 
 ### Examples
 
@@ -160,6 +166,9 @@ Configuration can be set in multiple places. Order of precedence (highest to low
 
 ## References
 
-- [Run your app](https://docs.streamlit.io/develop/concepts/architecture/run-your-app) - Concepts and methods for running Streamlit apps
-- [config.toml](https://docs.streamlit.io/develop/api-reference/configuration/config.toml) - Complete configuration options reference
-- [CLI reference](https://docs.streamlit.io/develop/api-reference/cli) - Full CLI command documentation
+- [Run your app](https://docs.streamlit.io/develop/concepts/architecture/run-your-app) -
+  Concepts and methods for running Streamlit apps
+- [config.toml](https://docs.streamlit.io/develop/api-reference/configuration/config.toml) -
+  Complete configuration options reference
+- [CLI reference](https://docs.streamlit.io/develop/api-reference/cli) - Full CLI
+  command documentation

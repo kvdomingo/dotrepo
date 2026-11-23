@@ -4,7 +4,7 @@
 
 Recommended AWS account structure:
 
-```
+```text
 Organization
 ├── Management Account (root)
 ├── Security Account
@@ -19,7 +19,7 @@ Organization
 
 ## Live Repository Structure
 
-```
+```text
 infrastructure-live/
 ├── root.hcl
 ├── setup-state-backend.sh
@@ -107,6 +107,7 @@ bucket = format("tfstate-%s%s-%s",
 ```
 
 Results in:
+
 - `tfstate-myproject-nonprod-staging-us-east-1`
 - `tfstate-myproject-prod-us-east-1`
 
@@ -173,7 +174,8 @@ unit "route53" {
 }
 ```
 
-The root.hcl generates the cross-account provider automatically when `dns_account_id` is set.
+The root.hcl generates the cross-account provider automatically when `dns_account_id` is
+set.
 
 ## Deployment Order
 

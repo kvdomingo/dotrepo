@@ -5,11 +5,13 @@ description: "**[REQUIRED]** Use for ALL Streamlit tasks: creating, editing, deb
 
 # Developing with Streamlit
 
-This is a **routing skill** that directs you to specialized sub-skills for Streamlit development.
+This is a **routing skill** that directs you to specialized sub-skills for Streamlit
+development.
 
 ## When to Use
 
 Invoke this skill when the user's request involves:
+
 - Creating a new Streamlit app
 - Editing or modifying an existing Streamlit app
 - Debugging Streamlit issues (errors, session state bugs, performance problems)
@@ -19,11 +21,13 @@ Invoke this skill when the user's request involves:
 - Styling widgets (button colors, backgrounds, CSS customization)
 - Any question about Streamlit widgets, layouts, or components
 
-**Trigger phrases:** "streamlit", "st.", "dashboard", "app.py", "beautify app", "make it look better", "style", "CSS", "color", "background", "theme", "button", "slow rerun", "session state", "performance", "faster", "cache", "deploy"
+**Trigger phrases:** "streamlit", "st.", "dashboard", "app.py", "beautify app", "make it
+look better", "style", "CSS", "color", "background", "theme", "button", "slow rerun",
+"session state", "performance", "faster", "cache", "deploy"
 
 ## Workflow
 
-```
+```text
 Step 1: Locate the Streamlit source code
     ↓
 Step 2: Identify task type and load appropriate sub-skill(s)
@@ -35,20 +39,24 @@ Step 4: Check if app is running and offer to run it
 
 ### Step 1: Locate the Streamlit Source Code (if needed)
 
-**Goal:** Identify the app file(s) to edit. **Skip this step if already clear from context.**
+**Goal:** Identify the app file(s) to edit.
+**Skip this step if already clear from context.**
 
 **When to skip:**
+
 - User mentioned a specific file path (e.g., "edit `src/app.py`")
 - User has file(s) already in conversation context
 - Working directory has an obvious single entry point (`app.py`, `streamlit_app.py`)
 
 **When to search:**
+
 - User says "my streamlit app" without specifying which file
 - Multiple Python files exist and it's unclear which is the entry point
 
 **If searching is needed:**
 
 1. **Quick scan** for Streamlit files:
+
    ```bash
    find . -name "*.py" -type f | xargs grep -l "import streamlit\|from streamlit" 2>/dev/null | head -10
    ```
@@ -58,14 +66,17 @@ Step 4: Check if app is running and offer to run it
    - `app.py` at root → likely entry point
    - File using `st.navigation` → entry point for multi-page apps
    - Single `.py` file at root with streamlit import → entry point
-   - Files in `pages/` or `app_pages/` subdirectory → **NOT entry points** (these are sub-pages)
+   - Files in `pages/` or `app_pages/` subdirectory → **NOT entry points** (these are
+     sub-pages)
 
 3. **If entry point is obvious** → use it, no confirmation needed
 
    Example: Found `streamlit_app.py` and `pages/metrics.py` → use `streamlit_app.py`
 
-4. **Only ask if genuinely ambiguous** (e.g., multiple root-level candidates, none named `streamlit_app.py`):
-   ```
+4. **Only ask if genuinely ambiguous** (e.g., multiple root-level candidates, none named
+   `streamlit_app.py`):
+
+   ```text
    Found multiple potential entry points:
    - dashboard.py
    - main.py
@@ -79,7 +90,8 @@ Step 4: Check if app is running and offer to run it
 
 **Goal:** Determine what the user needs and load the appropriate guidance.
 
-Use this routing table to select sub-skill(s). **Always read the sub-skill file** before making changes:
+Use this routing table to select sub-skill(s). **Always read the sub-skill file** before
+making changes:
 
 | User Need | Sub-skill to Read |
 |-----------|-------------------|
@@ -105,42 +117,61 @@ Use this routing table to select sub-skill(s). **Always read the sub-skill file*
 
 **Fallback — "this widget doesn't exist in Streamlit":**
 
-If the user asks for a UI element or interaction that **has never been part of Streamlit's API** and cannot be built with any combination of native widgets (e.g., drag-and-drop, canvas drawing, custom interactive visualizations), **route to the CCv2 sub-skill** (`skills/building-streamlit-custom-components-v2/SKILL.md`). **Do not** route to CCv2 for features that exist in newer Streamlit versions (e.g., `st.connection`, `st.segmented_control`) — suggest upgrading instead.
+If the user asks for a UI element or interaction that
+**has never been part of Streamlit's API** and cannot be built with any combination of
+native widgets (e.g., drag-and-drop, canvas drawing, custom interactive visualizations),
+**route to the CCv2 sub-skill**
+(`skills/building-streamlit-custom-components-v2/SKILL.md`). **Do not** route to CCv2
+for features that exist in newer Streamlit versions (e.g., `st.connection`,
+`st.segmented_control`) — suggest upgrading instead.
 
 **Common combinations:**
 
 For **beautifying/improving an app**, read in order:
+
 1. `skills/improving-streamlit-design/SKILL.md`
 2. `skills/using-streamlit-layouts/SKILL.md`
 3. `skills/choosing-streamlit-selection-widgets/SKILL.md`
 
 For **building a dashboard**, read:
+
 1. `skills/building-streamlit-dashboards/SKILL.md`
 2. `skills/displaying-streamlit-data/SKILL.md`
 
 **IMPORTANT - Use templates:**
 
-When creating a **new dashboard app**, prefer starting from a template in `templates/apps/`:
+When creating a **new dashboard app**, prefer starting from a template in
+`templates/apps/`:
+
 - If a template closely matches the request, copy it and adapt:
-  - `dashboard-metrics` / `dashboard-metrics-snowflake` — KPI cards with time-series charts
+  - `dashboard-metrics` / `dashboard-metrics-snowflake` — KPI cards with time-series
+    charts
   - `dashboard-companies` — company/entity comparison
   - `dashboard-compute` / `dashboard-compute-snowflake` — resource/credit monitoring
   - `dashboard-feature-usage` — feature adoption tracking
   - `dashboard-seattle-weather` — public dataset exploration (local only)
-  - `dashboard-stock-peers` / `dashboard-stock-peers-snowflake` — financial peer analysis
-- If no template is a close match, start from scratch but borrow relevant patterns from the templates (e.g., caching with `@st.cache_data`, `filter_by_time_range()`, `st.set_page_config()`, chart utilities, layout structure)
+  - `dashboard-stock-peers` / `dashboard-stock-peers-snowflake` — financial peer
+    analysis
+- If no template is a close match, start from scratch but borrow relevant patterns from
+  the templates (e.g., caching with `@st.cache_data`, `filter_by_time_range()`,
+  `st.set_page_config()`, chart utilities, layout structure)
 - See `templates/apps/README.md` for template descriptions
 
 When **editing an existing app**, use templates as reference for best practices:
-- Check `templates/apps/` for caching patterns, layout structure, and Snowflake integration
+
+- Check `templates/apps/` for caching patterns, layout structure, and Snowflake
+  integration
 - Apply consistent patterns from templates to improve the existing code
 
 When applying a **custom theme**, use a template from `templates/themes/`:
-- Copy a theme directory (snowflake, dracula, nord, stripe, solarized-light, spotify, github, minimal)
+
+- Copy a theme directory (snowflake, dracula, nord, stripe, solarized-light, spotify,
+  github, minimal)
 - Themes use Google Fonts for easy setup
 - See `templates/themes/README.md` for theme previews
 
 For **performance optimization**, read:
+
 1. `skills/optimizing-streamlit-performance/SKILL.md`
 
 ### Step 3: Apply Guidance to Edit Code
@@ -160,6 +191,7 @@ For **performance optimization**, read:
 **Actions:**
 
 1. **Check** for running Streamlit apps on ports 850*:
+
    ```bash
    lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | grep -i python | awk '{print $2, $9}' | grep ':85' || echo "No Streamlit apps detected on ports 850*"
    ```
@@ -167,7 +199,8 @@ For **performance optimization**, read:
 2. **Present** findings to user:
 
    **If app is running:**
-   ```
+
+   ```text
    Found Streamlit app running:
    - PID: [pid] at http://localhost:[port]
 
@@ -175,7 +208,8 @@ For **performance optimization**, read:
    ```
 
    **If no app is running:**
-   ```
+
+   ```text
    No Streamlit app detected on ports 850*.
 
    Would you like me to run the app? I can start it with:
@@ -183,13 +217,15 @@ For **performance optimization**, read:
    ```
 
 3. **If user wants to run the app**, start it:
+
    ```bash
    streamlit run [path/to/app.py] --server.port 8501
    ```
 
 ## Stopping Points
 
-- **Step 2**: If multiple sub-skills seem relevant, ask user which aspect to focus on first
+- **Step 2**: If multiple sub-skills seem relevant, ask user which aspect to focus on
+  first
 - **Step 4**: Ask before starting the Streamlit app
 
 ## Skill map

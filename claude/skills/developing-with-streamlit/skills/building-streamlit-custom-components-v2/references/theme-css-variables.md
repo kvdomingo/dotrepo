@@ -1,8 +1,12 @@
 ## Streamlit theme CSS variables for CCv2 components (`--st-*`)
 
-Streamlit injects a set of `--st-*` CSS custom properties into CCv2 components so your component can match the app’s active theme from within your component CSS (including when `isolate_styles=True` and you’re rendering inside a shadow root).
+Streamlit injects a set of `--st-*` CSS custom properties into CCv2 components so your
+component can match the app’s active theme from within your component CSS (including
+when `isolate_styles=True` and you’re rendering inside a shadow root).
 
-**Recommendation:** Prefer `var(--st-…)` over hard-coded colors and sizes. These variables automatically adapt to a user's current Streamlit theme (light/dark/custom), so most components **do not** need separate “dark mode vs light mode” styling.
+**Recommendation:** Prefer `var(--st-…)` over hard-coded colors and sizes. These
+variables automatically adapt to a user's current Streamlit theme (light/dark/custom),
+so most components **do not** need separate “dark mode vs light mode” styling.
 
 ## Contents
 
@@ -42,13 +46,16 @@ These variables originate from Streamlit’s theme object and are serialized int
 - **Strings**: passed through (e.g. `--st-primary-color: #ff4b4b`).
 - **Numbers**: stringified (e.g. `--st-base-font-weight: 400`).
 - **Booleans**: become `"1"` or `"0"` (e.g. `--st-link-underline`).
-- **Arrays**: become a comma-joined string (e.g. `--st-heading-font-sizes: 2.75rem,2.25rem,...`).
+- **Arrays**: become a comma-joined string (e.g.
+  `--st-heading-font-sizes: 2.75rem,2.25rem,...`).
   - If you need individual items in JS, split on `","`.
-- **Missing values (`null` / `undefined`)**: become `unset` so consumers fall back to initial/inherited CSS behavior.
+- **Missing values (`null` / `undefined`)**: become `unset` so consumers fall back to
+  initial/inherited CSS behavior.
 
 ### Cheat sheet: the 90% variables (intent → `--st-*`)
 
-Use this section as your starting point. It covers what most components need most of the time.
+Use this section as your starting point. It covers what most components need most of the
+time.
 
 | Intent                    | Variables                                                              |
 | ------------------------- | ---------------------------------------------------------------------- |
@@ -160,7 +167,8 @@ export default function (component) {
 
 ### Semantic/status palette
 
-These are best for status UI (badges, alerts, validation messages), not for primary layout surfaces.
+These are best for status UI (badges, alerts, validation messages), not for primary
+layout surfaces.
 
 Each “family” typically comes in three variants:
 

@@ -4,6 +4,6 @@ triggers:
   - "log management with Papertrail"
 ---
 
-# dagster-papertrail
+## dagster-papertrail
 
-Docs: https://docs.dagster.io/integrations/libraries/papertrail
+Docs: <https://docs.dagster.io/integrations/libraries/papertrail>

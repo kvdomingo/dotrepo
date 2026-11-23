@@ -2,9 +2,9 @@
 
 Customizable edge components for React Flow canvases with animated and temporary states.
 
-The `Edge` component provides two pre-styled edge types for React Flow canvases: `Temporary` for dashed temporary connections and `Animated` for connections with animated indicators.
-
-
+The `Edge` component provides two pre-styled edge types for React Flow canvases:
+`Temporary` for dashed temporary connections and `Animated` for connections with
+animated indicators.
 
 ## Installation
 
@@ -27,11 +27,13 @@ npx ai-elements@latest add edge
 
 ### `Edge.Temporary`
 
-A dashed edge style for temporary or preview connections. Uses a simple Bezier path with a dashed stroke pattern.
+A dashed edge style for temporary or preview connections. Uses a simple Bezier path with
+a dashed stroke pattern.
 
 ### `Edge.Animated`
 
-A solid edge with an animated circle that moves along the path. The animation repeats indefinitely with a 2-second duration, providing visual feedback for active connections.
+A solid edge with an animated circle that moves along the path. The animation repeats
+indefinitely with a 2-second duration, providing visual feedback for active connections.
 
 ## Props
 

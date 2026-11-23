@@ -2,7 +2,7 @@
 
 ## Directory Layout
 
-```
+```text
 infrastructure-catalog/
 ├── units/                      # Terragrunt units (building blocks)
 │   ├── acm/
@@ -31,6 +31,7 @@ infrastructure-catalog/
 ## Units
 
 Units are the building blocks of your infrastructure catalog. Each unit:
+
 - Wraps a single OpenTofu/Terraform module
 - Receives configuration through `values.xxx`
 - Declares dependencies on other units

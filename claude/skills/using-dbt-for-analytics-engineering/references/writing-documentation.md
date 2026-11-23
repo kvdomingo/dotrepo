@@ -1,6 +1,7 @@
 # Writing project documentation
 
-Never generate documentation which simply restates the entity's name. Describe **why, not just what**.
+Never generate documentation which simply restates the entity's name. Describe
+**why, not just what**.
 
 Inspect the data before writing documentation about it, using discovering-data.
 
@@ -16,7 +17,7 @@ models:
     description: All customers who are active
 ```
 
-Good: 
+Good:
 
 ```yml
 models:
@@ -26,14 +27,15 @@ models:
 
 ## Column level
 
-Calculated fields should include a brief description of the transformation and its purpose.
+Calculated fields should include a brief description of the transformation and its
+purpose.
 
 Bad:
 
 ```yml
-models: 
+models:
   - name: customers
-    columns: 
+    columns:
       - name: customer_id
         description: The customer's identification number
 ```
@@ -41,9 +43,9 @@ models:
 Good:
 
 ```yml
-models: 
+models:
   - name: customers
-    columns: 
+    columns:
       - name: customer_id
         description: Users older than 2020-02-16 have `v1_` prefixed to their customer ID due to the platform migration.
 ```

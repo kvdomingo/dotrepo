@@ -3,7 +3,8 @@
 > **Part of:** [terraform-skill](../SKILL.md)
 > **Purpose:** CI/CD integration patterns for Terraform/OpenTofu
 
-This document provides detailed CI/CD workflow templates and optimization strategies for infrastructure-as-code pipelines.
+This document provides detailed CI/CD workflow templates and optimization strategies for
+infrastructure-as-code pipelines.
 
 ---
 
@@ -398,7 +399,8 @@ security-scan:
 
 ## Atlantis Integration
 
-[Atlantis](https://www.runatlantis.io/) provides Terraform automation via pull request comments.
+[Atlantis](https://www.runatlantis.io/) provides Terraform automation via pull request
+comments.
 
 ### atlantis.yaml
 

@@ -4,12 +4,12 @@ triggers:
   - "using @dbt_assets decorator for programmatic dbt integration"
 ---
 
-# Pythonic Integration
+## Pythonic Integration
 
-The Pythonic approach uses the `@dbt_assets` decorator to define dbt assets programmatically. This
-provides maximum flexibility for complex customization scenarios.
+The Pythonic approach uses the `@dbt_assets` decorator to define dbt assets
+programmatically. This provides maximum flexibility for complex customization scenarios.
 
-## Overview
+### Overview
 
 Key classes:
 
@@ -18,7 +18,7 @@ Key classes:
 - **`DbtProject`**: Represents a dbt project and manages manifest compilation
 - **`DagsterDbtTranslator`**: Customizes how dbt nodes map to Dagster assets
 
-## Basic Setup
+### Basic Setup
 
 ```python
 import dagster as dg
@@ -41,26 +41,27 @@ def my_dbt_assets(context: dg.AssetExecutionContext, dbt: DbtCliResource):
 defs = dg.Definitions(assets=[my_dbt_assets], resources={"dbt": dbt_resource})
 ```
 
-## Manifest Management
+### Manifest Management
 
 The dbt manifest can be generated at runtime (development) or build time (production).
 
-### Runtime Compilation (Development)
+#### Runtime Compilation (Development)
 
-`DbtProject.prepare_if_dev()` automatically compiles the manifest during local development:
+`DbtProject.prepare_if_dev()` automatically compiles the manifest during local
+development:
 
 ```python nocheck
 my_dbt_project = DbtProject(project_dir="path/to/dbt_project")
 my_dbt_project.prepare_if_dev()  # Runs dbt deps + dbt parse if needed
 ```
 
-### Build-Time Compilation (Production)
+#### Build-Time Compilation (Production)
 
-For production deployments, precompile the manifest in CI/CD to avoid recompilation overhead. The
-manifest at `DbtProject.manifest_path` (typically `target/manifest.json`) should be included in your
-deployed package.
+For production deployments, precompile the manifest in CI/CD to avoid recompilation
+overhead. The manifest at `DbtProject.manifest_path` (typically `target/manifest.json`)
+should be included in your deployed package.
 
-## Selecting Models
+### Selecting Models
 
 Use dbt selection syntax to filter which models are included:
 
@@ -74,11 +75,12 @@ def my_dbt_assets(context, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 ```
 
-## Translation and Customization
+### Translation and Customization
 
-### Using DagsterDbtTranslator
+#### Using DagsterDbtTranslator
 
-Create a custom translator by subclassing `DagsterDbtTranslator` and overriding `get_asset_spec()`:
+Create a custom translator by subclassing `DagsterDbtTranslator` and overriding
+`get_asset_spec()`:
 
 ```python nocheck
 from collections.abc import Mapping
@@ -111,10 +113,10 @@ def my_dbt_assets(context, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 ```
 
-The `get_asset_spec()` method is called once per dbt node and should return a complete `AssetSpec`
-describing that node.
+The `get_asset_spec()` method is called once per dbt node and should return a complete
+`AssetSpec` describing that node.
 
-### dbt Meta Config
+#### dbt Meta Config
 
 Define custom metadata in your dbt project files that can be consumed by your custom
 `get_asset_spec()` implementation:
@@ -128,7 +130,7 @@ models:
 
 Access this metadata via the manifest in your translator's `get_asset_spec()` method.
 
-## Incremental Models and Partitioning
+### Incremental Models and Partitioning
 
 To partition incremental dbt models:
 
@@ -175,7 +177,7 @@ where order_date >= '{{ var('min_date') }}' and order_date <= '{{ var('max_date'
 For multiple partitions definitions, create separate `@dbt_assets` definitions and use
 `select`/`exclude` to filter models for each.
 
-## Metadata
+### Metadata
 
 Enable automatic metadata fetching by chaining methods on the event iterator:
 
@@ -191,20 +193,22 @@ def my_dbt_assets(context, dbt: DbtCliResource):
 ```
 
 - `fetch_row_counts()`: Fetch row counts for tables
-- `fetch_column_metadata()`: Fetch column schema and lineage (extracted via sqlglot parsing)
+- `fetch_column_metadata()`: Fetch column schema and lineage (extracted via sqlglot
+  parsing)
 
 Both metadata types are fetched in parallel during dbt execution.
 
-## Asset Checks
+### Asset Checks
 
-See [Asset Checks](asset-checks.md) for details on how dbt tests are loaded as Dagster asset checks.
+See [Asset Checks](asset-checks.md) for details on how dbt tests are loaded as Dagster
+asset checks.
 
-## Dependencies
+### Dependencies
 
-See [Dependencies](dependencies.md) for details on how Dagster parses dbt project dependencies and
-patterns for defining additional dependencies.
+See [Dependencies](dependencies.md) for details on how Dagster parses dbt project
+dependencies and patterns for defining additional dependencies.
 
-### Referencing dbt Models in Other Assets
+#### Referencing dbt Models in Other Assets
 
 Use `get_asset_key_for_model()` to get asset keys for dbt models:
 
@@ -219,9 +223,9 @@ def export_customers():
     pass
 ```
 
-## Scheduling
+### Scheduling
 
-### dbt-Only Jobs
+#### dbt-Only Jobs
 
 Use `build_schedule_from_dbt_selection()` for jobs that only materialize dbt assets:
 
@@ -236,10 +240,10 @@ daily_dbt_schedule = build_schedule_from_dbt_selection(
 )
 ```
 
-### Mixed Jobs (dbt + Non-dbt Assets)
+#### Mixed Jobs (dbt + Non-dbt Assets)
 
-Use `build_dbt_asset_selection()` combined with `AssetSelection` for jobs with dbt and non-dbt
-assets:
+Use `build_dbt_asset_selection()` combined with `AssetSelection` for jobs with dbt and
+non-dbt assets:
 
 ```python nocheck
 import dagster as dg
@@ -253,9 +257,10 @@ daily_job = dg.define_asset_job(name="daily_pipeline", selection=all_assets)
 daily_schedule = dg.ScheduleDefinition(job=daily_job, cron_schedule="0 0 * * *")
 ```
 
-### Declarative Automation
+#### Declarative Automation
 
-Configure AutomationConditions via custom `get_asset_spec()` implementation in your translator:
+Configure AutomationConditions via custom `get_asset_spec()` implementation in your
+translator:
 
 ```python nocheck
 class AutomatedDbtTranslator(DagsterDbtTranslator):
@@ -266,7 +271,7 @@ class AutomatedDbtTranslator(DagsterDbtTranslator):
         )
 ```
 
-## Runtime Configuration
+### Runtime Configuration
 
 Use Dagster's config system to provide runtime parameters:
 
@@ -288,6 +293,6 @@ def my_dbt_assets(context, dbt: DbtCliResource, config: DbtConfig):
     yield from dbt.cli(args, context=context).stream()
 ```
 
-## dbt Cloud
+### dbt Cloud
 
 For dbt Cloud projects, see [dbt Cloud Integration](dbt-cloud.md).

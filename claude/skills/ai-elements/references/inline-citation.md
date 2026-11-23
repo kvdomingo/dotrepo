@@ -1,8 +1,12 @@
 # Inline Citation
 
-A hoverable citation component that displays source information and quotes inline with text, perfect for AI-generated content with references.
+A hoverable citation component that displays source information and quotes inline with
+text, perfect for AI-generated content with references.
 
-The `InlineCitation` component provides a way to display citations inline with text content, similar to academic papers or research documents. It consists of a citation pill that shows detailed source information on hover, making it perfect for AI-generated content that needs to reference sources.
+The `InlineCitation` component provides a way to display citations inline with text
+content, similar to academic papers or research documents. It consists of a citation
+pill that shows detailed source information on hover, making it perfect for AI-generated
+content that needs to reference sources.
 
 See `scripts/inline-citation.tsx` for this example.
 
@@ -14,7 +18,8 @@ npx ai-elements@latest add inline-citation
 
 ## Usage with AI SDK
 
-Build citations for AI-generated content using [`experimental_generateObject`](/docs/reference/ai-sdk-ui/use-object).
+Build citations for AI-generated content using
+[`experimental_generateObject`](/docs/reference/ai-sdk-ui/use-object).
 
 Add the following component to your frontend:
 
@@ -160,14 +165,14 @@ export async function POST(req: Request) {
   const result = streamObject({
     model: "openai/gpt-4o",
     schema: citationSchema,
-    prompt: `Generate a well-researched paragraph about ${prompt} with proper citations. 
-    
+    prompt: `Generate a well-researched paragraph about ${prompt} with proper citations.
+
     Include:
     - A comprehensive paragraph with inline citations marked as [1], [2], etc.
     - 2-3 citations with realistic source information
     - Each citation should have a title, URL, and optional description/quote
     - Make the content informative and the sources credible
-    
+
     Format citations as numbered references within the text.`,
   });
 
@@ -190,7 +195,8 @@ export async function POST(req: Request) {
 
 ## Usage with AI SDK
 
-Currently, there is no official support for inline citations with Streamdown or the Response component. This is because:
+Currently, there is no official support for inline citations with Streamdown or the
+Response component. This is because:
 
 - There isn't any good markdown syntax for inline citations
 - Language models don't naturally respond with inline citation syntax
@@ -198,15 +204,23 @@ Currently, there is no official support for inline citations with Streamdown or 
 
 ### Potential Approaches
 
-While these methods are hypothetical and not officially supported, there are two conceptual ways inline citations could work with Streamdown:
+While these methods are hypothetical and not officially supported, there are two
+conceptual ways inline citations could work with Streamdown:
 
-1. **Footnote conversion**: GitHub Flavored Markdown (GFM) handles footnotes using `[^1]` syntax. You could hypothetically remove the default footnote rendering and convert footnotes to inline citations instead.
+1. **Footnote conversion**: GitHub Flavored Markdown (GFM) handles footnotes using
+   `[^1]` syntax. You could hypothetically remove the default footnote rendering and
+   convert footnotes to inline citations instead.
 
-2. **Custom HTML syntax**: You could add a system prompt instructing the model to use a special HTML syntax like `<citation />` and pass that as a custom component to Streamdown.
+2. **Custom HTML syntax**: You could add a system prompt instructing the model to use a
+   special HTML syntax like `<citation />` and pass that as a custom component to
+   Streamdown.
 
-These approaches require custom implementation and are not currently supported out of the box. We will investigate official support for this use case in the future.
+These approaches require custom implementation and are not currently supported out of
+the box. We will investigate official support for this use case in the future.
 
-For now, the recommended approach is to use `experimental_useObject` (as shown in the usage example above) to generate structured citation data, then manually parse and render inline citations.
+For now, the recommended approach is to use `experimental_useObject` (as shown in the
+usage example above) to generate structured citation data, then manually parse and
+render inline citations.
 
 ## Props
 

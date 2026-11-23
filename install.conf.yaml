@@ -67,3 +67,4 @@
     - cp packages.config /mnt/c/Users/Kenneth/packages.config
     - cp winget-packages.txt /mnt/c/Users/Kenneth/winget-packages.txt
     - fc-cache -f
+    - claude/install-mcp.sh

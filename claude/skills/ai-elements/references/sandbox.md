@@ -2,7 +2,10 @@
 
 A collapsible container for displaying AI-generated code and output in chat interfaces.
 
-The `Sandbox` component provides a structured way to display AI-generated code alongside its execution output in chat conversations. It features a collapsible container with status indicators and tabbed navigation between code and output views. It's designed to be used with `CodeBlock` for displaying code and `StackTrace` for displaying errors.
+The `Sandbox` component provides a structured way to display AI-generated code alongside
+its execution output in chat conversations. It features a collapsible container with
+status indicators and tabbed navigation between code and output views. It's designed to
+be used with `CodeBlock` for displaying code and `StackTrace` for displaying errors.
 
 See `scripts/sandbox.tsx` for this example.
 
@@ -23,7 +26,8 @@ npx ai-elements@latest add sandbox
 
 ## Usage with AI SDK
 
-The Sandbox component integrates with the AI SDK's tool state to show code generation progress:
+The Sandbox component integrates with the AI SDK's tool state to show code generation
+progress:
 
 ```tsx title="components/code-sandbox.tsx"
 "use client";

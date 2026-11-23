@@ -4,6 +4,6 @@ triggers:
   - "Microsoft Teams notifications and alerts from Dagster"
 ---
 
-# dagster-msteams
+## dagster-msteams
 
-Docs: https://docs.dagster.io/integrations/libraries/msteams
+Docs: <https://docs.dagster.io/integrations/libraries/msteams>

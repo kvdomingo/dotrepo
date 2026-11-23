@@ -3,13 +3,14 @@ title: Type-Safe useChat with Agents
 description: Build end-to-end type-safe agents by inferring UIMessage types from your agent definition.
 ---
 
-# Type-Safe useChat with Agents
+## Type-Safe useChat with Agents
 
-Build end-to-end type-safe agents by inferring `UIMessage` types from your agent definition for type-safe UI rendering with `useChat`.
+Build end-to-end type-safe agents by inferring `UIMessage` types from your agent
+definition for type-safe UI rendering with `useChat`.
 
-## Recommended Structure
+### Recommended Structure
 
-```
+```text
 lib/
   agents/
     my-agent.ts       # Agent definition + type export
@@ -18,7 +19,7 @@ lib/
     calculator-tool.ts
 ```
 
-## Define Tools
+### Define Tools
 
 ```ts
 // lib/tools/weather-tool.ts
@@ -36,7 +37,7 @@ export const weatherTool = tool({
 });
 ```
 
-## Define Agent and Export Type
+### Define Agent and Export Type
 
 ```ts
 // lib/agents/my-agent.ts
@@ -57,7 +58,7 @@ export const myAgent = new ToolLoopAgent({
 export type MyAgentUIMessage = InferAgentUIMessage<typeof myAgent>;
 ```
 
-### With Custom Metadata
+#### With Custom Metadata
 
 ```ts
 // lib/agents/my-agent.ts
@@ -73,7 +74,7 @@ type MyMetadata = z.infer<typeof metadataSchema>;
 export type MyAgentUIMessage = InferAgentUIMessage<typeof myAgent, MyMetadata>;
 ```
 
-## Use with `useChat`
+### Use with `useChat`
 
 ```tsx
 // app/chat.tsx
@@ -93,7 +94,7 @@ export function Chat() {
 }
 ```
 
-## Rendering Parts with Type Safety
+### Rendering Parts with Type Safety
 
 Tool parts are typed as `tool-{toolName}` based on your agent's tools:
 
@@ -130,11 +131,14 @@ function Message({ message }: { message: MyAgentUIMessage }) {
 }
 ```
 
-The `part.type` discriminant narrows the type, giving you autocomplete and type checking for `input` and `output` based on each tool's schema.
+The `part.type` discriminant narrows the type, giving you autocomplete and type checking
+for `input` and `output` based on each tool's schema.
 
-## Splitting Tool Rendering into Components
+### Splitting Tool Rendering into Components
 
-When rendering many tools, you may want to split each tool into its own component. Use `UIToolInvocation<TOOL>` to derive a typed invocation from your tool and export it alongside the tool definition:
+When rendering many tools, you may want to split each tool into its own component. Use
+`UIToolInvocation<TOOL>` to derive a typed invocation from your tool and export it
+alongside the tool definition:
 
 ```ts
 // lib/tools/weather-tool.ts
@@ -201,4 +205,5 @@ function Message({ message }: { message: MyAgentUIMessage }) {
 }
 ```
 
-This approach keeps your tool rendering logic organized while maintaining full type safety, without needing to import the tool implementation into your UI components.
+This approach keeps your tool rendering logic organized while maintaining full type
+safety, without needing to import the tool implementation into your UI components.

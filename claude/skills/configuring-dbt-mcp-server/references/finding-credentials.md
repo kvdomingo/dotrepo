@@ -17,6 +17,7 @@
 4. **Copy the token immediately** — it won't be shown again
 
 **Notes:**
+
 - Requires a Developer license
 - Inherits all permissions from your user account
 - Account-scoped: create separate tokens for each dbt account you access
@@ -24,7 +25,8 @@
 
 ### Service Token
 
-Use service tokens for system-level integrations (CI/CD, automation) rather than user-specific access.
+Use service tokens for system-level integrations (CI/CD, automation) rather than
+user-specific access.
 
 1. Go to **Account Settings** → **Service Tokens** (in left sidebar)
 2. Click **+ New Token**
@@ -32,12 +34,14 @@ Use service tokens for system-level integrations (CI/CD, automation) rather than
 4. **Save the token immediately** — it won't be shown again
 
 **Permission sets for MCP:**
+
 - **Semantic Layer Only**: For querying metrics only
 - **Metadata Only**: For Discovery API access
 - **Job Admin**: For Admin API (triggering jobs)
 - **Developer**: For broader access
 
 **Notes:**
+
 - Requires Developer license + account admin permissions to create
 - Service tokens belong to the account, not a user
 - Cannot use service tokens for `execute_sql` — use PAT instead
@@ -47,7 +51,8 @@ Use service tokens for system-level integrations (CI/CD, automation) rather than
 1. Sign in to dbt Cloud
 2. Look at the URL in your browser — the Account ID is the number after `/accounts/`
 
-**Example:** In `https://cloud.getdbt.com/settings/accounts/12345/...`, the Account ID is `12345`
+**Example:** In `https://cloud.getdbt.com/settings/accounts/12345/...`, the Account ID
+is `12345`
 
 **Alternative:** Go to **Settings** → **Account Settings** and check the URL.
 
@@ -57,7 +62,8 @@ Use service tokens for system-level integrations (CI/CD, automation) rather than
 2. Click on the environment (Production or Development)
 3. Look at the URL — the Environment ID is the last number
 
-**URL pattern:** `https://cloud.getdbt.com/deploy/<account_id>/projects/<project_id>/environments/<environment_id>`
+**URL pattern:**
+`https://cloud.getdbt.com/deploy/<account_id>/projects/<project_id>/environments/<environment_id>`
 
 **Example:** In `.../environments/98765`, the Environment ID is `98765`
 
@@ -67,4 +73,5 @@ Use service tokens for system-level integrations (CI/CD, automation) rather than
 2. Click on your user profile
 3. Look at the URL — the number after `/users/` is your User ID
 
-**Example:** In `https://cloud.getdbt.com/settings/accounts/12345/users/67891`, the User ID is `67891`
+**Example:** In `https://cloud.getdbt.com/settings/accounts/12345/users/67891`, the User
+ID is `67891`

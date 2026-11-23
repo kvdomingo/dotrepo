@@ -3,13 +3,15 @@ title: AI SDK DevTools
 description: Debug AI SDK calls by inspecting captured runs and steps.
 ---
 
-# AI SDK DevTools
+## AI SDK DevTools
 
-## Why Use DevTools
+### Why Use DevTools
 
-DevTools captures all AI SDK calls (`generateText`, `streamText`, `ToolLoopAgent`) to a local JSON file. This lets you inspect LLM requests, responses, tool calls, and multi-step interactions without manually logging.
+DevTools captures all AI SDK calls (`generateText`, `streamText`, `ToolLoopAgent`) to a
+local JSON file. This lets you inspect LLM requests, responses, tool calls, and
+multi-step interactions without manually logging.
 
-## Setup
+### Setup
 
 Requires AI SDK 6. Install `@ai-sdk/devtools` using your project's package manager.
 
@@ -25,11 +27,11 @@ const model = wrapLanguageModel({
 });
 ```
 
-## Viewing Captured Data
+### Viewing Captured Data
 
 All runs and steps are saved to:
 
-```
+```text
 .devtools/generations.json
 ```
 
@@ -46,7 +48,8 @@ npx @ai-sdk/devtools
 # Open http://localhost:4983
 ```
 
-## Data Structure
+### Data Structure
 
 - **Run**: A complete multi-step interaction grouped by initial prompt
-- **Step**: A single LLM call within a run (includes input, output, tool calls, token usage)
+- **Step**: A single LLM call within a run (includes input, output, tool calls, token
+  usage)

@@ -1,14 +1,16 @@
 # Terragrunt Skill for Claude Code
 
-A Claude Code skill providing best practices guidance for Terragrunt infrastructure-as-code with OpenTofu/Terraform.
+A Claude Code skill providing best practices guidance for Terragrunt
+infrastructure-as-code with OpenTofu/Terraform.
 
 ## Architecture
 
-> **Important:** Catalog and Live repositories should be **separate Git repositories**. The live repo consumes units and stacks from the catalog via Git URLs.
+> **Important:** Catalog and Live repositories should be **separate Git repositories**.
+> The live repo consumes units and stacks from the catalog via Git URLs.
 
 ### Option A: Modules in Separate Repos
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        SEPARATE REPOSITORIES                         │
 ├─────────────────────────┬─────────────────────────┬─────────────────┤
@@ -30,7 +32,7 @@ A Claude Code skill providing best practices guidance for Terragrunt infrastruct
 
 ### Option B: Modules in Catalog
 
-```
+```text
 ┌───────────────────────────────────────────────────────────────┐
 │                    SEPARATE REPOSITORIES                       │
 ├─────────────────────────────────┬─────────────────────────────┤
@@ -61,17 +63,20 @@ A Claude Code skill providing best practices guidance for Terragrunt infrastruct
 ## Features
 
 ### Catalog & Live Pattern
+
 - **Infrastructure Catalog**: Reusable units and template stacks (separate repo)
 - **Infrastructure Live**: Environment-specific deployments consuming the catalog
 - **Module Repos**: Separate repositories with semantic versioning
 
 ### Unit & Stack Patterns
+
 - Values pattern for configuration injection
 - Reference resolution (`"../unit"` → dependency outputs)
 - Unit interdependencies with mock outputs
 - Conditional dependencies with `enabled` and `skip_outputs`
 
 ### CI/CD Pipelines
+
 - GitLab CI with reusable templates
 - GitHub Actions workflows
 - AWS OIDC authentication (`assume-role-with-web-identity`)
@@ -79,19 +84,22 @@ A Claude Code skill providing best practices guidance for Terragrunt infrastruct
 - SSH-based Git access (recommended over HTTPS)
 
 ### Performance Optimization
+
 - Provider caching (`--provider-cache`)
 - Two-layer caching architecture (local + network mirror)
 - Benchmarking tools (Hyperfine, boring-registry)
 - Explicit stacks for 2x faster runs
 
 ### Multi-Account Deployments
+
 - Cross-account role assumption
 - Environment-based state bucket separation
 - Hierarchical configuration (root.hcl → account.hcl → region.hcl → env.hcl)
 
 ## Installation
 
-This skill is distributed via Claude Code marketplace using `.claude-plugin/marketplace.json`.
+This skill is distributed via Claude Code marketplace using
+`.claude-plugin/marketplace.json`.
 
 ### Claude Code (Recommended)
 
@@ -110,7 +118,8 @@ git clone https://github.com/jfr992/terragrunt-skill.git ~/.claude/skills/terrag
 ### Verify Installation
 
 After installation, try:
-```
+
+```text
 "Create a Terragrunt stack for a serverless API with Lambda, DynamoDB, and S3"
 ```
 
@@ -126,7 +135,8 @@ Claude will automatically use the skill when working with Terragrunt code.
 ```
 
 This generates:
-```
+
+```text
 infrastructure-catalog/
 ├── units/
 │   ├── s3/terragrunt.hcl           # Wraps terraform-aws-s3 module
@@ -144,7 +154,8 @@ infrastructure-catalog/
 ```
 
 This generates:
-```
+
+```text
 infrastructure-live/
 ├── root.hcl                        # Provider, backend, catalog config
 ├── non-prod/
@@ -175,17 +186,20 @@ terragrunt stack run apply --filter '.terragrunt-stack/dynamodb'
 terragrunt stack run apply --filter '.terragrunt-stack/lambda...'
 ```
 
-See [Terragrunt Filters](https://terragrunt.gruntwork.io/docs/features/filter/) for advanced filtering options.
+See [Terragrunt Filters](https://terragrunt.gruntwork.io/docs/features/filter/) for
+advanced filtering options.
 
 ## Usage
 
 The skill activates when working with:
+
 - `terragrunt.hcl` files (units)
 - `terragrunt.stack.hcl` files (stacks)
 - `root.hcl` configuration
 - Terragrunt CLI commands
 
 ### Example Prompts
+
 - "Create a new EKS stack with Karpenter and ArgoCD registration"
 - "Set up a serverless API with Lambda, DynamoDB, and S3"
 - "Add GitLab CI pipeline with GCP Workload Identity"
@@ -193,9 +207,10 @@ The skill activates when working with:
 
 ## Test Output (Examples)
 
-The `test-output/` directory contains example files generated using this skill, demonstrating the recommended patterns:
+The `test-output/` directory contains example files generated using this skill,
+demonstrating the recommended patterns:
 
-```
+```text
 test-output/
 ├── catalog/                    # Example catalog repo structure
 │   ├── units/
@@ -216,7 +231,8 @@ test-output/
                 └── my-api/terragrunt.stack.hcl
 ```
 
-> **Note:** In production, `catalog/` and `live/` would be **separate Git repositories**. They are combined here for demonstration purposes only.
+> **Note:** In production, `catalog/` and `live/` would be
+> **separate Git repositories**. They are combined here for demonstration purposes only.
 
 ## Documentation Structure
 
@@ -242,7 +258,8 @@ See [CLAUDE.md](CLAUDE.md) for contributor guidelines and repository architectur
 
 ## State Backend Bootstrap
 
-Terragrunt can automatically create state backend resources (S3 bucket + DynamoDB table) when you run any command:
+Terragrunt can automatically create state backend resources (S3 bucket + DynamoDB table)
+when you run any command:
 
 ```hcl
 # root.hcl
@@ -262,17 +279,21 @@ remote_state {
 }
 ```
 
-Terragrunt automatically provisions the S3 bucket (with versioning, encryption, access logging) and DynamoDB table (with encryption) if they don't exist.
+Terragrunt automatically provisions the S3 bucket (with versioning, encryption, access
+logging) and DynamoDB table (with encryption) if they don't exist.
 
-See [State Backend](https://terragrunt.gruntwork.io/docs/features/state-backend/) for details.
+See [State Backend](https://terragrunt.gruntwork.io/docs/features/state-backend/) for
+details.
 
-> **Note:** The `scripts/setup-state-backend.sh` in this repo provides an alternative manual approach with more control over bucket configuration.
+> **Note:** The `scripts/setup-state-backend.sh` in this repo provides an alternative
+> manual approach with more control over bucket configuration.
 
 ## Platform Engineering & Self-Service
 
 ### Catalog Discovery
 
-The `terragrunt catalog` command enables self-service infrastructure by letting teams browse and scaffold from your catalog:
+The `terragrunt catalog` command enables self-service infrastructure by letting teams
+browse and scaffold from your catalog:
 
 ```bash
 # Browse available modules, units, and stacks
@@ -284,7 +305,8 @@ terragrunt scaffold git@github.com:YOUR_ORG/infrastructure-catalog.git//units/rd
 
 ### Boilerplate Templates
 
-[Boilerplate](https://github.com/gruntwork-io/boilerplate) powers the scaffolding with interactive prompts:
+[Boilerplate](https://github.com/gruntwork-io/boilerplate) powers the scaffolding with
+interactive prompts:
 
 ```yaml
 # units/rds/boilerplate.yml
@@ -300,7 +322,8 @@ variables:
     default: "15.4"
 ```
 
-When users run `terragrunt scaffold`, they're prompted for these values, generating a pre-configured `terragrunt.hcl`.
+When users run `terragrunt scaffold`, they're prompted for these values, generating a
+pre-configured `terragrunt.hcl`.
 
 ### Self-Service Portal Integration
 
@@ -316,6 +339,7 @@ terragrunt scaffold \
 ```
 
 This enables:
+
 - **Standardized deployments** across teams
 - **Governance** via catalog-level policies
 - **Reduced toil** through automated configuration
