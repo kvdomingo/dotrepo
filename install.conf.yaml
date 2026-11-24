@@ -12,6 +12,7 @@
     ~/.claude/CLAUDE.md: claude/CLAUDE.md
     ~/.claude/RTK.md: claude/RTK.md
     ~/.claude/skills: claude/skills
+    ~/.claude/rules: claude/rules
     ~/.config/atuin/config.toml: atuin.toml
     ~/.config/gcloud/configurations: gcloud/configurations
     ~/.config/gh/config.yml: gh-config.yml
