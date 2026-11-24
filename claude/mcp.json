@@ -147,6 +147,13 @@
       "env": {
         "WANDERLOG_COOKIE": "${WANDERLOG_COOKIE}"
       }
+    },
+    "GitHub": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_PAT}"
+      }
     }
   }
 }

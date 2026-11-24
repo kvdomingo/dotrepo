@@ -22,6 +22,7 @@ export COMPOSE_BAKE=true
 export PAGER="less -SRFXMi --mouse --wheel-lines=3"
 export KUBECONFIG="$HOME/.kube/config.yaml"
 export AI_MEMORY_SERVER_URL="https://memory.lab.kvd.studio"
+export ADMIN_ENDPOINT_URL="https://versity-api.dev.kvd.studio"  # Versity Gateway
 export CLOUDSDK_HOME="$HOME/.local/share/mise/installs/gcloud/latest"
 export BUT_THEME="dark"
 

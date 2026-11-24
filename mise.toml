@@ -81,3 +81,4 @@ zellij = "latest"
 oh-my-pi = { version = "latest", rename_exe = "omp" }
 gcloud = { version = "latest", postinstall = "$(gcloud info --format=\"value(basic.python_location)\") -m pip install -U numpy" }
 headscale = "latest"
+"aqua:versity/versitygw" = "latest"
