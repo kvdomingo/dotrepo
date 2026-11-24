@@ -711,6 +711,9 @@ skill, not create a new one. In this case:
   read-only. Copy to `/tmp/skill-name/`, edit there, and package from the copy.
 - **If packaging manually, stage in `/tmp/` first**, then copy to the output
   directory -- direct writes may fail due to permissions.
+- **The copy is not the user's skill.** Save it the way this session's own instructions
+  say (a save tool, a proposal card, or a sent file), and until the user saves, say that
+  the change is not saved.
 
 ---
 
