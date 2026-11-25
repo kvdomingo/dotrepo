@@ -55,6 +55,7 @@ if [[ "$PLATFORM" == "wsl" ]]; then
     "/mnt/c/Windows/system32"
     "/mnt/c/Windows"
     "/mnt/c/Program Files/WSL"
+    "/opt/OpenMausBot"
   )
 
   alias wslc='/mnt/c/Program\ Files/WSL/wslc.exe'

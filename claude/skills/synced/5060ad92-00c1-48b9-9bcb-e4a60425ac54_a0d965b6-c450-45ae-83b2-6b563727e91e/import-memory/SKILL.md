@@ -19,11 +19,11 @@ memory tools in this conversation (`memory_write` / `memory_append`, or their
 `memory_user_edits` tool does not count: it is a small, lossy scratchpad, not Claude's
 memory store, so never use it to import anything — if it is the only memory tool you
 have, treat that as having none. If you have none, tell the user this conversation can't
-save memories, point them to Settings > Capabilities > "Import memory from other AI
-providers" (claude.ai/settings/capabilities?open_memory_import=true) — Claude's built-in
-importer, which runs the whole import there; it is not a switch that unlocks importing
-in this chat, so don't tell them to enable something and come back — and stop there. Do
-not write the export — or any cleaned, filtered, or summarized version of it — to local
+save memories, point them to Settings, under "Import memory from other AI providers"
+(claude.ai/settings/capabilities?open_memory_import=true) — Claude's built-in importer,
+which runs the whole import there; it is not a switch that unlocks importing in this
+chat, so don't tell them to enable something and come back — and stop there. Do not
+write the export — or any cleaned, filtered, or summarized version of it — to local
 files, artifacts, or anywhere else, whether as a substitute for memory or as a copy "for
 later": the paste already lives in this conversation, and the importer takes it as-is.
 

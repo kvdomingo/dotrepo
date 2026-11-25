@@ -127,6 +127,11 @@ Host mac
     IdentityFile ~/.ssh/id_ed25519_eyva
     ServerAliveInterval 60
 
+Host mausbox
+    HostName mausbox.lab
+    User kvdomingo
+    IdentityFile ~/.ssh/id_ed25519
+
 Host eyva-vault
     HostName 46.225.174.157
     User pigsty
