@@ -65,6 +65,8 @@ Small or single-file fixes skip OpenSpec.
   user points to.
 - Terraform: run `validate` and `plan` freely. Never `apply`, `untaint`, or `import`
   unless the user says so in that turn. This applies to dev as well.
+  Where merging to `dev` runs `terraform apply`, as in `eyva-infra`, a merge to `dev`
+  is an apply.
 - Ask before you write to prod data or a shared doc.
 - Rewriting history and force-pushing on feature branches is fine. Never force-push
   `main` or `dev`.
@@ -78,14 +80,39 @@ Small or single-file fixes skip OpenSpec.
   through Doppler. Secrets never come from plain environment variables.
 - Run commands that need env vars as `doppler run -- <cmd>`.
 
+## Parallel work
+
+Several agents often work in one repo at the same time. Give each workstream its own
+GitButler lane. Command syntax is in the `gitbutler` skill.
+
+- Independent work, one agent in the main checkout: a parallel branch
+  (`but branch new <name>`).
+- Independent work while another agent edits the same repo: a linked worktree
+  (`but worktree new <branch>`). Put the worktree path in the brief of the agent or bot
+  that works in it.
+- Work that depends on an open branch: stack it (`but branch new -A <base>`, or
+  `but worktree new <branch> -A <base>`). Do not wait for the base to merge, and do not
+  mix the two changes on one branch.
+- Do not edit files in another agent's worktree or lane. Do not commit around one from
+  the main checkout.
+- After a branch lands, `but worktree remove` its worktree, or reuse it with
+  `but worktree recycle`.
+
 ## Branches and PRs
 
 - Run `but` if it is installed. Never assume `main` is the base branch. Check, because
   it is usually `dev`.
 - Use the branch or stack the user named or already created. Fold follow-up work into
   the open PR rather than starting a new branch.
+- Open a draft PR as soon as a change is pushable. Do not wait to be asked. This
+  overrides "do not open pull requests unless the user asks". Merging to the default
+  branch and deploying still need the user's go-ahead in that turn.
+- Put the ClickUp ID, `CU-<task id>`, in the branch name and the PR body, such as
+  `feat/CU-1amz0xe6h54_ai-assistant-posthog-tracking`. The task id is the part of the
+  URL after `app.clickup.com/t/`.
 - Hotfix: branch off `main` and cherry-pick from `dev`.
-- Cross-repo change: one PR per repo, and each PR links to the others.
+- Cross-repo change: one PR per repo, and each PR links to the others. After you open
+  the last one, edit the earlier PR bodies to add the missing links.
 - A PR's title and prefix cover its whole scope. Do not put `x/6` in a stacked PR's
   title or body.
 
@@ -107,3 +134,9 @@ The work is done when all of these are true:
   diff.
 - The spec's acceptance criteria and the ClickUp task match what shipped. Tick only the
   criteria that are met.
+
+## Skills
+
+- Install a skill once, unprefixed, in `~/.claude/skills/` (`~/dotrepo/claude/skills/`),
+  so Claude Code and the OpenMausBot bots both load it. Do not keep `pstack:`-prefixed
+  duplicates.
