@@ -107,6 +107,11 @@ GitButler lane. Command syntax is in the `gitbutler` skill.
 - Open a draft PR as soon as a change is pushable. Do not wait to be asked. This
   overrides "do not open pull requests unless the user asks". Merging to the default
   branch and deploying still need the user's go-ahead in that turn.
+- Before you write a PR body, look for the repo's PR template
+  (`.github/PULL_REQUEST_TEMPLATE.md`, `.github/pull_request_template.md`,
+  `.github/PULL_REQUEST_TEMPLATE/`). If there is one, fill every section in its order.
+  Write "None" for a section that does not apply. The `pr-description` skill has the
+  lookup.
 - Put the ClickUp ID, `CU-<task id>`, in the branch name and the PR body, such as
   `feat/CU-1amz0xe6h54_ai-assistant-posthog-tracking`. The task id is the part of the
   URL after `app.clickup.com/t/`.
